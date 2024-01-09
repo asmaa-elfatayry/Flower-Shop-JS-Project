@@ -1,0 +1,35 @@
+$light-theme-colors: (
+  text-color: #4F4F4F,
+  heading-color: #323232,
+  blue-color: rgb(67, 181, 244),
+  orange-color: #F34F3F,
+  background-color: #ffffff,
+  secondBackground: #F7F7F7,
+  footer-color: #323232,
+);
+
+$dark-theme-colors: (
+  text-color: #e1e0e0,
+  heading-color: #f4f4f4,
+  blue-color: rgb(67, 181, 244),
+  orange-color: #F34F3F,
+  background-color: #121212,
+  secondBackground: #252525,
+  footer-color: #323232,
+);
+
+$base-font-family: 'Arial', sans-serif;
+$heading-font-family: 'Roboto', sans-serif;
+
+$border-radius: 4px;
+
+// Default theme is light
+$theme: light;
+
+@function get-theme-color($color) {
+  @if $theme == light {
+    @return map-get($light-theme-colors, $color);
+  } @else {
+    @return map-get($dark-theme-colors, $color);
+  }
+}
