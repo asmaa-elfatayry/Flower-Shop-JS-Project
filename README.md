@@ -27,13 +27,15 @@ The project structure is organized to keep things modular and maintainable. Here
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/asmaa-elfatayry/flower-js-ecommerce.git
+   git clone https://github.com/asmaa-elfatayry/Flower-Shop-JS-Project
+
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd flower-js-ecommerce
+   cd Flower-Shop-JS-Project
+
    ```
 
 3. Open the project in your preferred code editor.
