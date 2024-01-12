@@ -1,4 +1,23 @@
-/* line 5, ../sass/main.scss */
+@media (max-width: 768px) {
+  /* line 2, ../sass/_layout.scss */
+  .actionsBtn {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  /* line 6, ../sass/_layout.scss */
+  table th, td {
+    font-size: 14px;
+  }
+}
+/* line 4, ../sass/main.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* line 10, ../sass/main.scss */
 body {
   font-family: "Arial", sans-serif;
   background-color: #ffffff;
