@@ -1,24 +1,48 @@
+@import url(../node_modules/animate.css/animate.css);
+@import url("hover-min.css");
+/* line 24, ../sass/_variables.scss */
+body {
+  color: #4F4F4F;
+  background-color: #ffffff;
+}
+
+/* line 31, ../sass/_variables.scss */
+body.dark-theme {
+  color: #e1e0e0;
+  background-color: #121212;
+}
+
 @media (max-width: 768px) {
-  /* line 2, ../sass/_layout.scss */
+  /* line 3, ../sass/_layout.scss */
   .actionsBtn {
     flex-direction: column;
     gap: 5px;
   }
 
-  /* line 6, ../sass/_layout.scss */
+  /* line 7, ../sass/_layout.scss */
   table th, td {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  /* line 10, ../sass/_layout.scss */
+  #productList tr td button {
+    width: 75px;
+    font-size: 12px;
+  }
+
+  /* line 15, ../sass/_layout.scss */
+  .controls h1 {
+    font-size: 25px;
   }
 }
-/* line 4, ../sass/main.scss */
+/* line 7, ../sass/main.scss */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* line 10, ../sass/main.scss */
+/* line 13, ../sass/main.scss */
 body {
   font-family: "Arial", sans-serif;
-  background-color: #ffffff;
 }
