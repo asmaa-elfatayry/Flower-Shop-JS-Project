@@ -1,48 +1,103 @@
-@import url(../node_modules/animate.css/animate.css);
-@import url("hover-min.css");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $base-font-family;
+    /* background-color: get-theme-color(background-color); */ /* Uncomment or update as needed */
+    background-color: #ffffff; /* Example background color */
+}
+
+#procuct-card {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#procuct-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-options {
+    height: 20%;
+}
+
+.card-details {
+    height: 80%;
+}
+
+#procuct-card img {
+    height: 30%;
+}
+
 /* line 24, ../sass/_variables.scss */
 body {
-  color: #4F4F4F;
-  background-color: #ffffff;
+    color: #4F4F4F;
+    background-color: #ffffff;
 }
 
 /* line 31, ../sass/_variables.scss */
 body.dark-theme {
-  color: #e1e0e0;
-  background-color: #121212;
+    color: #e1e0e0;
+    background-color: #121212;
 }
 
 @media (max-width: 768px) {
-  /* line 3, ../sass/_layout.scss */
-  .actionsBtn {
-    flex-direction: column;
-    gap: 5px;
-  }
+    /* line 3, ../sass/_layout.scss */
+    .actionsBtn {
+        flex-direction: column;
+        gap: 5px;
+    }
 
-  /* line 7, ../sass/_layout.scss */
-  table th, td {
-    font-size: 12px;
-  }
+    /* line 7, ../sass/_layout.scss */
+    table th, td {
+        font-size: 12px;
+    }
 
-  /* line 10, ../sass/_layout.scss */
-  #productList tr td button {
-    width: 75px;
-    font-size: 12px;
-  }
+    /* line 10, ../sass/_layout.scss */
+    #productList tr td button {
+        width: 75px;
+        font-size: 12px;
+    }
 
-  /* line 15, ../sass/_layout.scss */
-  .controls h1 {
-    font-size: 25px;
-  }
+    /* line 15, ../sass/_layout.scss */
+    .controls h1 {
+        font-size: 25px;
+    }
 }
+
 /* line 7, ../sass/main.scss */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* line 13, ../sass/main.scss */
 body {
-  font-family: "Arial", sans-serif;
+    font-family: "Arial", sans-serif;
+}
+
+#procuct-card {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#procuct-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-options {
+    height: 20%;
+}
+
+.card-details {
+    height: 80%;
+}
+
+#procuct-card img {
+    height: 30%;
 }
