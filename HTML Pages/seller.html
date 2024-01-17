@@ -3,13 +3,258 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Seller Dashboard</title>
     <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
     <link rel="stylesheet" href="../stylesheets/main.css" />
+    <link rel="stylesheet" href="../stylesheets/seller.css" />
+    <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
+    <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
   </head>
-  <body>
+  <body class="vh-100" theme="light">
+    <div class="container-fluid px-3 row h-100">
+      <div class="sellerInfo text-center mr-3 pt-5 h-100">
+        <i class="fa fa-plus toggleInfo"></i>
+        <i class="fa fa-moon-o darkMood"></i>
+        <i class="fa fa-power-off logout"></i>
+
+        <div id="sellerInfoContainer">
+          <div class="sellerImg rounded-circle mx-auto">
+            <img
+              src="../images/flowershop2.png"
+              alt="shop"
+              class="w-100 h-100 rounded-circle p-2"
+            />
+          </div>
+
+          <p class="sellerName"></p>
+
+          <p class="location"></p>
+        </div>
+      </div>
+      <div class="controls mt-3 ml-5 col-11">
+        <h1 class="animate__animated animate__backInLeft animate__delay-.5s">
+          Seller Dashboard
+        </h1>
+
+        <div class="table-responsive">
+          <table id="productTable" class="table text-center table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Category</th>
+                <th scope="col">Stock No</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productList"></tbody>
+          </table>
+        </div>
+
+        <button
+          class="btn btn-outline-success text-center addBtn"
+          data-toggle="modal"
+          data-target="#addProductModal"
+        >
+          Add Product
+        </button>
+      </div>
+
+      <!-- Update Product Modal -->
+      <div
+        class="modal fade"
+        id="updateProductModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="updateProductModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateProductModalLabel">
+                Update Product
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="updateProductForm">
+                <div class="form-group">
+                  <label for="productName">Product Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="updateProductName"
+                    required
+                  />
+                  <small class="error-msg" id="nameErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productPrice">Product Price</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="updateProductPrice"
+                    required
+                  />
+                  <small class="error-msg" id="priceErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productImage">Change The Image </label><br />
+                  <label class="uploadButton" for="updateProductImage"
+                    >New Image</label
+                  >
+                  <input type="file" id="updateProductImage" />
+                  <small class="error-msg" id="imgErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productCategory">Product Category</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="updateProductCategory"
+                    required
+                  />
+                  <small class="error-msg" id="categoryErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productStock">Product Stock</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="updateProductStock"
+                    required
+                  />
+                  <small class="error-msg" id="stockErr"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Update Product
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Product Modal -->
+      <div
+        class="modal fade h-75 mt-5"
+        id="addProductModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="addProductModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModalLabel">
+                Add New Product
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="addProductForm">
+                <div class="form-group">
+                  <label for="productName">Product Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="productName"
+                    required
+                  />
+                  <small class="error-msg" id="anameErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productName">Name Meaning</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nameMeaning"
+                    required
+                  />
+                  <small class="error-msg" id="ameaningErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productPrice">Product Price</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="productPrice"
+                    required
+                  />
+                  <small class="error-msg" id="apriceErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productName">Decription</label>
+                  <textarea
+                    class="form-control"
+                    name=""
+                    id="description"
+                    cols="30"
+                    rows="2"
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="productImage">Choose Your Flower Image</label
+                  ><br />
+
+                  <label class="uploadButton" for="productImage">Upload</label>
+                  <input type="file" id="productImage" />
+                  <small class="error-msg" id="aimgErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productCategory">Product Category</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="productCategory"
+                    required
+                  />
+                  <small class="error-msg" id="acategoryErr"></small>
+                </div>
+                <div class="form-group">
+                  <label for="productStock">Product Stock</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="productStock"
+                    required
+                  />
+                  <small class="error-msg" id="astockErr"></small>
+                </div>
+                <button type="submit" id="AddBtn" class="btn btn-primary">
+                  Add Product
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end controls -->
+    </div>
+
     <script src="../JS/JQuery-3.3.1.min.js"></script>
     <script src="../JS/popper.js"></script>
     <script src="../JS/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../JS/index.js"></script>
+    <script src="../JS/seller.js"></script>
   </body>
 </html>
