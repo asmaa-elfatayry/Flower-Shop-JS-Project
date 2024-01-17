@@ -9,6 +9,10 @@ body {
     background-color: get-theme-color(background-color);
 }
 
+h1{
+    background-color:  red;
+}
+
 #procuct-card {
     margin-right: 20px;
     margin-bottom: 20px;
@@ -30,3 +34,4 @@ body {
 #procuct-card img {
     height: 30%;
 }
+
