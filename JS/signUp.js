@@ -69,6 +69,7 @@ window.addEventListener("load", function () {
       document.getElementsByTagName("input")[1].classList.remove("is-invalid");
       document.getElementsByTagName("input")[2].classList.remove("is-invalid");
       signUp(name, email, password);
+
       
     }
 
@@ -107,8 +108,8 @@ window.addEventListener("load", function () {
 
     UserData.push(newUser);
     localStorage.setItem("userData", JSON.stringify(UserData));
+    logged_user(newUser) ;
 
-    console.log("User signed up successfully:", newUser);
   }
 
   // Function to check the validity of an email address
@@ -125,5 +126,21 @@ window.addEventListener("load", function () {
     const s_char = /[!@#$%^&*(),.?":{}|<>]/.test(password);
     return char && digit && s_char;
   }
+
+  
+  function logged_user(user) {
+      const logged_user = JSON.parse(localStorage.getItem("userloggeddata")) || [];
+      logged_user.pop();
+      const newloggeduser = {
+        id: user.id,
+        name:user.name,
+        email: user.email,
+        password: user.password,
+        role: "user"
+      };
+      logged_user.push(newloggeduser);
+      localStorage.setItem("userloggeddata", JSON.stringify(logged_user));
+
+    }
 
 });

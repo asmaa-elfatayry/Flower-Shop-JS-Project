@@ -11,14 +11,15 @@ window.addEventListener("load", function () {
       FlowersDate = data.flowers;
       SellerData = data.sellers;
       UserData = data.users;
-     UserLoggedData=data.logged_user;
-    RequestSeller=data.request_seller;
+      UserLoggedData = data.logged_user;
+      RequestSeller = data.request_seller;
       localStorage.setItem("flowersData", JSON.stringify(FlowersDate));
       localStorage.setItem("sellerData", JSON.stringify(SellerData));
       localStorage.setItem("userData", JSON.stringify(UserData));
       localStorage.setItem("userloggeddata", JSON.stringify(UserLoggedData));
-      localStorage.setItem("requestseller",JSON.stringify(RequestSeller));
-    
+      localStorage.setItem("requestseller", JSON.stringify(RequestSeller));
+
+
     })
     .catch((error) => console.error("Error fetching products:", error));
 });

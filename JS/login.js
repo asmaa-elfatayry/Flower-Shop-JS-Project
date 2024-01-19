@@ -49,15 +49,13 @@ window.addEventListener("load", function () {
           document.getElementsByTagName("input")[1].classList.add("is-invalid");
           message.classList.add("invalid-feedback");
           message.style.display = "block";
-          message.style.alignItemscenter="center";
-          message.style.justifyContent="center";
           message.innerText = "Invalid email or password. Please check your credentials.";
       }
   }
   
   
 
-    function logged_user(user) {
+    function logged_user(user,role) {
       const logged_user = JSON.parse(localStorage.getItem("userloggeddata")) || [];
       logged_user.pop();
       const newloggeduser = {
