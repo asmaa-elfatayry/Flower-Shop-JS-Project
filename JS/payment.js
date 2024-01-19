@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        imageUrl: "../images/payment.gif",
-        imageWidth: 200,
+        imageUrl: "../images/dribbble-gif.gif",
+        imageWidth: "90%",
         imageHeight: 200,
         // icon: "warning",
         showCancelButton: true,
