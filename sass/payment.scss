@@ -1,0 +1,110 @@
+body {
+    background-color: whitesmoke;
+  }
+
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 1;
+    font-family: 'Open sans', sans-serif;
+    padding-bottom: 50px;
+    animation: move 3s infinite;
+    color: #F05990;
+}
+
+li {
+    list-style: none;
+    position: relative;
+}
+
+li .top-card {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    transition: 0.5s; 
+}
+
+li .top-card:hover {
+    transform: translateX(-50%) scale(1.3);
+    cursor: pointer;
+}
+
+ul .form-card {
+    width: fit-content;
+    background-color: white;
+    display: none;
+    margin-top: 120px;
+    padding: 50px 20px 20px;
+    width: 100%;
+}
+
+
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px !important;
+    align-items: center;
+  
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+form input {
+    width: 100%;
+}
+
+.expire-cvv {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.expire-date {
+    display: flex;
+    gap: 5px;
+    input {
+        width: 70px;
+        height: 60px;
+    }
+}
+
+.expire {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+img{
+    border-radius: 10px;
+    max-width: 220px;
+}
+.error{
+    color: rgb(231, 70, 70);
+    text-align: left ;
+    display: block;
+}
+input::placeholder {
+    color: #a0a0a0;
+}  
+.swal2-actions{
+  gap: 5px;
+}
+@keyframes move {
+    0%{transform: translateY(-10px);}
+ 
+50%{transform: translateY(10px);}
+
+    100%{transform: translateY(-10px);}
+    
+}
+@media (max-width:992px) {
+  .payment-types{
+    flex-direction: column;
+    gap: 80px !important;
+  }
+}

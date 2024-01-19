@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floura | Our products</title>
+    <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" href="../stylesheets/main.css" />
+    <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
+    <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
+  </head>
+
+  <body>
+    <header class="container-fluid px-3 row">
+      <div class="sellerInfo col-12 col-md-2 text-center mt-5">
+        <div id="sellerInfoContainer">
+          <div class="w-50 h-50 rounded-circle mx-auto my-3 border border-info">
+            <img
+              src="../images/flowershop2.png"
+              alt="shop"
+              class="w-100 h-100 rounded-circle p-2"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container col-11">
+      <div class="row">
+        <div class="col-12 col-md-4 mr-5">
+          <h3>Search</h3>
+          <hr />
+          <div class="row">
+            <div class="input-group mb-2">
+              <input
+                type="text"
+                class="form-control col-9"
+                id="searchTXT"
+                placeholder="Search Our Store"
+              />
+              <div class="input-group-apppend">
+                <button
+                  class="btn btn-outline-secondary bg-dark"
+                  id="searchBTN"
+                  type="button"
+                >
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <h3>Price filter</h3>
+          <hr />
+          <div class="row">
+            <input type="number" value="0" class="col-3" id="minPrice" />
+            <span class="col-2 text-center">To</span>
+            <input type="number" value="1000" class="col-4" id="maxPrice" />
+            <button
+              class="btn btn-outline-secondary bg-dark col-3 col-lg-2"
+              id="priceFilterBTN"
+              type="button"
+            >
+              GO
+            </button>
+          </div>
+          <br />
+
+          <h3>Categories</h3>
+          <hr />
+          <ul class="list-group col-8">
+            <li class="list-group-item list-group-item-secondary active">
+              All products
+            </li>
+            <li class="list-group-item list-group-item-secondary">
+              Best Selling
+            </li>
+            <li class="list-group-item list-group-item-secondary">
+              New Products
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-7">
+          <div class="container" id="productContainer"></div>
+        </div>
+      </div>
+    </div>
+    <script src="../JS/products.js"></script>
+  </body>
+</html>

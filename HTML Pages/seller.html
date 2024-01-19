@@ -3,17 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Seller Dashboard</title>
+    <title>Floura | Seller Dashboard</title>
     <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
     <link rel="stylesheet" href="../stylesheets/main.css" />
+    <link rel="stylesheet" href="../stylesheets/seller.css" />
     <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
     <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
   </head>
-  <body>
-    <div class="container-fluid px-3 row">
-      <div class="sellerInfo col-12 col-md-2 text-center mt-5">
+  <body class="vh-100" theme="light">
+    <div class="container-fluid px-3 row h-100">
+      <div class="sellerInfo text-center mr-5 pt-5 h-100">
+        <i class="fa fa-plus toggleInfo"></i>
+        <i class="fa fa-moon-o darkMood"></i>
+        <i class="fa fa-power-off logout"></i>
+
         <div id="sellerInfoContainer">
-          <div class="w-50 h-50 rounded-circle mx-auto my-3 border border-info">
+          <div class="sellerImg rounded-circle mx-auto">
             <img
               src="../images/flowershop2.png"
               alt="shop"
@@ -21,32 +26,35 @@
             />
           </div>
 
-          <p><i class="fa fa-user pr-2"></i><span class="sellerName"></span></p>
-          <p>
-            <i class="fa fa-map-marker pr-2"></i><span class="location"></span>
-          </p>
+          <p class="sellerName"></p>
+
+          <p class="location"></p>
         </div>
       </div>
-      <div class="controls col-12 col-md-10 mt-3">
-        <h1>Seller Dashboard</h1>
+      <div class="controls mt-3 col-11">
+        <h1 class="animate__animated animate__backInLeft animate__delay-.5s">
+          Seller Dashboard
+        </h1>
 
-        <table id="productTable" class="table table-striped text-center">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Price</th>
-              <th scope="col">Image</th>
-              <th scope="col">Category</th>
-              <th scope="col">Stock No</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="productList"></tbody>
-        </table>
+        <div class="table-responsive">
+          <table id="productTable" class="table text-center table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Category</th>
+                <th scope="col">Stock No</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productList"></tbody>
+          </table>
+        </div>
 
         <button
-          class="btn btn-success text-center addBtn"
+          class="btn btn-outline-success text-center addBtn"
           data-toggle="modal"
           data-target="#addProductModal"
         >
@@ -88,6 +96,7 @@
                     id="updateProductName"
                     required
                   />
+                  <small class="error-msg" id="nameErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productPrice">Product Price</label>
@@ -97,15 +106,15 @@
                     id="updateProductPrice"
                     required
                   />
+                  <small class="error-msg" id="priceErr"></small>
                 </div>
                 <div class="form-group">
-                  <label for="productImage">Product Image </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="updateProductImage"
-                    required
-                  />
+                  <label for="productImage">Change The Image </label><br />
+                  <label class="uploadButton" for="updateProductImage"
+                    >New Image</label
+                  >
+                  <input type="file" id="updateProductImage" />
+                  <small class="error-msg" id="imgErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productCategory">Product Category</label>
@@ -115,6 +124,7 @@
                     id="updateProductCategory"
                     required
                   />
+                  <small class="error-msg" id="categoryErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productStock">Product Stock</label>
@@ -124,6 +134,7 @@
                     id="updateProductStock"
                     required
                   />
+                  <small class="error-msg" id="stockErr"></small>
                 </div>
                 <button type="submit" class="btn btn-primary">
                   Update Product
@@ -136,14 +147,14 @@
 
       <!-- Add Product Modal -->
       <div
-        class="modal fade"
+        class="modal fade h-75 mt-5"
         id="addProductModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="addProductModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="addProductModalLabel">
@@ -168,6 +179,7 @@
                     id="productName"
                     required
                   />
+                  <small class="error-msg" id="anameErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productName">Name Meaning</label>
@@ -177,6 +189,7 @@
                     id="nameMeaning"
                     required
                   />
+                  <small class="error-msg" id="ameaningErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productPrice">Product Price</label>
@@ -186,6 +199,7 @@
                     id="productPrice"
                     required
                   />
+                  <small class="error-msg" id="apriceErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productName">Decription</label>
@@ -198,13 +212,12 @@
                   ></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="productImage">Product Image URL</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="productImage"
-                    required
-                  />
+                  <label for="productImage">Choose Your Flower Image</label
+                  ><br />
+
+                  <label class="uploadButton" for="productImage">Upload</label>
+                  <input type="file" id="productImage" />
+                  <small class="error-msg" id="aimgErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productCategory">Product Category</label>
@@ -214,6 +227,7 @@
                     id="productCategory"
                     required
                   />
+                  <small class="error-msg" id="acategoryErr"></small>
                 </div>
                 <div class="form-group">
                   <label for="productStock">Product Stock</label>
@@ -223,6 +237,7 @@
                     id="productStock"
                     required
                   />
+                  <small class="error-msg" id="astockErr"></small>
                 </div>
                 <button type="submit" id="AddBtn" class="btn btn-primary">
                   Add Product
@@ -238,6 +253,7 @@
     <script src="../JS/JQuery-3.3.1.min.js"></script>
     <script src="../JS/popper.js"></script>
     <script src="../JS/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../JS/index.js"></script>
     <script src="../JS/seller.js"></script>
   </body>
