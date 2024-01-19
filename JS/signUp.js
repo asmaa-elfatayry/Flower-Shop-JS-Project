@@ -69,10 +69,7 @@ window.addEventListener("load", function () {
       document.getElementsByTagName("input")[1].classList.remove("is-invalid");
       document.getElementsByTagName("input")[2].classList.remove("is-invalid");
       signUp(name, email, password);
-
-
-
-
+      
     }
 
   });

@@ -88,6 +88,7 @@ window.addEventListener("load", function () {
         document.getElementsByTagName("input")[3].classList.remove("is-invalid");
         document.getElementsByTagName("input")[4].classList.remove("is-invalid");
         seller_req(shop_name, email, password,number_prod,location_shop);
+        document.getElementsByClassName("message")[0].innerHTML = '<div class="alert alert-success" role="alert">the request has been send successfuly.</div>';
       }
   
     });
@@ -143,7 +144,7 @@ function check_positive(number_prod)
     return number>0;
     
 }
-  
-  
+
+
   });
   
