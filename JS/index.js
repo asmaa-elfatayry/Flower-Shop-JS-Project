@@ -3,18 +3,22 @@ window.addEventListener("load", function () {
   let FlowersDate;
   let SellerData;
   let UserData;
+  let UserLoggedData;
+  let RequestSeller;
   fetch("../Data.json")
     .then((response) => response.json())
     .then((data) => {
       FlowersDate = data.flowers;
       SellerData = data.sellers;
       UserData = data.users;
+     UserLoggedData=data.logged_user;
+    RequestSeller=data.request_seller;
       localStorage.setItem("flowersData", JSON.stringify(FlowersDate));
       localStorage.setItem("sellerData", JSON.stringify(SellerData));
       localStorage.setItem("userData", JSON.stringify(UserData));
-      //   localStorage.setItem("sellerId", sellerId);
-
-      //   console.log("Data saved to local storage:", FlowersDate);
+      localStorage.setItem("userloggeddata", JSON.stringify(UserLoggedData));
+      localStorage.setItem("requestseller",JSON.stringify(RequestSeller));
+    
     })
     .catch((error) => console.error("Error fetching products:", error));
 });
