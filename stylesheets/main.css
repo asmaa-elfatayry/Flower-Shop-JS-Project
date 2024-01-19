@@ -1,24 +1,267 @@
-@media (max-width: 768px) {
-  /* line 2, ../sass/_layout.scss */
-  .actionsBtn {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  /* line 6, ../sass/_layout.scss */
-  table th, td {
-    font-size: 14px;
-  }
-}
-/* line 4, ../sass/main.scss */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* line 10, ../sass/main.scss */
 body {
-  font-family: "Arial", sans-serif;
+    font-family: 'Arial', sans-serif;
+    /* background-color: get-theme-color(background-color); */ /* Uncomment or update as needed */
+    background-color: #ffffff; /* Example background color */
+   font-family: "Arial", sans-serif;
+}
+/* line 24, ../sass/_variables.scss */
+
+/* product */
+#procuct-card {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#procuct-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-options {
+    height: 20%;
+}
+
+.card-details {
+    height: 80%;
+}
+
+#procuct-card img {
+    height: 30%;
+}
+
+
+@media (max-width: 768px) {
+    /* line 3, ../sass/_layout.scss */
+    .actionsBtn {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    /* line 7, ../sass/_layout.scss */
+    table th, td {
+        font-size: 12px;
+    }
+
+    /* line 10, ../sass/_layout.scss */
+    #productList tr td button {
+        width: 75px;
+        font-size: 12px;
+    }
+
+    /* line 15, ../sass/_layout.scss */
+    .controls h1 {
+        font-size: 25px;
+    }
+}
+
+/* line 7, ../sass/main.scss */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+ 
+
+#procuct-card {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#procuct-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-options {
+    height: 20%;
+}
+
+.card-details {
+    height: 80%;
+}
+
+#procuct-card img {
+    height: 30%;
+
+}
+
+  .container-fluid{
+    padding: 0 !important;
+  }
+  #carouselExampleControls img{
+    height:600px;
+  }
+  .navbar{
+    position: relative;
+  }
+  .navbar-collapse{
+    /* order: 2; */
+    background-color: white;
+    z-index: 3;
+  }
+  @media screen and (max-width:992px){
+    .navbar-collapse{
+      position: fixed;
+      height: 100vh;
+      width: 200px;
+      right: 0px;
+      top: 70px;
+    }
+    .navbar{
+
+      order: 3;
+    }
+
+  }
+
+/* line 12, ../sass/main.scss */
+
+.homeSection_1
+{
+  display :flex;
+  flex-wrap: wrap;
+  height: 70px;
+  justify-content:space-around;
+  align-items: center;
+  width:100%;
   background-color: #ffffff;
 }
+.carousel-caption
+{
+  position:absolute;
+  left:140px;
+  bottom:209px;
+  text-align: left;
+  color:#4a2330;
+  width:500px
+}
+.carousel-caption h2
+{
+  margin-bottom:20px;
+}
+.carousel-caption p{
+  font-size: 20px;
+  margin-bottom:25px;
+}
+.carousel-caption button{
+  padding: 10px 25px;
+  border-radius:5x;
+  background-color:#F05990;
+  border:#ffffff;
+  color :#ffffff;
+  border-radius:5px;
+}
+
+.carousel-control-prev-span
+{
+fill:#F05990 !important;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+    font-size:20px;
+    margin:10px;
+}
+.nav-item
+{
+  margin-right: 15px;
+}
+.navbar-light .navbar-nav .nav-link:hover,
+.nav-item.active .nav-link
+{
+  color:#F05990 !important;
+}
+
+.homeSection_1 .logo img{
+  width: 150px;
+}
+footer
+{
+ 
+  width:100%;
+  display:flex;
+  flex-wrap: wrap;
+  background-color: #222222;
+  color:white;
+}
+footer ul{
+  list-style-type: none;
+}
+footer a
+{
+  color:white;
+  text-decoration: none;
+}
+
+.child-footer
+{
+  width:99.9%;
+  margin :auto;
+  padding:100px 0px;
+
+}
+.single-footer-widget
+{
+  padding:  0px 20px;
+
+}
+.footer-copyright-area
+{
+  width: 100%;
+  height: 70px;
+  background-color: black;
+  padding:10px;
+
+}
+#footer_span{
+  color:#E72463;
+  text-decoration: none;
+}
+.fa-brands
+{
+ 
+  border-radius: 50%;
+}
+.d-flex li{
+  width:30px;
+}
+.social-links ul{
+  gap: 15px;
+}
+.social-links ul li {
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  text-align: center;
+  padding-top: 5px;
+  transition: 1s;
+}
+
+.social-links ul li a{
+  color: #ffffff;
+}
+.social-links ul li:hover{
+ /* background-color: #E72463;*/
+ background-color: #F05990;
+  border-color: #F05990;
+}
+#logo-footer{
+  width: 200px;
+  height: auto !important;
+}
+.widget-list li :hover
+{
+  color:#F05990; 
+  text-decoration: none;
+}
+
+
