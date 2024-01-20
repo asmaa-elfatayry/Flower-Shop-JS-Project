@@ -103,8 +103,8 @@ window.addEventListener("load", function () {
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "delete ",
-        cancelButtonText: "cancel",
+        cancelButtonText: "Cancel ",
+        confirmButtonText: "Delete",
         reverseButtons: true,
       })
       .then((result) => {
@@ -449,7 +449,7 @@ window.addEventListener("load", function () {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          location.assign("login.html");
+          location.assign("login_sign.html");
         }
       });
   });
