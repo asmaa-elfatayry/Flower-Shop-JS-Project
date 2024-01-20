@@ -13,12 +13,4 @@ window.addEventListener('load',function(){
 
     });
 
-
-
-
-
-
-
-
-
 });
