@@ -1,0 +1,18 @@
+@media (max-width: 768px) { 
+    //seller
+    .actionsBtn{
+        flex-direction: column;
+        gap: 5px;
+    }
+    table th,td{
+        font-size: 12px;
+    }
+    #productList tr td button{
+        width: 75px;
+        font-size: 12px;
+    }
+ 
+    .controls h1{
+        font-size: 25px;
+    }
+}

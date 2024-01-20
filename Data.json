@@ -1,0 +1,390 @@
+{
+    "flowers": [
+      {
+        "id": 1,
+        "name": "Mugunghwa",
+        "meaning": "Symbolizes immortality and perseverance. The national flower of South Korea.",
+        "image": "flower1.jpg",
+        "price": 10.99,
+        "description": "Beautiful red rose symbolizing immortality and perseverance.",
+        "category": "National Flowers",
+        "seller": {
+          "id": 1
+        },
+        "stock": 50
+      },
+      {
+        "id": 2,
+        "name": "Begonia",
+        "meaning": "Represents gratitude and harmony. Often given to express appreciation.",
+        "image": "flower2.jpg",
+        "price": 12.99,
+        "description": "Elegant white lily representing gratitude and harmony.",
+        "category": "Expressive Lilies",
+        "seller": {
+          "id": 2
+        },
+        "stock": 30
+      },
+      {
+        "id": 3,
+        "name": "Chrysanthemum",
+        "meaning": "Symbolizes longevity and uprightness. A popular motif in traditional Korean art.",
+        "image": "flower3.jpg",
+        "price": 16.99,
+        "description": "Elegant white lily symbolizing longevity and uprightness.",
+        "category": "Traditional Lilies",
+        "seller": {
+          "id": 1
+        },
+        "stock": 20
+      },
+      {
+        "id": 4,
+        "name": "Orchid",
+        "meaning": "Represents refinement, friendship, and noble character. Associated with elegance.",
+        "image": "flower4.jpg",
+        "price": 16.99,
+        "description": "Elegant white lily representing refinement, friendship, and noble character.",
+        "category": "Elegant Lilies",
+        "seller": {
+          "id": 2
+        },
+        "stock": 20
+      },
+      {
+        "id": 5,
+        "name": "Apricot Blossom",
+        "meaning": "Symbolizes purity and endurance. Used in Korean poetry and art.",
+        "image": "flower5.jpg",
+        "price": 16.99,
+        "description": "Elegant white lily symbolizing purity and endurance.",
+        "category": "Poetic Lilies",
+        "seller": {
+          "id": 1
+        },
+        "stock": 20
+      },
+      {
+        "id": 6,
+        "name": "Dahlia",
+        "meaning": "Represents inner strength and elegance. Known for its vibrant and diverse colors.",
+        "image": "flower6.jpg",
+        "price": 14.99,
+        "description": "Elegant white lily symbolizing inner strength and elegance.",
+        "category": "Vibrant Lilies",
+        "seller": {
+          "id": 6
+        },
+        "stock": 25
+      },
+      {
+        "id": 7,
+        "name": "Plum Blossom",
+        "meaning": "Represents resilience and beauty through adversity. Associated with spring.",
+        "image": "flower7.jpg",
+        "price": 16.99,
+        "description": "Elegant white lily symbolizing resilience and beauty through adversity.",
+        "category": "Seasonal Lilies",
+        "seller": {
+          "id": 3
+        },
+        "stock": 20
+      },
+      {
+        "id": 8,
+        "name": "Azalea",
+        "meaning": "Symbolizes femininity and softness. Used to express admiration.",
+        "image": "flower8.jpg",
+        "price": 16.99,
+        "description": "Elegant Azalea symbolizing femininity and softness.",
+        "category": "Admiration Flowers",
+        "seller": {
+          "id": 3
+        },
+        "stock": 20
+      },
+      {
+        "id": 9,
+        "name": "Camellia",
+        "meaning": "Represents admiration and perfection. Associated with waiting with faith.",
+        "image": "flower9.jpg",
+        "price": 16.99,
+        "description": "Elegant Camellia symbolizing admiration and perfection.",
+        "category": "Faithful Flowers",
+        "seller": {
+          "id": 3,
+          "contact": "floralboutique@example.com"
+        },
+        "stock": 20
+      },
+      {
+        "id": 10,
+        "name": "Peach Blossom",
+        "meaning": "Symbolizes longevity and happiness. Used in celebrations and festivals.",
+        "image": "flower10.jpg",
+        "price": 16.99,
+        "description": "Elegant Peach Blossom symbolizing longevity and happiness.",
+        "category": "Festive Flowers",
+        "seller": {
+          "id": 4
+        },
+        "stock": 20
+      },
+      {
+        "id": 11,
+        "name": "Tulip",
+        "meaning": "Represents a declaration of love. Different colors convey specific emotions.",
+        "image": "flower11.jpg",
+        "price": 16.99,
+        "description": "Elegant Tulip symbolizing a declaration of love.",
+        "category": "Romantic Flowers",
+        "seller": {
+          "id": 1
+        },
+        "stock": 20
+      },
+      {
+        "id": 12,
+        "name": "Rose",
+        "meaning": "Symbolizes love, passion, and beauty. Different colors convey different sentiments.",
+        "image": "flower12.jpg",
+        "price": 16.99,
+        "description": "Elegant Rose symbolizing love, passion, and beauty.",
+        "category": "Romantic Flowers",
+        "seller": {
+          "id": 2
+        },
+        "stock": 20
+      },
+      {
+        "id": 13,
+        "name": "Lily",
+        "meaning": "Represents purity and virtue. Associated with motherhood and renewal.",
+        "image": "flower13.jpg",
+        "price": 16.99,
+        "description": "Elegant Lily symbolizing purity and virtue.",
+        "category": "Symbolic Flowers",
+        "seller": {
+          "id": 2
+        },
+        "stock": 18
+      },
+      {
+        "id": 14,
+        "name": "Sunflower",
+        "meaning": "Symbolizes adoration and loyalty. Represents warmth and positivity.",
+        "image": "flower14.jpg",
+        "price": 16.99,
+        "description": "Elegant Sunflower symbolizing adoration and loyalty.",
+        "category": "Cheerful Flowers",
+        "seller": {
+          "id": 2
+        },
+        "stock": 16
+      },
+      {
+        "id": 15,
+        "name": "Daisy",
+        "meaning": "Represents innocence and purity. Often associated with new beginnings.",
+        "image": "flower15.jpg",
+        "price": 16.99,
+        "description": "Elegant Daisy symbolizing innocence and purity.",
+        "category": "Symbolic Flowers",
+        "seller": {
+          "id": 2
+        },
+        "stock": 20
+      },
+      {
+        "id": 16,
+        "name": "Daffodil",
+        "meaning": "Symbolizes rebirth and new beginnings. Represents the arrival of spring.",
+        "image": "flower16.jpg",
+        "price": 16.99,
+        "description": "Elegant Daffodil symbolizing rebirth and new beginnings.",
+        "category": "Spring Flowers",
+        "seller": {
+          "id": 4
+        },
+        "stock": 20
+      },
+      {
+        "id": 17,
+        "name": "Peony",
+        "meaning": "Represents prosperity, honor, and compassion. Associated with wealth and good fortune.",
+        "image": "flower17.jpg",
+        "price": 16.99,
+        "description": "Elegant Peony symbolizing prosperity, honor, and compassion.",
+        "category": "Symbolic Flowers",
+        "seller": {
+          "id": 4
+        },
+        "stock": 20
+      },
+      {
+        "id": 18,
+        "name": "Daisy Delight",
+        "meaning": "Represents cheerfulness and innocence. Often associated with simplicity and purity.",
+        "image": "flower18.jpg",
+        "price": 14.99,
+        "description": "Charming Daisy representing cheerfulness and innocence.",
+        "category": "Cheerful Blooms",
+        "seller": {
+          "id": 1
+        },
+        "stock": 25
+      },
+      {
+        "id": 19,
+        "name": "Vibrant Tulip",
+        "meaning": "Symbolizes passion and elegance. Different colors convey specific emotions.",
+        "image": "flower19.jpg",
+        "price": 18.99,
+        "description": "Elegant Tulip symbolizing passion and elegance.",
+        "category": "Passionate Petals",
+        "seller": {
+          "id": 3
+    
+        },
+        "stock": 15
+      },
+      {
+        "id": 20,
+        "name": "Harmony Orchid",
+        "meaning": "Represents unity and refinement. Associated with elegance and friendship.",
+        "image": "flower20.jpg",
+        "price": 19.99,
+        "description": "Exquisite Orchid symbolizing unity and refinement.",
+        "category": "Elegant Blooms",
+        "seller": {
+          "id": 3
+     
+        },
+        "stock": 18
+      },
+      {
+        "id": 21,
+        "name": "Radiant Sunflower",
+        "meaning": "Symbolizes positivity and joy. Represents adoration and loyalty.",
+        "image": "flower21.jpg",
+        "price": 17.99,
+        "description": "Vibrant Sunflower radiating positivity and joy.",
+        "category": "Joyful Blooms",
+        "seller": {
+          "id": 4
+        },
+        "stock": 22
+      },
+      {
+        "id": 22,
+        "name": "Serene Lily",
+        "meaning": "Represents tranquility and peace. Associated with purity and renewal.",
+        "image": "flower22.jpg",
+        "price": 15.99,
+        "description": "Graceful Lily symbolizing tranquility and peace.",
+        "category": "Tranquil Blooms",
+        "seller": {
+          "id": 4
+       
+        },
+        "stock": 20
+      },
+      {
+        "id": 23,
+        "name": "Enchanting Rose",
+        "meaning": "Symbolizes enchantment and mystery. Different colors convey diverse sentiments.",
+        "image": "flower23.jpg",
+        "price": 21.99,
+        "description": "Captivating Rose symbolizing enchantment and mystery.",
+        "category": "Enchanting Blooms",
+        "seller": {
+          "id": 4
+        
+        },
+        "stock": 16
+      },
+      {
+        "id": 24,
+        "name": "Eternal Chrysanthemum",
+        "meaning": "Represents everlasting beauty and vitality. A symbol of honor and positive energy.",
+        "image": "flower24.jpg",
+        "price": 20.99,
+        "description": "Timeless Chrysanthemum symbolizing everlasting beauty and vitality.",
+        "category": "Eternal Blooms",
+        "seller": {
+          "id": 1
+    
+        },
+        "stock": 19
+      },{
+      "id": 25,
+      "name": "Vivid Violet",
+      "meaning": "Symbolizes enchantment and mystery. Associated with imagination and creativity.",
+      "image": "flower25.jpg",
+      "price": 18.99,
+      "description": "Colorful Violet symbolizing enchantment and mystery, perfect for expressing imagination and creativity.",
+      "category": "Artistic Blooms",
+      "seller": {
+        "id": 3
+
+      },
+      "stock": 21
+    }
+    
+    
+    
+    
+    ],
+    "sellers": [
+      {
+        "id": 1,
+        "name": "FlowerShop1",
+        "role": "seller",
+        "location": "Cityville",
+        "contact": "flowershop1@example.com",
+        "products": [1, 3, 5,11,18,24],
+        "password":"123"
+      },
+      {
+        "id": 2,
+        "name": "FloralBoutique",
+        "role": "seller",
+        "location": "Townsville",
+        "contact": "floralboutique@example.com",
+        "products": [2, 4, 6, 12, 13, 14, 15],
+        "password":"123"
+      },
+      {
+        "id": 3,
+        "name": "FloralEmporium",
+        "role": "seller",
+        "location": "Meadowville",
+        "contact": "floralemporium@example.com",
+        "products": [7, 8, 9, 19, 20, 25],
+        "password":"123"
+      },
+      {
+        "id": 4,
+        "name": "SunShine",
+        "role": "seller",
+        "location": "Paris",
+        "contact": "SunShine@example.com",
+        "products": [10, 16, 17, 21, 22, 23],
+        "password":"123"
+      }
+    ],
+    "users": [
+      {
+        "id": 1,
+        "username": "admin",
+        "role": "admin",
+        "email": "admin@example.com",
+        "password":"123"
+      }
+  
+    ]
+  }
+  
+
+

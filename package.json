@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "hover.css": "^2.3.2",
+    "sweetalert2": "^11.10.3"
+  }
+}
