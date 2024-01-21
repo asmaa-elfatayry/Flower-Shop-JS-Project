@@ -41,9 +41,9 @@ body {
 }
 
 .card-details {
-  height: 80%;
+  /* height: 80%; */
 }
 
 #procuct-card img {
-  height: 30%;
+  height: 250px;
 }
