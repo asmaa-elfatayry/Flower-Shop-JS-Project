@@ -1,7 +1,9 @@
+import * as sigAutho from './Authentication.js';
 window.addEventListener("load", function () {
 
   let save_sign = document.getElementById("sig");
   let redirect_signin = document.getElementById("signin");
+
 
 
   redirect_signin.addEventListener('click', function () {
@@ -14,88 +16,29 @@ window.addEventListener("load", function () {
     let name = document.getElementsByTagName("input")[0].value;
     let email = document.getElementsByTagName("input")[1].value;
     let password = document.getElementsByTagName("input")[2].value;
-    let message = document.getElementById("validation");
-    message.classList.remove("invalid-feedback");
-    message.innerText = "";
-
-
-
-    if (!valid_name(name)) {
-      document.getElementsByTagName("input")[0].classList.remove("is-invalid");
-      message.classList.add("invalid-feedback");
-      document.getElementsByTagName("input")[0].classList.add("is-invalid");
-      document.getElementsByTagName("input")[0].focus();
-      message.style.display = "block";
-      message.innerText = "this is invalid name ,please try again";
-
-
+    if (!sigAutho.valid_name(name)) {
+      sigAutho.handleTheErrorMessage(0, "this is invalid name ,please try again");
     }
-    else if (isEmailExists(email)) {
-      document.getElementsByTagName("input")[1].classList.remove("is-invalid");
-      message.classList.add("invalid-feedback");
-      document.getElementsByTagName("input")[1].classList.add("is-invalid");
-      document.getElementsByTagName("input")[1].focus();
-      message.style.display = "block";
-      message.innerText = "This email is already registered. Please use a different email.";
+    else if (sigAutho.isEmailExists(email)) {
+      sigAutho.handleTheErrorMessage(1, "This email is already registered. Please use a different email.");
     }
-
-    else if (email.trim() == 0 || !isValidEmail(email)) {
-      document.getElementsByTagName("input")[1].classList.remove("is-invalid");
-      message.classList.add("invalid-feedback");
-      document.getElementsByTagName("input")[1].classList.add("is-invalid");
-      document.getElementsByTagName("input")[1].focus();
-      message.style.display = "block";
-      message.innerText = "This email is not a valid email,please try another one.";
-
+    else if (email.trim() == 0 || !sigAutho.isValidEmail(email)) {
+      sigAutho.handleTheErrorMessage(1, "This email is not a valid email,please try another one.");
     }
-    else if (!password_valid(password)) {
-      document.getElementsByTagName("input")[2].classList.remove("is-invalid");
-      message.classList.add("invalid-feedback");
-      document.getElementsByTagName("input")[2].classList.add("is-invalid");
-      document.getElementsByTagName("input")[2].focus();
-      message.style.display = "block";
-      message.innerText = "This is an invalid password. Please make sure it is at least 8 characters long and choose a complex one.";
-    } else if (!iscomplexPassword(password)) {
-      document.getElementsByTagName("input")[2].classList.remove("is-invalid");
-      message.classList.add("invalid-feedback");
-      document.getElementsByTagName("input")[2].classList.add("is-invalid");
-      document.getElementsByTagName("input")[2].focus();
-      message.style.display = "block";
-      message.innerText = "This is not a complex password. Please choose a password with at least 8 characters, including letters, digits, and special characters.";
+    else if (!sigAutho.password_valid(password)) {
+      sigAutho.handleTheErrorMessage(2, "This is an invalid password. Please make sure it is at least 8 characters long and choose a complex one.");
+    } else if (!sigAutho.iscomplexPassword(password)) {
+      sigAutho.handleTheErrorMessage(2, "This is not a complex password. Please choose a password with at least 8 characters, including letters, digits, and special characters.");
     }
-
     else {
-      document.getElementsByTagName("input")[0].classList.remove("is-invalid");
-      document.getElementsByTagName("input")[1].classList.remove("is-invalid");
-      document.getElementsByTagName("input")[2].classList.remove("is-invalid");
       signUp(name, email, password);
-
-      
+      const loggedInUser = { name: name, email: email, role: "user" };
+      sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+      window.location.href = "../index.html";
     }
 
   });
-  function password_valid(password) {
-    if (password.trim() == 0 || password.trim().length < 8) {
-      return false
-    }
-    return true
-  }
 
-  function valid_name(name) {
-    let reg = new RegExp('^[a-zA-Z][a-zA-Z0-9]{3,9}$');
-    if (reg.test(name)) {
-      return true;
-    }
-    return false;
-  }
-
-
-  function isEmailExists(email) {
-    const userData = JSON.parse(localStorage.getItem("userData")) || [];
-    return userData.some((user) => user.email === email);
-  }
-
-  // signup
   function signUp(name, email, password) {
     const UserData = JSON.parse(localStorage.getItem("userData")) || [];
     const newUser = {
@@ -108,39 +51,8 @@ window.addEventListener("load", function () {
 
     UserData.push(newUser);
     localStorage.setItem("userData", JSON.stringify(UserData));
-    logged_user(newUser) ;
-
-  }
-
-  // Function to check the validity of an email address
-  function isValidEmail(email) {
-    const emailRegex = new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
-    return emailRegex.test(email);
-  }
-
-
-
-  function iscomplexPassword(password) {
-    const char = /[a-zA-Z]/.test(password);
-    const digit = /\d/.test(password);
-    const s_char = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    return char && digit && s_char;
   }
 
   
-  function logged_user(user) {
-      const logged_user = JSON.parse(localStorage.getItem("userloggeddata")) || [];
-      logged_user.pop();
-      const newloggeduser = {
-        id: user.id,
-        name:user.name,
-        email: user.email,
-        password: user.password,
-        role: "user"
-      };
-      logged_user.push(newloggeduser);
-      localStorage.setItem("userloggeddata", JSON.stringify(logged_user));
-
-    }
 
 });
