@@ -1,5 +1,6 @@
 body {
     background-color: #f8f9fa; /* Light gray background */
+    height: 100vh;
 }
 
 #cover {
@@ -38,6 +39,7 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    max-height: 400px;
 
 }
 hr {
@@ -51,6 +53,9 @@ hr {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-height: 100vh;
+    overflow-y: auto;
+
 }
 
 .user-info {
@@ -69,6 +74,13 @@ hr {
 .profile-right li {
     margin-bottom: 10px;
     color: #555;
+}
+.container-fluid
+{
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 @media (max-width: 768px) {
     .profile-left, .profile-right {

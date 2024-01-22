@@ -16,7 +16,7 @@ window.addEventListener("load", function () {
     let name = document.getElementsByTagName("input")[0].value;
     let email = document.getElementsByTagName("input")[1].value;
     let password = document.getElementsByTagName("input")[2].value;
-    if (!sigAutho.valid_name(name)) {
+    if (!sigAutho.valid_name(name.trim())) {
       sigAutho.handleTheErrorMessage(0, "this is invalid name ,please try again");
     }
     else if (sigAutho.isEmailExists(email)) {
@@ -31,8 +31,8 @@ window.addEventListener("load", function () {
       sigAutho.handleTheErrorMessage(2, "This is not a complex password. Please choose a password with at least 8 characters, including letters, digits, and special characters.");
     }
     else {
-      signUp(name, email, password);
-      const loggedInUser = { name: name, email: email, role: "user" };
+      const user_n_id=signUp(name.trim(), email, password);
+      const loggedInUser = { id:user_n_id,name: name.trim(), email: email, role: "user" };
       sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       window.location.href = "../index.html";
     }
@@ -51,6 +51,7 @@ window.addEventListener("load", function () {
 
     UserData.push(newUser);
     localStorage.setItem("userData", JSON.stringify(UserData));
+    return newUser.id;
   }
 
   

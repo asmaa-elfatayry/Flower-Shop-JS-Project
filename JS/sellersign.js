@@ -12,10 +12,10 @@ window.addEventListener("load", function () {
 
 
     event.preventDefault();
-    if (!selAutho.valid_name(shop_name)) {
+    if (!selAutho.valid_name(shop_name.trim())) {
       selAutho.handleTheErrorMessage(0, "this is invalid name ,please try again");
     }
-    else if (!selAutho.valid_name(location_shop)) {
+    else if (!selAutho.valid_name(location_shop.trim())) {
       selAutho.handleTheErrorMessage(1, "this is invalid name ,please try again");
     }
     else if (selAutho.isEmailExists(email)) {
@@ -41,7 +41,7 @@ window.addEventListener("load", function () {
       document.getElementsByTagName("input")[2].classList.remove("is-invalid");
       document.getElementsByTagName("input")[3].classList.remove("is-invalid");
       document.getElementsByTagName("input")[4].classList.remove("is-invalid");
-      seller_req(shop_name, email, password, number_prod, location_shop);
+      seller_req(shop_name.trim(), email, password, number_prod, location_shop.trim());
       document.getElementsByClassName("message")[0].innerHTML = '<div class="alert alert-success" role="alert">the request has been send successfuly.</div>';
 
     }

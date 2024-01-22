@@ -19,14 +19,12 @@ export function handleTheErrorMessage(index, mess) {
   }
 
   export function valid_name(name) {
-    let reg = new RegExp('^[a-zA-Z][a-zA-Z0-9]{3,9}$');
+    let reg = new RegExp('^[a-zA-Z][a-zA-Z0-9]{3,}$');
     if (reg.test(name)) {
       return true;
     }
     return false;
   }
-
-
   export function isEmailExists(email) {
     const userData = JSON.parse(localStorage.getItem("userData")) || [];
     return userData.some((user) => user.email === email);

@@ -43,6 +43,7 @@ window.addEventListener("load", function () {
 
   function logged_user(user, role) {
       const loggedInUser = {
+          id:user.id,
           name: user.name,
           email: role === 'seller' ? user.contact : user.email,
           role: role
