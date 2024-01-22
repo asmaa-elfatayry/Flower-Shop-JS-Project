@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 window.addEventListener("load", function () {
   //   const sellerId = 3; // just for test it will come from login
   let FlowersDate;
@@ -39,12 +33,3 @@ window.addEventListener("load", function () {
       })
 });
 
-<<<<<<< HEAD
-
-
-
-    });
-
-});
-=======
->>>>>>> d0a5b05cff0661bb7df33aa6cc269972316a46e9
