@@ -1,11 +1,12 @@
-let numberOfProfProducts = 6;
-window.addEventListener('load', function () {
+let numberOfProfProducts = 4;
+window.addEventListener('DOMContentLoaded', function () {
     let flowers = JSON.parse(this.window.localStorage.getItem('flowersData'));
+    let filteredFlowers;
     let newRowDiv = document.createElement('div');
     newRowDiv.className = 'row justify-content-around';
-    this.document.getElementById('productContainer').appendChild(newRowDiv);
+    document.getElementById('productContainer').appendChild(newRowDiv);
     function addProduct(product) {
-        let curProduct = this.document.createElement('div');
+        let curProduct = document.createElement('div');
         curProduct.className = 'card col-12 col-md-5';
         curProduct.id = 'procuct-card'
         newRowDiv.appendChild(curProduct);
@@ -24,41 +25,44 @@ window.addEventListener('load', function () {
                 </div>
             </div>
         `
+        curProduct.addEventListener('click', function () {
+            localStorage.setItem('productToShow', JSON.stringify(product));
+            window.open('../HTML pages/product_details.html', '_self');
+        })
     }
-    function displayProducts(txt) {
-        let filteredFlowers = flowers.filter(function(cur) {
-            return cur.name.toLowerCase().includes(txt.toLowerCase());
+    let mnP = document.getElementById('minPrice');
+    let mxP = document.getElementById('maxPrice');
+    let pagingBTNs = document.getElementsByClassName('paging-BTN');
+    function displayProducts() {
+        newRowDiv.innerHTML = '';
+        let txt = document.getElementById('searchTXT').value.trim();
+        filteredFlowers = flowers.filter(function (cur) {
+            return cur.name.toLowerCase().includes(txt.toLowerCase())
+                && Number(cur.price) >= Number(mnP.value)
+                && Number(cur.price) <= Number(mxP.value);
         });
         for (let i = 0; i < Math.min(numberOfProfProducts, filteredFlowers.length); i++) {
             addProduct(filteredFlowers[i]);
         }
+        displayPaging();
     }
-    displayProducts("");
-    this.document.getElementById('searchBTN').addEventListener('click', function () {
-        newRowDiv.innerHTML = '';
-        let curSearch = document.getElementById('searchTXT').value.trim();
-        displayProducts(curSearch);
+    displayProducts();
+    document.getElementById('searchTXT').addEventListener('keyup', function () {
+        displayProducts();
     })
-    let mnP = document.getElementById('minPrice');
-    let mxP = document.getElementById('maxPrice');
     mnP.addEventListener('change', function () {
         if (Number(mnP.value) < 0)
             mnP.value = 0;
         if (Number(mnP.value) > Number(mxP.value))
             mnP.value = mxP.value;
+        displayProducts();
     })
     mxP.addEventListener('change', function () {
         if (Number(mxP.value) < 0)
             mxP.value = 0;
         if (Number(mxP.value) < Number(mnP.value))
             mxP.value = mnP.value;
-    })
-    this.document.getElementById('priceFilterBTN').addEventListener('click', function () {
-        newRowDiv.innerHTML = '';
-        for (let i = 0; i < flowers.length; i++) {
-            if (Number(flowers[i].price) >= Number(mnP.value) && Number(flowers[i].price) <= Number(mxP.value))
-                addProduct(flowers[i]);
-        }
+        displayProducts();
     })
     let categories = document.getElementsByClassName('categories');
     for (let i = 0; i < categories.length; i++) {
@@ -68,31 +72,74 @@ window.addEventListener('load', function () {
             e.target.classList.add("active");
         })
     }
-    let pagingBTNs = this.document.getElementsByClassName('paging-BTN');
+    function displayPaging() {
+        let pages = Math.ceil(filteredFlowers.length / numberOfProfProducts);
+        document.getElementsByClassName('dots-1')[0].classList.add('d-none');
+        if (pages < 6) {
+            for (let i = 0; i < pagingBTNs.length; i++) {
+                if (i >= pages) {
+                    pagingBTNs[i].classList.add('d-none');
+                }
+                else {
+                    pagingBTNs[i].children[0].innerText = i + 1;
+                }
+            }
+            document.getElementsByClassName('dots-2')[0].classList.add('d-none');
+        }
+        else {
+            for (let i = 0; i < pagingBTNs.length - 1; i++) {
+                pagingBTNs[i].children[0].innerText = i + 1;
+            }
+            document.getElementsByClassName('dots-2')[0].classList.remove('d-none');
+            pagingBTNs[pagingBTNs.length - 1].children[0].innerText = pages;
+        }
+    }
     for (let btn = 0; btn < pagingBTNs.length; btn++) {
         pagingBTNs[btn].addEventListener('click', function (e) {
-            let page = e.target.innerText;
+            let page = Number(e.target.innerText);
+            let pages = Math.ceil(filteredFlowers.length / numberOfProfProducts);
             newRowDiv.innerHTML = '';
-            for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, flowers.length); i++) {
-                addProduct(flowers[i]);
+            for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
+                addProduct(filteredFlowers[i]);
             }
             for (let i = 0; i < pagingBTNs.length; i++)
                 pagingBTNs[i].classList.remove("active");
-            this.classList.add("active");
+            if (page >= 4 && page <= pages - 3) {
+                document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
+                document.getElementsByClassName('dots-2')[0].classList.remove('d-none');
+                pagingBTNs[1].children[0].innerText = page - 1;
+                pagingBTNs[2].children[0].innerText = page;
+                pagingBTNs[2].classList.add("active");
+                pagingBTNs[3].children[0].innerText = page + 1;
+            }
+            else if (page < 4) {
+                displayPaging();
+                pagingBTNs[0].classList.remove('active');
+                pagingBTNs[page - 1].classList.add('active');
+            }
+            else {
+                for (let i = pagingBTNs.length - 1,cur=pages; i > 0; i--,cur--) {
+                    pagingBTNs[i].children[0].innerText = cur;
+                }
+                document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
+                document.getElementsByClassName('dots-2')[0].classList.add('d-none');
+                let idx = pagingBTNs.length-1-(pages-page);
+                pagingBTNs[idx].classList.add("active");
+            }
         })
     }
-    this.document.getElementById('paging-next').addEventListener('click', function (e) {
+    document.getElementById('paging-next').addEventListener('click', function (e) {
         for (let i = 0; i < pagingBTNs.length; i++) {
             if (pagingBTNs[i].classList.contains('active')) {
                 if (i == pagingBTNs.length - 1) {
                     let page = Number(pagingBTNs[i].children[0].innerText) + 1;
-                    if ((page - 1) * numberOfProfProducts >= flowers.length)
+                    if ((page - 1) * numberOfProfProducts >= filteredFlowers.length)
                         break;
                     pagingBTNs[i].children[0].innerText = page;
                     pagingBTNs[i - 1].children[0].innerText = page - 1;
                     pagingBTNs[i - 2].children[0].innerText = page - 2;
                     newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, flowers.length); i++) {
+                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
                         addProduct(flowers[i]);
                     }
                 }
@@ -101,7 +148,7 @@ window.addEventListener('load', function () {
                     pagingBTNs[i + 1].classList.add('active');
                     let page = Number(pagingBTNs[i + 1].children[0].innerText);
                     newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, flowers.length); i++) {
+                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
                         addProduct(flowers[i]);
                     }
                     break;
@@ -109,7 +156,7 @@ window.addEventListener('load', function () {
             }
         }
     })
-    this.document.getElementById('paging-prev').addEventListener('click', function (e) {
+    document.getElementById('paging-prev').addEventListener('click', function (e) {
         for (let i = 0; i < pagingBTNs.length; i++) {
             if (pagingBTNs[i].classList.contains('active')) {
                 if (i == 0) {
@@ -120,7 +167,7 @@ window.addEventListener('load', function () {
                     pagingBTNs[i + 1].children[0].innerText = page + 1;
                     pagingBTNs[i + 2].children[0].innerText = page + 2;
                     newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, flowers.length); i++) {
+                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
                         addProduct(flowers[i]);
                     }
                 }
@@ -129,7 +176,7 @@ window.addEventListener('load', function () {
                     pagingBTNs[i - 1].classList.add('active');
                     let page = Number(pagingBTNs[i - 1].children[0].innerText);
                     newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, flowers.length); i++) {
+                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
                         addProduct(flowers[i]);
                     }
                 }
