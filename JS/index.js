@@ -23,7 +23,7 @@ window.addEventListener("load", function () {
     })
     .catch((error) => console.error("Error fetching products:", error));
   
-  //amira section
+  
       let search_icon = this.document.querySelector(".search");
     console.log(search_icon);
       search_icon.addEventListener('click' , function(e){
@@ -32,4 +32,5 @@ window.addEventListener("load", function () {
         search_input.classList.add("applaySearchStyle") ;
       })
 });
+
 
