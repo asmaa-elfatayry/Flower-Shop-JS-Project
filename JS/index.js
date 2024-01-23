@@ -1,3 +1,4 @@
+
 window.addEventListener("load", function () {
   //   const sellerId = 3; // just for test it will come from login
   function loadData()
@@ -19,6 +20,15 @@ window.addEventListener("load", function () {
         localStorage.setItem("requestseller", JSON.stringify(RequestSeller));
   
   
+
+  
+      let search_icon = this.document.querySelector(".search");
+    console.log(search_icon);
+      search_icon.addEventListener('click' , function(e){
+        let search_input = document.querySelector(".search_input");
+        search_input.classList.remove("none") ;
+        search_input.classList.add("applaySearchStyle") ;
+
       })
       .catch((error) => console.error("Error fetching products:", error));
 
@@ -61,4 +71,5 @@ window.addEventListener("load", function () {
     //search_input.classList.add("applaySearchStyle");
   //})
 });
+
 
