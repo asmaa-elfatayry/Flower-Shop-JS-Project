@@ -1,6 +1,3 @@
-@import "variables";
-@import "layout";
-
 * {
     margin: 0;
     padding: 0;
@@ -10,6 +7,10 @@
 body {
     font-family: $base-font-family;
     background-color: get-theme-color(background-color);
+}
+
+h1{
+    background-color:  red;
 }
 
 #procuct-card {
@@ -29,6 +30,4 @@ body {
 #procuct-card img {
     height: 30%;
 }
-#product-image {
-    box-shadow: 10px 10px 30px;
-  }
+

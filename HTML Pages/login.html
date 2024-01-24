@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
+    <link rel="stylesheet" href="../stylesheets/login.css">
+    <title>Login</title>
+</head>
+
+
+<body>
+   <section class="px-5">
+    <div class="container bg-white shadow border rounded ">
+        <div class="row box rounded">
+            <div class="col-lg-6 col-sm-12 right-box d-flex align-items-center justify-content-center">
+                <div class="overlay-left text-center">
+                    <h1 class="mb-4">Welcome Back</h1>
+                    <p class="mb-4">Every flower is a soul blossoming in nature</p>
+                    <button class="btn btn-outline-light" id="signUp">Sign Up</button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 left-box d-flex align-items-center justify-content-center p-4 rounded">
+                <form action="" class="w-100">
+                    <div class="text-center mb-4">
+                        <img src="../images/flowershop2.png" alt="Logo" width="80" height="80">
+                    </div>
+                    <div class="text-center mb-4">
+                        <h1 class="text-center">Sign In</h1>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <input type="email" class="form-control" placeholder="Email" autocomplete="email"
+                                style="background-color: #eee;" />
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-12">
+                            <input type="password" class="form-control" placeholder="Password"
+                                autocomplete="current-password" style="background-color: #eee;" />
+                        </div>
+                    </div>
+                    <div class="mb-1 text-center">
+                        <div id="validationuserExist">
+                           
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center">
+                        <button class="btn btn-primary" id="log">Sign In</button>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   </section>
+    <script src="../JS/index.js"></script>
+    <script src="../JS/login.js"></script>
+</body>
+
+</html>

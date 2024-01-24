@@ -383,6 +383,18 @@
         "password":"123"
       }
   
+    ],
+
+    "request_seller":[],
+    "logged_user":[
+      {
+        "id": 1,
+        "username": "admin",
+        "role": "admin",
+        "email": "admin@example.com",
+        "password":"123"
+      }
+     
     ]
   }
   
