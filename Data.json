@@ -377,25 +377,22 @@
     "users": [
       {
         "id": 1,
-        "username": "admin",
+        "name": "Mohamed",
         "role": "admin",
         "email": "admin@example.com",
+        "password":"123"
+      },
+      {
+        "id": 2,
+        "name": "Yousif",
+        "role": "user",
+        "email": "y@example.com",
         "password":"123"
       }
   
     ],
 
-    "request_seller":[],
-    "logged_user":[
-      {
-        "id": 1,
-        "username": "admin",
-        "role": "admin",
-        "email": "admin@example.com",
-        "password":"123"
-      }
-     
-    ]
+    "request_seller":[]
   }
   
 

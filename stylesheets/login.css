@@ -1,50 +1,53 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+/* line 3, ../sass/login.scss */
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
+/* line 9, ../sass/login.scss */
 body {
-    font-family: 'Montserrat', sans-serif;
-    background: #f6f5f7;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
+  font-family: 'Montserrat', sans-serif;
+  background: #f6f5f7;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
+/* line 20, ../sass/login.scss */
 h1 {
-    font-weight: bold;
+  font-weight: bold;
 }
+
+/* line 23, ../sass/login.scss */
 .custom-input {
-    width: 100%; /* Adjust the width as needed */
+  width: 100%;
+  /* Adjust the width as needed */
 }
 
-
+/* line 28, ../sass/login.scss */
 .right-box {
-    background-image: linear-gradient(rgba(245, 242, 242, 0.5), rgba(218, 161, 245, 0.5)), url("../images/flowers/flo_sign.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-   
-
+  background-image: linear-gradient(rgba(245, 242, 242, 0.5), rgba(218, 161, 245, 0.5)), url("../images/flowers/flo_sign.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
+/* line 36, ../sass/login.scss */
 .overlay-left h1 {
-    color: #eee;
+  color: #eee;
 }
 
+/* line 40, ../sass/login.scss */
 p {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: .5px;
-    margin: 20px 0 30px;
-    font-family: 'Butterfly Kids', cursive;
-    text-shadow: 2px 2px 4px #2d2c2c;
-    color: #eee;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: .5px;
+  margin: 20px 0 30px;
+  font-family: 'Butterfly Kids', cursive;
+  text-shadow: 2px 2px 4px #2d2c2c;
+  color: #eee;
 }
-

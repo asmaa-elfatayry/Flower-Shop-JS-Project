@@ -1,3 +1,10 @@
+import {
+  validateCVV,
+  validateExpiryDate,
+  validateCardNumber,
+  ValidEmail,
+  ValidPassword,
+} from "./ValidationMoudule.js";
 document.addEventListener("DOMContentLoaded", function () {
   // create user data containers
   function createUserDataPayment() {
@@ -69,30 +76,30 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  function ValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+  // function ValidEmail(email) {
+  //   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // }
 
-  function ValidPassword(password) {
-    return password.length >= 6;
-  }
-  function validateCardNumber(cardNumber) {
-    return /^\d{16}$/.test(cardNumber);
-  }
+  // function ValidPassword(password) {
+  //   return password.length >= 6;
+  // }
+  // function validateCardNumber(cardNumber) {
+  //   return /^\d{16}$/.test(cardNumber);
+  // }
 
-  function validateExpiryDate(month, year) {
-    const currentYear = new Date().getFullYear().toString().slice(2);
-    const currentMonth = new Date().getMonth() + 1;
-    return (
-      /^\d{2}$/.test(month) &&
-      /^\d{2}$/.test(year) &&
-      (year > currentYear || (year == currentYear && month >= currentMonth))
-    );
-  }
+  // function validateExpiryDate(month, year) {
+  //   const currentYear = new Date().getFullYear().toString().slice(2);
+  //   const currentMonth = new Date().getMonth() + 1;
+  //   return (
+  //     /^\d{2}$/.test(month) &&
+  //     /^\d{2}$/.test(year) &&
+  //     (year > currentYear || (year == currentYear && month >= currentMonth))
+  //   );
+  // }
 
-  function validateCVV(cvv) {
-    return /^\d{3,4}$/.test(cvv);
-  }
+  // function validateCVV(cvv) {
+  //   return /^\d{3,4}$/.test(cvv);
+  // }
   function resetErrorMessages() {
     let errorElements = document.querySelectorAll(".error");
     errorElements.forEach((element) => {

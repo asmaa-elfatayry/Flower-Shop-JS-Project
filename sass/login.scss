@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f6f5f7;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+h1 {
+    font-weight: bold;
+}
+.custom-input {
+    width: 100%; /* Adjust the width as needed */
+}
+
+
+.right-box {
+    background-image: linear-gradient(rgba(245, 242, 242, 0.5), rgba(218, 161, 245, 0.5)), url("../images/flowers/flo_sign.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+
+}
+
+.overlay-left h1 {
+    color: #eee;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: .5px;
+    margin: 20px 0 30px;
+    font-family: 'Butterfly Kids', cursive;
+    text-shadow: 2px 2px 4px #2d2c2c;
+    color: #eee;
+}
