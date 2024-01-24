@@ -75,6 +75,8 @@ window.addEventListener('DOMContentLoaded', function () {
     function displayPaging() {
         let pages = Math.ceil(filteredFlowers.length / numberOfProfProducts);
         document.getElementsByClassName('dots-1')[0].classList.add('d-none');
+        document.getElementById('paging-next').classList.remove('d-none');
+        document.getElementById('paging-prev').classList.add('d-none');
         if (pages < 6) {
             for (let i = 0; i < pagingBTNs.length; i++) {
                 if (i >= pages) {
@@ -105,6 +107,8 @@ window.addEventListener('DOMContentLoaded', function () {
             for (let i = 0; i < pagingBTNs.length; i++)
                 pagingBTNs[i].classList.remove("active");
             if (page >= 4 && page <= pages - 3) {
+                document.getElementById('paging-prev').classList.remove('d-none');
+                document.getElementById('paging-next').classList.remove('d-none');
                 document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
                 document.getElementsByClassName('dots-2')[0].classList.remove('d-none');
                 pagingBTNs[1].children[0].innerText = page - 1;
@@ -116,15 +120,22 @@ window.addEventListener('DOMContentLoaded', function () {
                 displayPaging();
                 pagingBTNs[0].classList.remove('active');
                 pagingBTNs[page - 1].classList.add('active');
+                if (page > 1)
+                    document.getElementById('paging-prev').classList.remove('d-none');
             }
             else {
-                for (let i = pagingBTNs.length - 1,cur=pages; i > 0; i--,cur--) {
+                for (let i = pagingBTNs.length - 1, cur = pages; i > 0; i--, cur--) {
                     pagingBTNs[i].children[0].innerText = cur;
                 }
                 document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
                 document.getElementsByClassName('dots-2')[0].classList.add('d-none');
-                let idx = pagingBTNs.length-1-(pages-page);
+                let idx = pagingBTNs.length - 1 - (pages - page);
                 pagingBTNs[idx].classList.add("active");
+                document.getElementById('paging-prev').classList.remove('d-none');
+                if (page == pages)
+                    document.getElementById('paging-next').classList.add('d-none');
+                else
+                    document.getElementById('paging-next').classList.remove('d-none');
             }
         })
     }
