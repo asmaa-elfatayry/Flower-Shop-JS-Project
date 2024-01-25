@@ -30,39 +30,44 @@ window.addEventListener('DOMContentLoaded', function () {
             window.open('../HTML pages/product_details.html', '_self');
         })
     }
+
+
     let mnP = document.getElementById('minPrice');
     let mxP = document.getElementById('maxPrice');
     let pagingBTNs = document.getElementsByClassName('paging-BTN');
-    function displayProducts() {
-        newRowDiv.innerHTML = '';
+    function filterProducts() {
         let txt = document.getElementById('searchTXT').value.trim();
         filteredFlowers = flowers.filter(function (cur) {
             return cur.name.toLowerCase().includes(txt.toLowerCase())
                 && Number(cur.price) >= Number(mnP.value)
                 && Number(cur.price) <= Number(mxP.value);
         });
-        for (let i = 0; i < Math.min(numberOfProfProducts, filteredFlowers.length); i++) {
+    }
+    function displayProducts(page) {
+        newRowDiv.innerHTML = '';
+        filterProducts();
+        for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
             addProduct(filteredFlowers[i]);
         }
-        displayPaging();
+        displayPaging(page);
     }
-    displayProducts();
+    displayProducts(1);
     document.getElementById('searchTXT').addEventListener('keyup', function () {
-        displayProducts();
+        displayProducts(1);
     })
     mnP.addEventListener('change', function () {
         if (Number(mnP.value) < 0)
             mnP.value = 0;
         if (Number(mnP.value) > Number(mxP.value))
             mnP.value = mxP.value;
-        displayProducts();
+        displayProducts(1);
     })
     mxP.addEventListener('change', function () {
         if (Number(mxP.value) < 0)
             mxP.value = 0;
         if (Number(mxP.value) < Number(mnP.value))
             mxP.value = mnP.value;
-        displayProducts();
+        displayProducts(1);
     })
     let categories = document.getElementsByClassName('categories');
     for (let i = 0; i < categories.length; i++) {
@@ -72,125 +77,82 @@ window.addEventListener('DOMContentLoaded', function () {
             e.target.classList.add("active");
         })
     }
-    function displayPaging() {
-        let pages = Math.ceil(filteredFlowers.length / numberOfProfProducts);
+    function removePaging() {
+        for (let i = 0; i < pagingBTNs.length; i++) {
+            pagingBTNs[i].classList.add('d-none');
+            pagingBTNs[i].classList.remove('active');
+        }
         document.getElementsByClassName('dots-1')[0].classList.add('d-none');
-        document.getElementById('paging-next').classList.remove('d-none');
+        document.getElementsByClassName('dots-2')[0].classList.add('d-none');
         document.getElementById('paging-prev').classList.add('d-none');
-        if (pages < 6) {
+        document.getElementById('paging-next').classList.add('d-none');
+    }
+    function displayPaging(page) {
+        removePaging();
+        let pages = Math.ceil(filteredFlowers.length / numberOfProfProducts);
+        if (page > 1)
+            document.getElementById('paging-prev').classList.remove('d-none');
+        if (page < pages)
+            document.getElementById('paging-next').classList.remove('d-none');
+        if (page >= 4 && page <= pages - 3) {
+            document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
+            document.getElementsByClassName('dots-2')[0].classList.remove('d-none');
+            for (let i = 0; i < pagingBTNs.length; i++)
+                pagingBTNs[i].classList.remove('d-none');
+            pagingBTNs[0].children[0].innerText = 1;
+            pagingBTNs[1].children[0].innerText = page - 1;
+            pagingBTNs[2].children[0].innerText = page;
+            pagingBTNs[2].classList.add("active");
+            pagingBTNs[3].children[0].innerText = page + 1;
+            pagingBTNs[4].children[0].innerText = pages;
+        }
+        else if (page < 4) {
             for (let i = 0; i < pagingBTNs.length; i++) {
-                if (i >= pages) {
-                    pagingBTNs[i].classList.add('d-none');
-                }
-                else {
+                if (i < pages) {
                     pagingBTNs[i].children[0].innerText = i + 1;
+                    pagingBTNs[i].classList.remove('d-none');
+                    if (page == i + 1)
+                        pagingBTNs[i].classList.add('active');
                 }
+                else
+                    break;
             }
-            document.getElementsByClassName('dots-2')[0].classList.add('d-none');
+            if (pages >= 6)
+                document.getElementsByClassName('dots-2')[0].classList.remove('d-none');
         }
         else {
-            for (let i = 0; i < pagingBTNs.length - 1; i++) {
-                pagingBTNs[i].children[0].innerText = i + 1;
+            for (let i = pagingBTNs.length - 1, cur = pages; i > 0; i--, cur--) {
+                pagingBTNs[i].children[0].innerText = cur;
+                pagingBTNs[i].classList.remove('d-none');
+                if (page == cur)
+                    pagingBTNs[i].classList.add('active');
             }
-            document.getElementsByClassName('dots-2')[0].classList.remove('d-none');
-            pagingBTNs[pagingBTNs.length - 1].children[0].innerText = pages;
+            if (pages >= 6) {
+                document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
+                pagingBTNs[0].classList.remove('d-none');
+                pagingBTNs[0].children[0].innerText = 1;
+            }
         }
     }
     for (let btn = 0; btn < pagingBTNs.length; btn++) {
         pagingBTNs[btn].addEventListener('click', function (e) {
             let page = Number(e.target.innerText);
-            let pages = Math.ceil(filteredFlowers.length / numberOfProfProducts);
-            newRowDiv.innerHTML = '';
-            for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
-                addProduct(filteredFlowers[i]);
-            }
-            for (let i = 0; i < pagingBTNs.length; i++)
-                pagingBTNs[i].classList.remove("active");
-            if (page >= 4 && page <= pages - 3) {
-                document.getElementById('paging-prev').classList.remove('d-none');
-                document.getElementById('paging-next').classList.remove('d-none');
-                document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
-                document.getElementsByClassName('dots-2')[0].classList.remove('d-none');
-                pagingBTNs[1].children[0].innerText = page - 1;
-                pagingBTNs[2].children[0].innerText = page;
-                pagingBTNs[2].classList.add("active");
-                pagingBTNs[3].children[0].innerText = page + 1;
-            }
-            else if (page < 4) {
-                displayPaging();
-                pagingBTNs[0].classList.remove('active');
-                pagingBTNs[page - 1].classList.add('active');
-                if (page > 1)
-                    document.getElementById('paging-prev').classList.remove('d-none');
-            }
-            else {
-                for (let i = pagingBTNs.length - 1, cur = pages; i > 0; i--, cur--) {
-                    pagingBTNs[i].children[0].innerText = cur;
-                }
-                document.getElementsByClassName('dots-1')[0].classList.remove('d-none');
-                document.getElementsByClassName('dots-2')[0].classList.add('d-none');
-                let idx = pagingBTNs.length - 1 - (pages - page);
-                pagingBTNs[idx].classList.add("active");
-                document.getElementById('paging-prev').classList.remove('d-none');
-                if (page == pages)
-                    document.getElementById('paging-next').classList.add('d-none');
-                else
-                    document.getElementById('paging-next').classList.remove('d-none');
-            }
+            displayProducts(page);
         })
     }
     document.getElementById('paging-next').addEventListener('click', function (e) {
         for (let i = 0; i < pagingBTNs.length; i++) {
             if (pagingBTNs[i].classList.contains('active')) {
-                if (i == pagingBTNs.length - 1) {
-                    let page = Number(pagingBTNs[i].children[0].innerText) + 1;
-                    if ((page - 1) * numberOfProfProducts >= filteredFlowers.length)
-                        break;
-                    pagingBTNs[i].children[0].innerText = page;
-                    pagingBTNs[i - 1].children[0].innerText = page - 1;
-                    pagingBTNs[i - 2].children[0].innerText = page - 2;
-                    newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
-                        addProduct(flowers[i]);
-                    }
-                }
-                else {
-                    pagingBTNs[i].classList.remove('active');
-                    pagingBTNs[i + 1].classList.add('active');
-                    let page = Number(pagingBTNs[i + 1].children[0].innerText);
-                    newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
-                        addProduct(flowers[i]);
-                    }
-                    break;
-                }
+                displayProducts(Number(pagingBTNs[i].children[0].innerText) + 1);
+                break;
             }
         }
     })
     document.getElementById('paging-prev').addEventListener('click', function (e) {
         for (let i = 0; i < pagingBTNs.length; i++) {
             if (pagingBTNs[i].classList.contains('active')) {
-                if (i == 0) {
-                    let page = Number(pagingBTNs[i].children[0].innerText) - 1;
-                    if (page < 1)
-                        break;
-                    pagingBTNs[i].children[0].innerText = page;
-                    pagingBTNs[i + 1].children[0].innerText = page + 1;
-                    pagingBTNs[i + 2].children[0].innerText = page + 2;
-                    newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
-                        addProduct(flowers[i]);
-                    }
-                }
-                else {
-                    pagingBTNs[i].classList.remove('active');
-                    pagingBTNs[i - 1].classList.add('active');
-                    let page = Number(pagingBTNs[i - 1].children[0].innerText);
-                    newRowDiv.innerHTML = '';
-                    for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
-                        addProduct(flowers[i]);
-                    }
-                }
+                displayProducts(Number(pagingBTNs[i].children[0].innerText) - 1);
+                break;
             }
         }
     })
