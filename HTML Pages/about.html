@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <!-- CSS and JS file end here -->
     <title>contact-us</title>
     <style>
     </style>
@@ -40,29 +43,48 @@
             </ul>
           </div>
         </nav>
-        <div class="user">
-          <i class="fa-solid fa-user mr-3"></i>
-          <i class="fa fa-shopping-cart"></i>
-        </div>
+        <ul class="user ">
+          <li><i class="fa fa-shopping-cart"></i></li> 
+          <li><i class="fa-solid fa-user mr-3"></i></li> 
+         </ul>
       </section><!--end of navbar-->
       <div class="contact-background about-background">
         <div class="content">
         <h3>About Us</h3>
         <ul>
-            <li  id ="home_li"><a href="../index.html"> Home </a> </li><span> ></span>
+            <li id ="home_li"><a href="../index.html"> Home </a> </li><span>/</span>
             <li id ="contact_li">About Us</li>
         </ul>
       </div>
     </div><!--end of contact-background -->
-     <!--featured /floral_features-->
-     <div class="container mt-5">
+      <!--welcome-->
+    <div class="container mb-5">
+        <div class="row welcome_about">
+            <div class=" col-lg-6 col-md-5">
+                <div class="about-content">
+                    <h2>Welcome To <span>Floral Boutique</span> Store !</h2>
+                    <p class="mt-4">A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you.
+                      Where flowers are our inspiration to create lasting memories. Whatever the occasion inspiration to create lasting memories.., Whatever the occasion inspiration to create lasting memoriesWhatever 
+                      the occasion inspiration to create lasting memories.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-5">
+                <div class="about_image">
+                  <img src="../images/about-us.webp"/>
+                    </div>
+            </div>
+        </div><!--end of welcome-->
+     </div><!--container-->
+       <!--featured /floral_features-->
+     <div class="container mt-5 mb-5">
       <div class=" row floral_features">
         <div class=" col-lg-3 col-sm-6">
           <div class="feature">
-            <div class="fimg"><img src="../images/Free-Delivery.webp"></div>
+            <div class="fimg"><img id="fimg_one" src="../images/Free-Delivery.webp"></div>
               <div class="feature_content" >
                 <h4>Free Delivery</h4>
-                <p>Free shipping around the world for all orders over $120</p>
+                <p>Free shipping around the world for all orders </p>
               </div>
             </div>
           </div><!--col-12 col-lg-4-->
@@ -70,8 +92,8 @@
             <div class="feature">
               <div class="fimg"><img src="../images/Online-Order.webp"></div>
                 <div class="feature_content" >
-                  <h4>Free Delivery</h4>
-                  <p>Free shipping around the world for all orders over $120</p>
+                  <h4>Online Order</h4>
+                  <p>Don’t worry you can order Online by our Site</p>
                 </div>
               </div>
             </div><!--col-12 col-lg-4-->
@@ -79,8 +101,8 @@
               <div class="feature">
                 <div class="fimg"><img src="../images/Freshness.webp"></div>
                   <div class="feature_content" >
-                    <h4>Free Delivery</h4>
-                    <p>Free shipping around the world for all orders over $120</p>
+                    <h4>Freshness</h4>
+                    <p>You have freshness flowers every single order</p>
                   </div>
                 </div>
               </div><!--col-12 col-lg-4-->
@@ -88,34 +110,241 @@
                 <div class="feature">
                   <div class="fimg"><img src="../images/Made-By-Artists.webp"></div>
                     <div class="feature_content" >
-                      <h4>Free Delivery</h4>
-                      <p>Free shipping around the world for all orders over $120</p>
+                      <h4>  Made By Artists</h4>
+                      <p>World for all made by artists orders over now</p>
                     </div>
                   </div>
                 </div><!--col-12 col-lg-4-->
         </div><!--row / featured /floral_features-->
-      </div><!--container -->
-
-    <div class="container mb-5">
-        <div class="row">
-            <div class=" col-lg-6 col-md-5">
-                <div class="about-content">
-                    <h2>Welcome To <span>Floral Boutique</span> Store !</h2>
-                    <p class="mt-3">Adipiscing lacus ut elementum, nec duis, tempor litora turpis dapibus. Imperdiet cursus odio tortor in elementum. Egestas nunc eleifend feugiat lectus laoreet, vel nunc taciti integer cras. Hac pede dis, praesent nibh ac dui mauris sit. Pellentesque mi, facilisi mauris, elit sociis leo sodales accumsan. Iaculis ac fringilla 
-                      torquent lorem consectetuer, sociosqu phasellus risus urna aliquam, ornare
-                    </p>
+     </div>
+    <!--reviews-->
+    <div class="container">
+    <div class="carousel-bg">
+      <h1>Client says</h1>
+      <div class="after"></div>
+      <div id="carousel1" class="carousel slide testimonial-style" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel1" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel1" data-slide-to="1"></li>
+          <li data-target="#carousel1" data-slide-to="2"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="car_img"><img src="../images/11.jpg"/></div>
+            <div class="carousel-caption slide2 testimonial-caption-style">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae semper quis lectus nulla at volutpat diam.</p>
+              <p class="testimonial-authors">Mohamed</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="car_img"><img src="../images/12.jpg"/></div>
+            <div class="carousel-caption slide2 testimonial-caption-style">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae semper quis lectus nulla at volutpat diam.</p>
+              <p class="testimonial-authors">John</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="car_img"><img src="../images/13.jpg"/></div>
+            <div class="carousel-caption slide2 testimonial-caption-style">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae semper quis lectus nulla at volutpat diam.</p>
+              <p class="testimonial-authors">Ahmed</p>
+            </div>
+          </div>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel1" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+        <a class="right carousel-control" href="#carousel1" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+      </div>
+    </div><!--reviews-->
+  </div><!--container -->
+  <!--team members-->
+  <div class=" container">
+  <div class="team_members ">
+    <div class="section-title-1 text-center">
+      <span class="title-1 d-block">The guys behind the curtains</span>
+      <h2 class="title-2 text-uppercase mb-5">a team of highly-skilled experts</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-about">
+          <img src="../images/2 (1).webp" class="card-img-top" alt="Stephen Mearsley"/>
+          <div class="social-links_about">
+            <ul class="d-flex">
+                <li id="first_brand">
+                    <a class="rounded-circle" href="#" title="Facebook"> <i class="fa-brands fa-facebook"></i></a>
+                </li>
+                <li id="sec_brand">
+                    <a class="rounded-circle" href="#" title="Twitter"> <i class="fa-brands fa-twitter"></i></a>
+                </li>
+                <li id="third_brand">
+                    <a class="rounded-circle" href="#" title="Linkedin"> <i class="fa-brands fa-linkedin"></i></a> 
+                </li>
+                </ul>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-5">
-                <div class="about_image">
-                    <img src="../images/about-us.webp"/>
-                    </div>
-            </div>
-        </div><!--end of row-->
-    </div><!--end of container-->
-   
-
-
-    </div><!--end of container fluid-->
-    </body>
+          <div class="card-body">
+            <h3 class="card-title text-center">Dollie Horton</h3>
+            <p class="card-text text-center">Marketing</p>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-4">
+        <div class="card card-about">
+          <img src="../images/1 (1).webp" class="card-img-top" alt="Stephen Mearsley"/>
+          <div class="social-links_about">
+            <ul class="d-flex">
+                <li id="first_brand">
+                    <a class="rounded-circle" href="#" title="Facebook"> <i class="fa-brands fa-facebook"></i></a>
+                </li>
+                <li id="sec_brand">
+                    <a class="rounded-circle" href="#" title="Twitter"> <i class="fa-brands fa-twitter"></i></a>
+                </li>
+                <li id="third_brand">
+                    <a class="rounded-circle" href="#" title="Linkedin"> <i class="fa-brands fa-linkedin"></i></a> 
+                </li>
+                </ul>
+                </div>
+          <div class="card-body">
+            <h3 class="card-title text-center">Special title treatment</h3>
+            <p class="card-text text-center">Maggie Strickland</p>
+          </div>
+        </div>
+      </div>
+      <div class=" col-md-4">
+        <div class="card card-about">
+          <img src="../images/3 (1).webp" class="card-img-top" alt="Stephen Mearsley"/>
+          <div class="social-links_about">
+            <ul class="d-flex">
+                <li id="first_brand">
+                    <a class="rounded-circle" href="#" title="Facebook"> <i class="fa-brands fa-facebook"></i></a>
+                </li>
+                <li id="sec_brand">
+                    <a class="rounded-circle" href="#" title="Twitter"> <i class="fa-brands fa-twitter"></i></a>
+                </li>
+                <li id="third_brand">
+                    <a class="rounded-circle" href="#" title="Linkedin"> <i class="fa-brands fa-linkedin"></i></a> 
+                </li>
+                </ul>
+                </div>
+          <div class="card-body">
+            <h3 class="card-title text-center">Stephen Mearsley</h3>
+            <p class="card-text text-center">President & CEO</p>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+  </div>
+  <!--footer-->
+  <footer>
+    <div class="child-footer">
+    <div class="footer-area">
+      <div class="footer-widget-area">
+          <div class="container container-default custom-area">
+              <div class="row align-items-baseline">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-custom">
+                      <div class="single-footer-widget ">
+                          <div class="footer-logo">
+                              <a href="index.html">
+                              <img src="../images/logo.png" id="logo-footer" alt="Logo Image">
+                              </a>
+                          </div>
+                          <p class="desc-content navbar-light first ">Lorem Khaled Ipsum is a major key to success. To be successful you’ve got to work hard you’ve got to make it.</p>
+                          <div class="social-links">
+                              <ul class="d-flex">
+                                  <li>
+                                      <a class="rounded-circle" href="#" title="Facebook">
+                                        <i class="fa-brands fa-facebook"></i>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a class="rounded-circle" href="#" title="Twitter">
+                                          <i class="fa-brands fa-twitter"></i>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a class="rounded-circle" href="#" title="Linkedin">
+                                          <i class="fa-brands fa-linkedin"></i>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a class="rounded-circle" href="#" title="Youtube">
+                                        <i class="fa-brands fa-youtube"></i>
+                                      </a>
+                                  </li> 
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-2 col-custom">
+                      <div class="single-footer-widget">
+                          <h2 class="widget-title">Information</h2>
+                          <ul class="widget-list">
+                              <li><a href="#">Our Company</a></li>
+                              <li><a href="contact-us.html">Contact Us</a></li>
+                              <li><a href="#">Our Services</a></li>
+                              <li><a href="#">Why We?</a></li>
+                              <li><a href="#">Careers</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-2 col-custom">
+                      <div class="single-footer-widget">
+                          <h2 class="widget-title">Quicklink</h2>
+                          <ul class="widget-list">
+                              <li><a href="about-us.html">About</a></li>
+                              <li><a href="#">Blog</a></li>
+                              <li><a href="#">Shop</a></li>
+                              <li><a href="#">Cart</a></li>
+                              <li><a href="contact-us.html">Contact</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-2 col-custom">
+                      <div class="single-footer-widget">
+                          <h2 class="widget-title">Support</h2>
+                          <ul class="widget-list">
+                              <li><a href="#">Online Support</a></li>
+                              <li><a href="#">Shipping Policy</a></li>
+                              <li><a href="#">Return Policy</a></li>
+                              <li><a href="#">Privacy Policy</a></li>
+                              <li><a href="#">Terms of Service</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-custom">
+                      <div class="single-footer-widget">
+                          <h2 class="widget-title">Location</h2>
+                          <div class="widget-body">
+                              <address>123, ABC, Road ##, Main City, Your address goes here.<br>Phone: 01234 567 890<br>Email: https://websiteName.com</address>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+      <div class="footer-copyright-area">
+          <div class="container custom-area">
+              <div class="row">
+                  <div class="col-12 text-center col-custom">
+                      <div class="copyright-content">
+                          <p>Copyright © 2021 <a  id="footer_span" href="#" title="https://bootstrap.com/"> Floral Boutique</a>.All Rights Reserved</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
     
+  </footer> 
+</div><!--end of container fluid-->
+<script src="../JS/JQuery-3.3.1.min.js"></script>
+<script src="../JS/popper.js"></script>
+<script src="../JS/bootstrap.min.js"></script>
+<script src="../JS/all.min.js"></script>
+<script src="../JS/home.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+</body>
