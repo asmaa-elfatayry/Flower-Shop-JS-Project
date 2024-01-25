@@ -33,7 +33,6 @@ window.addEventListener("load" , function(){
     {
         addProduct(flowers[i])
     }
-
 });*/
 function addProduct(product) {
     card = document.createElement("div");
