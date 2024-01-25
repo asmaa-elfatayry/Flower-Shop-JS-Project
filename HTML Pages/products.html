@@ -1,90 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floura | Our products</title>
-    <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
-    <link rel="stylesheet" href="../stylesheets/main.css" />
-    <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
-    <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
-  </head>
 
-  <body>
-    <header class="container-fluid px-3 row">
-      <div class="sellerInfo col-12 col-md-2 text-center mt-5">
-        <div id="sellerInfoContainer">
-          <div class="w-50 h-50 rounded-circle mx-auto my-3 border border-info">
-            <img
-              src="../images/flowershop2.png"
-              alt="shop"
-              class="w-100 h-100 rounded-circle p-2"
-            />
-          </div>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our products</title>
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+  <link rel="stylesheet" href="../stylesheets/products_and_product_details.css" />
+  <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
+
+  <!-- <link rel="stylesheet" href="../stylesheets/main.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"> -->
+</head>
+
+<body>
+  <!-- <section class="homeSection_1 sticky-top">
+    <div class="logo"><img src="../images/logo.png"></div>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="HTML Pages/products.html">Flowers </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="HTML Pages/about.html">About Us </i></a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="HTML Pages/contact.html">Contact Us </a>
+          </li>
+        </ul>
       </div>
-    </header>
-    <div class="container col-11">
-      <div class="row">
-        <div class="col-12 col-md-4 mr-5">
-          <h3>Search</h3>
-          <hr />
-          <div class="row">
-            <div class="input-group mb-2">
-              <input
-                type="text"
-                class="form-control col-9"
-                id="searchTXT"
-                placeholder="Search Our Store"
-              />
-              <div class="input-group-apppend">
-                <button
-                  class="btn btn-outline-secondary bg-dark"
-                  id="searchBTN"
-                  type="button"
-                >
-                  <i class="fa fa-search"></i>
-                </button>
-              </div>
+    </nav>
+    <div class="user">
+
+    </div>
+  </section> -->
+  <div class="container col-11">
+    <div class="row">
+      <div class="col-12 col-md-4 mr-5">
+        <h3>Search</h3>
+        <hr>
+        <div class="row">
+          <div class="input-group mb-2">
+            <input type="text" class="form-control col-9" id="searchTXT" placeholder="Search Our Store">
+            <div class="input-group-apppend">
+              <button class="btn btn-outline-secondary bg-dark" id="searchBTN" type="button">
+                <i class="fa fa-search"></i>
+              </button>
             </div>
           </div>
-          <br />
-
-          <h3>Price filter</h3>
-          <hr />
-          <div class="row">
-            <input type="number" value="0" class="col-3" id="minPrice" />
-            <span class="col-2 text-center">To</span>
-            <input type="number" value="1000" class="col-4" id="maxPrice" />
-            <button
-              class="btn btn-outline-secondary bg-dark col-3 col-lg-2"
-              id="priceFilterBTN"
-              type="button"
-            >
-              GO
-            </button>
-          </div>
-          <br />
-
-          <h3>Categories</h3>
-          <hr />
-          <ul class="list-group col-8">
-            <li class="list-group-item list-group-item-secondary active">
-              All products
-            </li>
-            <li class="list-group-item list-group-item-secondary">
-              Best Selling
-            </li>
-            <li class="list-group-item list-group-item-secondary">
-              New Products
-            </li>
-          </ul>
         </div>
-        <div class="col-12 col-md-7">
-          <div class="container" id="productContainer"></div>
+        <br>
+
+        <h3>Price filter</h3>
+        <hr>
+        <div class="row">
+          <input type="number" value="0" class="col-3" id="minPrice">
+          <span class="col-2 text-center">To</span>
+          <input type="number" value="1000" class="col-4" id="maxPrice">
+          <button class="btn btn-outline-secondary bg-dark col-3 col-lg-2" id="priceFilterBTN" type="button">GO</button>
+        </div>
+        <br>
+
+        <h3>Categories</h3>
+        <hr>
+        <ul class="list-group col-8">
+          <li class="list-group-item list-group-item-secondary active categories">All products</li>
+          <li class="list-group-item list-group-item-secondary categories">Best Selling</li>
+          <li class="list-group-item list-group-item-secondary categories">New Products</li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-7">
+        <div class="container text-center" id="productContainer">
+
         </div>
       </div>
     </div>
-    <script src="../JS/products.js"></script>
-  </body>
+    <div class="col-12 d-flex justify-content-center">
+      <nav>
+        <ul class="pagination">
+          <li class="page-item d-none" id="paging-prev">
+            <span class="page-link">Previous</span>
+          </li>
+          <li class="page-item active paging-BTN"><a class="page-link">1</a></li>
+          <li class="page-item d-none dots-1"><a class="page-link">...</a></li>
+          <li class="page-item paging-BTN"><a class="page-link">2</a></li>
+          <li class="page-item paging-BTN"><a class="page-link">3</a></li>
+          <li class="page-item paging-BTN"><a class="page-link">4</a></li>
+          <li class="page-item d-none dots-2"><a class="page-link">...</a></li>
+          <li class="page-item paging-BTN"><a class="page-link">3</a></li>
+          <li class="page-item" id="paging-next">
+            <span class="page-link">Next</span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <script src="../JS/products.js"></script>
+</body>
+
 </html>
