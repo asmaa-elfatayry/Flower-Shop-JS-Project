@@ -50,7 +50,7 @@ transition: 1s;
     position: absolute;
     left: 0px;
     top: 0px;
-    height: 100%;
+    height: 100vh;
 }
 i{
     transition: 1s;
@@ -114,12 +114,45 @@ i:hover{
 .swal2-actions{
     gap: 10px;
 }
-// animation 
-@keyframes RotateImg {
-    10%{transform: rotate(45deg); }
-    25%{transform: rotate(90deg);}
-    50%{transform: rotate(0deg);}
-    60%{transform: rotate(-45deg);}
-    75%{transform: rotate(-90deg);}
-    100%{transform: rotate(0deg);}
+.table>tbody {
+  vertical-align: baseline !important;
+}
+.chart-parent{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 50px auto;
+}
+.myChart{
+  width: 450px !important;
+  height: 75vh !important;
+}
+#productTable ,#OrdersTable{
+  display: none;
+}
+
+.typeOf{
+  color:#bf4289;
+}
+
+//orders
+.state span{
+  display: inline-flex;
+  background-color: transparent;
+  border: 2px solid #c78dd1db;
+  padding: 10px;
+  border-radius:5px 10px;
+
+  transition: .5s;
+}
+.state span:hover{
+  background-color: #c78dd1db;
+  color: whitesmoke;
+
+}
+.state span.approved{
+background-color: #088a31bf;
+border: 2px solid #95e98cdb;
+color: whitesmoke;
 }
