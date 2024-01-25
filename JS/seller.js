@@ -41,7 +41,7 @@ window.addEventListener("load", function () {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          location.assign("login_sign.html");
+          location.assign("login.html");
         }
       });
   });

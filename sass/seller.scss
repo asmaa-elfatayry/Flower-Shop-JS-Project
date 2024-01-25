@@ -135,12 +135,24 @@ i:hover{
 .typeOf{
   color:#bf4289;
 }
-// animation 
-@keyframes RotateImg {
-    10%{transform: rotate(45deg); }
-    25%{transform: rotate(90deg);}
-    50%{transform: rotate(0deg);}
-    60%{transform: rotate(-45deg);}
-    75%{transform: rotate(-90deg);}
-    100%{transform: rotate(0deg);}
+
+//orders
+.state span{
+  display: inline-flex;
+  background-color: transparent;
+  border: 2px solid #c78dd1db;
+  padding: 10px;
+  border-radius:5px 10px;
+
+  transition: .5s;
+}
+.state span:hover{
+  background-color: #c78dd1db;
+  color: whitesmoke;
+
+}
+.state span.approved{
+background-color: #088a31bf;
+border: 2px solid #95e98cdb;
+color: whitesmoke;
 }
