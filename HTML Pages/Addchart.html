@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
+    <title>Floura | Add to Chart</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
+    <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" href="../stylesheets/Addchart.css" />
+    <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Your Chart</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="row " style="width:98vw">
+            <div class="wrap">
+                <div class="truck-img"><img src="../images/delivery-truck.png " alt="truck"></div>
+                <div class="box-img"><img src="../images/box.png" alt="flower"></div>
+                <div class="box-img box-img2"><img src="../images/box.png" alt="flower"></div>
+            </div>
+            
+        </div>
+
+        <div class="row d-flex justify-content-around">
+            <div class="table-responsive col-md-7 border displayTable">
+                <table id="orderTable" class="table text-center table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderlist"></tbody>
+                </table>
+            </div>
+            <div class="col-md-3 border bill ">
+                <h1>Bill</h1>
+                <hr>
+                <p id="quantity"></p>
+                <p id="price"></p>
+                <hr>
+                <p id="total"></p>
+                <button class="btn btn-secondary checkout">check out</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../JS/AddCart.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</html>

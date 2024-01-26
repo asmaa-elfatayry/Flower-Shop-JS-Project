@@ -3,7 +3,7 @@ import * as selAutho from './Authentication.js';
 window.addEventListener("load", function () {
 
   let save_sign = document.getElementById("sig_sel");
-  save_sign.addEventListener('click', function () {
+  save_sign.addEventListener('click', function (event) {
     let shop_name = document.getElementsByTagName("input")[0].value;
     let email = document.getElementsByTagName("input")[2].value;
     let password = document.getElementsByTagName("input")[3].value;
@@ -61,8 +61,6 @@ window.addEventListener("load", function () {
 
     requestdata.push(newrequest);
     localStorage.setItem("requestseller", JSON.stringify(requestdata));
-
-    console.log("order is send succesfuly");
   }
 
 
