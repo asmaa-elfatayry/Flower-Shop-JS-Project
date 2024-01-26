@@ -195,10 +195,17 @@ window.addEventListener("DOMContentLoaded", function () {
           displayProducts(Number(pagingBTNs[i].children[0].innerText) - 1);
           break;
         }
+
       }
     });
 
-  //=================================================================================
+
+    })
+
+
+
+    //=================================================================================
+
   //===================Add product in cart===========================================
 
   class Order {
@@ -333,4 +340,10 @@ window.addEventListener("DOMContentLoaded", function () {
       badge.innerText = numberOfOrdersInCart();
     }
   }
+
 });
+
+  
+
+  
+
