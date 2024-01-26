@@ -5,7 +5,7 @@ import {
 } from "./ValidationMoudule.js";
 let myspan = document.querySelector(".typeOf");
 let flag;
-const sellerId = parseInt(localStorage.getItem("sellerId"));
+const sellerId = parseInt(localStorage.getItem("sellerId")) || 1;
 console.log(sellerId);
 let FlowersDate = JSON.parse(localStorage.getItem("flowersData")) || [];
 let sellerData = JSON.parse(localStorage.getItem("sellerData")) || [];
