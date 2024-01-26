@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Seller Dashboard for Floura" />
     <title>Floura | Seller Dashboard</title>
     <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
-    <link rel="stylesheet" href="../stylesheets/main.css" />
+    <!-- <link rel="stylesheet" href="../stylesheets/main.css" /> -->
     <link rel="stylesheet" href="../stylesheets/seller.css" />
     <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
     <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
@@ -13,7 +14,11 @@
   <body class="vh-100" theme="light">
     <div class="container-fluid px-3 row h-100">
       <div class="sellerInfo text-center mr-5 pt-5 h-100">
-        <i class="fa fa-plus toggleInfo"></i>
+        <i class="fa fa-user-circle-o toggleInfo" aria-label="Profile"></i>
+        <i class="fa fa-bar-chart charts"></i>
+        <i class="fa fa-wrench productControl"></i>
+
+        <i class="fa fa-shopping-cart orders"></i>
         <i class="fa fa-moon-o darkMood"></i>
         <i class="fa fa-power-off logout"></i>
 
@@ -31,35 +36,64 @@
           <p class="location"></p>
         </div>
       </div>
-      <div class="controls mt-3 col-11">
+
+      <div class="controls mt-3 col-12">
         <h1 class="animate__animated animate__backInLeft animate__delay-.5s">
-          Seller Dashboard
+          Seller Dashboard <span class="typeOf"></span>
         </h1>
+        <div class="chart-parent"></div>
+        <div class="dynamic-section">
+          <div class="input-group mb-3 my-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Search</span
+            >
+            <input
+              type="text"
+              class="form-control search"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
 
-        <div class="table-responsive">
-          <table id="productTable" class="table text-center table-hover">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Image</th>
-                <th scope="col">Category</th>
-                <th scope="col">Stock No</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="productList"></tbody>
-          </table>
+          <div class="table-responsive">
+            <table id="productTable" class="table text-center table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Stock No</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productList"></tbody>
+            </table>
+            <table id="OrdersTable" class="table text-center table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">UserID</th>
+                  <th scope="col">ProductID</th>
+                  <th scope="col">SellerID</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">State</th>
+                </tr>
+              </thead>
+              <tbody id="OrderList"></tbody>
+            </table>
+          </div>
+
+          <button
+            class="btn btn-outline-success text-center addBtn"
+            data-toggle="modal"
+            data-target="#addProductModal"
+          >
+            Add Product
+          </button>
         </div>
-
-        <button
-          class="btn btn-outline-success text-center addBtn"
-          data-toggle="modal"
-          data-target="#addProductModal"
-        >
-          Add Product
-        </button>
       </div>
 
       <!-- Update Product Modal -->
@@ -248,13 +282,19 @@
         </div>
       </div>
       <!-- end controls -->
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
     </div>
-
+    <!-- end container -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../JS/JQuery-3.3.1.min.js"></script>
     <script src="../JS/popper.js"></script>
     <script src="../JS/bootstrap.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../JS/index.js"></script>
-    <script src="../JS/seller.js"></script>
+    <script src="../JS/ValidationMoudule.js" type="module"></script>
+    <script src="../JS/SellerDashboard.js" type="module"></script>
+    <script src="../JS/seller.js" type="module"></script>
   </body>
 </html>
