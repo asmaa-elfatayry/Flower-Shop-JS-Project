@@ -13,16 +13,13 @@ window.addEventListener("load", function () {
         SellerData = data.sellers;
         UserData = data.users;
         RequestSeller = data.request_seller;
-        ChartOrder=data.CartOrders;
-
- 
+        ChartOrder = data.CartOrders;
 
         localStorage.setItem("flowersData", JSON.stringify(FlowersDate));
         localStorage.setItem("sellerData", JSON.stringify(SellerData));
         localStorage.setItem("userData", JSON.stringify(UserData));
         localStorage.setItem("requestseller", JSON.stringify(RequestSeller));
         localStorage.setItem("ChartOrder", JSON.stringify(ChartOrder));
-
 
         let search_icon = this.document.querySelector(".search");
         console.log(search_icon);
@@ -69,16 +66,13 @@ window.addEventListener("load", function () {
         <a href="../HTML Pages/login.html" class="btn btn-secondary">Login</a>`;
     }
 
-
-  //amira section
-  //let search_icon = this.document.querySelector(".search");
-  //console.log(search_icon);
-  //search_icon.addEventListener('click', function (e) {
+    //amira section
+    //let search_icon = this.document.querySelector(".search");
+    //console.log(search_icon);
+    //search_icon.addEventListener('click', function (e) {
     //let search_input = document.querySelector(".search_input");
     //search_input.classList.remove("none");
     //search_input.classList.add("applaySearchStyle");
-  //})
-
+    //})
   }
-
 });

@@ -38,13 +38,12 @@ body.dark-theme .sellerInfo {
 }
 
 /* line 30, ../sass/seller.scss */
-.productS-img {
-  animation: 6s  infinite ease-in-out;
+.productS-img img {
   transition: 1s;
 }
 
 /* line 34, ../sass/seller.scss */
-.productS-img:hover {
+.productS-img img:hover {
   animation-play-state: paused;
   transform: scale(1.3);
 }
