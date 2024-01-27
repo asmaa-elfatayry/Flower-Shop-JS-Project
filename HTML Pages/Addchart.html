@@ -38,20 +38,25 @@
         </div>
       </div>
 
-      <div class="row d-flex justify-content-around">
-        <div class="table-responsive col-md-7 border displayTable">
-          <table id="orderTable" class="table text-center table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Order Number</th>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody id="orderlist"></tbody>
-          </table>
+
+        <div class="row d-flex justify-content-around">
+            <div class="table-responsive col-md-7 border displayTable">
+                <table id="orderTable" class="table text-center table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderlist"></tbody>
+                </table>
+            </div>
+        
+
         </div>
         <div class="col-md-3 border bill">
           <h1>Bill</h1>
@@ -65,6 +70,8 @@
            
             data-bs-target="#paymentModal"     aria-hidden="true" -->
 
+
+
           <!-- Modal -->
           <div
             id="paymentModal"
@@ -77,6 +84,7 @@
                   <h5 class="modal-title" id="exampleModalLabel">
                     Chosse Payment
                   </h5>
+
 
                   <button
                     type="button"
@@ -233,4 +241,6 @@
   <script src="../JS/AddCart.js" type="module"></script>
   <script src="../JS/payment.js" type="module"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 </html>

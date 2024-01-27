@@ -6,6 +6,8 @@ window.addEventListener("load", function () {
     let UserData;
     let RequestSeller;
     let ChartOrder;
+    sessionStorage.setItem("guestRequestorder", JSON.stringify([]));
+
 
     fetch("../Data.json")
       .then((response) => response.json())
