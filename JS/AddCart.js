@@ -1,3 +1,4 @@
+
 import * as order from './order.js';
 window.addEventListener('load', function () {
     let currentuser=JSON.parse(sessionStorage.getItem("loggedInUser"))||[];
@@ -50,7 +51,7 @@ window.addEventListener('load', function () {
         price.innerText = `Price: ${getPrice()}`;
         quantity.innerText = `Total Quantity: ${getQuantity()}`;
         total.innerText = `Total: ${getTotal()}`;
-    }
+
 
     function getTotal() {
         let ExistChartOrder=getuserorder();
@@ -163,13 +164,13 @@ window.addEventListener('load', function () {
 
             table.appendChild(tbody);
         }
-    }
-    function inTheStock(event) {
-        var productId = parseInt(event.target.parentNode.parentNode.id);
-        var inputElement = event.target;
-        handleQuantityChange(productId, inputElement);
+   
+  function inTheStock(event) {
+    var productId = parseInt(event.target.parentNode.parentNode.id);
+    var inputElement = event.target;
+    handleQuantityChange(productId, inputElement);
+  }
 
-    }
 
     function handleQuantityChange(productId, inputElement) {
 
@@ -237,4 +238,40 @@ window.addEventListener('load', function () {
         createTable();
         generateBill();
     }
+
+  }
+
+  function updateChartData(ExistChartOrder) {
+    localStorage.setItem("ChartOrder", JSON.stringify(ExistChartOrder));
+  }
+
+  function getStockQuantityById(productId) {
+    let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
+    let product = flowers.find((flower) => flower.id === productId);
+    if (product) {
+      return product.stock;
+    } else {
+      return 0;
+    }
+  }
+
+  //open payment
+  this.document
+    .querySelector(".checkout")
+    .addEventListener("click", function () {
+      if (ExistChartOrder.length > 0) {
+        document.querySelector("#paymentModal").style.display = "block";
+        document.querySelector(".overlay").style.display = "block";
+      } else {
+        Swal.fire("No orders available!");
+      }
+    });
+
+  this.document
+    .querySelector(".btn-close")
+    .addEventListener("click", function () {
+      document.querySelector("#paymentModal").style.display = "none";
+      document.querySelector(".overlay").style.display = "none";
+    });
+
 });

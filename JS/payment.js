@@ -5,43 +5,23 @@ import {
   ValidEmail,
   ValidPassword,
 } from "./ValidationMoudule.js";
+
 document.addEventListener("DOMContentLoaded", function () {
-  // create user data containers
-  function createUserDataPayment() {
-    let container = document.createElement("div");
-    container.className = "card-info alert alert-warning";
-    container.innerHTML = `<p><label>UserName:</label> <span>test</span></p>
-          <p><label>Total Price:</label> <span>33$</span></p>`;
-    let visaContainer = container.cloneNode(true);
-    let paypalContainer = container.cloneNode(true);
-
-    document.querySelector(".visa .form-card").prepend(visaContainer);
-    document.querySelector(".paypal .form-card").prepend(paypalContainer);
-  }
-
-  createUserDataPayment();
-
-  let visaCard = document.querySelector(".visa .top-card");
-  let paypalCard = document.querySelector(".paypal .top-card");
-
+  let visaCard = document.querySelector(".visa ");
+  let paypalCard = document.querySelector(".paypal");
+  let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   visaCard.addEventListener("click", function () {
-    visaCard.style.transform = "translateX(-50%) scale(1.3)";
-    visaCard.nextElementSibling.style.display = "block";
-
-    paypalCard.style.transform = "translateX(-50%) scale(0.7)";
-    paypalCard.nextElementSibling.style.display = "none";
-
-    document.body.style.backgroundColor = "#F0F0F0";
+    document.getElementById("visa").style.display = "block";
+    document.getElementById("paypal").style.display = "none";
+    visaCard.style.transform = "scale(1.3)";
+    paypalCard.style.transform = "scale(.9)";
   });
 
   paypalCard.addEventListener("click", function () {
-    paypalCard.style.transform = "translateX(-50%) scale(1.3)";
-    paypalCard.nextElementSibling.style.display = "block";
-
-    visaCard.style.transform = "translateX(-50%) scale(0.7)";
-    visaCard.nextElementSibling.style.display = "none";
-
-    document.body.style.backgroundColor = "lavender";
+    document.getElementById("paypal").style.display = "block";
+    document.getElementById("visa").style.display = "none";
+    paypalCard.style.transform = "scale(1.3)";
+    visaCard.style.transform = "scale(.9)";
   });
 
   function showSweetAlert() {
@@ -53,27 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
       buttonsStyling: false,
     });
 
-    swalWithBootstrapButtons
-      .fire({
-        title: "Are you sure?",
-        imageUrl: "../images/dribbble-gif.gif",
-        imageWidth: "90%",
-        imageHeight: 200,
-        // icon: "warning",
-        showCancelButton: true,
-        cancelButtonText: "Cancel ",
-        confirmButtonText: "Confirm Process",
-        reverseButtons: true,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            "Success",
+    swalWithBootstrapButtons.fire(
+      "Success",
 
-            " Thank You,Have A Nice Day With Floura :)"
-          );
-        }
-      });
+      " Thank You,Have A Nice Day With Floura :)"
+    );
   }
 
   // function ValidEmail(email) {
@@ -125,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showError("paypalPasswordError", "Invalid Password");
       return;
     }
-    showSweetAlert();
+    updatePaidNoForProducts(ExistChartOrder);
   }
   function validateVisaForm(event) {
     event.preventDefault();
@@ -157,13 +121,61 @@ document.addEventListener("DOMContentLoaded", function () {
       showError("visaCVVError", "Invalid CVV");
       return;
     }
-    showSweetAlert();
+    updatePaidNoForProducts(ExistChartOrder);
   }
-  //let confirmButtons = document.querySelectorAll(".confirm");
+
   document
     .querySelectorAll(".confirm")[0]
     .addEventListener("click", validateVisaForm);
   document
     .querySelectorAll(".confirm")[1]
     .addEventListener("click", validatePaypalForm);
+
+  function ClearInputs() {
+    document.querySelector("#paymentModal").style.display = "none";
+    document.querySelector(".overlay").style.display = "none";
+    const allInputs = document.querySelectorAll("form input");
+    allInputs.forEach((inp) => {
+      inp.value = "";
+    });
+  }
+  function updatePaidNoForProducts(soldProducts) {
+    let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
+
+    soldProducts.forEach((soldProduct) => {
+      let product = flowers.find(
+        (flower) => flower.id === soldProduct.productId
+      );
+
+      if (product && product.stock > 0 && soldProduct.state === 1) {
+        product.paidno = (product.paidno || 0) + soldProduct.quantity;
+        product.stock -= soldProduct.quantity;
+        ClearInputs();
+        showSweetAlert();
+        //
+        let chartOrderData = localStorage.getItem("ChartOrder");
+        if (chartOrderData) {
+          let parsedData = JSON.parse(chartOrderData);
+
+          let clonedData = JSON.parse(JSON.stringify(parsedData));
+
+          localStorage.setItem("order", JSON.stringify(clonedData));
+
+          localStorage.setItem("ChartOrder", "");
+        }
+      } else if (product && soldProduct.state == 0) {
+        // alert("Sorry seller must approve first");
+        console.log(product);
+        console.log(soldProduct.state);
+        Swal.fire("Sorry seller must approve first");
+        ClearInputs();
+      } else {
+        Swal.fire("Sorry, The Product Not Avalible Now!");
+        ClearInputs();
+      }
+    });
+
+    //->update data
+    localStorage.setItem("flowersData", JSON.stringify(flowers));
+  }
 });
