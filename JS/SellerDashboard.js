@@ -5,7 +5,15 @@ import {
 } from "./ValidationMoudule.js";
 let myspan = document.querySelector(".typeOf");
 let flag;
-const sellerId = parseInt(localStorage.getItem("sellerId"));
+let sellerId;
+const loggedInUserData = sessionStorage.getItem("loggedInUser");
+
+if (loggedInUserData) {
+  const loggedInUser = JSON.parse(loggedInUserData);
+
+  sellerId = loggedInUser.id;
+}
+// const sellerId = parseInt(localStorage.getItem("sellerId")) || 1;
 console.log(sellerId);
 let FlowersDate = JSON.parse(localStorage.getItem("flowersData")) || [];
 let sellerData = JSON.parse(localStorage.getItem("sellerData")) || [];
@@ -50,39 +58,22 @@ export function ShowCharts() {
   ctx1.classList.add("myChart");
   document.querySelector(".chart-parent").appendChild(ctx1);
 
-  // Create the second canvas
-  let ctx2 = document.createElement("canvas");
-  ctx2.classList.add("myChart");
-  document.querySelector(".chart-parent").appendChild(ctx2);
+  // console.log(FlowersDate[0]["seller"]);
+  const filteredFlowers = FlowersDate.filter(
+    (product) => product["seller"].id === sellerId && product.stock > 0
+  );
+  console.log(filteredFlowers);
 
-  // First chart (Bar chart)
-  new Chart(ctx1, {
+  const barChartConfig = {
     type: "bar",
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: filteredFlowers.map((data) => data.name),
       datasets: [
         {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1,
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-            "rgba(255, 205, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(201, 203, 207, 0.2)",
-          ],
-          borderColor: [
-            "rgb(255, 99, 132)",
-            "rgb(255, 159, 64)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-            "rgb(54, 162, 235)",
-            "rgb(153, 102, 255)",
-            "rgb(201, 203, 207)",
-          ],
+          label: "Stock Numbers",
+          data: filteredFlowers.map((data) => data.stock),
+          backgroundColor: "#ca9cbc",
+          borderColor: "lavender",
           borderWidth: 1,
         },
       ],
@@ -94,28 +85,46 @@ export function ShowCharts() {
         },
       },
     },
-  });
+  };
 
-  // Second chart (Polar area chart)
-  new Chart(ctx2, {
-    type: "doughnut",
+  new Chart(ctx1, barChartConfig);
+  //second char
+  let ctx2 = document.createElement("canvas");
+  ctx2.width = 400;
+  ctx2.height = 200;
+  ctx2.classList.add("myChart");
+  document.querySelector(".chart-parent").appendChild(ctx2);
+
+  const filteredPaidFlowers = FlowersDate.filter(
+    (product) => product["seller"].id === sellerId
+  );
+  console.log(filteredPaidFlowers);
+
+  const barChartConfig2 = {
+    type: "bar",
     data: {
-      labels: ["Red", "Green", "Yellow", "Grey", "Blue"],
+      labels: filteredPaidFlowers.map((data) => data.name),
       datasets: [
         {
-          label: "My First Dataset",
-          data: [11, 16, 7, 3, 14],
-          backgroundColor: [
-            "rgb(255, 99, 132)",
-            "rgb(75, 192, 192)",
-            "rgb(255, 205, 86)",
-            "rgb(201, 203, 207)",
-            "rgb(54, 162, 235)",
-          ],
+          label: "Product Paid Numbers",
+          data: filteredPaidFlowers.map((data) => data.paidNo),
+          backgroundColor: "#c7dbef",
+          borderColor: "lavender",
+          borderWidth: 1,
         },
       ],
     },
-  });
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stepSize: 1,
+        },
+      },
+    },
+  };
+
+  new Chart(ctx2, barChartConfig2);
 }
 // end charts page
 
@@ -186,7 +195,7 @@ export function displayProducts(products) {
   document.querySelector(".dynamic-section").style.display = "block";
   document.getElementById("productTable").style.display = "block";
   document.getElementById("OrdersTable").style.display = "none";
-
+  document.querySelector(".addBtn").style.display = "block";
   //   document.querySelector(".dynamic-section").style.display = "block";
   //   document.querySelector(".chart-parent").style.display = "none";
   products.forEach((product) => {
@@ -474,72 +483,87 @@ export function toggleTheme() {
 
 // start handle orders section
 export function ShowOrders() {
-  const datafake = {
-    userId: 3,
-    productID: 2,
-    sellerId: 1,
-    productName: "test",
-    price: 33,
-    quantity: 2,
-    state: 0,
-  };
   myspan.textContent = ": Orders Details";
   document.querySelector(".chart-parent").style.display = "none";
   document.querySelector(".dynamic-section").style.display = "block";
   document.getElementById("productTable").style.display = "none";
   document.getElementById("OrdersTable").style.display = "block";
   document.querySelector(".addBtn").style.display = "none";
-  const OrdersListContainer = document.getElementById("OrderList");
-  OrdersListContainer.innerHTML = "";
-  const row = document.createElement("tr");
 
-  const idUserCell = document.createElement("td");
-  idUserCell.textContent = datafake.userId;
-  row.appendChild(idUserCell);
-
-  const idProductCell = document.createElement("td");
-  idProductCell.textContent = datafake.productID;
-  row.appendChild(idProductCell);
-
-  const idSellerCell = document.createElement("td");
-  idSellerCell.textContent = datafake.sellerId;
-  row.appendChild(idSellerCell);
-
-  const nameCell = document.createElement("td");
-  nameCell.textContent = datafake.productName;
-  row.appendChild(nameCell);
-
-  const priceCell = document.createElement("td");
-  priceCell.textContent = datafake.price;
-  row.appendChild(priceCell);
-
-  const quantityCell = document.createElement("td");
-  quantityCell.textContent = datafake.quantity;
-  row.appendChild(quantityCell);
-
-  const stateCell = document.createElement("td");
-  stateCell.classList.add("state");
-  const state = document.createElement("span");
-
-  if (datafake.state == 0) {
-    state.textContent = "Pending";
-  } else {
-    state.textContent = "Approved";
-    state.classList.add("approved");
+  function getOrdersForSeller(sellerID) {
+    const allOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    return allOrders.filter((order) => order.sellerId === sellerID);
   }
 
-  stateCell.appendChild(state);
-  row.appendChild(stateCell);
-  OrdersListContainer.appendChild(row);
+  function updateOrderState(orderID, newState) {
+    const allOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    const updatedOrders = allOrders.map((order) => {
+      if (order.orderID === orderID) {
+        order.state = newState;
+      }
+      return order;
+    });
+    localStorage.setItem("ChartOrder", JSON.stringify(updatedOrders));
+  }
 
-  state.addEventListener("click", function () {
-    state.classList.toggle("approved");
-    if (datafake.state === 0) {
-      state.textContent = "Approved";
-      datafake.state = 1;
-    } else {
+  const OrdersListContainer = document.getElementById("OrderList");
+  OrdersListContainer.innerHTML = "";
+
+  const sellerOrders = getOrdersForSeller(sellerId);
+
+  sellerOrders.forEach((order) => {
+    const row = document.createElement("tr");
+
+    const idUserCell = document.createElement("td");
+    idUserCell.textContent = order.orderId;
+    row.appendChild(idUserCell);
+
+    const idProductCell = document.createElement("td");
+    idProductCell.textContent = order.productId;
+    row.appendChild(idProductCell);
+
+    const idSellerCell = document.createElement("td");
+    idSellerCell.textContent = order.sellerId;
+    row.appendChild(idSellerCell);
+
+    const dateCell = document.createElement("td");
+    dateCell.textContent = new Date(order.date).toISOString().split("T")[0];
+    row.appendChild(dateCell);
+
+    const priceCell = document.createElement("td");
+    priceCell.textContent = order.price;
+    row.appendChild(priceCell);
+
+    const quantityCell = document.createElement("td");
+    quantityCell.textContent = order.quantity;
+    row.appendChild(quantityCell);
+
+    const stateCell = document.createElement("td");
+    stateCell.classList.add("state");
+    const state = document.createElement("span");
+
+    if (order.state === 0) {
       state.textContent = "Pending";
-      datafake.state = 0;
+    } else {
+      state.textContent = "Approved";
+      state.classList.add("approved");
     }
+
+    stateCell.appendChild(state);
+    row.appendChild(stateCell);
+    OrdersListContainer.appendChild(row);
+
+    state.addEventListener("click", function () {
+      state.classList.toggle("approved");
+      if (order.state === 0) {
+        state.textContent = "Approved";
+        order.state = 1;
+        updateOrderState(order.orderID, 1);
+      } else {
+        state.textContent = "Pending";
+        order.state = 0;
+        updateOrderState(order.orderID, 0);
+      }
+    });
   });
 }
