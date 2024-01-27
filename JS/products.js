@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', function () {
     function displayProducts(page) {
         newRowDiv.innerHTML = '';
         filterProducts();
-        if(filteredFlowers.length == 0) {
+        if (filteredFlowers.length == 0) {
             document.getElementById('no-products').classList.remove('d-none');
             removePaging();
             return;
@@ -50,10 +50,8 @@ window.addEventListener('DOMContentLoaded', function () {
         displayPaging(page);
     }
 
-  displayProducts(1);
-  document.getElementById("searchTXT").addEventListener("keyup", function () {
     displayProducts(1);
-    document.getElementById('searchTXT').addEventListener('keyup', function () {
+    document.getElementById("searchTXT").addEventListener("keyup", function () {
         displayProducts(1);
     })
     mnP.addEventListener('change', function () {
@@ -157,4 +155,51 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
     })
+
+    //===================Add product in cart============
+
+
+    function addchart(id) {
+        let CurrentUserData = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
+        let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+
+        let p_id = parseInt(id);
+        if (!order.order_is_exists(p_id)) {
+            let found_prod = flowers.find((flower) => flower.id === p_id);
+            let quantity = 1;
+            let orderid = TotalOrders.length + 1;
+            let price = found_prod.price;
+            let sellerid = found_prod.seller.id;
+            let date = new Date();
+            let state = "pending";
+            let prodId = found_prod.id;
+            if (CurrentUserData.length == 0) {
+                let TotalguestOrders = JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+                let user = -1;
+                if (!order.order_is_exists_guest(p_id)) {
+                    let new_order = new order.Order(date, prodId, sellerid, quantity, price, orderid, state, user);
+                    TotalguestOrders.push(new_order.getOrderData());
+                    order.updateChartguestData(TotalguestOrders);
+                    order.updateguestBadge();
+
+
+                }
+                else {
+                    order.updateproductByIdguest(p_id);
+                    order.updateguestBadge();
+                }
+
+            }
+            else {
+                let user = CurrentUserData.id;
+                let new_order = new order.Order(date, prodId, sellerid, quantity, price, orderid, state, user);
+                TotalOrders.push(new_order.getOrderData());
+                order.updateChartData(TotalOrders);
+                order.updateBadge();
+            }
+        } else {
+            order.updateproductById(p_id);
+            order.updateBadge();
+        }
+    }
 })
