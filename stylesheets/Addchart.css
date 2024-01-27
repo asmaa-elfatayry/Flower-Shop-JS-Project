@@ -96,7 +96,7 @@ hr {
 
 /* line 90, ../sass/Addchart.scss */
 .displayTable {
-  max-height: 90vh;
+  max-height: 80vh;
   overflow-y: scroll;
 }
 

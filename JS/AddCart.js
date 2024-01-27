@@ -1,7 +1,10 @@
+import * as order from './order.js';
 window.addEventListener('load', function () {
-    let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
-    var table = document.getElementById("orderTable");
-    var tbody = document.getElementById("orderlist");
+    let currentuser=JSON.parse(sessionStorage.getItem("loggedInUser"))||[];
+   
+
+    let table = document.getElementById("orderTable");
+    let tbody = document.getElementById("orderlist");
     let price = document.getElementById("price");
     let quantity = document.getElementById("quantity");
     let total = document.getElementById("total");
@@ -10,6 +13,39 @@ window.addEventListener('load', function () {
     createTable();
     generateBill();
 
+    function getTotalorders()
+    {
+        let TotalOrders;
+        if(currentuser.length==0)
+        {
+            TotalOrders=JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+        }
+        else
+        {
+            TotalOrders=JSON.parse(localStorage.getItem("ChartOrder")) || [];
+        }
+        
+        return TotalOrders;
+
+    }
+    function getuserorder()
+    {
+        let TotalOrders;
+        if(currentuser.length==0)
+        {
+            TotalOrders=JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+            return TotalOrders;
+
+        }
+        else
+        {
+            let TotalOrders=JSON.parse(localStorage.getItem("ChartOrder")) || [];
+            let ExistChartOrder = TotalOrders.filter((order)=>{ return order.user===currentuser.id});
+            return ExistChartOrder;
+    
+        }
+        
+    }
     function generateBill() {
         price.innerText = `Price: ${getPrice()}`;
         quantity.innerText = `Total Quantity: ${getQuantity()}`;
@@ -17,6 +53,7 @@ window.addEventListener('load', function () {
     }
 
     function getTotal() {
+        let ExistChartOrder=getuserorder();
         let total = 0;
         for (let i = 0; i < ExistChartOrder.length; i++) {
             total += ExistChartOrder[i].quantity * ExistChartOrder[i].price;
@@ -26,6 +63,7 @@ window.addEventListener('load', function () {
     }
 
     function getQuantity() {
+        let ExistChartOrder=getuserorder();
         let quantity = 0;
         for (let i = 0; i < ExistChartOrder.length; i++) {
             quantity += ExistChartOrder[i].quantity;
@@ -34,13 +72,24 @@ window.addEventListener('load', function () {
 
     }
     function getPrice() {
+        let ExistChartOrder=getuserorder();
         let price = 0;
         for (let i = 0; i < ExistChartOrder.length; i++) {
             price += ExistChartOrder[i].price;
         }
         return price.toFixed(2);
     }
+
+    function getPriceForProduct(i) {
+        let ExistChartOrder=getuserorder();
+        let price = 0;
+        price= ExistChartOrder[i].price * ExistChartOrder[i].quantity;
+        return price.toFixed(2);
+    }
+
     function createTable() {
+        let ExistChartOrder=getuserorder();
+        console.log(ExistChartOrder);
         if (ExistChartOrder.length === 0) {
             var messageRow = document.createElement("tr");
             var messageCell = document.createElement("td");
@@ -68,7 +117,16 @@ window.addEventListener('load', function () {
                 imgCell.className = "order-img";
                 var imge = document.createElement("img");
                 imge.classList.add("rounded-circle");
-                imge.src = "../images/flowers/" + getProductImgById(ExistChartOrder[i].productId);
+                if(currentuser.length==0)
+                {
+                    imge.src = "../images/flowers/" + getProductImgByIdguest(ExistChartOrder[i].productId);
+
+                }
+                else
+                {
+                    imge.src = "../images/flowers/" + getProductImgById(ExistChartOrder[i].productId);
+
+                }
                 imge.width = "50";
                 imge.height = "50";
 
@@ -87,11 +145,13 @@ window.addEventListener('load', function () {
                 input.addEventListener('keyup', inTheStock);
                 input.addEventListener('input', inTheStock);
                 input.addEventListener('change', inTheStock);
-
-                input.max = `${getStockQuantityById(ExistChartOrder[i].productId)}`;
-
+                input.max = `${order.getStockQuantityById(ExistChartOrder[i].productId)}`;
                 quantityCell.appendChild(input);
                 row.appendChild(quantityCell);
+                
+                var Totalprice=document.createElement("td");
+                Totalprice.appendChild(document.createTextNode(getPriceForProduct(i)));
+                row.appendChild(Totalprice);
 
                 var removeCell = document.createElement("td");
                 removeCell.innerHTML = `<i class="fa fa-trash" id="${ExistChartOrder[i].orderId}" style="color:red ;font-size:1.5rem"></i>`;
@@ -112,12 +172,13 @@ window.addEventListener('load', function () {
     }
 
     function handleQuantityChange(productId, inputElement) {
+
         var enteredQuantity = parseInt(inputElement.value);
 
         if (!Number.isInteger(enteredQuantity) || enteredQuantity <= 0) {
             removeTable();
             createTable();
-        } else if (enteredQuantity > getStockQuantityById(productId)) {
+        } else if (enteredQuantity > order.getStockQuantityById(productId)) {
             Swal.fire({
                 position: "center",
                 icon: "error",
@@ -128,33 +189,26 @@ window.addEventListener('load', function () {
             removeTable();
             createTable();
         } else {
-            let index = ExistChartOrder.findIndex((order) => order.productId == productId);
-            ExistChartOrder[index].quantity = enteredQuantity;
-            updateChartData(ExistChartOrder);
+            let TotalOrders=JSON.parse(localStorage.getItem("ChartOrder")) || [];
+            let index = TotalOrders.findIndex((order) => order.productId === parseInt(id) && order.user==currentuser.id);
+            TotalOrders[index].quantity = enteredQuantity;
+            order.updateChartData(TotalOrders);
             removeTable();
             createTable();
             generateBill();
         }
     }
 
-
-    function updateChartData(ExistChartOrder) {
-        localStorage.setItem("ChartOrder", JSON.stringify(ExistChartOrder));
-    }
-
-
-    function getStockQuantityById(productId) {
-        let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
-        let product = flowers.find((flower) => flower.id === productId);
-        if (product) {
-            return product.stock;
-        } else {
-            return 0;
-        }
-    }
-
     function getProductImgById(id) {
-        let resultOrdeId = ExistChartOrder.find((order) => order.productId === id);
+        let TotalOrders=getTotalorders();
+        let resultOrdeId = TotalOrders.find((order) => order.productId === parseInt(id) && order.user==currentuser.id);
+        let searchedProduct = JSON.parse(localStorage.getItem("flowersData")) || [];
+        let resultproduct = searchedProduct.find((flower) => flower.id === resultOrdeId.productId);
+        return resultproduct.image;
+    }
+    function getProductImgByIdguest(id) {
+        let TotalOrders=getTotalorders();
+        let resultOrdeId = TotalOrders.find((order) => order.productId === parseInt(id));
         let searchedProduct = JSON.parse(localStorage.getItem("flowersData")) || [];
         let resultproduct = searchedProduct.find((flower) => flower.id === resultOrdeId.productId);
         return resultproduct.image;
@@ -163,13 +217,24 @@ window.addEventListener('load', function () {
         tbody.innerHTML = ``;
     }
     function removeorder(event) {
-        let index = ExistChartOrder.findIndex((order) => order.orderId == event.target.id);
-        ExistChartOrder.splice(index, 1);
-        updateChartData(ExistChartOrder);
+        let TotalOrders=getTotalorders();
+        let index;
+        if(currentuser.length==0)
+        {
+             index = TotalOrders.findIndex((order) => order.orderId == event.target.id);
+
+            
+        }
+        else
+        {
+             index = TotalOrders.findIndex((order) => order.orderId == event.target.id && order.user==currentuser.id);
+
+
+        }
+        TotalOrders.splice(index, 1);
+        order.updateChartData(TotalOrders);
         removeTable();
         createTable();
         generateBill();
     }
-
-
 });
