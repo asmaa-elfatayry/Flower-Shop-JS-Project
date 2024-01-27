@@ -1,3 +1,4 @@
+
 window.addEventListener("load", function () {
   function loadData() {
     let FlowersDate;
@@ -12,6 +13,7 @@ window.addEventListener("load", function () {
         FlowersDate = data.flowers;
         SellerData = data.sellers;
         UserData = data.users;
+        favourites = data.favourites;
         RequestSeller = data.request_seller;
         ChartOrder = data.CartOrders;
 
@@ -19,7 +21,13 @@ window.addEventListener("load", function () {
         localStorage.setItem("sellerData", JSON.stringify(SellerData));
         localStorage.setItem("userData", JSON.stringify(UserData));
         localStorage.setItem("requestseller", JSON.stringify(RequestSeller));
+
+        localStorage.setItem("favourites" ,JSON.stringify(favourites));
+
+
+
         localStorage.setItem("ChartOrder", JSON.stringify(ChartOrder));
+
 
         let search_icon = this.document.querySelector(".search");
         console.log(search_icon);
@@ -74,5 +82,7 @@ window.addEventListener("load", function () {
     //search_input.classList.remove("none");
     //search_input.classList.add("applaySearchStyle");
     //})
+
   }
 });
+
