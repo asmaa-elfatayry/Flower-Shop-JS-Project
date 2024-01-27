@@ -177,4 +177,23 @@ window.addEventListener("load", function () {
     createTable();
     generateBill();
   }
+
+  //open payment
+  this.document
+    .querySelector(".checkout")
+    .addEventListener("click", function () {
+      if (ExistChartOrder.length > 0) {
+        document.querySelector("#paymentModal").style.display = "block";
+        document.querySelector(".overlay").style.display = "block";
+      } else {
+        Swal.fire("No orders available!");
+      }
+    });
+
+  this.document
+    .querySelector(".btn-close")
+    .addEventListener("click", function () {
+      document.querySelector("#paymentModal").style.display = "none";
+      document.querySelector(".overlay").style.display = "none";
+    });
 });

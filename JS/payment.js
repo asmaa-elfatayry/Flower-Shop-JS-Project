@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
     updatePaidNoForProducts(ExistChartOrder);
-    showSweetAlert();
   }
   function validateVisaForm(event) {
     event.preventDefault();
@@ -123,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
     updatePaidNoForProducts(ExistChartOrder);
-    showSweetAlert();
   }
 
   document
@@ -133,6 +131,14 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelectorAll(".confirm")[1]
     .addEventListener("click", validatePaypalForm);
 
+  function ClearInputs() {
+    document.querySelector("#paymentModal").style.display = "none";
+    document.querySelector(".overlay").style.display = "none";
+    const allInputs = document.querySelectorAll("form input");
+    allInputs.forEach((inp) => {
+      inp.value = "";
+    });
+  }
   function updatePaidNoForProducts(soldProducts) {
     let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
 
@@ -144,10 +150,28 @@ document.addEventListener("DOMContentLoaded", function () {
       if (product && product.stock > 0 && soldProduct.state === 1) {
         product.paidno = (product.paidno || 0) + soldProduct.quantity;
         product.stock -= soldProduct.quantity;
+        ClearInputs();
+        showSweetAlert();
+        //
+        let chartOrderData = localStorage.getItem("ChartOrder");
+        if (chartOrderData) {
+          let parsedData = JSON.parse(chartOrderData);
+
+          let clonedData = JSON.parse(JSON.stringify(parsedData));
+
+          localStorage.setItem("order", JSON.stringify(clonedData));
+
+          localStorage.setItem("ChartOrder", "");
+        }
       } else if (product && soldProduct.state == 0) {
-        alert("Sorry seller must approve first");
+        // alert("Sorry seller must approve first");
+        console.log(product);
+        console.log(soldProduct.state);
+        Swal.fire("Sorry seller must approve first");
+        ClearInputs();
       } else {
-        alert("Sorry, The Product Not Avalible Now!");
+        Swal.fire("Sorry, The Product Not Avalible Now!");
+        ClearInputs();
       }
     });
 

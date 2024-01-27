@@ -355,7 +355,153 @@
 
       },
       "stock": 21
-    }
+    },
+    {
+      "id": 26,
+      "name": "Harmony Orchid",
+      "meaning": "Represents unity and refinement. Associated with elegance and friendship.",
+      "image": "flower20.png",
+      "price": 19.99,
+      "description": "Exquisite Orchid symbolizing unity and refinement.",
+      "category": "Graduation",
+      "paidNo":5,
+      "seller": {
+        "id": 3
+   
+      },
+      "stock": 18
+    },
+    {
+      "id": 27,
+      "name": "Radiant Sunflower",
+      "meaning": "Symbolizes positivity and joy. Represents adoration and loyalty.",
+      "image": "flower21.png",
+      "price": 17.99,
+      "description": "Vibrant Sunflower radiating positivity and joy.",
+      "category": "Wedding",
+      "paidNo":2,
+      "seller": {
+        "id": 4
+      },
+      "stock": 8
+    },
+    {
+      "id": 28,
+      "name": "Serene Lily",
+      "meaning": "Represents tranquility and peace. Associated with purity and renewal.",
+      "image": "flower22.png",
+      "price": 15.99,
+      "description": "Graceful Lily symbolizing tranquility and peace.",
+      "category": "Graduation",
+      "paidNo":2,
+      "seller": {
+        "id": 1
+     
+      },
+      "stock": 12
+    },
+    {
+      "id": 29,
+      "name": "Enchanting Rose",
+      "meaning": "Symbolizes enchantment and mystery. Different colors convey diverse sentiments.",
+      "image": "flower23.png",
+      "price": 21.99,
+      "description": "Captivating Rose symbolizing enchantment and mystery.",
+      "category": "ُEngagement",
+      "paidNo":4,
+      "seller": {
+        "id": 4
+      
+      },
+      "stock": 10
+    },
+    {
+      "id": 30,
+      "name": "Eternal Chrysanthemum",
+      "meaning": "Represents everlasting beauty and vitality. A symbol of honor and positive energy.",
+      "image": "flower24.png",
+      "price": 20.99,
+      "description": "Timeless Chrysanthemum symbolizing everlasting beauty and vitality.",
+      "category": "Graduation",
+      "paidNo":2,
+      "seller": {
+        "id": 1
+  
+      },
+      "stock": 19
+    },{
+    "id": 31,
+    "name": "Vivid Violet",
+    "meaning": "Symbolizes enchantment and mystery. Associated with imagination and creativity.",
+    "image": "flower25.png",
+    "price": 18.99,
+    "description": "Colorful Violet symbolizing enchantment and mystery, perfect for expressing imagination and creativity.",
+    "category": "Valentine",
+    "paidNo":0,
+    "seller": {
+      "id": 3
+
+    },
+    "stock": 14
+  },
+  {
+    "id": 32,
+    "name": "Peony",
+    "meaning": "Represents prosperity, honor, and compassion. Associated with wealth and good fortune.",
+    "image": "flower17.png",
+    "price": 16.99,
+    "description": "Elegant Peony symbolizing prosperity, honor, and compassion.",
+    "category": "Graduation",
+    "paidNo":8,
+    "seller": {
+      "id": 4
+    },
+    "stock": 20
+  },
+  {
+    "id": 33,
+    "name": "Daisy Delight",
+    "meaning": "Represents cheerfulness and innocence. Often associated with simplicity and purity.",
+    "image": "flower18.png",
+    "price": 14.99,
+    "description": "Charming Daisy representing cheerfulness and innocence.",
+    "category": "Wedding",
+    "paidNo":18,
+    "seller": {
+      "id": 4
+    },
+    "stock": 25
+  },
+  {
+    "id": 34,
+    "name": "Vibrant Tulip",
+    "meaning": "Symbolizes passion and elegance. Different colors convey specific emotions.",
+    "image": "flower19.png",
+    "price": 18.99,
+    "description": "Elegant Tulip symbolizing passion and elegance.",
+    "category": "Graduation",
+    "paidNo":5,
+    "seller": {
+      "id": 3
+
+    },
+    "stock": 15
+  },
+  {
+    "id": 35,
+    "name": "Harmony Orchid",
+    "meaning": "Represents unity and refinement. Associated with elegance and friendship.",
+    "image": "flower20.png",
+    "price": 19.99,
+    "description": "Exquisite Orchid symbolizing unity and refinement.",
+    "category": "Graduation",
+    "paidNo":8,
+    "seller": {
+      "id": 3
+ 
+    },
+    "stock": 18
+  }
     
     
     
