@@ -392,7 +392,8 @@
   
     ],
 
-    "request_seller":[]
+    "request_seller":[],
+    "favourites": []
   }
   
 
