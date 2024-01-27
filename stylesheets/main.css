@@ -3,10 +3,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* line 10, ../sass/main.scss */
 #procuct-card {
+  margin-right: 20px;
+  margin-bottom: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
@@ -19,6 +24,7 @@
 
 /* line 20, ../sass/main.scss */
 .card-options {
+  height: 20%;
   height: 20%;
 }
 
