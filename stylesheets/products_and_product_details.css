@@ -16,11 +16,20 @@
     height: 250px;
 }
 
-#product-image {
+#product-image:hover {
     box-shadow: 10px 10px 30px;
 }
 
 #product-image:hover {
     transition: all 1s;
     transform: scale(1.01);
+}
+#filter-Div {
+    justify-content: space-between;
+    align-items: center;
+    margin: 60px 0px;
+}
+._active {
+    text-decoration: underline;
+    color: #ef5ab1;
 }

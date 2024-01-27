@@ -43,14 +43,68 @@
         </div>
     </section>
     <div class="container">
-        <div class="row">
-            <div class="col-1 d-md-none"></div>
-            <div class="col-10 mb-5 col-md-4" id="product-image"></div>
-            <div class="col-1 d-md-none"></div>
-            <div class="col-12 col-md-6" id="product-data"></div>
+        <div class="row justify-content-between">
+            <div class="col-12 mb-5 col-md-4 border border-dark rounded" id="product-image">
+                <img src="" class="img-fluid">
+            </div>
+            <div class="col-12 col-md-7 row" id="product-data">
+                <h2 class="col-12 mb-2" style="font-family: cursive;color: #ef5ab1;" id="product-name"></h2>
+
+                <span class="col-6">Description</span>
+                <p class="col-6" id="product-description"></p>
+
+                <span class="col-6">Meaning</span>
+                <p class="col-6" id="product-meaning"></p>
+
+                <span class="col-6">Price</span>
+                <p class="col-6" id="product-price"></p>
+
+                <span class="col-6">Category</span>
+                <p class="col-6" id="product-category"></p>
+
+                <span class="col-6">available stock</span>
+                <p class="col-6" id="product-stock"></p>
+                <div class="col-6 mb-2">
+                    <div class="col-auto container">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <span class="input-group-prepend" id="minus-btn">
+                                        <button type="button" class="btn btn-danger btn-number" disabled
+                                            data-type="minus" data-field="quant[1]">
+                                            <span class="fa fa-minus"></span>
+                                        </button>
+                                    </span>
+                                    <input type="text" style="width:70px;" name="quant[1]"
+                                        class="text-secondary text-center form-control input-number" value="1" min="1"
+                                        max="1000" id="items-count">
+                                    <span class="input-group-append" id="plus-btn">
+                                        <button type="button" class="btn btn-primary btn-number" data-type="plus"
+                                            data-field="quant[1]">
+                                            <span class="fa fa-plus"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-2" id="items-price">
+                    50 EGP
+                </div>
+                <div class="col-12 ">
+                    <button class="col-auto mx-5 btn btn-outline-secondary" type="button">
+                        Add to cart
+                    </button>
+                    <button class="col-auto mx-5 btn btn-outline-secondary" type="button">
+                        Add to Wishlist
+                    </button>
+
+                </div>
+            </div>
         </div>
     </div>
-    <footer>
+    <footer class="container-fluid">
         <div class="child-footer">
             <div class="footer-area">
                 <div class="footer-widget-area">
@@ -64,7 +118,8 @@
                                             <img src="../images/logo.png" id="logo-footer" alt="Logo Image">
                                         </a>
                                     </div>
-                                    <p class="desc-content navbar-light first ">Lorem Khaled Ipsum is a major key to
+                                    <p class="desc-content navbar-light first ">Lorem Khaled Ipsum is a major
+                                        key to
                                         success. To be
                                         successful you’ve got to work hard you’ve got to make it.</p>
                                     <div class="social-links">
@@ -133,7 +188,8 @@
                                 <div class="single-footer-widget">
                                     <h2 class="widget-title">Location</h2>
                                     <div class="widget-body">
-                                        <address>123, ABC, Road ##, Main City, Your address goes here.<br>Phone: 01234
+                                        <address>123, ABC, Road ##, Main City, Your address goes here.<br>Phone:
+                                            01234
                                             567 890<br>Email:
                                             https://websiteName.com</address>
                                     </div>
@@ -149,7 +205,8 @@
                 <div class="row">
                     <div class="col-12 text-center col-custom">
                         <div class="copyright-content">
-                            <p>Copyright © 2021 <a id="footer_span" href="#" title="https://bootstrap.com/"> Floral
+                            <p>Copyright © 2021 <a id="footer_span" href="#" title="https://bootstrap.com/">
+                                    Floral
                                     Boutique</a>.All
                                 Rights Reserved</p>
                         </div>

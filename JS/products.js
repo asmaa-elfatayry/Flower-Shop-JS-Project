@@ -1,36 +1,12 @@
-let numberOfProfProducts = 4;
+import { addProduct } from "../JS/card.js"
+let numberOfProfProducts = 12;
 window.addEventListener('DOMContentLoaded', function () {
     let flowers = JSON.parse(this.window.localStorage.getItem('flowersData'));
     let filteredFlowers;
+    let categories = document.getElementsByClassName('category-btn');
     let newRowDiv = document.createElement('div');
     newRowDiv.className = 'row justify-content-around';
     document.getElementById('productContainer').appendChild(newRowDiv);
-    function addProduct(product) {
-        let curProduct = document.createElement('div');
-        curProduct.className = 'card col-12 col-md-5';
-        curProduct.id = 'procuct-card'
-        newRowDiv.appendChild(curProduct);
-        curProduct.innerHTML = `
-            <img src="../images/flowers/${product.image}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <div class="card-details">
-                    <h5 class="card-title">${product.name}</h5>
-                  
-                    <span>${product.price} EGP<span>
-                </div>
-                <div class="card-options text-center">
-                    <button class="btn btn-outline-secondary" type="button">
-                                    Add to cart
-                    </button>
-                </div>
-            </div>
-        `
-        curProduct.addEventListener('click', function () {
-            localStorage.setItem('productToShow', JSON.stringify(product));
-            window.open('../HTML pages/product_details.html', '_self');
-        })
-    }
-
 
     let mnP = document.getElementById('minPrice');
     let mxP = document.getElementById('maxPrice');
@@ -42,12 +18,30 @@ window.addEventListener('DOMContentLoaded', function () {
                 && Number(cur.price) >= Number(mnP.value)
                 && Number(cur.price) <= Number(mxP.value);
         });
+        for (let i = 0; i < categories.length; i++) {
+            if (categories[i].classList.contains('_active')) {
+                if (i == 1) {
+                    filteredFlowers.sort(function (a, b) {
+                        return b.price - a.price;
+                    })
+                }
+                else if (i == 2) {
+                    filteredFlowers = filteredFlowers.reverse();
+                }
+            }
+        }
     }
     function displayProducts(page) {
         newRowDiv.innerHTML = '';
         filterProducts();
+        if(filteredFlowers.length == 0) {
+            document.getElementById('no-products').classList.remove('d-none');
+            removePaging();
+            return;
+        }
+        document.getElementById('no-products').classList.add('d-none');
         for (let i = (page - 1) * numberOfProfProducts; i < Math.min((page - 1) * numberOfProfProducts + numberOfProfProducts, filteredFlowers.length); i++) {
-            addProduct(filteredFlowers[i]);
+            addProduct(filteredFlowers[i], newRowDiv);
         }
         displayPaging(page);
     }
@@ -69,12 +63,12 @@ window.addEventListener('DOMContentLoaded', function () {
             mxP.value = mnP.value;
         displayProducts(1);
     })
-    let categories = document.getElementsByClassName('categories');
     for (let i = 0; i < categories.length; i++) {
         categories[i].addEventListener('click', function (e) {
             for (let i = 0; i < categories.length; i++)
-                categories[i].classList.remove("active");
-            e.target.classList.add("active");
+                categories[i].classList.remove("_active");
+            e.target.classList.add("_active");
+            displayProducts(1);
         })
     }
     function removePaging() {
