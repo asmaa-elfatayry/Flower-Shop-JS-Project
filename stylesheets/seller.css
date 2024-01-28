@@ -13,42 +13,101 @@ body.dark-theme {
 
 /* line 11, ../sass/seller.scss */
 body.dark-theme .sellerInfo {
-  background-color: #9789af;
+  background-color: #2c2b2d;
 }
 
 /* line 15, ../sass/seller.scss */
+body.dark-theme tr, th, td, input {
+  background-color: #b8aad4;
+}
+
+/* line 21, ../sass/seller.scss */
 .btn.btn-danger {
   background-color: #F05990;
 }
 
-/* line 19, ../sass/seller.scss */
+/* line 25, ../sass/seller.scss */
+.addBtn {
+  margin-top: 30px;
+}
+
+/* line 28, ../sass/seller.scss */
+.info {
+  position: absolute;
+  left: 40px;
+  background-color: #1b1a1ab7;
+  color: #f6f2f2;
+  border-radius: 4px;
+  border: 1px solid #F05990;
+  padding: 3px;
+  transition: .4s;
+  font-size: 14px;
+  display: none;
+}
+
+/* line 40, ../sass/seller.scss */
+.info:hover {
+  background-color: #bf4289;
+}
+
+/* line 43, ../sass/seller.scss */
+.info.charts {
+  top: 120px;
+}
+
+/* line 46, ../sass/seller.scss */
+.info.products {
+  top: 180px;
+}
+
+/* line 49, ../sass/seller.scss */
+.info.orders {
+  top: 250px;
+}
+
+/* line 52, ../sass/seller.scss */
+.info.mood {
+  top: 310px;
+}
+
+/* line 55, ../sass/seller.scss */
+.info.logout {
+  top: 380px;
+}
+
+/* line 58, ../sass/seller.scss */
+.sellerInfo i:hover + span {
+  display: block;
+}
+
+/* line 62, ../sass/seller.scss */
 .error-msg {
   color: brown;
   margin-left: 10px;
 }
 
-/* line 23, ../sass/seller.scss */
+/* line 66, ../sass/seller.scss */
 .is-invalid {
   border-color: brown;
 }
 
-/* line 26, ../sass/seller.scss */
+/* line 69, ../sass/seller.scss */
 .is-valid {
   border-color: green;
 }
 
-/* line 30, ../sass/seller.scss */
+/* line 73, ../sass/seller.scss */
 .productS-img img {
   transition: 1s;
 }
 
-/* line 34, ../sass/seller.scss */
+/* line 77, ../sass/seller.scss */
 .productS-img img:hover {
   animation-play-state: paused;
   transform: scale(1.3);
 }
 
-/* line 43, ../sass/seller.scss */
+/* line 86, ../sass/seller.scss */
 .sellerInfo {
   background-color: lavender;
   width: 50px;
@@ -61,23 +120,23 @@ body.dark-theme .sellerInfo {
   height: 100vh;
 }
 
-/* line 55, ../sass/seller.scss */
+/* line 98, ../sass/seller.scss */
 i {
   transition: 1s;
 }
 
-/* line 58, ../sass/seller.scss */
+/* line 101, ../sass/seller.scss */
 i:hover {
   cursor: pointer;
   transform: rotate(360deg);
 }
 
-/* line 62, ../sass/seller.scss */
+/* line 105, ../sass/seller.scss */
 #sellerInfoContainer {
   display: none;
 }
 
-/* line 65, ../sass/seller.scss */
+/* line 108, ../sass/seller.scss */
 #sellerInfoContainer.showInfo {
   display: block;
   width: 193px;
@@ -90,19 +149,19 @@ i:hover {
   z-index: 3;
 }
 
-/* line 77, ../sass/seller.scss */
+/* line 120, ../sass/seller.scss */
 #sellerInfoContainer .sellerImg {
   width: 115px;
   margin: 40px 0;
   border: 6px solid #9880e4;
 }
 
-/* line 82, ../sass/seller.scss */
+/* line 125, ../sass/seller.scss */
 #sellerInfoContainer i {
   color: #657079;
 }
 
-/* line 85, ../sass/seller.scss */
+/* line 128, ../sass/seller.scss */
 input[type=file] {
   position: absolute;
   z-index: -1;
@@ -112,12 +171,12 @@ input[type=file] {
   color: #b8b8b8;
 }
 
-/* line 93, ../sass/seller.scss */
+/* line 136, ../sass/seller.scss */
 .button-wrap {
   position: relative;
 }
 
-/* line 96, ../sass/seller.scss */
+/* line 139, ../sass/seller.scss */
 .uploadButton {
   display: inline-block;
   padding: 12px 18px;
@@ -129,53 +188,54 @@ input[type=file] {
   color: #fff;
 }
 
-/* line 106, ../sass/seller.scss */
+/* line 149, ../sass/seller.scss */
 .controls {
   width: 80%;
   margin-left: 5rem;
 }
 
-/* line 110, ../sass/seller.scss */
+/* line 153, ../sass/seller.scss */
 .vh-100 {
   height: 100vh;
 }
 
-/* line 114, ../sass/seller.scss */
+/* line 157, ../sass/seller.scss */
 .swal2-actions {
   gap: 10px;
 }
 
-/* line 117, ../sass/seller.scss */
+/* line 160, ../sass/seller.scss */
 .table > tbody {
   vertical-align: baseline !important;
 }
 
-/* line 120, ../sass/seller.scss */
+/* line 163, ../sass/seller.scss */
 .chart-parent {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   margin: 50px auto;
+  gap: 1%;
 }
 
-/* line 127, ../sass/seller.scss */
+/* line 171, ../sass/seller.scss */
 .myChart {
-  width: 450px !important;
+  width: 48% !important;
   height: 75vh !important;
 }
 
-/* line 131, ../sass/seller.scss */
+/* line 175, ../sass/seller.scss */
 #productTable, #OrdersTable {
   display: none;
 }
 
-/* line 135, ../sass/seller.scss */
+/* line 179, ../sass/seller.scss */
 .typeOf {
   color: #bf4289;
 }
 
-/* line 140, ../sass/seller.scss */
+/* line 184, ../sass/seller.scss */
 .state span {
   display: inline-flex;
   background-color: transparent;
@@ -185,15 +245,39 @@ input[type=file] {
   transition: .5s;
 }
 
-/* line 149, ../sass/seller.scss */
+/* line 193, ../sass/seller.scss */
 .state span:hover {
   background-color: #c78dd1db;
   color: whitesmoke;
 }
 
-/* line 154, ../sass/seller.scss */
+/* line 198, ../sass/seller.scss */
 .state span.approved {
   background-color: #088a31bf;
   border: 2px solid #95e98cdb;
   color: whitesmoke;
+}
+
+@media (max-width: 576px) {
+  /* line 205, ../sass/seller.scss */
+  h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  /* line 209, ../sass/seller.scss */
+  .chart-parent {
+    gap: 40px;
+  }
+
+  /* line 212, ../sass/seller.scss */
+  .myChart {
+    width: 90% !important;
+    height: 35vh !important;
+  }
+
+  /* line 216, ../sass/seller.scss */
+  .canvas {
+    width: 90%;
+  }
 }

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
     <!--<link rel ="stylesheet" href="stylesheets/all.min.css">font -->
     <link rel="stylesheet" href="stylesheets/index_style.css">
+    <link rel="stylesheet" href="stylesheets/navbarAndFooter.css">
     <link href="stylesheets/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
@@ -43,16 +44,45 @@
             <li class="nav-item ">
               <a class="nav-link" href="HTML Pages/contact.html">Contact Us </a>
             </li>
+
+            <!-- amira update -->
+            <ul class="nav-icons">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-user"></i>
+                  </a>
+                  <div class="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item bg-transparent" href="HTML Pages/signup.html">Sign up</a>
+                      <a href="HTML Pages/login.html" class="dropdown-item bg-transparent">Login</a>
+                  </div>
+                  <li class="login"></li>
+                </li>
+             
+            <ul class="ifUserLogged">
+              <li class="nav-item ">
+                <a href ="HTML Pages/Addchart.html" class="shopping-cart"><i class="fa fa-shopping-cart"></i></a>
+             </li>
+            <li class="nav-item ">
+              <a href ="HTML Pages/user.html" class="profile"><i class="fa-solid fa-house-chimney-user"></i></a>
+            </li>
+                <li class="nav-item ">
+                  <a href ="HTML Pages/login.html" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+               </li>
+            </ul>
+  </ul>
+           <!-- end li icons -->
           </ul>
+          <!-- end navar nav -->
         </div>
+        <!-- end collapse -->
       </nav>
-      <ul class="user ">
+      <!-- <ul class="user ">
        <li><i class="fa fa-shopping-cart"></i></li> 
        <li><i class="fa-solid fa-user mr-3"></i></li> 
-      </ul>
+      </ul> -->
     </section>
       </div>
-    </section>
+
     <!-- carousel -->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
@@ -85,45 +115,54 @@
     </div>
     <!-- six images -->
     <div class="productimages">
+      <h3 class="section-title-2 text-uppercase">Our Category</h3>
       <div class="categories-area ">
         <div class="row">
           <div class="cat-1 col-md-4 col-6">
             <div class="categories-img mb-30">
               <img class="pimg" src="images/home1-category-1.webp" alt="">
+              <div class="categories-img_content">ُEngagement</div>
             </div>
           </div>
           <div class="cat-3 col-6 col-md-4 ">
             <div class="categories-img mb-30">
               <img class="pimg" src="images/home1-category-2.webp" alt="">
+              <div class="categories-img_content">Wedding</div>
             </div>
           </div>
           <div class="cat-4 col-6 col-md-4 ">
             <div class="categories-img mb-30">
              <img class="pimg" src="images/home1-category-4.webp" alt="">
+             <div class="categories-img_content"> Birthday </div>
+             <span class="soon">Soon!</span>
             </div>
           </div>
           <div class="cat-4 col-6 col-md-4 ">
             <div class="categories-img mb-30">
               <img class="pimg" src="images/home1-category-3.webp" alt="">
-              <div class="categories-img_content">Red tulip</div>
+              
+              <div class="categories-img_content">Graduation</div>
             </div>
           </div>
           <div class="cat-4 col-6 col-md-4 ">
             <div class="categories-img mb-30">
               <img class="pimg" src="images/home1-category-5.webp" alt="">
+              <div class="categories-img_content">Valentine</div>
             </div>
           </div>
           <div class="cat-4 col-6 col-md-4 ">
             <div class="categories-img mb-30">
               <img class="pimg" src="images/home1-category-3.webp" alt="">
+              <div class="categories-img_content">Cadoux </div>
+              <span class="soon">Soon!</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- featured products -->
-    <div class="container productContainer">
-      <p class="title-1">Wonderful gift</p>
+    <div class="container " id="productContainer">
+   
       <h3 class="section-title-2 text-uppercase">Featured Products</h3>
     </div>
     <!-- footer -->
@@ -239,9 +278,11 @@
 
   <script src="JS/index.js" type="module"></script>
 
-  <script src="JS/home.js"></script>
+  <script src="JS/home.js" type="module"></script>
+  <script src="JS/card.js" type="module"></script>
   <script src="JS/wishlist.js"></script>
 
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
