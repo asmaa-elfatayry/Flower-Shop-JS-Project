@@ -93,9 +93,10 @@ window.addEventListener('load', function () {
                 input.value = ExistChartOrder[i].quantity;
                 input.type = "number";
                 input.min = "1";
-                input.addEventListener('keyup', inTheStock);
-                input.addEventListener('input', inTheStock);
-                input.addEventListener('change', inTheStock);
+                input.addEventListener('input', function (event) {
+                    validQuantity(event.target, ExistChartOrder[i].productId,ExistChartOrder[i].quantity);
+                });
+    
                 input.max = `${order.getStockQuantityById(ExistChartOrder[i].productId)}`;
                 quantityCell.appendChild(input);
                 row.appendChild(quantityCell);
@@ -115,34 +116,39 @@ window.addEventListener('load', function () {
             table.appendChild(tbody);
         }
     }
-    function inTheStock(event) {
-        var productId = parseInt(event.target.parentNode.parentNode.id);
-        var inputElement = event.target;
-        handleQuantityChange(productId, inputElement);
 
-    }
-    function handleQuantityChange(productId, inputElement) {
+function validQuantity(inputElement, productId,quantity) {
         var enteredQuantity = parseInt(inputElement.value);
+        var availableStock = order.getStockQuantityById(productId);
+    
         if (!Number.isInteger(enteredQuantity) || enteredQuantity <= 0) {
-            removeTable();
-            createTable();
-        } else if (enteredQuantity > order.getStockQuantityById(productId)) {
+            inputElement.value = quantity;
             Swal.fire({
                 position: "center",
                 icon: "error",
-                title: "The quantity is not available right now",
+                title: "Its not a valid quanity",
                 showConfirmButton: false,
                 timer: 1500,
             });
-            removeTable();
-            createTable();
-        } else {
-            order.updateproductById(productId);
-            removeTable();
-            createTable();
+        }
+        else if (enteredQuantity > availableStock) {
+            inputElement.value = quantity;
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "The entered quantity exceeds available stock",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+        else{
+            order.updateproduct(productId,enteredQuantity);
             generateBill();
+            inputElement.value = enteredQuantity;
         }
     }
+    
+ 
     function removeTable() {
         tbody.innerHTML = ``;
     }
@@ -161,24 +167,24 @@ window.addEventListener('load', function () {
         createTable();
         generateBill();
     }
-  //open payment
-let ExistChartOrder=order.getuserorder();
-  this.document
-    .querySelector(".checkout")
-    .addEventListener("click", function () {
-      if (ExistChartOrder.length > 0) {
-        document.querySelector("#paymentModal").style.display = "block";
-        document.querySelector(".overlay").style.display = "block";
-      } else {
-        Swal.fire("No orders available!");
-      }
-    });
+    //open payment
+    let ExistChartOrder=order.getuserorder();
+    this.document
+        .querySelector(".checkout")
+        .addEventListener("click", function () {
+            if (ExistChartOrder.length > 0) {
+                document.querySelector("#paymentModal").style.display = "block";
+                document.querySelector(".overlay").style.display = "block";
+            } else {
+                Swal.fire("No orders available!");
+            }
+        });
 
-  this.document
-    .querySelector(".btn-close")
-    .addEventListener("click", function () {
-      document.querySelector("#paymentModal").style.display = "none";
-      document.querySelector(".overlay").style.display = "none";
-    });
-
-});
+    this.document
+        .querySelector(".btn-close")
+        .addEventListener("click", function () {
+            document.querySelector("#paymentModal").style.display = "none";
+            document.querySelector(".overlay").style.display = "none";
+        });
+}
+);
