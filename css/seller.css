@@ -1,0 +1,171 @@
+body {
+  color: #4F4F4F;
+  background-color: #ffffff;
+}
+
+/* line 31, ../sass/_variables.scss */
+body.dark-theme {
+  color: #e1e0e0;
+  background-color: #121212;
+}
+
+body.dark-theme .sellerInfo {
+  background-color: #9789af;
+}
+
+.btn.btn-danger {
+  background-color: #F05990;
+}
+
+.error-msg {
+  color: brown;
+  margin-left: 10px;
+}
+
+.is-invalid {
+  border-color: brown;
+}
+
+.is-valid {
+  border-color: green;
+}
+
+.productS-img {
+  animation: 6s infinite ease-in-out;
+  transition: 1s;
+}
+
+.productS-img:hover {
+  animation-play-state: paused;
+  transform: scale(1.3);
+}
+
+.sellerInfo {
+  background-color: lavender;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100vh;
+}
+
+i {
+  transition: 1s;
+}
+
+i:hover {
+  cursor: pointer;
+  transform: rotate(360deg);
+}
+
+#sellerInfoContainer {
+  display: none;
+}
+
+#sellerInfoContainer.showInfo {
+  display: block;
+  width: 193px;
+  background-color: whitesmoke;
+  height: 100vh;
+  position: absolute;
+  left: 52px;
+  top: 0px;
+  height: 100%;
+  z-index: 3;
+}
+
+#sellerInfoContainer .sellerImg {
+  width: 115px;
+  margin: 40px 0;
+  border: 6px solid #9880e4;
+}
+
+#sellerInfoContainer i {
+  color: #657079;
+}
+
+input[type=file] {
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  left: 8px;
+  font-size: 17px;
+  color: #b8b8b8;
+}
+
+.button-wrap {
+  position: relative;
+}
+
+.uploadButton {
+  display: inline-block;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #bf4289;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.controls {
+  width: 80%;
+  margin-left: 5rem;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.swal2-actions {
+  gap: 10px;
+}
+
+.table > tbody {
+  vertical-align: baseline !important;
+}
+
+.chart-parent {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 50px auto;
+}
+
+.myChart {
+  width: 450px !important;
+  height: 75vh !important;
+}
+
+#productTable, #OrdersTable {
+  display: none;
+}
+
+.typeOf {
+  color: #bf4289;
+}
+
+@keyframes RotateImg {
+  10% {
+    transform: rotate(45deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(-45deg);
+  }
+  75% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

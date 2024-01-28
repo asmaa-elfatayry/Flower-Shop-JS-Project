@@ -1,0 +1,36 @@
+
+/* line 1, ../sass/main.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* line 10, ../sass/main.scss */
+#procuct-card {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 15, ../sass/main.scss */
+#procuct-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* line 20, ../sass/main.scss */
+.card-options {
+  height: 20%;
+  height: 20%;
+}
+
+/* line 24, ../sass/main.scss */
+#procuct-card img {
+  height: 30%;
+}
+

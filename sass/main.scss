@@ -1,8 +1,27 @@
-@import "variables";
-@import "layout";
-
-
-body{
-    font-family: $base-font-family;
-    background-color: get-theme-color(background-color);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+
+
+
+#procuct-card {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#procuct-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-options {
+    height: 20%;
+}
+
+#procuct-card img {
+    height: 30%;
+}
+

@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+/* line 3, ../sass/sellerSign.scss */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 9, ../sass/sellerSign.scss */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #f6f5f7;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* line 20, ../sass/sellerSign.scss */
+.right-box {
+  background-image: linear-gradient(rgba(207, 204, 204, 0.5), rgba(137, 73, 115, 0.5)), url("../images/fs.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* line 28, ../sass/sellerSign.scss */
+.overlay-left h1 {
+  color: #eee;
+}
+
+/* line 31, ../sass/sellerSign.scss */
+h1 {
+  font-weight: bold;
+  color: #eee;
+}
+
+/* line 37, ../sass/sellerSign.scss */
+p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: .5px;
+  margin: 20px 0 30px;
+  font-family: 'Butterfly Kids', cursive;
+  text-shadow: 2px 2px 4px #2d2c2c;
+  color: #eee;
+}

@@ -1,0 +1,125 @@
+/* line 1, ../sass/Addchart.scss */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* line 7, ../sass/Addchart.scss */
+h1 {
+  font-family: 'Dancing Script', cursive;
+  color: #8c1858;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+/* line 13, ../sass/Addchart.scss */
+body {
+  overflow: hidden;
+}
+
+/* line 18, ../sass/Addchart.scss */
+.box-img {
+  position: absolute;
+  z-index: 1;
+  left: 60%;
+  opacity: 0;
+  animation: box  15s linear infinite;
+  top: -50px;
+}
+
+/* line 31, ../sass/Addchart.scss */
+div > img {
+  width: 70px;
+}
+
+/* line 34, ../sass/Addchart.scss */
+.wrap {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+/* line 40, ../sass/Addchart.scss */
+.truck-img {
+  position: absolute;
+  left: -150px;
+  z-index: 2;
+  animation: truck  15s linear infinite;
+  top: -60px;
+}
+
+/* line 48, ../sass/Addchart.scss */
+.box-img > img {
+  width: 38px;
+}
+
+/* line 52, ../sass/Addchart.scss */
+.box-img2 {
+  animation-delay: 1s;
+}
+
+@keyframes truck {
+  40%, 70% {
+    left: 60%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes box {
+  0%, 40% {
+    opacity: 0;
+    left: 55%;
+  }
+  50% {
+    opacity: 1;
+    left: 61%;
+  }
+  60% {
+    opacity: 0;
+    left: 61%;
+  }
+}
+/* line 80, ../sass/Addchart.scss */
+hr {
+  border: none;
+  height: 1.5px;
+  background: linear-gradient(to right, #36142c, #ab8daf);
+}
+
+/* line 85, ../sass/Addchart.scss */
+.bill {
+  max-height: 70vh;
+  min-height: 60vh;
+}
+
+/* line 90, ../sass/Addchart.scss */
+.displayTable {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+/* line 95, ../sass/Addchart.scss */
+.checkout {
+  width: 100%;
+  background-color: #8c1858;
+}
+
+/* line 100, ../sass/Addchart.scss */
+input[type="number"] {
+  width: 70px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0;
+}
+
+/* line 110, ../sass/Addchart.scss */
+input[type="number"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
