@@ -1,9 +1,6 @@
-
 import * as order from './order.js';
 window.addEventListener('load', function () {
-    let currentuser=JSON.parse(sessionStorage.getItem("loggedInUser"))||[];
-   
-
+    let currentuser = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
     let table = document.getElementById("orderTable");
     let tbody = document.getElementById("orderlist");
     let price = document.getElementById("price");
@@ -13,48 +10,14 @@ window.addEventListener('load', function () {
 
     createTable();
     generateBill();
-
-    function getTotalorders()
-    {
-        let TotalOrders;
-        if(currentuser.length==0)
-        {
-            TotalOrders=JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
-        }
-        else
-        {
-            TotalOrders=JSON.parse(localStorage.getItem("ChartOrder")) || [];
-        }
-        
-        return TotalOrders;
-
-    }
-    function getuserorder()
-    {
-        let TotalOrders;
-        if(currentuser.length==0)
-        {
-            TotalOrders=JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
-            return TotalOrders;
-
-        }
-        else
-        {
-            let TotalOrders=JSON.parse(localStorage.getItem("ChartOrder")) || [];
-            let ExistChartOrder = TotalOrders.filter((order)=>{ return order.user===currentuser.id});
-            return ExistChartOrder;
-    
-        }
-        
-    }
     function generateBill() {
         price.innerText = `Price: ${getPrice()}`;
         quantity.innerText = `Total Quantity: ${getQuantity()}`;
         total.innerText = `Total: ${getTotal()}`;
-
+    }
 
     function getTotal() {
-        let ExistChartOrder=getuserorder();
+        let ExistChartOrder = order.getuserorder();
         let total = 0;
         for (let i = 0; i < ExistChartOrder.length; i++) {
             total += ExistChartOrder[i].quantity * ExistChartOrder[i].price;
@@ -64,7 +27,7 @@ window.addEventListener('load', function () {
     }
 
     function getQuantity() {
-        let ExistChartOrder=getuserorder();
+        let ExistChartOrder = order.getuserorder();
         let quantity = 0;
         for (let i = 0; i < ExistChartOrder.length; i++) {
             quantity += ExistChartOrder[i].quantity;
@@ -73,24 +36,21 @@ window.addEventListener('load', function () {
 
     }
     function getPrice() {
-        let ExistChartOrder=getuserorder();
+        let ExistChartOrder = order.getuserorder();
         let price = 0;
         for (let i = 0; i < ExistChartOrder.length; i++) {
             price += ExistChartOrder[i].price;
         }
         return price.toFixed(2);
     }
-
     function getPriceForProduct(i) {
-        let ExistChartOrder=getuserorder();
+        let ExistChartOrder = order.getuserorder();
         let price = 0;
-        price= ExistChartOrder[i].price * ExistChartOrder[i].quantity;
+        price = ExistChartOrder[i].price * ExistChartOrder[i].quantity;
         return price.toFixed(2);
     }
-
     function createTable() {
-        let ExistChartOrder=getuserorder();
-        console.log(ExistChartOrder);
+        let ExistChartOrder = order.getuserorder();
         if (ExistChartOrder.length === 0) {
             var messageRow = document.createElement("tr");
             var messageCell = document.createElement("td");
@@ -118,19 +78,9 @@ window.addEventListener('load', function () {
                 imgCell.className = "order-img";
                 var imge = document.createElement("img");
                 imge.classList.add("rounded-circle");
-                if(currentuser.length==0)
-                {
-                    imge.src = "../images/flowers/" + getProductImgByIdguest(ExistChartOrder[i].productId);
-
-                }
-                else
-                {
-                    imge.src = "../images/flowers/" + getProductImgById(ExistChartOrder[i].productId);
-
-                }
+                imge.src = "../images/flowers/" + order.getProductImgById(ExistChartOrder[i].productId);
                 imge.width = "50";
                 imge.height = "50";
-
                 imgCell.appendChild(imge);
                 row.appendChild(imgCell);
 
@@ -149,8 +99,8 @@ window.addEventListener('load', function () {
                 input.max = `${order.getStockQuantityById(ExistChartOrder[i].productId)}`;
                 quantityCell.appendChild(input);
                 row.appendChild(quantityCell);
-                
-                var Totalprice=document.createElement("td");
+
+                var Totalprice = document.createElement("td");
                 Totalprice.appendChild(document.createTextNode(getPriceForProduct(i)));
                 row.appendChild(Totalprice);
 
@@ -164,18 +114,15 @@ window.addEventListener('load', function () {
 
             table.appendChild(tbody);
         }
-   
-  function inTheStock(event) {
-    var productId = parseInt(event.target.parentNode.parentNode.id);
-    var inputElement = event.target;
-    handleQuantityChange(productId, inputElement);
-  }
+    }
+    function inTheStock(event) {
+        var productId = parseInt(event.target.parentNode.parentNode.id);
+        var inputElement = event.target;
+        handleQuantityChange(productId, inputElement);
 
-
+    }
     function handleQuantityChange(productId, inputElement) {
-
         var enteredQuantity = parseInt(inputElement.value);
-
         if (!Number.isInteger(enteredQuantity) || enteredQuantity <= 0) {
             removeTable();
             createTable();
@@ -190,47 +137,23 @@ window.addEventListener('load', function () {
             removeTable();
             createTable();
         } else {
-            let TotalOrders=JSON.parse(localStorage.getItem("ChartOrder")) || [];
-            let index = TotalOrders.findIndex((order) => order.productId === parseInt(id) && order.user==currentuser.id);
-            TotalOrders[index].quantity = enteredQuantity;
-            order.updateChartData(TotalOrders);
+            order.updateproductById(productId);
             removeTable();
             createTable();
             generateBill();
         }
     }
-
-    function getProductImgById(id) {
-        let TotalOrders=getTotalorders();
-        let resultOrdeId = TotalOrders.find((order) => order.productId === parseInt(id) && order.user==currentuser.id);
-        let searchedProduct = JSON.parse(localStorage.getItem("flowersData")) || [];
-        let resultproduct = searchedProduct.find((flower) => flower.id === resultOrdeId.productId);
-        return resultproduct.image;
-    }
-    function getProductImgByIdguest(id) {
-        let TotalOrders=getTotalorders();
-        let resultOrdeId = TotalOrders.find((order) => order.productId === parseInt(id));
-        let searchedProduct = JSON.parse(localStorage.getItem("flowersData")) || [];
-        let resultproduct = searchedProduct.find((flower) => flower.id === resultOrdeId.productId);
-        return resultproduct.image;
-    }
     function removeTable() {
         tbody.innerHTML = ``;
     }
     function removeorder(event) {
-        let TotalOrders=getTotalorders();
+        let TotalOrders = order.getTotalorders();
         let index;
-        if(currentuser.length==0)
-        {
-             index = TotalOrders.findIndex((order) => order.orderId == event.target.id);
-
-            
+        if (currentuser.length == 0) {
+            index = TotalOrders.findIndex((order) => order.orderId == event.target.id);
         }
-        else
-        {
-             index = TotalOrders.findIndex((order) => order.orderId == event.target.id && order.user==currentuser.id);
-
-
+        else {
+            index = TotalOrders.findIndex((order) => order.orderId == event.target.id && order.user == currentuser.id);
         }
         TotalOrders.splice(index, 1);
         order.updateChartData(TotalOrders);
@@ -238,40 +161,23 @@ window.addEventListener('load', function () {
         createTable();
         generateBill();
     }
+    //open payment
+    this.document
+        .querySelector(".checkout")
+        .addEventListener("click", function () {
+            if (ExistChartOrder.length > 0) {
+                document.querySelector("#paymentModal").style.display = "block";
+                document.querySelector(".overlay").style.display = "block";
+            } else {
+                Swal.fire("No orders available!");
+            }
+        });
 
-  }
-
-  function updateChartData(ExistChartOrder) {
-    localStorage.setItem("ChartOrder", JSON.stringify(ExistChartOrder));
-  }
-
-  function getStockQuantityById(productId) {
-    let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
-    let product = flowers.find((flower) => flower.id === productId);
-    if (product) {
-      return product.stock;
-    } else {
-      return 0;
-    }
-  }
-
-  //open payment
-  this.document
-    .querySelector(".checkout")
-    .addEventListener("click", function () {
-      if (ExistChartOrder.length > 0) {
-        document.querySelector("#paymentModal").style.display = "block";
-        document.querySelector(".overlay").style.display = "block";
-      } else {
-        Swal.fire("No orders available!");
-      }
-    });
-
-  this.document
-    .querySelector(".btn-close")
-    .addEventListener("click", function () {
-      document.querySelector("#paymentModal").style.display = "none";
-      document.querySelector(".overlay").style.display = "none";
-    });
-
-});
+    this.document
+        .querySelector(".btn-close")
+        .addEventListener("click", function () {
+            document.querySelector("#paymentModal").style.display = "none";
+            document.querySelector(".overlay").style.display = "none";
+        });
+}
+);
