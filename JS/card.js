@@ -1,3 +1,4 @@
+import * as order from './order.js';
 export function addProduct(product, rowDiv) {
   let card = document.createElement("div");
   card.classList.add("card", "col-12", "col-md-5", "col-lg-3");
