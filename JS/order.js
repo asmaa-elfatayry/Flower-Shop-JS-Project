@@ -161,3 +161,34 @@ export function getProductImgById(id) {
   resultproduct = searchedProduct.find((flower) => flower.id === resultOrdeId.productId);
   return resultproduct.image;
 }
+
+export function getpendingorder() {
+  let userorders = getuserorder();
+  let userpendingorders = userorders.filter((userorder) => { return userorder.state == 0 });
+  return userpendingorders;
+}
+
+
+export function getdeliveredorder() {
+  let userorders = getuserorder();
+  let userpendingorders = userorders.filter((userorder) => { return userorder.state == 1 });
+  return userpendingorders;
+}
+
+
+export function updateproduct(id, quanity) {
+  let TotalOrders = getTotalorders();
+  let index;
+  if (currentuser.length == 0) {
+    index = TotalOrders.findIndex((order) => order.productId === parseInt(id));
+
+  }
+  else {
+    index = TotalOrders.findIndex((order) => order.productId === parseInt(id) && order.user == currentuser.id);
+
+  }
+  if (index !== -1) {
+    TotalOrders[index].quantity = quanity;
+    updateChartData(TotalOrders);
+  }
+}
