@@ -3,8 +3,6 @@ import { addProduct } from "../JS/card.js"
 let numberOfProfProducts = 12;
 window.addEventListener('DOMContentLoaded', function () {
     order.updateBadge();
-    order.updateguestBadge();
-
     let flowers = JSON.parse(this.window.localStorage.getItem('flowersData'));
     let filteredFlowers;
     let categories = document.getElementsByClassName('category-btn');
@@ -155,51 +153,4 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
     })
-
-    //===================Add product in cart============
-
-
-    function addchart(id) {
-        let CurrentUserData = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
-        let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
-
-        let p_id = parseInt(id);
-        if (!order.order_is_exists(p_id)) {
-            let found_prod = flowers.find((flower) => flower.id === p_id);
-            let quantity = 1;
-            let orderid = TotalOrders.length + 1;
-            let price = found_prod.price;
-            let sellerid = found_prod.seller.id;
-            let date = new Date();
-            let state = "pending";
-            let prodId = found_prod.id;
-            if (CurrentUserData.length == 0) {
-                let TotalguestOrders = JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
-                let user = -1;
-                if (!order.order_is_exists_guest(p_id)) {
-                    let new_order = new order.Order(date, prodId, sellerid, quantity, price, orderid, state, user);
-                    TotalguestOrders.push(new_order.getOrderData());
-                    order.updateChartguestData(TotalguestOrders);
-                    order.updateguestBadge();
-
-
-                }
-                else {
-                    order.updateproductByIdguest(p_id);
-                    order.updateguestBadge();
-                }
-
-            }
-            else {
-                let user = CurrentUserData.id;
-                let new_order = new order.Order(date, prodId, sellerid, quantity, price, orderid, state, user);
-                TotalOrders.push(new_order.getOrderData());
-                order.updateChartData(TotalOrders);
-                order.updateBadge();
-            }
-        } else {
-            order.updateproductById(p_id);
-            order.updateBadge();
-        }
-    }
 })
