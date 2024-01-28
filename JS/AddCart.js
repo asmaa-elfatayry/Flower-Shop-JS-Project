@@ -162,6 +162,7 @@ window.addEventListener('load', function () {
         generateBill();
     }
   //open payment
+ExistChartOrder=order.getuserorder();
   this.document
     .querySelector(".checkout")
     .addEventListener("click", function () {
