@@ -20,7 +20,7 @@ export function addProduct(product, rowDiv) {
   const heartIcon = document.createElement("i");
   heartIcon.classList.add("fa-solid", "fa-heart", "for_wish");
 
-  console.log(heartIcon);
+  // console.log(heartIcon);
 
   heartIcon.id = product.id;
   // productContainer = document.querySelector("#productContainer");
@@ -106,10 +106,10 @@ export function addProduct(product, rowDiv) {
   addToCartButton.setAttribute("id", `${product.id}`);
   addToCartButton.textContent = "Add to Cart";
   cardBody.appendChild(addToCartButton);
-  // card.addEventListener("click", function () {
-  //   localStorage.setItem("productToShow", JSON.stringify(product));
-  //   window.open("../HTML pages/product_details.html", "_self");
-  // });
+  card.addEventListener("click", function () {
+    localStorage.setItem("productToShow", JSON.stringify(product));
+    window.open("../HTML pages/product_details.html", "_self");
+  });
 }
 export function wish(e) {
   // console.log("ss");
