@@ -46,7 +46,8 @@ window.addEventListener("load", function () {
       name: name,
       email: email,
       password: password,
-      role: 'user'
+      role: 'user',
+      favorite:[]
     };
 
     UserData.push(newUser);

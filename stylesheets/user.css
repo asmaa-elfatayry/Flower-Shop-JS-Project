@@ -1,22 +1,28 @@
 /* line 1, ../sass/user.scss */
 body {
   background-color: #f8f9fa;
-  /* Light gray background */
-  height: 100vh;
+  overflow-y: hidden;
 }
 
 /* line 6, ../sass/user.scss */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* line 13, ../sass/user.scss */
 #cover {
   padding: 20px;
   text-align: center;
 }
 
-/* line 11, ../sass/user.scss */
+/* line 18, ../sass/user.scss */
 .wrape {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 151px;
+  width: 145px;
   height: 151px;
   padding: 10px;
   border-radius: 50%;
@@ -24,7 +30,7 @@ body {
   background-color: #eee;
 }
 
-/* line 23, ../sass/user.scss */
+/* line 30, ../sass/user.scss */
 .img {
   width: 100%;
   height: 100%;
@@ -32,11 +38,10 @@ body {
   object-fit: cover;
 }
 
-/* line 32, ../sass/user.scss */
+/* line 39, ../sass/user.scss */
 .profile-left {
   background: linear-gradient(to right, #fb83d7, #ab8daf);
   padding: 30px;
-  border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   color: #eee;
   display: flex;
@@ -46,46 +51,34 @@ body {
   max-height: 400px;
 }
 
-/* line 45, ../sass/user.scss */
+/* line 52, ../sass/user.scss */
 hr {
   border: none;
   height: 3px;
   background: linear-gradient(to right, #36142c, #ab8daf);
 }
 
-/* line 51, ../sass/user.scss */
+/* line 58, ../sass/user.scss */
 .profile-right {
   background-color: #fff;
-  padding: 30px;
+  padding-top: 30px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   max-height: 100vh;
   overflow-y: auto;
 }
 
-/* line 61, ../sass/user.scss */
+/* line 68, ../sass/user.scss */
 .user-info {
   margin-top: 20px;
 }
 
-/* line 65, ../sass/user.scss */
+/* line 72, ../sass/user.scss */
 .user-info button {
   margin-top: 10px;
 }
 
-/* line 69, ../sass/user.scss */
-.profile-right ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-/* line 74, ../sass/user.scss */
-.profile-right li {
-  margin-bottom: 10px;
-  color: #555;
-}
-
-/* line 78, ../sass/user.scss */
+/* line 75, ../sass/user.scss */
 .container-fluid {
   max-width: 100vw;
   max-height: 100vh;
@@ -94,8 +87,45 @@ hr {
 }
 
 @media (max-width: 768px) {
-  /* line 86, ../sass/user.scss */
+  /* line 83, ../sass/user.scss */
   .profile-left, .profile-right {
     margin-top: 20px;
   }
+}
+/* line 88, ../sass/user.scss */
+.nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* line 92, ../sass/user.scss */
+.nav li {
+  margin-bottom: 3px;
+  color: #555;
+  border-left: 5px solid #fb83d7;
+  background-color: #ffffff;
+  margin-right: inherit;
+}
+
+/* line 99, ../sass/user.scss */
+.nav li a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+
+/* line 104, ../sass/user.scss */
+.nav li:last-child {
+  border-bottom: none;
+}
+
+/* line 107, ../sass/user.scss */
+.nav-item {
+  text-align: left;
+}
+
+/* line 111, ../sass/user.scss */
+.container-fluid {
+  max-height: 100vh;
+  overflow: hidden;
 }

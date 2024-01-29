@@ -8,6 +8,7 @@ window.addEventListener('load', function () {
     let total = document.getElementById("total");
 
 
+
     createTable();
     generateBill();
     function generateBill() {
@@ -44,6 +45,7 @@ window.addEventListener('load', function () {
         return price.toFixed(2);
     }
     function getPriceForProduct(i) {
+
         let ExistChartOrder = order.getuserorder();
         let price = 0;
         price = ExistChartOrder[i].price * ExistChartOrder[i].quantity;
@@ -52,11 +54,11 @@ window.addEventListener('load', function () {
     function createTable() {
         let ExistChartOrder = order.getuserorder();
         if (ExistChartOrder.length === 0) {
-            var messageRow = document.createElement("tr");
-            var messageCell = document.createElement("td");
+            let messageRow = document.createElement("tr");
+            let messageCell = document.createElement("td");
             messageCell.colSpan = 5;
 
-            var icon = document.createElement("i");
+            let icon = document.createElement("i");
             icon.classList.add("fa", "fa-ban", "mr-2");
             icon.style.color = "red";
             icon.style.fontSize = "1.5rem";
@@ -68,15 +70,15 @@ window.addEventListener('load', function () {
         }
         else {
             for (let i = 0; i < ExistChartOrder.length; i++) {
-                var row = document.createElement("tr");
+                let row = document.createElement("tr");
                 row.id = ExistChartOrder[i].productId;
-                var numberCell = document.createElement("td");
+                let numberCell = document.createElement("td");
                 numberCell.appendChild(document.createTextNode(ExistChartOrder[i].orderId));
                 row.appendChild(numberCell);
 
-                var imgCell = document.createElement("td");
+                let imgCell = document.createElement("td");
                 imgCell.className = "order-img";
-                var imge = document.createElement("img");
+                let imge = document.createElement("img");
                 imge.classList.add("rounded-circle");
                 imge.src = "../images/flowers/" + order.getProductImgById(ExistChartOrder[i].productId);
                 imge.width = "50";
@@ -84,27 +86,28 @@ window.addEventListener('load', function () {
                 imgCell.appendChild(imge);
                 row.appendChild(imgCell);
 
-                var priceCell = document.createElement("td");
+                let priceCell = document.createElement("td");
                 priceCell.appendChild(document.createTextNode(ExistChartOrder[i].price));
                 row.appendChild(priceCell);
 
-                var quantityCell = document.createElement("td");
-                var input = document.createElement("input");
+                let quantityCell = document.createElement("td");
+                let input = document.createElement("input");
                 input.value = ExistChartOrder[i].quantity;
                 input.type = "number";
                 input.min = "1";
-                input.addEventListener('keyup', inTheStock);
-                input.addEventListener('input', inTheStock);
-                input.addEventListener('change', inTheStock);
+                input.addEventListener('input', function (event) {
+                    validQuantity(event.target, ExistChartOrder[i].productId, ExistChartOrder[i].quantity);
+                });
+    
                 input.max = `${order.getStockQuantityById(ExistChartOrder[i].productId)}`;
                 quantityCell.appendChild(input);
                 row.appendChild(quantityCell);
 
-                var Totalprice = document.createElement("td");
+                let Totalprice = document.createElement("td");
                 Totalprice.appendChild(document.createTextNode(getPriceForProduct(i)));
                 row.appendChild(Totalprice);
 
-                var removeCell = document.createElement("td");
+                let removeCell = document.createElement("td");
                 removeCell.innerHTML = `<i class="fa fa-trash" id="${ExistChartOrder[i].orderId}" style="color:red ;font-size:1.5rem"></i>`;
                 removeCell.addEventListener('click', removeorder);
                 row.appendChild(removeCell);
@@ -115,34 +118,40 @@ window.addEventListener('load', function () {
             table.appendChild(tbody);
         }
     }
-    function inTheStock(event) {
-        var productId = parseInt(event.target.parentNode.parentNode.id);
-        var inputElement = event.target;
-        handleQuantityChange(productId, inputElement);
 
-    }
-    function handleQuantityChange(productId, inputElement) {
-        var enteredQuantity = parseInt(inputElement.value);
+    function validQuantity(inputElement, productId, quantity) {
+        debugger;
+        let enteredQuantity = parseInt(inputElement.value);
+        let availableStock = order.getStockQuantityById(productId);
+        var totalPriceCell = inputElement.parentElement.nextElementSibling; 
+
+    
         if (!Number.isInteger(enteredQuantity) || enteredQuantity <= 0) {
-            removeTable();
-            createTable();
-        } else if (enteredQuantity > order.getStockQuantityById(productId)) {
+            inputElement.value = quantity;
             Swal.fire({
                 position: "center",
                 icon: "error",
-                title: "The quantity is not available right now",
+                title: "It's not a valid quantity",
                 showConfirmButton: false,
                 timer: 1500,
             });
-            removeTable();
-            createTable();
+        } else if (enteredQuantity > availableStock) {
+            inputElement.value = quantity;
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "The entered quantity exceeds available stock",
+                showConfirmButton: false,
+                timer: 1500,
+            });
         } else {
-            order.updateproductById(productId);
-            removeTable();
-            createTable();
+            order.updateproduct(productId, enteredQuantity);
             generateBill();
+            inputElement.value = enteredQuantity;
+            totalPriceCell.innerText = getPriceForProduct(productId);
         }
     }
+ 
     function removeTable() {
         tbody.innerHTML = ``;
     }
@@ -157,28 +166,29 @@ window.addEventListener('load', function () {
         }
         TotalOrders.splice(index, 1);
         order.updateChartData(TotalOrders);
+        order.updateBadge();
         removeTable();
         createTable();
         generateBill();
     }
-  //open payment
-ExistChartOrder=order.getuserorder();
-  this.document
-    .querySelector(".checkout")
-    .addEventListener("click", function () {
-      if (ExistChartOrder.length > 0) {
-        document.querySelector("#paymentModal").style.display = "block";
-        document.querySelector(".overlay").style.display = "block";
-      } else {
-        Swal.fire("No orders available!");
-      }
-    });
+    //open payment
+    let ExistChartOrder=order.getuserorder();
+    this.document
+        .querySelector(".checkout")
+        .addEventListener("click", function () {
+            if (ExistChartOrder.length > 0) {
+                document.querySelector("#paymentModal").style.display = "block";
+                document.querySelector(".overlay").style.display = "block";
+            } else {
+                Swal.fire("No orders available!");
+            }
+        });
 
-  this.document
-    .querySelector(".btn-close")
-    .addEventListener("click", function () {
-      document.querySelector("#paymentModal").style.display = "none";
-      document.querySelector(".overlay").style.display = "none";
-    });
-
-});
+    this.document
+        .querySelector(".btn-close")
+        .addEventListener("click", function () {
+            document.querySelector("#paymentModal").style.display = "none";
+            document.querySelector(".overlay").style.display = "none";
+        });
+}
+);
