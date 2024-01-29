@@ -28,6 +28,7 @@ window.addEventListener("load", function () {
 
     if (user && user.role === "user") {
       logged_user(user, "user");
+      assignGuestOrderToLoggedUser(user.id);
       window.location.href = "../index.html";
     } else if (seller) {
       logged_user(seller, "seller");
@@ -45,6 +46,36 @@ window.addEventListener("load", function () {
       message.innerText =
         "Invalid email or password. Please check your credentials.";
     }
+
+    
+  }
+
+
+  function assignGuestOrderToLoggedUser(id)
+  {
+    let orders=getGuestOrders();
+    if(orders.length!=0)
+    {
+      orders.forEach(order=>{order.user=id});
+      let newchartorders=getchartOrders();
+      
+      newchartorders.push(orders);
+      sessionStorage.setItem("guestRequestorder",JSON.stringify([]));
+      return;
+
+    }
+    
+  }
+
+  function getchartOrders()
+  {
+    let guestOrder=JSON.parse(localStorage.getItem("ChartOrder"))||[]
+    return guestOrder;
+  }
+  function getGuestOrders()
+  {
+    let guestOrder=JSON.parse(sessionStorage.getItem("guestRequestorder"))||[]
+    return guestOrder;
   }
 
   function logged_user(user, role) {

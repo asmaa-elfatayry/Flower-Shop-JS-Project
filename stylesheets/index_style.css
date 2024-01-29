@@ -1,11 +1,15 @@
-  *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box !important;
-      list-style-type:none;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+  list-style-type:none;
+}
   ol, ul {
     padding-left: 0;
+}
+a:hover{
+  text-decoration: none;
+  outline: none;
 }
   body {
   font-family: "Arial", sans-serif, "Poppins";
@@ -178,87 +182,16 @@ fill:#F05990 !important;
 {
   font-family: "Josefin Slab", serif;
 }
-.card
-{
-  padding:0px 20px;
-  box-sizing: border-box;
-  border: none;
-  padding:20px 0px;
-  /* transition:all 2s; */
-}
-.fa-star
-{
-  color: #F05990;
-}
-.card-details
-{
- /* height: 350px; */
- border-radius: 5px;
- margin:10px;
- position:relative;
- transition:all 1s ;
-}
-.card-details:hover
-{
-  box-shadow: 3px 3px 7px rgba(141, 140, 140, 0.3),-1px -1px 7px rgba(141, 140, 140, 0.3);
-/* background-color: #ffbdf62b; */
 
-}
-.card-body{
-  padding: 0 !important;
-  text-align: center;
-}
-.card-details:hover #icons 
-{
-  opacity:1;
-  color: #d3d3d3;
-
-}
 .icons.clicked-fav{
   color: #F05990;
   opacity:1;
 }
-.card-details:hover img,
-.card-details:hover div{
-  box-shadow: none;
-}
-#icons
-{
-  display:flex;
-  flex-direction: column;
-  position:absolute;
-  top:3%;
-  right:5%;
-  opacity:0;
-  transition:all 2s;
-}
 
-.card-details img
-{
-  width:95%;
-  height:250px;
-}
 .card-details svg.active{
  color : #E72463;
  opacity : 1;
  }
-.card-details button
-{
-  padding:8px 10px;
-  background-color: #E72463;
-  color: white;
-  border-radius: 20px;
-  border: none;
-  margin-bottom: 40px;
-  margin-top:5px;
-  transition: all 2s;
-}
-.card-details button:hover
-{
-  background-color: white;
-  color: #E72463;
-  border: 1px solid #F05990;
-}
 h3.section-title-2.text-uppercase {
   text-align: center;
   padding-bottom: 10px;

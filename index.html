@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
   <!--<link rel ="stylesheet" href="stylesheets/all.min.css">font -->
   <link rel="stylesheet" href="stylesheets/index_style.css">
+  <link rel="stylesheet" href="stylesheets/card.css"/>
   <link rel="stylesheet" href="stylesheets/navbarAndFooter.css">
   <link href="stylesheets/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,10 +21,17 @@
 </head>
 
 <body>
-  <div class="container-fluid ">
+  <div class="container-fluid sticky-top header-container">
     <!-- home section -->
-    <section class="homeSection_1 sticky-top">
-      <div class="logo"><img src="images/logo.png"></div>
+    <section class="homeSection_1">
+      <div class="logo">
+        <a href="index.html" class="d-inline-flex flex-column align-items-center justify-content-center text-decoration-none">
+          <div id="floral">
+            Fl<img src="../images/logo.svg" alt="">ral
+          </div>
+          <div id="boutique">boutique</div>
+        </a>
+      </div>
       <nav class="navbar navbar-expand-lg navbar-light ">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,9 +49,6 @@
               <a class="nav-link" href="HTML Pages/about.html">About Us </i></a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="HTML Pages/wishlist.html">wishlist </a>
-            </li>
-            <li class="nav-item ">
               <a class="nav-link" href="HTML Pages/contact.html">Contact Us </a>
             </li>
 
@@ -54,7 +59,7 @@
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-user"></i>
                 </a>
-                <div class="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdownMenuLink">
+                <div class="log_sign dropdown-menu border-0" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item bg-transparent" href="HTML Pages/signup.html">Sign up</a>
                   <a href="HTML Pages/login.html" class="dropdown-item bg-transparent">Login</a>
                 </div>
@@ -160,7 +165,7 @@
         </div>
         <div class="cat-4 col-6 col-md-4 ">
           <div class="categories-img mb-30">
-            <img class="pimg" src="images/home1-category-3.webp" alt="">
+            <img class="pimg" src="images/WhatsApp Image 2024-01-29 at 12.43.52 PM.jpeg" alt="">
             <div class="categories-img_content">Cadoux </div>
             <span class="soon">Soon!</span>
           </div>
@@ -174,7 +179,7 @@
     <h3 class="section-title-2 text-uppercase">Featured Products</h3>
   </div>
   <!-- footer -->
-  <footer>
+  <footer class="container-fluid">
     <div class="child-footer">
       <div class="footer-area">
         <div class="footer-widget-area">
@@ -183,9 +188,12 @@
               <!-- first column -->
               <div class="col-12 col-md-12 col-xl-3 col-custom">
                 <div class="single-footer-widget ">
-                  <div class="footer-logo">
-                    <a href="index.html">
-                      <img src="images/logo.png" id="logo-footer" alt="Logo Image">
+                  <div class="logo footer-logo">
+                    <a href="index.html" class="d-inline-flex flex-column align-items-center justify-content-center text-decoration-none">
+                      <div id="floral" style="color:white">
+                        Fl<img src="../images/logo.svg" alt="">ral
+                      </div>
+                      <div id="boutique" style="color:white">boutique</div>
                     </a>
                   </div>
                   <p class="desc-content navbar-light first ">Lorem Khaled Ipsum is a major key to success. To be
@@ -278,7 +286,7 @@
         </div>
       </div>
   </footer>
-  </div><!--end of container-fluid-->
+  <!--end of container-fluid-->
   <script src="JS/JQuery-3.3.1.min.js"></script>
   <script src="JS/popper.js"></script>
   <script src="JS/bootstrap.min.js"></script>

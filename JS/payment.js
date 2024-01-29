@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let product = flowers.find(
         (flower) => flower.id === soldProduct.productId
       );
-
+  
       if (product && product.stock > 0 && soldProduct.state === 1) {
       
         product.paidno = (product.paidno || 0) + soldProduct.quantity;

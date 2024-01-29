@@ -2,7 +2,7 @@ import * as order from './order.js';
 export function addProduct(product, rowDiv) {
   //debugger;
   let card = document.createElement("div");
-  card.classList.add("card", "col-12", "col-md-5", "col-lg-3");
+  card.classList.add("card", "col-12", "col-md-4", "col-lg-3");
   rowDiv.appendChild(card);
 
   let cardDetails = document.createElement("div");
