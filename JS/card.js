@@ -1,4 +1,4 @@
-import * as order from './order.js';
+import * as order from "./order.js";
 export function addProduct(product, rowDiv) {
   let card = document.createElement("div");
   card.classList.add("card", "col-12", "col-md-5", "col-lg-3");
@@ -106,9 +106,12 @@ export function addProduct(product, rowDiv) {
   addToCartButton.setAttribute("id", `${product.id}`);
   addToCartButton.textContent = "Add to Cart";
   cardBody.appendChild(addToCartButton);
-  card.addEventListener("click", function () {
-    localStorage.setItem("productToShow", JSON.stringify(product));
-    window.open("../HTML pages/product_details.html", "_self");
+  card.addEventListener("click", function (e) {
+    if (e.target.classList.contains("for_wish") == false) {
+      // e.stopPropagation()
+      localStorage.setItem("productToShow", JSON.stringify(product));
+      window.open("../HTML pages/product_details.html", "_self");
+    }
   });
 }
 export function wish(e) {
