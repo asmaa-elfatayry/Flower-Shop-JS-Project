@@ -13,6 +13,9 @@ window.addEventListener("load", function () {
       .then((response) => response.json())
       .then((data) => {
         FlowersDate = data.flowers;
+        for (let i = 0; i<FlowersDate.length; i++) {
+          FlowersDate[i]['reviews'] = new Array;
+        }
         SellerData = data.sellers;
         UserData = data.users;
         favourites = data.favourites;
@@ -24,7 +27,7 @@ window.addEventListener("load", function () {
         localStorage.setItem("userData", JSON.stringify(UserData));
         localStorage.setItem("requestseller", JSON.stringify(RequestSeller));
 
-        localStorage.setItem("favourites" ,JSON.stringify(favourites));
+        localStorage.setItem("favourites", JSON.stringify(favourites));
 
 
 
@@ -41,6 +44,7 @@ window.addEventListener("load", function () {
       })
       .catch((error) => console.error("Error fetching products:", error));
   }
+  // loadData();
   if (localStorage.length === 0) {
     loadData();
   }

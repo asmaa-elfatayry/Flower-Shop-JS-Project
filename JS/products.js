@@ -1,6 +1,6 @@
 import * as order from './order.js';
 import { addProduct } from "../JS/card.js"
-let numberOfProfProducts = 12;
+let numberOfProfProducts = 4;
 window.addEventListener('DOMContentLoaded', function () {
     order.updateBadge();
     order.updateguestBadge();
@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let filteredFlowers;
     let categories = document.getElementsByClassName('category-btn');
     let newRowDiv = document.createElement('div');
-    newRowDiv.className = 'row justify-content-around';
+    newRowDiv.className = 'row';
     document.getElementById('productContainer').appendChild(newRowDiv);
 
     let mnP = document.getElementById('minPrice');

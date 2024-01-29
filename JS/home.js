@@ -1,5 +1,5 @@
 
-let favourites , favIcon,divflower ,selflower,flower , fav ,x ,flowers ,e , productContainer ,rowDiv;
+//let favourites , favIcon,divflower ,selflower,flower , fav ,x ,flowers ,e , productContainer ,rowDiv;
 window.addEventListener("load", function () {
     flowers = JSON.parse(window.localStorage.getItem("flowersData"));
     productContainer = document.querySelector(".productContainer");

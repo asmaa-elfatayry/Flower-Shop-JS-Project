@@ -16,20 +16,233 @@
     height: 250px;
 }
 
+#product-image{
+    background-color: white;
+    padding: 0.5rem;
+    border: 2px solid #dee2e6;
+    text-align: center;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 9px rgba(164,164,164,0.2);
+}
+#product-image{
+    height: max-content;
+}
+#product-image img{
+    width: 65%;
+}
 #product-image:hover {
-    box-shadow: 10px 10px 30px;
+    box-shadow: 2px 2px 5px;
 }
 
 #product-image:hover {
-    transition: all 1s;
-    transform: scale(1.01);
+    transition: all 0.2s;
 }
+
 #filter-Div {
     justify-content: space-between;
     align-items: center;
     margin: 60px 0px;
 }
+
+.category-btn {
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer !important;
+}
+
 ._active {
-    text-decoration: underline;
+    background-color: #e1397f !important;
+    color: white !important;
+}
+
+.category-btn:hover {
+    background-color: #e1397f !important;
+    color: white !important;
+}
+
+#filter-Div,
+#productContainer {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+    margin: 20px 0;
+}
+
+.pagination li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#searchTXT {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    height: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#searchBTN {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 40px;
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#searchBTN:hover {
+    background-color: #e1397f !important;
+}
+
+.pagination li.active a,
+.pagination li a:hover {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.pagination li.dots-1,
+.pagination li.dots-2 {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+#minPrice,
+#maxPrice {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#commentBTN {
+    width: 100px;
+    height: 50px;
+}
+
+#product-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+#product-data {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 3px 3px 9px rgba(164,164,164,0.2);
+}
+
+#product-data h2 {
+    font-family: 'cursive';
     color: #ef5ab1;
+    margin-bottom: 20px;
+}
+
+#product-data p {
+    margin-bottom: 15px;
+}
+
+.btn-number {
+    cursor: pointer;
+}
+
+#items-price {
+    font-weight: bold;
+    font-size: 18px;
+    color: #dc3545;
+}
+
+.btn-outline-secondary {
+    background-color: transparent;
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+
+#comment-section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    box-shadow: 10px 10px 50px #d3b6c2;
+}
+
+#comment-section h2 {
+    color: #d60578;
+}
+
+#comment-section hr {
+    border-top: 2px solid #d60578;
+    margin-bottom: 20px;
+}
+
+#comment-section label {
+    font-weight: bold;
+}
+
+#comment-section textarea {
+    width: 100%;
+}
+
+#comment-section .btn {
+    background-color: #ffffff;
+    color: #d60578;
+    border: 1px solid #d60578;
+}
+
+#comment-section .btn:hover {
+    background-color: #ef5ab1;
+    color: white;
+}
+.comment {
+    padding: 20px;
+    border-radius: 40px;
+    background-color: #d8d8d8;
+}
+.review {
+    margin-left: 20px;
+}
+.reviewer {
+    margin-left: 20px;
+}
+.heartBtn{
+    color: silver;
+}
+.heartBtn:hover{
+    color: red;
+    transition: all 0.5s;
+}
+.page-link{
+    background-color: #d60578;
+    color: white;
+}
+.page-link:hover{
+    color: #d60578 !important;
+    background-color: white !important;
+}
+.pagination .active .page-link{
+    background-color: #ef5ab1 !important;
+    color: white !important;
+}
+.pagination .active .page-link:hover{
+    background-color: white !important;
+    color:#d60578 !important;
 }

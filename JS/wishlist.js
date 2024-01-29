@@ -1,4 +1,4 @@
-let mywishlist, tbody, createdTr, createdTD1, createdTD2, createdTD3, createdTD4, createdTD5 ,row_div,productContainer;
+//let mywishlist, tbody, createdTr, createdTD1, createdTD2, createdTD3, createdTD4, createdTD5 ,row_div,productContainer;
 window.addEventListener('load', function () {
     mywishlist = JSON.parse(window.localStorage.getItem("favourites"));
     productContainer = document.querySelector(".productContainer");

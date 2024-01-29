@@ -7,7 +7,7 @@
     <title>Our products</title>
     <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
     <link rel="stylesheet" href="../stylesheets/products_and_product_details.css" />
-    <!-- <link rel="stylesheet" href="../stylesheets/main.css"> -->
+    <link rel="stylesheet" href="../stylesheets/index_style.css">
     <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
@@ -44,66 +44,117 @@
     </section>
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-12 mb-5 col-md-4 border border-dark rounded" id="product-image">
-                <img src="" class="img-fluid">
+            <div class="my-auto col-12 col-md-5">
+                <div id="product-image">
+                    <img src="" class="" alt="Product Image">
+                </div>
             </div>
-            <div class="col-12 col-md-7 row" id="product-data">
-                <h2 class="col-12 mb-2" style="font-family: cursive;color: #ef5ab1;" id="product-name"></h2>
+            <div class="col-12 col-md-7" id="product-data">
+                <h2 class="mb-2" style="font-family: 'cursive'; color: #ef5ab1;" id="product-name">
+                </h2>
+                <div class="mt-2 col-12 text-center">
+                    </div>
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Description:</strong>
+                        <p id="product-description"></p>
+                    </div>
+                    <div class="col-6">
+                        <strong>Meaning:</strong>
+                        <p id="product-meaning"></p>
+                    </div>
+                </div>
 
-                <span class="col-6">Description</span>
-                <p class="col-6" id="product-description"></p>
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Price:</strong>
+                        <p id="product-price"></p>
+                    </div>
+                    <div class="col-6">
+                        <strong>Category:</strong>
+                        <p id="product-category"></p>
+                    </div>
+                </div>
 
-                <span class="col-6">Meaning</span>
-                <p class="col-6" id="product-meaning"></p>
-
-                <span class="col-6">Price</span>
-                <p class="col-6" id="product-price"></p>
-
-                <span class="col-6">Category</span>
-                <p class="col-6" id="product-category"></p>
-
-                <span class="col-6">available stock</span>
-                <p class="col-6" id="product-stock"></p>
-                <div class="col-6 mb-2">
-                    <div class="col-auto container">
-                        <div class="row">
-                            <div class="col-auto">
-                                <div class="input-group">
-                                    <span class="input-group-prepend" id="minus-btn">
-                                        <button type="button" class="btn btn-danger btn-number" disabled
-                                            data-type="minus" data-field="quant[1]">
-                                            <span class="fa fa-minus"></span>
-                                        </button>
-                                    </span>
-                                    <input type="text" style="width:70px;" name="quant[1]"
-                                        class="text-secondary text-center form-control input-number" value="1" min="1"
-                                        max="1000" id="items-count">
-                                    <span class="input-group-append" id="plus-btn">
-                                        <button type="button" class="btn btn-primary btn-number" data-type="plus"
-                                            data-field="quant[1]">
-                                            <span class="fa fa-plus"></span>
-                                        </button>
-                                    </span>
-                                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Available Stock:</strong>
+                        <p id="product-stock"></p>
+                    </div>
+                    <div class="col-6">
+                        <strong>Items Price:</strong>
+                        <p id="items-price">50 EGP</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex me-5 justify-content-between col-auto">
+                        <div class="col-6">
+                            <button style="left: 20px;" class="me-2 btn btn-outline-secondary" type="button">
+                                Add to Cart
+                            </button>
+                        </div>
+                        <div class="row col-6">
+                            <div style="left: 10px; width: fit-content;" class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-danger btn-number" id="minus-btn" disabled
+                                        data-type="minus" data-field="quant[1]">
+                                        <span class="fa fa-minus"></span>
+                                    </button>
+                                </span>
+                                <input type="text" style="width:70px;" name="quant[1]"
+                                    class="text-secondary text-center form-control input-number" value="1" min="1"
+                                    max="1000" id="items-count">
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-primary btn-number" id="plus-btn"
+                                        data-type="plus" data-field="quant[1]">
+                                        <span class="fa fa-plus"></span>
+                                    </button>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 mb-2" id="items-price">
-                    50 EGP
-                </div>
-                <div class="col-12 ">
-                    <button class="col-auto mx-5 btn btn-outline-secondary" type="button">
-                        Add to cart
-                    </button>
-                    <button class="col-auto mx-5 btn btn-outline-secondary" type="button">
-                        Add to Wishlist
-                    </button>
-
-                </div>
             </div>
         </div>
     </div>
+
+    <div class="container mb-3" id="comment-section">
+        <h2 class="text-center mb-4">Reviews</h2>
+        <hr class="mb-4">
+        <div id="comment" class="row justify-content-center">
+            <div class="row text-center">
+                <label for="commentTextarea" class="form-label">Leave a Comment</label>
+                <div class="col-10 mb-3">
+                    <textarea class="form-control" id="commentTextarea" placeholder="Write your comment"
+                        rows="4"></textarea>
+                </div>
+                <div class="col-2 d-flex justify-content-center my-auto">
+                    <button type="button" class="btn" id="commentBTN">Submit</button>
+                </div>
+            </div>
+            <hr>
+            <div style="height: 300px; overflow-y: auto;" id="comments">
+                <!-- <div class="col-10 mb-3 comment">
+                    <q class="review">This product is good</q>
+                    <i class="reviewer">Ahmed</i>
+                </div>
+                <div class="col-10 mb-3 comment">
+                    <q class="review">This product is good</q>
+                    <i class="reviewer">Ahmed</i>
+                </div>
+                <div class="col-10 mb-3 comment">
+                    <q class="review">This product is good</q>
+                    <i class="reviewer">Ahmed</i>
+                </div>
+                <div class="col-10 mb-3 comment">
+                    <q class="review">This product is good</q>
+                    <i class="reviewer">Ahmed</i>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
     <footer class="container-fluid">
         <div class="child-footer">
             <div class="footer-area">
@@ -214,10 +265,11 @@
                 </div>
             </div>
     </footer>
-    <script src="../JS/product-details.js"></script>
+    <script type="module" src="../JS/product-details.js"></script>
     <script src="../JS/JQuery-3.3.1.min.js"></script>
     <script src="../JS/popper.js"></script>
     <script src="../JS/bootstrap.min.js"></script>
+    <script src="../JS/all.min.js"></script>
 </body>
 
 </html>
