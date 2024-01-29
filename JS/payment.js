@@ -5,7 +5,7 @@ import {
   ValidEmail,
   ValidPassword,
 } from "./ValidationMoudule.js";
-
+import { getuserorder } from "./order.js";
 document.addEventListener("DOMContentLoaded", function () {
   let visaCard = document.querySelector(".visa ");
   let paypalCard = document.querySelector(".paypal");
@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
- 
   function resetErrorMessages() {
     let errorElements = document.querySelectorAll(".error");
     errorElements.forEach((element) => {
@@ -116,6 +115,34 @@ document.addEventListener("DOMContentLoaded", function () {
       inp.value = "";
     });
   }
+  let chartOrderData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+  localStorage.setItem("order", JSON.stringify([]));
+  let order = [];
+
+  function removeCartOrdersAfterChecked(currentUserOrder) {
+    let userId = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    userId = userId.id;
+    console.log(chartOrderData);
+    // console.log(currentUserOrder);
+    // console.log(chartOrderData);
+    for (let i = 0; i < chartOrderData.length; i++) {
+      console(chartOrderData);
+      if (Number(chartOrderData[i].user) == userId) {
+        console(chartOrderData);
+        console.log(i);
+        order.push(chartOrderData[i]);
+        chartOrderData.splice(i, 1);
+        localStorage.setItem("order", JSON.stringify(order));
+      }
+      // if(currentUserOrder[i].user == )
+      // const index = chartOrderData.indexOf(currentUserOrder[i]);
+      // if (index !== -1) {
+      //   chartOrderData.splice(index, 1);
+      // }
+    }
+  }
+  //
+
   function updatePaidNoForProducts(soldProducts) {
     let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
 
@@ -124,21 +151,23 @@ document.addEventListener("DOMContentLoaded", function () {
         (flower) => flower.id === soldProduct.productId
       );
 
-      if (product && product.stock > 0 && soldProduct.state === 1) {
-      
+      if (product && product.stock > 0) {
         product.paidno = (product.paidno || 0) + soldProduct.quantity;
         product.stock -= soldProduct.quantity;
         ClearInputs();
         showSweetAlert();
         //
-        let chartOrderData = localStorage.getItem("ChartOrder");
+        // chartOrderData = localStorage.getItem("ChartOrder");
+        let currentuserorders = getuserorder();
+        removeCartOrdersAfterChecked(currentuserorders);
+
         if (chartOrderData) {
-          let parsedData = JSON.parse(chartOrderData);
+          let parsedData = chartOrderData;
+          parsedData.forEach((orderI) => orderI.id);
 
           let clonedData = JSON.parse(JSON.stringify(parsedData));
-          localStorage.setItem("order", JSON.stringify(clonedData));
 
-          localStorage.setItem("CartOrders", JSON.stringify([]));
+          localStorage.setItem("ChartOrder", JSON.stringify([]));
         }
       } else if (product && soldProduct.state == 0) {
         // alert("Sorry seller must approve first");

@@ -12,10 +12,15 @@ function validateCardNumber(cardNumber) {
 function validateExpiryDate(month, year) {
   const currentYear = new Date().getFullYear().toString().slice(2);
   const currentMonth = new Date().getMonth() + 1;
+  const maxMonth = 12;
+
   return (
     /^\d{2}$/.test(month) &&
     /^\d{2}$/.test(year) &&
-    (year > currentYear || (year == currentYear && month >= currentMonth))
+    month > 0 &&
+    month <= maxMonth &&
+    (year > currentYear || (year == currentYear && month >= currentMonth)) &&
+    month <= maxMonth // Check if month is less than or equal to 12
   );
 }
 
