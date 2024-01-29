@@ -1,4 +1,23 @@
 window.addEventListener("load", function () {
+  let curUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  if(!curUser || curUser.role != 'admin') {
+    let error = document.createElement("div");
+    let head404 = document.createElement("h1");
+    let miniHead404 = document.createElement("h3");
+    let paragraph404 = document.createElement("p");
+    paragraph404.textContent = "The resource requested could not be found on this server";
+    head404.textContent = "404";
+    miniHead404.innerText = "Not Found";
+    error.classList.add("page-not-found");
+    error.appendChild(head404);
+    error.appendChild(miniHead404);
+    error.appendChild(paragraph404);
+    document.body.innerHTML = "";
+    document.body.style.backgroundColor = "#FFF";
+    document.body.appendChild(error);
+    error.appendChild();
+    return;
+  }
   let page  = "";
   var lastsorted = ""
   var content = document.getElementById("content");
@@ -7,7 +26,7 @@ window.addEventListener("load", function () {
   let flowersData = JSON.parse(localStorage.getItem("flowersData")) || [];
   let sellersData = JSON.parse(localStorage.getItem("sellerData")) || [];
   let usersData = JSON.parse(localStorage.getItem("userData")) || [];
-  let ordersData = JSON.parse(localStorage.getItem("ordersData")) || [];
+  let ordersData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener('click', (e)=>{
@@ -49,9 +68,10 @@ window.addEventListener("load", function () {
         arrangeData(items);
         document.getElementById("search").addEventListener("keyup", function (e) {
           let newItems = items.filter(function (a) {
+            
             switch (page){
               case "products":
-                items = flowersData;
+                // items = flowersData;
                 return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
                   a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
                   a['category'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
@@ -60,9 +80,10 @@ window.addEventListener("load", function () {
                   a['stock'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
                 );
       
-              case "sellers":
+              case "users":
+                console.log(a)
                 return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                  a['username'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                  a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
                   a['email'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
                   a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
                 );
