@@ -1,4 +1,4 @@
-import * as order from './order.js';
+import * as order from "./order.js";
 export function addProduct(product, rowDiv) {
   //debugger;
   let card = document.createElement("div");
