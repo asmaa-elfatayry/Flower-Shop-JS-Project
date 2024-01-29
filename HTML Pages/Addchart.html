@@ -1,246 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
-    <title>Floura | Add to Chart</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
-    />
-    <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
-    <link rel="stylesheet" href="../stylesheets/Addchart.css" />
-    <link rel="stylesheet" href="../stylesheets/payment.css" />
-    <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
-  </head>
 
-  <body>
-    <div class="overlay"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon" />
+  <title>Floura | Add to Chart</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+  <link rel="stylesheet" href="../stylesheets/Addchart.css" />
+  <link rel="stylesheet" href="../stylesheets/payment.css" />
+  <link rel="stylesheet" href="../stylesheets/navbarAndFooter.css">
+  <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
+</head>
+
+<body>
+  <div class="overlay"></div>
+  <div class="container-fluid">
+    <section class="homeSection_1 sticky-top">
+      <div class="logo"><img src="../images/logo.png"></div>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Flowers </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="wishlist.html">wishlist </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us </a>
+            </li>
+  
+            <!-- amira update -->
+            <ul class="nav-icons">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                </a>
+                <div class="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item bg-transparent" href="signup.html">Sign up</a>
+                  <a href="login.html" class="dropdown-item bg-transparent">Login</a>
+                </div>
+                <li class="login"></li>
+              </li>
+              <li class="nav-item position-relative">
+                <a href="Addchart.html" class="shopping-cart">
+                  <i class="fa fa-shopping-cart"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    style="display: none;">0</span>
+                </a>
+              </li>
+  
+              <ul class="ifUserLogged">
+               
+                <li class="nav-item">
+                  <a href="user.html" class="profile"><i class="fa-solid fa-house-chimney-user"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a href="login.html" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                </li>
+              </ul>
+            </ul>
+            <!-- end li icons -->
+          </ul>
+        </div>
+      </nav>
+    </section>
+  </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col text-center">
           <h1>Your Chart</h1>
-          <hr />
+          <hr>
         </div>
       </div>
-      <div class="row" style="width: 98vw">
+      <div class="row " style="width:98vw">
         <div class="wrap">
-          <div class="truck-img">
-            <img src="../images/delivery-truck.png " alt="truck" />
-          </div>
-          <div class="box-img">
-            <img src="../images/box.png" alt="flower" />
-          </div>
-          <div class="box-img box-img2">
-            <img src="../images/box.png" alt="flower" />
-          </div>
+          <div class="truck-img"><img src="../images/delivery-truck.png " alt="truck"></div>
+          <div class="box-img"><img src="../images/box.png" alt="flower"></div>
+          <div class="box-img box-img2"><img src="../images/box.png" alt="flower"></div>
         </div>
+
       </div>
 
-
-        <div class="row d-flex justify-content-around">
-            <div class="table-responsive col-md-7 border displayTable">
-                <table id="orderTable" class="table text-center table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Order Number</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total Price</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="orderlist"></tbody>
-                </table>
-            </div>
-        
-
+      <div class="row d-flex justify-content-around">
+        <div class="table-responsive col-md-7 border displayTable">
+          <table id="orderTable" class="table text-center table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Order Number</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="orderlist"></tbody>
+          </table>
         </div>
-        <div class="col-md-3 border bill">
+        <div class="col-md-3 border bill ">
           <h1>Bill</h1>
-          <hr />
+          <hr>
           <p id="quantity"></p>
           <p id="price"></p>
-          <hr />
+          <hr>
           <p id="total"></p>
           <button class="btn btn-secondary checkout">check out</button>
-          <!-- payment section
-           
-            data-bs-target="#paymentModal"     aria-hidden="true" -->
+        </div>
+      </div>
+    </div>
+
+    <!-- payment section -->
+    <!-- Modal -->
+    <div id="paymentModal" data-bs-toggle="modal" aria-labelledby="paymentModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Chosse Payment
+            </h5>
 
 
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- asmaa payment -->
 
-          <!-- Modal -->
-          <div
-            id="paymentModal"
-            data-bs-toggle="modal"
-            aria-labelledby="paymentModal"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Chosse Payment
-                  </h5>
+            <div class="container text-center pt-5">
+              <ul class="row payment-types">
+                <li class="top-card visa">
+                  <img src="../images/Visa.png" alt="visa" />
+                </li>
+                <li class="top-card paypal">
+                  <img src="../images/paypall.png" alt="paypal" />
+                </li>
+              </ul>
+              <!-- end options -->
+              <ul>
+                <li id="visa">
+                  <div class="form-card">
+                    <form class="form-floating" id="visaForm">
+                      <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="visaCardNumber"
+                          placeholder="1234 1234 1234 1234" />
+                        <label for="visaCardNumber">Card Number</label>
+                        <span class="error" id="visaCardNumberError"></span>
+                      </div>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" id="visaCardHolder" placeholder="Asmaa Omar" />
+                        <label for="visaCardHolder">Card Holder (name)</label>
+                        <span class="error" id="visaCardHolderError"></span>
+                      </div>
 
+                      <p class="expire">Expire:</p>
+                      <div class="expire-cvv">
+                        <div class="field expire-date">
+                          <div class="form-floating">
+                            <input type="tel" class="form-control" id="visaExpiresMonth" placeholder="MM"
+                              allowed-pattern="[0-9]" maxlength="2" />
+                            <label for="visaExpiresMonth">MM</label>
+                            <span class="error" id="visaExpiresMonthError"></span>
+                          </div>
 
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  <!-- asmaa payment -->
-
-                  <div class="container text-center pt-5">
-                    <ul class="row payment-types">
-                      <li class="top-card visa">
-                        <img src="../images/Visa.png" alt="visa" />
-                      </li>
-                      <li class="top-card paypal">
-                        <img src="../images/paypall.png" alt="paypal" />
-                      </li>
-                    </ul>
-                    <!-- end options -->
-                    <ul>
-                      <li id="visa">
-                        <div class="form-card">
-                          <form class="form-floating" id="visaForm">
-                            <div class="form-floating mb-3">
-                              <input
-                                type="number"
-                                class="form-control"
-                                id="visaCardNumber"
-                                placeholder="1234 1234 1234 1234"
-                              />
-                              <label for="visaCardNumber">Card Number</label>
-                              <span
-                                class="error"
-                                id="visaCardNumberError"
-                              ></span>
-                            </div>
-                            <div class="form-floating">
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="visaCardHolder"
-                                placeholder="Asmaa Omar"
-                              />
-                              <label for="visaCardHolder"
-                                >Card Holder (name)</label
-                              >
-                              <span
-                                class="error"
-                                id="visaCardHolderError"
-                              ></span>
-                            </div>
-
-                            <p class="expire">Expire:</p>
-                            <div class="expire-cvv">
-                              <div class="field expire-date">
-                                <div class="form-floating">
-                                  <input
-                                    type="tel"
-                                    class="form-control"
-                                    id="visaExpiresMonth"
-                                    placeholder="MM"
-                                    allowed-pattern="[0-9]"
-                                    maxlength="2"
-                                  />
-                                  <label for="visaExpiresMonth">MM</label>
-                                  <span
-                                    class="error"
-                                    id="visaExpiresMonthError"
-                                  ></span>
-                                </div>
-
-                                <div class="form-floating">
-                                  <input
-                                    type="tel"
-                                    class="form-control"
-                                    id="visaExpiresYear"
-                                    placeholder="YY"
-                                    allowed-pattern="[0-9]"
-                                    maxlength="2"
-                                  />
-                                  <label for="visaExpiresYear">YY</label>
-                                  <span
-                                    class="error"
-                                    id="visaExpiresYearError"
-                                  ></span>
-                                </div>
-                              </div>
-
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  id="visaCVV"
-                                  placeholder="123"
-                                />
-                                <label for="visaCVV">CVV</label>
-                                <span class="error" id="visaCVVError"></span>
-                              </div>
-                            </div>
-
-                            <p class="btn btn-outline-success confirm">
-                              Confirm
-                            </p>
-                          </form>
+                          <div class="form-floating">
+                            <input type="tel" class="form-control" id="visaExpiresYear" placeholder="YY"
+                              allowed-pattern="[0-9]" maxlength="2" />
+                            <label for="visaExpiresYear">YY</label>
+                            <span class="error" id="visaExpiresYearError"></span>
+                          </div>
                         </div>
-                        <!-- end visa -->
-                      </li>
-                      <li id="paypal">
-                        <div class="form-card">
-                          <form class="form-floating" id="paypalForm">
-                            <div class="form-floating mb-3">
-                              <input
-                                type="email"
-                                class="form-control"
-                                id="paypalEmail"
-                                placeholder="name@example.com"
-                              />
-                              <label for="paypalEmail">Email address</label>
-                              <span class="error" id="paypalEmailError"></span>
-                            </div>
-                            <div class="form-floating">
-                              <input
-                                type="password"
-                                class="form-control"
-                                id="paypalPassword"
-                                placeholder="Password"
-                              />
-                              <label for="paypalPassword">Password</label>
-                              <span
-                                class="error"
-                                id="paypalPasswordError"
-                              ></span>
-                            </div>
-                            <p class="btn btn-outline-success confirm">
-                              Confirm
-                            </p>
-                          </form>
+
+                        <div class="form-floating mb-3">
+                          <input type="number" class="form-control" id="visaCVV" placeholder="123" />
+                          <label for="visaCVV">CVV</label>
+                          <span class="error" id="visaCVVError"></span>
                         </div>
-                      </li>
-                    </ul>
+                      </div>
+
+                      <p class="btn btn-outline-success confirm">
+                        Confirm
+                      </p>
+                    </form>
                   </div>
-                  <!-- asmaa  -->
-                </div>
-              </div>
+                  <!-- end visa -->
+                </li>
+                <li id="paypal">
+                  <div class="form-card">
+                    <form class="form-floating" id="paypalForm">
+                      <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="paypalEmail" placeholder="name@example.com" />
+                        <label for="paypalEmail">Email address</label>
+                        <span class="error" id="paypalEmailError"></span>
+                      </div>
+                      <div class="form-floating">
+                        <input type="password" class="form-control" id="paypalPassword" placeholder="Password" />
+                        <label for="paypalPassword">Password</label>
+                        <span class="error" id="paypalPasswordError"></span>
+                      </div>
+                      <p class="btn btn-outline-success confirm">
+                        Confirm
+                      </p>
+                    </form>
+                  </div>
+                </li>
+              </ul>
             </div>
+            <!-- asmaa  -->
           </div>
         </div>
       </div>
     </div>
   </body>
+  <script src="../JS/JQuery-3.3.1.min.js"></script>
   <script src="../JS/bootstrap.bundle.min.js"></script>
+  <script src="../JS/popper.js"></script>
+  <script src="../JS/bootstrap.min.js"></script>
+ 
+  <script src="../JS/index.js" type="module"></script>
   <script src="../JS/AddCart.js" type="module"></script>
   <script src="../JS/payment.js" type="module"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 </html>

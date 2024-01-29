@@ -90,13 +90,13 @@ hr {
 
 /* line 85, ../sass/Addchart.scss */
 .bill {
-  max-height: 70vh;
+  max-height: 40vh;
   min-height: 60vh;
 }
 
 /* line 90, ../sass/Addchart.scss */
 .displayTable {
-  max-height: 80vh;
+  max-height: 60vh;
   overflow-y: scroll;
 }
 
