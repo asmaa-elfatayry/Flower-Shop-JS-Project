@@ -73,11 +73,11 @@ window.addEventListener('load', function () {
         let text = document.getElementById('commentTextarea').value.trim();
         let username = JSON.parse(sessionStorage.getItem("loggedInUser"));
         if (!username) {
-            alert('please login first');
+            Swal.fire('please login first');
             return;
         }
         if (!text) {
-            alert('please write something first');
+            Swal.fire('please write something first');
             return;
         }
         let curDiv = document.getElementById('comments');

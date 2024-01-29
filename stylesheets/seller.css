@@ -281,3 +281,20 @@ input[type=file] {
     width: 90%;
   }
 }
+
+.page-not-found{
+  margin: 150px auto;
+  text-align: center;
+}
+.page-not-found h1{
+  font-size: 70px;
+  font-weight: 900;
+}
+.page-not-found h3{
+  font-size: 60px;
+  font-weight: 900;
+}
+.page-not-found p{
+  font-size: 20px;
+  font-weight: 600;
+}

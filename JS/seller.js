@@ -6,6 +6,25 @@ import {
   sellerProducts,
 } from "./SellerDashboard.js";
 window.addEventListener("load", function () {
+  let curUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  if(!curUser || curUser.role != 'seller') {
+    let error = document.createElement("div");
+    let head404 = document.createElement("h1");
+    let miniHead404 = document.createElement("h3");
+    let paragraph404 = document.createElement("p");
+    paragraph404.textContent = "The resource requested could not be found on this server";
+    head404.textContent = "404";
+    miniHead404.innerText = "Not Found";
+    error.classList.add("page-not-found");
+    error.appendChild(head404);
+    error.appendChild(miniHead404);
+    error.appendChild(paragraph404);
+    document.body.innerHTML = "";
+    document.body.style.backgroundColor = "#FFF";
+    document.body.appendChild(error);
+    error.appendChild();
+    return;
+  }
   // displayProducts(sellerProducts);
   ShowCharts();
   //start handling toggle left controls
