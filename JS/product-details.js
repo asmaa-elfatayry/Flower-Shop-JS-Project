@@ -1,4 +1,5 @@
 import { loggeduser } from "../JS/order.js";
+import { addchart } from "../JS/card.js";
 
 window.addEventListener('load', function () {
     let product = JSON.parse(window.localStorage.getItem('productToShow'));
@@ -31,18 +32,18 @@ window.addEventListener('load', function () {
     this.document.getElementById('minus-btn').addEventListener('click', function () {
         let newVal = validateAmount(Number(document.getElementById('items-count').value) - 1);
         document.getElementById('items-count').value = newVal;
-        document.getElementById('items-price').innerText = Number(newVal * product.price).toFixed(2);
+        document.getElementById('items-price').innerText = `${Number(newVal * product.price).toFixed(2)} EGP`;
     })
 
     this.document.getElementById('plus-btn').addEventListener('click', function () {
         let newVal = validateAmount(Number(document.getElementById('items-count').value) + 1);
         document.getElementById('items-count').value = newVal;
-        document.getElementById('items-price').innerText = Number(newVal * product.price).toFixed(2);
+        document.getElementById('items-price').innerText = `${Number(newVal * product.price).toFixed(2)} EGP`;
     })
 
     this.document.getElementById('items-count').addEventListener('change', function (e) {
         e.target.value = validateAmount(e.target.value);
-        document.getElementById('items-price').innerText = Number(Number(e.target.value) * product.price).toFixed(2);
+        document.getElementById('items-price').innerText = `${Number(Number(e.target.value) * product.price).toFixed(2)} EGP` ;
     })
 
     function addReview(curDiv, review_data) {
@@ -50,10 +51,11 @@ window.addEventListener('load', function () {
         curDiv.appendChild(comment_div);
         comment_div.classList.add('col-10', 'mb-3', 'comment');
         let review = document.createElement('q');
-        review.classList.add("text-break");
+        review.classList.add("text-break","mx-3","text-success");
         comment_div.appendChild(review);
         let name = document.createElement('i');
         comment_div.appendChild(name);
+        name.classList.add("text-muted");
         // console.log();
         review.innerText = review_data.review;
         name.innerText = review_data.name;
@@ -95,5 +97,9 @@ window.addEventListener('load', function () {
             }
         }
         localStorage.setItem("flowersData", JSON.stringify(flowers));
+    })
+
+    document.getElementById('addCartBTN').addEventListener('click',function() {
+        addchart(product.id);
     })
 })

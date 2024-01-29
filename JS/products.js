@@ -107,6 +107,13 @@ window.addEventListener('DOMContentLoaded', function () {
         else if (page < 4) {
             for (let i = 0; i < pagingBTNs.length; i++) {
                 if (i < pages) {
+                    if (i == pagingBTNs.length - 1) {
+                        pagingBTNs[i].children[0].innerText = pages;
+                        pagingBTNs[i].classList.remove('d-none');
+                        if (page == i + 1)
+                            pagingBTNs[i].classList.add('active');
+                        break;
+                    }
                     pagingBTNs[i].children[0].innerText = i + 1;
                     pagingBTNs[i].classList.remove('d-none');
                     if (page == i + 1)

@@ -105,7 +105,7 @@ function wish(event) {
 
 
 
-function addchart(id) {
+export function addchart(id) {
   //debugger;
   let CurrentUserData = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
   let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
