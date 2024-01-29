@@ -4,13 +4,15 @@
     border: none;
     padding: 20px 0px;
 
-}
 
+}
 .card-details {
     height: 420px;
     border-radius: 5px;
     margin: 10px;
     position: relative;
+    text-align: center;
+    background-color: hsl(341, 100%, 96%);
     transition: all 1s;
 }
 
@@ -63,10 +65,14 @@
     margin-bottom: 40px;
     margin-top: 5px;
     transition: all 2s;
+    font-size:18px;
 }
 
 .card-details button:hover {
-    opacity: .5;
-    /* background-color: white;
-    color: #E72463; */
+    background-color: white;
+    color: #E72463;
+    border: 1px solid #F05990;
+}
+#productContainer >.row > div{
+    background-color: #f5f7fb;
 }

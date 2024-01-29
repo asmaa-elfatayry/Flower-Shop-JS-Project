@@ -120,7 +120,7 @@ window.addEventListener('load', function () {
     }
 
     function validQuantity(inputElement, productId, quantity) {
-        debugger;
+        //debugger;
         let enteredQuantity = parseInt(inputElement.value);
         let availableStock = order.getStockQuantityById(productId);
         var totalPriceCell = inputElement.parentElement.nextElementSibling; 
@@ -176,12 +176,23 @@ window.addEventListener('load', function () {
     this.document
         .querySelector(".checkout")
         .addEventListener("click", function () {
+
+            if(sessionStorage.getItem("loggedInUser")===null){
+          
+                Swal.fire("Plz Login First!");
+                let currentOrder=JSON.parse( sessionStorage.getItem("guestRequestorder"));
+                console.log(currentOrder);
+                window.location.href="../HTML Pages/login.html";
+              }else{
             if (ExistChartOrder.length > 0) {
                 document.querySelector("#paymentModal").style.display = "block";
                 document.querySelector(".overlay").style.display = "block";
             } else {
                 Swal.fire("No orders available!");
+            
+              
             }
+        }
         });
 
     this.document
