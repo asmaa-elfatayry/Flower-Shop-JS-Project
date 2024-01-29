@@ -1,5 +1,6 @@
 import * as order from "./order.js";
 export function addProduct(product, rowDiv) {
+  //debugger;
   let card = document.createElement("div");
   card.classList.add("card", "col-12", "col-md-5", "col-lg-3");
   rowDiv.appendChild(card);
@@ -13,73 +14,16 @@ export function addProduct(product, rowDiv) {
   iconsDiv.id = "icons";
   cardDetails.appendChild(iconsDiv);
 
-  // const heartIconLink = document.createElement("a");
-  // heartIconLink.href = "favourites.html";
-  // heartIconLink.title = "Wishlist";
-
   const heartIcon = document.createElement("i");
   heartIcon.classList.add("fa-solid", "fa-heart", "for_wish");
 
-  // console.log(heartIcon);
-
   heartIcon.id = product.id;
-  // productContainer = document.querySelector("#productContainer");
-  iconsDiv.addEventListener("click", function (e) {
-    let currentUser = [];
-    // if the target element is heart
-    // if (e.target.parentElement.classList.contains("for_wish")) {
-    // check if any user login now
-    if (sessionStorage.getItem("loggedInUser") !== null) {
-      //get data of current user
-      currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
-      // add array favourate to this user
-      if (!currentUser.favorite) {
-        currentUser.favorite = [];
-      }
-
-      // update data after changes
-      sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
-    } else {
-      Swal.fire("Sorry you must login first!");
-    }
-    let flowers = JSON.parse(window.localStorage.getItem("flowersData"));
-    //    get heart id -> product id clicked
-    let heartId = parseInt(e.target.parentElement.id); // svg is parentelement ,  target : icon <i></i>  need the id of  <svg id="i"><i ></i></svg>,
-    //get product with the same id of heart
-    let selflower = flowers.find((flower) => flower.id == heartId);
-    // console.log(selflower);
-    let favIcon = document.getElementById(e.target.parentElement.id);
-    // console.log(favIcon);
-    // to check the selected flower added before to  the favourites local storage or not.
-    if (!currentUser.favorite.some((flower) => flower.id === heartId)) {
-      // Add the flower to the favorites array
-      currentUser.favorite.push(selflower);
-      console.log(currentUser.favorite);
-      favIcon.classList.add("active");
-
-      // Save the updated favorites to sessionStorage
-
-      // Print the updated state for debugging
-      // console.log(currentUser);
-    } else {
-      currentUser.favorite.pop(selflower);
-      console.log(currentUser.favorite);
-      favIcon.classList.remove("active");
-    }
-    sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
-
-    //   window.localStorage.setItem("favourites", JSON.stringify(fav));
-    // }
-  });
-  // console.log(JSON.parse(sessionStorage.getItem("loggedInUser"))['favorite']);
-  if (sessionStorage.getItem("loggedInUser")) {
-    let favourites =
-      JSON.parse(sessionStorage.getItem("loggedInUser"))["favorite"] || [];
+  if (JSON.parse(sessionStorage.getItem("loggedInUser"))) {
+    let favourites = JSON.parse(sessionStorage.getItem("loggedInUser"))["favorite"] || [];
     for (let i = 0; i < favourites.length; i++) {
       if (product.id == favourites[i]["id"]) heartIcon.classList.add("active");
     }
   }
-  // heartIcon.classList.add("active");
   heartIcon.style.fontSize = "2rem";
   iconsDiv.appendChild(heartIcon);
 
@@ -106,55 +50,104 @@ export function addProduct(product, rowDiv) {
   addToCartButton.setAttribute("id", `${product.id}`);
   addToCartButton.textContent = "Add to Cart";
   cardBody.appendChild(addToCartButton);
-  card.addEventListener("click", function (e) {
-    if (e.target.classList.contains("for_wish") == false) {
-      // e.stopPropagation()
+  card.addEventListener('click', function (event) {
+    // debugger;
+    if (event.target.classList.contains("cart")) {
+      addchart(event.target.id);
+    }
+    else if (event.target.parentElement.classList.contains("for_wish")) {
+
+      wish(event);
+    }
+    
+    else if (event.target.classList.contains("for_wish") == false ) {
+   
       localStorage.setItem("productToShow", JSON.stringify(product));
       window.open("../HTML pages/product_details.html", "_self");
     }
-  });
+  })
 }
-export function wish(e) {
-  // console.log("ss");
-  let currentUser;
-  // console.log(e.target);
-  // if the target element is heart
-  if (e.target.classList.contains("for_wish")) {
-    // check if any user login now
+
+
+function wish(event) {
+    let currentUser = [];
     if (sessionStorage.getItem("loggedInUser") !== null) {
-      //get data of current user
       currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
-      // add array favourate to this user
       if (!currentUser.favorite) {
         currentUser.favorite = [];
       }
-
-      // update data after changes
       sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
+    } else {
+      Swal.fire("Sorry you must login first!");
     }
-
-    //    get heart id -> product id clicked
-    heartId = parseInt(e.target.parentElement.id); // svg is parentelement ,  target : icon <i></i>  need the id of  <svg id="i"><i ></i></svg>,
-    //get product with the same id of heart
-    selflower = flowers.find((flower) => flower.id == heartId);
-    console.log(selflower);
-    // to check the selected flower added before to  the favourites local storage or not , added  only one time
+    let flowers = JSON.parse(window.localStorage.getItem("flowersData"));
+    let heartId = parseInt(event.target.parentElement.id);
+    let selflower = flowers.find((flower) => flower.id == heartId);
+    let favIcon = document.getElementById(event.target.parentElement.id);
     if (!currentUser.favorite.some((flower) => flower.id === heartId)) {
-      // Add the flower to the favorites array
       currentUser.favorite.push(selflower);
-
-      // Save the updated favorites to sessionStorage
-      sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
-
-      // Print the updated state for debugging
-      // console.log(currentUser);
+      favIcon.classList.add("active");
+    } else {
+      currentUser.favorite.pop(selflower);
+      console.log(currentUser.favorite);
+      favIcon.classList.remove("active");
     }
-
-    //   window.localStorage.setItem("favourites", JSON.stringify(fav));
-    favIcon = document.getElementById(e.target.parentElement.id);
-
-    favIcon.style.color = "#E72463";
-    favIcon.parentElement.style.opacity = "1";
-  }
-  // }
+    sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
 }
+
+
+
+
+
+
+
+
+
+
+
+function addchart(id) {
+  //debugger;
+  let CurrentUserData = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
+  let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+  let TotalOrdersg = JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+  let flowers = JSON.parse(localStorage.getItem('flowersData'));
+  let p_id = parseInt(id);
+  if (!order.order_is_exists(p_id)) {
+    let found_prod = flowers.find((flower) => flower.id === p_id);
+    let quantity = 1;
+    let orderid;
+    let price = found_prod.price;
+    let sellerid = found_prod.seller.id;
+    let date = new Date();
+    let state = 0;
+    let prodId = found_prod.id;
+    let user;
+    if (CurrentUserData.length == 0) {
+      user = -1;
+      orderid = TotalOrdersg.length + 1;
+
+    }
+    else {
+      user = CurrentUserData.id;
+      orderid = TotalOrders.length + 1;
+    }
+    let new_order = new order.Order(date, prodId, sellerid, quantity, price, orderid, state, user);
+    if (CurrentUserData.length == 0) {
+      TotalOrdersg.push(new_order.getOrderData());
+      order.updateChartData(TotalOrdersg);
+
+    }
+    else {
+      TotalOrders.push(new_order.getOrderData());
+      order.updateChartData(TotalOrders);
+
+    }
+    order.updateBadge();
+
+  } else {
+    order.updateproductById(p_id);
+    order.updateBadge();
+  }
+}
+
+
