@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our products</title>
   <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
-  <!-- <link rel="stylesheet" href="../stylesheets/products_and_product_details.css" /> -->
   <link rel="stylesheet" href="../stylesheets/font-awesome.css" />
 <link rel="stylesheet" href="../stylesheets/navbarAndFooter.css">
   <link rel="stylesheet" href="../stylesheets/card.css">
@@ -17,87 +16,69 @@
 
 <body>
 <!-- start navbar -->
-<div class="container-fluid ">
+<div class="container-fluid">
   <section class="homeSection_1 sticky-top">
     <div class="logo"><img src="../images/logo.png"></div>
-    <nav class="navbar navbar-expand-lg navbar-light ">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="products.html">Flowers </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="about.html">About Us </i></a>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link"  href="wishlist.html">wishlist </a>
+          <li class="nav-item">
+            <a class="nav-link" href="wishlist.html">wishlist </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact Us </a>
           </li>
 
           <!-- amira update -->
           <ul class="nav-icons">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user"></i>
-                </a>
-                <div class="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item bg-transparent" href="signup.html">Sign up</a>
-                    <a href="login.html" class="dropdown-item bg-transparent">Login</a>
-                </div>
-                <li class="login"></li>
-              </li>
-           
-          <ul class="ifUserLogged">
-            <li class="nav-item ">
-              <a href ="Addchart.html" class="shopping-cart"><i class="fa fa-shopping-cart"></i></a>
-           </li>
-          <li class="nav-item ">
-            <a href ="user.html" class="profile"><i class="fa-solid fa-house-chimney-user"></i></a>
-          </li>
-              <li class="nav-item ">
-                <a href ="login.html" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-             </li>
-          </ul>
-</ul>
-         <!-- end li icons -->
-        </ul>
-        <!-- end navar nav -->
-      </div>
-      <!-- end collapse -->
-    </nav>
-    <!-- <ul class="user ">
-     <li><i class="fa fa-shopping-cart"></i></li> 
-     <li><i class="fa-solid fa-user mr-3"></i></li> 
-    </ul> -->
-  </section>
-  </div>
-<!-- end navbar -->
-  <div class="row">
-    <div class="col-8 text-center p-5">
-      <a href="Addchart.html" class="position-relative">
-        <i
-          class="fa fa-shopping-cart position-absolute top-0 start-100"
-          style="color: #2ecc71; font-size: 3rem"
-        ></i>
-        <span
-          visiblity="hidden"
-          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-          style="margin-left: 0.5rem; display: none"
-        >
-        </span>
-      </a>
-    </div>
-  </div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user"></i>
+              </a>
+              <div class="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item bg-transparent" href="signup.html">Sign up</a>
+                <a href="login.html" class="dropdown-item bg-transparent">Login</a>
+              </div>
+              <li class="login"></li>
+            </li>
+            <li class="nav-item position-relative">
+              <a href="Addchart.html" class="shopping-cart">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  style="display: none;">0</span>
+              </a>
+            </li>
 
+            <ul class="ifUserLogged">
+            
+              <li class="nav-item">
+                <a href="user.html" class="profile"><i class="fa-solid fa-house-chimney-user"></i></a>
+              </li>
+              <li class="nav-item">
+                <a href="login.html" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+              </li>
+            </ul>
+          </ul>
+          <!-- end li icons -->
+        </ul>
+      </div>
+    </nav>
+  </section>
+</div>
   <div class="container col-11 mt-5">
     <div class="col-12 row gap-5" id="filter-Div">
       <div class="col-3">
@@ -132,23 +113,6 @@
       </div>
     </div>
     <div class="col-12 d-flex justify-content-center">
-      <!-- <nav>
-        <ul class="pagination">
-          <li class="page-item d-none" id="paging-prev">
-            <span class="page-link">Previous</span>
-          </li>
-          <li class="page-item active paging-BTN"><a class="page-link">1</a></li>
-          <li class="page-item d-none dots-1"><a class="page-link">...</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">2</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">3</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">4</a></li>
-          <li class="page-item d-none dots-2"><a class="page-link">...</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">3</a></li>
-          <li class="page-item" id="paging-next">
-            <span class="page-link">Next</span>
-          </li>
-        </ul>
-      </nav> -->
     </div>
   </div>
 
@@ -257,12 +221,12 @@
       </div>
   </footer>
   <script type="module" src="../JS/products.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script src="../JS/JQuery-3.3.1.min.js"></script>
   <script src="../JS/popper.js"></script>
   <script src="../JS/bootstrap.min.js"></script>
-  <script src="../JS/index.js"></script>
+  <script type="module" src="../JS/index.js"></script>
   <script src="../JS/home.js" type="module"></script>
 </body>
 

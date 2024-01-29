@@ -1,15 +1,19 @@
+import * as order from'./order.js';
 window.addEventListener("load", function () {
+
   function loadData() {
     let FlowersDate;
     let SellerData;
     let UserData;
     let RequestSeller;
     let ChartOrder;
+    let favourites;
     sessionStorage.setItem("guestRequestorder", JSON.stringify([]));
 
     fetch("../Data.json")
       .then((response) => response.json())
       .then((data) => {
+      
         FlowersDate = data.flowers;
         SellerData = data.sellers;
         UserData = data.users;
@@ -40,9 +44,7 @@ window.addEventListener("load", function () {
     loadData();
   }
 
-  // Get user information from sessionStorage
   let loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
-  // let nav = document.getElementsByClassName("user")[0];
   let navContainer = this.document.querySelector(".nav-item.dropdown");
 
   if (navContainer) {
@@ -56,8 +58,6 @@ window.addEventListener("load", function () {
     if (CheckLogedUser.length != 0 && CheckLogedUser.role == "user") {
       this.document.querySelector(".nav-item.dropdown").style.display = "none";
       this.document.querySelector(".ifUserLogged").style.display = "flex";
-      // navContainer.innerHTML = `   `;
-
       let logoutLink = document.querySelector(".logout");
       if (logoutLink) {
         logoutLink.addEventListener("click", function () {
@@ -70,4 +70,6 @@ window.addEventListener("load", function () {
       this.document.querySelector(".ifUserLogged").style.display = "none";
     }
   }
+  order.updateBadge();
+
 });

@@ -40,30 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // function ValidEmail(email) {
-  //   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  // }
-
-  // function ValidPassword(password) {
-  //   return password.length >= 6;
-  // }
-  // function validateCardNumber(cardNumber) {
-  //   return /^\d{16}$/.test(cardNumber);
-  // }
-
-  // function validateExpiryDate(month, year) {
-  //   const currentYear = new Date().getFullYear().toString().slice(2);
-  //   const currentMonth = new Date().getMonth() + 1;
-  //   return (
-  //     /^\d{2}$/.test(month) &&
-  //     /^\d{2}$/.test(year) &&
-  //     (year > currentYear || (year == currentYear && month >= currentMonth))
-  //   );
-  // }
-
-  // function validateCVV(cvv) {
-  //   return /^\d{3,4}$/.test(cvv);
-  // }
+ 
   function resetErrorMessages() {
     let errorElements = document.querySelectorAll(".error");
     errorElements.forEach((element) => {
@@ -148,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       if (product && product.stock > 0 && soldProduct.state === 1) {
+      
         product.paidno = (product.paidno || 0) + soldProduct.quantity;
         product.stock -= soldProduct.quantity;
         ClearInputs();
@@ -158,10 +136,9 @@ document.addEventListener("DOMContentLoaded", function () {
           let parsedData = JSON.parse(chartOrderData);
 
           let clonedData = JSON.parse(JSON.stringify(parsedData));
-
           localStorage.setItem("order", JSON.stringify(clonedData));
 
-          localStorage.setItem("ChartOrder", "");
+          localStorage.setItem("CartOrders", JSON.stringify([]));
         }
       } else if (product && soldProduct.state == 0) {
         // alert("Sorry seller must approve first");
