@@ -32,10 +32,10 @@ window.addEventListener("load", function () {
     } else if (seller) {
       logged_user(seller, "seller");
 
-      window.location.href = "../HTML Pages/seller.html";
+      window.location.href = "seller.html";
     } else if (user && user.role === "admin") {
       logged_user(user, "admin");
-      window.location.href = "../HTML Pages/admin.html";
+      window.location.href = "admin.html";
     } else {
       document.getElementsByTagName("input")[0].classList.add("is-invalid");
       document.getElementsByTagName("input")[0].focus();
@@ -53,7 +53,7 @@ window.addEventListener("load", function () {
       name: user.name,
       email: role === "seller" ? user.contact : user.email,
       role: role,
-      favourites:user.favourites
+      favourites: user.favourites,
     };
     sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
   }
