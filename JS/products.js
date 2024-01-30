@@ -1,6 +1,6 @@
 import * as order from './order.js';
 import { addProduct } from "../JS/card.js"
-let numberOfProfProducts = 4;
+let numberOfProfProducts = 12;
 window.addEventListener('DOMContentLoaded', function () {
     order.updateBadge();
 

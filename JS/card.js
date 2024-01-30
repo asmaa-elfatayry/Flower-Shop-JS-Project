@@ -22,7 +22,9 @@ export function addProduct(product, rowDiv) {
   if (currentUser) {
     let favourites = currentUser.favourites
     for (let i = 0; i < favourites.length; i++) {
-      if (product.id == favourites[i]) heartIcon.classList.add("active");
+      if (product.id == favourites[i]) {
+        heartIcon.classList.add("active");
+      }
     }
   }
   heartIcon.style.fontSize = "2rem";
@@ -94,6 +96,8 @@ function wish(ID) {
           users[i].favourites.push(heartId);
           favIcon.classList.add("active");
         }
+        currentUser.favourites = users[i].favourites;
+        sessionStorage.setItem("loggedInUser",JSON.stringify(currentUser));
         localStorage.setItem("userData", JSON.stringify(users));
         return;
       }
