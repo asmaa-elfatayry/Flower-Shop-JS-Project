@@ -49,7 +49,7 @@ window.addEventListener("load", function () {
     if (ExistChartOrder.length === 0) {
       let messageRow = document.createElement("tr");
       let messageCell = document.createElement("td");
-      messageCell.colSpan = 5;
+      messageCell.colSpan = 6;
 
       let icon = document.createElement("i");
       icon.classList.add("fa", "fa-ban", "mr-2");
@@ -126,7 +126,7 @@ window.addEventListener("load", function () {
     }
   }
 
-  function validQuantity(inputElement, productId, price,quantity) {
+  function validQuantity(inputElement, productId, price, quantity) {
     let enteredQuantity = parseInt(inputElement.value);
     let availableStock = order.getStockQuantityById(productId);
     var totalPriceCell = inputElement.parentElement.nextElementSibling;
@@ -153,7 +153,7 @@ window.addEventListener("load", function () {
       order.updateproduct(productId, enteredQuantity);
       generateBill();
       inputElement.value = enteredQuantity;
-      totalPriceCell.innerText = price*quantity;
+      totalPriceCell.innerText = price * quantity;
     }
   }
 
