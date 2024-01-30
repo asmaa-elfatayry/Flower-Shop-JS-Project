@@ -1,51 +1,77 @@
-# FlowerJS E-Commerce Project
+# Floura Flower E-Commerce Site 🌸
 
-Welcome to the FlowerJS E-Commerce project!
+Welcome to Floura, your go-to destination for all things floral! This e-commerce platform is designed to provide a delightful shopping experience for flower enthusiasts. The project features three main user roles: Users, Admin, and Sellers. Each role has specific functionalities and access levels to ensure smooth operation.
 
-## Project Structure
+<img src="images/pink-flowers-4wepipx4mtfx5v9m.jpg"/>
+## Features
 
-The project structure is organized to keep things modular and maintainable. Here's an overview of the main folders and their contents:
+- **Product Management**: Sellers can add, edit, and remove products. Users can view product details, add them to the cart, and explore the wide range of floral options.
+- **User Profiles**: Users have personalized profiles to manage their information, view order history, and maintain a wishlist.
+- **Shopping Cart**: Users can add products to their cart and proceed to checkout.
+- **Admin Dashboard**: Admins have access to an admin dashboard to monitor and manage the overall system.
+- **Order History**: Users can track their order history and view details of previous purchases.
+- **Wishlist**: Users can add products to their wishlist for future reference.
 
-- **scss**: Contains the Sass files for styling.
-  - **\_layout.scss**: Defines the overall layout styles.
-  - **\_variables.scss**: Stores variables for easy customization.
-  - **main.scss**: Main entry point for compiling Sass.
-- **stylesheets**: Generated CSS files.
-  - **main.css**: Compiled styles from the main.scss.
-  - **bootstrap.css**: Bootstrap styles.
-  - **all.css**: Font Awesome styles.
-- **js**: JavaScript files.
-  - **jquery.js**: jQuery library.
-  - **bootstrap.js**: Bootstrap JavaScript.
-  - **all.js**: Font Awesome JavaScript.
-- **images**: Empty folder for storing project images.
-- **HTML pages**: Separate folders for each HTML page.
-- **home page**: The entry point for the application "index.html".
+## User Roles
+
+### 1. User
+- View and search for products.
+- Add products to the shopping cart.
+- View detailed product information.
+- Manage user profile, including order history and wishlist.
+
+### 2. Admin
+- Access the admin dashboard.
+- Monitor and manage product listings.
+- View and manage user accounts.
+
+### 3. Seller
+- Manage own product listings.
+- Monitor sales and order status.
+- Update product information.
 
 ## Getting Started
 
-1. Clone the repository to your local machine:
-
+### Prerequisites
+1. Clone the repository.
    ```bash
-   git clone https://github.com/asmaa-elfatayry/Flower-Shop-JS-Project
-
+   git clone https://github.com/asmaa-elfatayry/Flower-Shop-JS-Project.git
+   cd floura-flower-ecommerce
    ```
+2. Run index.html
 
-2. Navigate to the project directory:
+  
+## Usage
 
-   ```bash
-   cd Flower-Shop-JS-Project
+1. User
+- Visit the Floura website.
+- Browse through the floral collections.
+- Click on a product to view details.
+- Add desired products to the cart.
+- Proceed to checkout and complete the order.
+- Manage your profile, view order history, and maintain a wishlist.
+  
+2. Admin
+- Control with all system.
+- Monitor product listings and user accounts.
 
-   ```
 
-3. Open the project in your preferred code editor.
+3. Seller
+- Access the seller dashboard.
+- Manage product listings, update information, and monitor sales.
+- Ensure accurate and up-to-date product information.
 
-4. Customize the project according to your requirements:
 
-   - Modify Sass files in the `scss` folder to adjust styles.
-   - Add images to the `images` folder.
-   - Create additional HTML pages as needed.
+Team Members:
 
-5. Run the project:
+GitHub-Username: [asmaa-elfatayry](https://github.com/asmaa-elfatayry)
 
-   - Open the home page (e.g., `index.html`) in your browser to see the initial setup.
+GitHub-Username: [ahmed-fahmy17](https://github.com/ahmed-fahmy17)
+
+GitHub-Username: [Eslam405](https://github.com/Eslam405)
+
+GitHub-Username: [amira-mohamed-mahmoud](https://github.com/amira-mohamed-mahmoud)
+
+GitHub-Username: [nayira411](https://github.com/nayira411)
+
+Feel free to reach out with any questions or feedback. Happy shopping at Floura! 🌸

@@ -51,7 +51,7 @@ export function addProduct(product, rowDiv) {
   addToCartButton.setAttribute("id", `${product.id}`);
   addToCartButton.textContent = "Add to Cart";
   cardBody.appendChild(addToCartButton);
-  card.addEventListener('click', function (event) {
+  card.addEventListener("click", function (event) {
     // debugger;
     if (event.target.classList.contains("cart")) {
       addchart(event.target.id);
@@ -66,9 +66,8 @@ export function addProduct(product, rowDiv) {
       localStorage.setItem("productToShow", JSON.stringify(product));
       window.open("../HTML pages/product_details.html", "_self");
     }
-  })
+  });
 }
-
 
 function wish(ID) {
   let currentUser = [];
@@ -104,59 +103,56 @@ function wish(ID) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 export function addchart(id) {
   //debugger;
-  let CurrentUserData = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
+  let CurrentUserData =JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
   let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
-  let TotalOrdersg = JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
-  let flowers = JSON.parse(localStorage.getItem('flowersData'));
-  let p_id = parseInt(id);
-  if (!order.order_is_exists(p_id)) {
-    let found_prod = flowers.find((flower) => flower.id === p_id);
-    let quantity = 1;
-    let orderid;
-    let price = found_prod.price;
-    let sellerid = found_prod.seller.id;
-    let date = new Date();
-    let state = 0;
-    let prodId = found_prod.id;
-    let user;
-    if (CurrentUserData.length == 0) {
-      user = -1;
-      orderid = TotalOrdersg.length + 1;
-
+  let TotalOrdersg =
+    JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+  let flowers = JSON.parse(localStorage.getItem("flowersData"));
+  if (CurrentUserData.length!=0) {
+    let p_id = parseInt(id);
+    if (!order.order_is_exists(p_id)) {
+      let found_prod = flowers.find((flower) => flower.id === p_id);
+      let quantity = 1;
+      let orderid;
+      let price = found_prod.price;
+      let sellerid = found_prod.seller.id;
+      let date = new Date();
+      let state = 0;
+      let prodId = found_prod.id;
+      let user;
+      if (CurrentUserData.length == 0) {
+        user = -1;
+        orderid = TotalOrdersg.length + 1;
+      } else {
+        user = CurrentUserData.id;
+        orderid = TotalOrders.length + 1;
+      }
+      let new_order = new order.Order(
+        date,
+        prodId,
+        sellerid,
+        quantity,
+        price,
+        orderid,
+        state,
+        user
+      );
+      if (CurrentUserData.length == 0) {
+        TotalOrdersg.push(new_order.getOrderData());
+        order.updateChartData(TotalOrdersg);
+      } else {
+        TotalOrders.push(new_order.getOrderData());
+        order.updateChartData(TotalOrders);
+      }
+      order.updateBadge();
+    } else {
+      order.updateproductById(p_id);
+      order.updateBadge();
     }
-    else {
-      user = CurrentUserData.id;
-      orderid = TotalOrders.length + 1;
-    }
-    let new_order = new order.Order(date, prodId, sellerid, quantity, price, orderid, state, user);
-    if (CurrentUserData.length == 0) {
-      TotalOrdersg.push(new_order.getOrderData());
-      order.updateChartData(TotalOrdersg);
-
-    }
-    else {
-      TotalOrders.push(new_order.getOrderData());
-      order.updateChartData(TotalOrders);
-
-    }
-    order.updateBadge();
-
   } else {
-    order.updateproductById(p_id);
-    order.updateBadge();
+    Swal.fire("please login first!");
+    window.location.href = "login.html";
   }
 }
-
-

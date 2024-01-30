@@ -20,7 +20,7 @@ function validateExpiryDate(month, year) {
     month > 0 &&
     month <= maxMonth &&
     (year > currentYear || (year == currentYear && month >= currentMonth)) &&
-    month <= maxMonth // Check if month is less than or equal to 12
+    month <= maxMonth
   );
 }
 
