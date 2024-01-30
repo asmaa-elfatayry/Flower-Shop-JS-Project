@@ -28,7 +28,6 @@ window.addEventListener("load", function () {
 
     if (user && user.role === "user") {
       logged_user(user, "user");
-      // assignGuestOrderToLoggedUser(user.id);
       window.location.href = "index.html";
     } else if (seller) {
       logged_user(seller, "seller");

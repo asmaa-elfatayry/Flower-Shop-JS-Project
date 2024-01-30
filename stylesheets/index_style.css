@@ -471,7 +471,10 @@ margin: 20px auto;
   background-color:#F05990;
   border:#F05990;
 }
-
+.testimonial-style .carousel-indicators 
+{
+  left: 50% !important;
+}
 .testimonial-style .carousel-indicators li {
   border: 2px solid #354052;
   background-color: #354052;
