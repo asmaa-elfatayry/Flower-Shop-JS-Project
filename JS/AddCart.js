@@ -102,7 +102,20 @@ window.addEventListener("load", function () {
             ExistChartOrder[i].price,
             ExistChartOrder[i].quantity
           );
+          
         });
+        input.addEventListener("change", function (event) {
+          validQuantity(
+            event.target,
+            ExistChartOrder[i].productId,
+            ExistChartOrder[i].price,
+            ExistChartOrder[i].quantity
+          );
+          
+        });
+
+
+
 
         input.max = `${order.getStockQuantityById(
           ExistChartOrder[i].productId
@@ -153,7 +166,7 @@ window.addEventListener("load", function () {
       order.updateproduct(productId, enteredQuantity);
       generateBill();
       inputElement.value = enteredQuantity;
-      totalPriceCell.innerText = price * quantity;
+      totalPriceCell.innerText = (price * enteredQuantity).toFixed(2);
     }
   }
 

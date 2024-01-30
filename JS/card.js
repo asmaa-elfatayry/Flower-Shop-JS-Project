@@ -19,7 +19,8 @@ export function addProduct(product, rowDiv) {
 
   heartIcon.id = product.id;
   if (JSON.parse(sessionStorage.getItem("loggedInUser"))) {
-    let favourites = JSON.parse(sessionStorage.getItem("loggedInUser"))["favorite"] || [];
+    let favourites =
+      JSON.parse(sessionStorage.getItem("loggedInUser"))["favorite"] || [];
     for (let i = 0; i < favourites.length; i++) {
       if (product.id == favourites[i]["id"]) heartIcon.classList.add("active");
     }
@@ -50,104 +51,95 @@ export function addProduct(product, rowDiv) {
   addToCartButton.setAttribute("id", `${product.id}`);
   addToCartButton.textContent = "Add to Cart";
   cardBody.appendChild(addToCartButton);
-  card.addEventListener('click', function (event) {
+  card.addEventListener("click", function (event) {
     // debugger;
     if (event.target.classList.contains("cart")) {
       addchart(event.target.id);
-    }
-    else if (event.target.parentElement.classList.contains("for_wish")) {
-
+    } else if (event.target.parentElement.classList.contains("for_wish")) {
       wish(event);
-    }
-    
-    else if (event.target.classList.contains("for_wish") == false ) {
-   
+    } else if (event.target.classList.contains("for_wish") == false) {
       localStorage.setItem("productToShow", JSON.stringify(product));
       window.open("../HTML pages/product_details.html", "_self");
     }
-  })
+  });
 }
-
 
 function wish(event) {
-    let currentUser = [];
-    if (sessionStorage.getItem("loggedInUser") !== null) {
-      currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
-      if (!currentUser.favorite) {
-        currentUser.favorite = [];
-      }
-      sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
-    } else {
-      Swal.fire("Sorry you must login first!");
-    }
-    let flowers = JSON.parse(window.localStorage.getItem("flowersData"));
-    let heartId = parseInt(event.target.parentElement.id);
-    let selflower = flowers.find((flower) => flower.id == heartId);
-    let favIcon = document.getElementById(event.target.parentElement.id);
-    if (!currentUser.favorite.some((flower) => flower.id === heartId)) {
-      currentUser.favorite.push(selflower);
-      favIcon.classList.add("active");
-    } else {
-      currentUser.favorite.pop(selflower);
-      console.log(currentUser.favorite);
-      favIcon.classList.remove("active");
+  let currentUser = [];
+  if (sessionStorage.getItem("loggedInUser") !== null) {
+    currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    if (!currentUser.favorite) {
+      currentUser.favorite = [];
     }
     sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
+  } else {
+    Swal.fire("Sorry you must login first!");
+  }
+  let flowers = JSON.parse(window.localStorage.getItem("flowersData"));
+  let heartId = parseInt(event.target.parentElement.id);
+  let selflower = flowers.find((flower) => flower.id == heartId);
+  let favIcon = document.getElementById(event.target.parentElement.id);
+  if (!currentUser.favorite.some((flower) => flower.id === heartId)) {
+    currentUser.favorite.push(selflower);
+    favIcon.classList.add("active");
+  } else {
+    currentUser.favorite.pop(selflower);
+    console.log(currentUser.favorite);
+    favIcon.classList.remove("active");
+  }
+  sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
 }
-
-
-
-
-
-
-
-
-
-
 
 export function addchart(id) {
   //debugger;
-  let CurrentUserData = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
+  let CurrentUserData =JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
   let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
-  let TotalOrdersg = JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
-  let flowers = JSON.parse(localStorage.getItem('flowersData'));
-  let p_id = parseInt(id);
-  if (!order.order_is_exists(p_id)) {
-    let found_prod = flowers.find((flower) => flower.id === p_id);
-    let quantity = 1;
-    let orderid;
-    let price = found_prod.price;
-    let sellerid = found_prod.seller.id;
-    let date = new Date();
-    let state = 0;
-    let prodId = found_prod.id;
-    let user;
-    if (CurrentUserData.length == 0) {
-      user = -1;
-      orderid = TotalOrdersg.length + 1;
-
+  let TotalOrdersg =
+    JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+  let flowers = JSON.parse(localStorage.getItem("flowersData"));
+  if (CurrentUserData.length!=0) {
+    let p_id = parseInt(id);
+    if (!order.order_is_exists(p_id)) {
+      let found_prod = flowers.find((flower) => flower.id === p_id);
+      let quantity = 1;
+      let orderid;
+      let price = found_prod.price;
+      let sellerid = found_prod.seller.id;
+      let date = new Date();
+      let state = 0;
+      let prodId = found_prod.id;
+      let user;
+      if (CurrentUserData.length == 0) {
+        user = -1;
+        orderid = TotalOrdersg.length + 1;
+      } else {
+        user = CurrentUserData.id;
+        orderid = TotalOrders.length + 1;
+      }
+      let new_order = new order.Order(
+        date,
+        prodId,
+        sellerid,
+        quantity,
+        price,
+        orderid,
+        state,
+        user
+      );
+      if (CurrentUserData.length == 0) {
+        TotalOrdersg.push(new_order.getOrderData());
+        order.updateChartData(TotalOrdersg);
+      } else {
+        TotalOrders.push(new_order.getOrderData());
+        order.updateChartData(TotalOrders);
+      }
+      order.updateBadge();
+    } else {
+      order.updateproductById(p_id);
+      order.updateBadge();
     }
-    else {
-      user = CurrentUserData.id;
-      orderid = TotalOrders.length + 1;
-    }
-    let new_order = new order.Order(date, prodId, sellerid, quantity, price, orderid, state, user);
-    if (CurrentUserData.length == 0) {
-      TotalOrdersg.push(new_order.getOrderData());
-      order.updateChartData(TotalOrdersg);
-
-    }
-    else {
-      TotalOrders.push(new_order.getOrderData());
-      order.updateChartData(TotalOrders);
-
-    }
-    order.updateBadge();
-
   } else {
-    order.updateproductById(p_id);
-    order.updateBadge();
+    Swal.fire("please login first!");
+    window.location.href = "login.html";
   }
 }
-
-

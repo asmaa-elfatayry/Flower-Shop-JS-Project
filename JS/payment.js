@@ -117,8 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   let chartOrderData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
-  let totalorders =
-    JSON.parse(localStorage.getItem("order", JSON.stringify([]))) || [];
+  let totalorders = JSON.parse(localStorage.getItem("order")) || [];
 
   let order = [];
 
@@ -130,7 +129,10 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < chartOrderData.length; i++) {
         if (chartOrderData[i].user == userId) {
           order = chartOrderData.splice(i, 1);
-          totalorders.push(order);
+          order.forEach((ord) => {
+            totalorders.push(ord);
+          });
+
           localStorage.setItem("order", JSON.stringify(totalorders));
           localStorage.setItem("ChartOrder", JSON.stringify(chartOrderData));
         }
@@ -146,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
     td.colSpan = 6;
     tr.append(td);
     document.querySelector("#orderlist").append(tr);
-
   }
 
   function updatePaidNoForProducts(soldProducts) {

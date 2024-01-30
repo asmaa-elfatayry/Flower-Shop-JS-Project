@@ -43,7 +43,7 @@ window.addEventListener("load", function () {
       })
       .catch((error) => console.error("Error fetching products:", error));
   }
-  // loadData();
+  
   if (localStorage.length === 0) {
     loadData();
   }
