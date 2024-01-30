@@ -5,7 +5,7 @@
   list-style-type:none;
 }
   ol, ul {
-    padding-left: 0;
+    padding: left 0, im !important;
 }
 a:hover{
   text-decoration: none;
@@ -188,10 +188,6 @@ fill:#F05990 !important;
   opacity:1;
 }
 
-.card-details svg.active{
- color : #E72463;
- opacity : 1;
- }
 h3.section-title-2.text-uppercase {
   text-align: center;
   padding-bottom: 10px;

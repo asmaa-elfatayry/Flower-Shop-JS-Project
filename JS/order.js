@@ -156,6 +156,7 @@ export function getProductImgById(id) {
   }
   else {
     resultOrdeId = TotalOrders.find((order) => order.productId === parseInt(id) && order.user == currentuser.id);
+   
   }
   resultproduct = searchedProduct.find((flower) => flower.id === resultOrdeId.productId);
   return resultproduct.image;
@@ -195,6 +196,6 @@ export function updateproduct(id, quanity) {
 export function getwhishlist()
 {
   let currentUser=JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
-  return currentUser.favorite;
+  return currentUser.favourites;
 
 }

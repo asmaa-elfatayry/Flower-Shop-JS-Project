@@ -1,4 +1,4 @@
-import * as order from'./order.js';
+import * as order from "./order.js";
 window.addEventListener("load", function () {
   // // Get the current date
   // const currentDate = new Date();
@@ -38,10 +38,9 @@ window.addEventListener("load", function () {
     fetch("../Data.json")
       .then((response) => response.json())
       .then((data) => {
-      
         FlowersDate = data.flowers;
-        for (let i = 0; i<FlowersDate.length; i++) {
-          FlowersDate[i]['reviews'] = new Array;
+        for (let i = 0; i < FlowersDate.length; i++) {
+          FlowersDate[i]["reviews"] = new Array();
         }
         SellerData = data.sellers;
         UserData = data.users;
@@ -69,7 +68,7 @@ window.addEventListener("load", function () {
       .catch((error) => console.error("Error fetching products:", error));
   }
   
-  if (localStorage.length <= 1) {
+  if (localStorage.length === 0) {
     loadData();
   }
 
@@ -100,5 +99,4 @@ window.addEventListener("load", function () {
     }
   }
   order.updateBadge();
-
 });

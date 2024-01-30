@@ -64,7 +64,7 @@ function getfavourites()
 {
   let whishlist = getwhishlist();
   let parentDiv = document.getElementById("whishlist");
-
+  let flowers = JSON.parse(localStorage.getItem('flowersData')) || [];
   if(whishlist.length==0)
   {
     let noOrdersMessage = document.createElement("div");
@@ -84,6 +84,7 @@ function getfavourites()
   else
   {
     for (let i = 0; i < whishlist.length; i++) {
+
       let div = document.createElement("div");
       div.classList.add("order-item"); 
       div.style.display = "flex";
@@ -96,24 +97,29 @@ function getfavourites()
       let textContainer = document.createElement("div");
       textContainer.style.flex = "1"; 
   
-      let p_name = document.createElement("p");
-      p_name.textContent = "Name: " + whishlist[i].name;
+      let productitem=flowers.filter(item=>{return item.id==whishlist[i]});
+
+//console.log(productitem);
+productitem.forEach(item => {
+  let p_name = document.createElement("p");
+      p_name.textContent = "Name: " + item.name;
       textContainer.appendChild(p_name);
   
       let p_meaning = document.createElement("p");
-      p_meaning.textContent = "Meaning: " + whishlist[i].meaning;
+      p_meaning.textContent = "Meaning: " + item.meaning;
       textContainer.appendChild(p_meaning);
   
       let p_category = document.createElement("p");
-      p_category.textContent = "category: " + whishlist[i].category;
+      p_category.textContent = "category: " + item.category;
       textContainer.appendChild(p_category);
   
   
       div.appendChild(textContainer);
   
+
     
       let p_image = document.createElement("img");
-      let source = getProductImgById(whishlist[i].productId);
+      let source = item.image;
       p_image.src = `../images/flowers/${source}`;
       p_image.classList.add("rounded-circle");
       p_image.width = "70";
@@ -122,6 +128,8 @@ function getfavourites()
   
       parentDiv.appendChild(div);
 
+});
+      
   }
   
 }
