@@ -26,7 +26,8 @@ window.addEventListener("load", function () {
   let flowersData = JSON.parse(localStorage.getItem("flowersData")) || [];
   let sellersData = JSON.parse(localStorage.getItem("sellerData")) || [];
   let usersData = JSON.parse(localStorage.getItem("userData")) || [];
-  let ordersData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+  let ordersData = JSON.parse(localStorage.getItem("order")) || [];
+  let requestseller = JSON.parse(localStorage.getItem("requestseller")) || [];
   
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener('click', (e)=>{
@@ -48,6 +49,10 @@ window.addEventListener("load", function () {
         case "orders":
           items = ordersData;
           break;
+        
+        case "requestedsellers":
+          items = requestseller;
+          break;
 
         default: 
           items = [];
@@ -55,62 +60,83 @@ window.addEventListener("load", function () {
       }
 
       if(page != "main"){
+        if(page == "exit") return;
         main_page.classList.add("d-none");
         content.classList.add("scrollable");
         if(document.querySelector(".content .table-responsive")){
           document.querySelector(".content .table-responsive").outerHTML = "";
           document.querySelector(".content .search-container").outerHTML = "";
         }
-        displaySearchInput(items, page);
-        createTableStructure();
-        displayHead(items);
-        displayTable(items,page);
-        arrangeData(items);
-        document.getElementById("search").addEventListener("keyup", function (e) {
-          let newItems = items.filter(function (a) {
-            
-            switch (page){
-              case "products":
-                // items = flowersData;
-                return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                  a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['category'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['price'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['seller']['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['stock'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
-                );
-      
-              case "users":
-                console.log(a)
-                return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                  a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['email'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
-                );
-                
-              case "sellers":
-                return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                  a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['location'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['contact'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
-                );
-                
-              case "orders":
-                return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                  a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['location'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['contact'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                  a['date'].toLocaleDateString("EN-EG").includes(document.getElementById("search").value.toUpperCase())
-                );
-      
-              default: 
-                return;
-            }
+        console.log(items)
+        if(items.length == 0){
+          Swal.fire({
+            title: `There is no ${document.querySelector(".main-list span."+page).textContent}`,
+            icon: 'warning',
+            confirmButtonText: 'OK'
           });
-          displayTable(newItems,page);
-      });
+        }
+        else{
+
+          displaySearchInput(items, page);
+          createTableStructure();
+          displayHead(items,page);
+          displayTable(items,page);
+          arrangeData(items);
+          document.getElementById("search").addEventListener("keyup", function (e) {
+            let newItems = items.filter(function (a) { 
+              switch (page){
+                case "products":
+                  // items = flowersData;
+                  return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
+                    a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['category'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['price'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['seller']['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['stock'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
+                  );
+        
+                case "users":
+                  console.log(a)
+                  return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
+                    a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['email'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
+                  );
+                  
+                case "sellers":
+                  return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
+                    a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['location'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['contact'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
+                  );
+                  
+                case "orders":
+                  return (a['state'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
+                    a['productId'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['user'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['orderId'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['price'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['quantity'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                    a['date'].toLocaleDateString("EN-EG").includes(document.getElementById("search").value.toUpperCase())
+                  );
+  
+                  case "requestedsellers":
+                    // items = flowersData;
+                    return (a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                      a['contact'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                      a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                      a['location'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
+                      a['no_products'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
+                    );
+        
+                default: 
+                  return;
+              }
+            });
+            displayTable(newItems,page);
+          });
+        }
       }
       else {
         main_page.classList.remove("d-none");
@@ -119,6 +145,15 @@ window.addEventListener("load", function () {
           document.querySelector(".content .table-responsive").classList.add("d-none");
           document.querySelector(".content .search-container").classList.add("d-none");
         }
+        let Revenue = document.getElementById("Revenue");
+        let Users = document.getElementById("Users");
+        let Visitors = document.getElementById("Visitors");
+        let Orders = document.getElementById("Orders");
+        // console.log(cards[0].children)
+        Revenue.textContent = localStorage.getItem("totalPrice");
+        Users.textContent = JSON.parse(localStorage.getItem("userData")).length
+        Orders.textContent = JSON.parse(localStorage.getItem("order")).length;
+        Visitors.textContent = localStorage.getItem("visitors");
       }
     }) 
   }
@@ -169,7 +204,7 @@ window.addEventListener("load", function () {
         datasets: [
           {
             label: "Monthly Visitors",
-            data: filteredFlowers.map((data) => data.price),
+            data: localStorage.getItem("visitors"),
             backgroundColor: "#c7dbef",
             borderColor: "lavender",
             borderWidth: 1,
@@ -234,33 +269,38 @@ window.addEventListener("load", function () {
     content.appendChild(search_container);
   }
   
-  function displayHead(items) {
+  function displayHead(items,page) {
     let tableHead = document.querySelector("#content #itemTable thead tr");
+    console.log(page)
     let heads = Object.keys(items[0]);
     tableHead.innerHTML = "";
     for(let i=0; i<heads.length; i++){
-      if(heads[i] != "role" && heads[i] != "products" && heads[i] != "description" && heads[i] != "meaning" && heads[i] != "image"){
+      if(heads[i] != "role" && heads[i] != "reviews" && heads[i] != "products" && heads[i] != "description" && heads[i] != "meaning" && heads[i] != "image"){
         let head = document.createElement("th");
-        // let headInner = document.createElement("span");
-        // head.appendChild(headInner);
         head.setAttribute("scope", "col");
-        // headInner.textContent = heads[i];
         head.textContent = heads[i];
         head.textContent = heads[i];
         if( typeof items[0][heads[i]] == "object"){
-          // headInner.textContent = `${heads[i]} ${Object.keys(items[0][heads[i]])[0]}`;
           head.textContent = `${heads[i]} ${Object.keys(items[0][heads[i]])[0]}`;
         }
         tableHead.appendChild(head);
       }
     }
-    let delHead = document.createElement("th");
-    delHead.setAttribute("scope", "col");
-    delHead.textContent = "delete";
-    tableHead.appendChild(delHead);
+    if(page != "orders" && page != "requestedsellers" ){
+      let delHead = document.createElement("th");
+      delHead.setAttribute("scope", "col");
+      delHead.textContent = "delete";
+      tableHead.appendChild(delHead);
+    }
+    else if(page == "requestedsellers"){
+      let approveHead = document.createElement("th");
+      approveHead.setAttribute("scope", "col");
+      approveHead.textContent = "approve";
+      tableHead.appendChild(approveHead); 
+    }
   }
   
-  function displayRow(item) {
+  function displayRow(item, page) {
     let tableHead = document.querySelector("#content #itemTable thead tr");
     const row = document.createElement("tr");
     for (let i = 0; i < tableHead.children.length; i++) {
@@ -275,20 +315,60 @@ window.addEventListener("load", function () {
       row.appendChild(Cell);
     }
     
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "btn btn-danger";
-    deleteButton.style.width = "90px";
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", (e) => deleteItem(item.id, e));
-    row.children[row.children.length - 1].appendChild(deleteButton);
-    return row;
+    if(page != "orders" && page != "requestedsellers" ){
+      const deleteButton = document.createElement("button");
+      deleteButton.className = "btn btn-danger";
+      deleteButton.style.width = "90px";
+      deleteButton.textContent = "Delete";
+      deleteButton.addEventListener("click", (e) => deleteItem(item.id, e));
+      row.children[row.children.length - 1].appendChild(deleteButton);
+    }
+    else if(page == "requestedsellers" ){
+      const dapproveButton = document.createElement("button");
+      dapproveButton.className = "btn btn-primary";
+      dapproveButton.style.width = "90px";
+      dapproveButton.textContent = "Approve";
+      dapproveButton.addEventListener("click", (e) => addSeller(e));
+      row.children[row.children.length - 1].appendChild(dapproveButton);
+    }
+      return row;
+  }
+
+  function addSeller(e){
+    let myRow = e.target.closest("tr");
+    let sellers = JSON.parse(localStorage.getItem("sellerData")) || [];
+    let requestedSellers = JSON.parse(localStorage.getItem("requestseller")) || [];
+    let indexToRemove = -1;
+    for (let j = 0; j < requestedSellers.length; j++) {
+        if (requestedSellers[j].name === myRow.children[0].textContent) {
+            indexToRemove = j;
+            break;
+        }
+    }
+    if (indexToRemove !== -1) {
+      requestedSellers.splice(indexToRemove, 1);
+      localStorage.setItem("requestseller", JSON.stringify(requestedSellers));
+      let newseller = {
+          "id": sellers.length > 0 ? sellers[sellers.length - 1].id + 1 : 1,
+          "name": myRow.children[0].textContent,
+          "role": "seller",
+          "location": myRow.children[4].textContent,
+          "contact": myRow.children[1].textContent,
+          "products": [],
+          "password": myRow.children[2].textContent,
+      };
+
+      sellers.push(newseller);
+      localStorage.setItem("sellerData", JSON.stringify(sellers));
+      myRow.outerHTML = "";
+    }
   }
   
-  function displayTable(items) {
+  function displayTable(items,page) {
     const tableListContainer = document.getElementById("tableList");
     tableListContainer.innerHTML = "";
     items.forEach((item) => {
-      const row = displayRow(item);
+      const row = displayRow(item,page);
       tableListContainer.appendChild(row);
     });
   }
@@ -405,8 +485,9 @@ window.addEventListener("load", function () {
           return firstKey - secondKey;
       })
       lastsorted = e.target.textContent;
-      displayTable(items);
+      displayTable(items,page);
     });
   }
   createCharts();
 });
+

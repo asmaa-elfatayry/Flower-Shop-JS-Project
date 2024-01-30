@@ -1,5 +1,30 @@
 import * as order from'./order.js';
 window.addEventListener("load", function () {
+  // // Get the current date
+  // const currentDate = new Date();
+  // // Calculate the previous month and year
+  // const lastMonth = currentDate.getMonth() === 0 ? 11 : currentDate.getMonth() - 1;
+  // const lastYear = lastMonth === 11 ? currentDate.getFullYear() - 1 : currentDate.getFullYear();
+  // // Create a key for the previous month and year
+  // const lastMonthYear = `${lastMonth + 1}-${lastYear}`;
+  // // Retrieve the stored visitor data from localStorage
+  // let visitorData = JSON.parse(localStorage.getItem("visitorData")) || {};
+  // // Check if the last month's data exists
+  // if (!visitorData[lastMonthYear]) {
+  //   // If not, initialize the count for the last month
+  //   visitorData[lastMonthYear] = 0;
+  // }
+  // // Increment the visitor count for the last month
+  // visitorData[lastMonthYear]++;
+  // // Save the updated visitor data back to localStorage
+  // localStorage.setItem("visitorData", JSON.stringify(visitorData));
+  // // Access the last month's visitor count
+  // const lastMonthVisitorCount = visitorData[lastMonthYear];
+  // // Log or display the visitor count for the last month
+  // console.log(`Visitors for ${lastMonthYear}: ${lastMonthVisitorCount}`);
+  let visitors = Number(JSON.parse(localStorage.getItem("visitors")));
+  visitors++;
+  localStorage.setItem("visitors", visitors)
 
   function loadData() {
     let FlowersDate;
@@ -44,7 +69,7 @@ window.addEventListener("load", function () {
       .catch((error) => console.error("Error fetching products:", error));
   }
   
-  if (localStorage.length === 0) {
+  if (localStorage.length <= 1) {
     loadData();
   }
 
