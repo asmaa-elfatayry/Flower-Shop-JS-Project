@@ -84,7 +84,7 @@ window.addEventListener("load", function () {
       name: user.name,
       email: role === "seller" ? user.contact : user.email,
       role: role,
-      favorite:[]
+      favourites:user.favourites
     };
     sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
   }

@@ -8,7 +8,20 @@ window.addEventListener('load', function () {
 
     this.document.getElementById('product-image').children[0].src = `../images/flowers/${product.image}`
 
-    this.document.getElementById('product-name').innerHTML = `${product.name} <i class="ms-3 heartBtn fa-solid fa-heart"></i>`;
+    this.document.getElementById('product-name').innerHTML = product.name;
+    // let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    // let heartIcon = document.getElementsByClassName('for_wish')[0];
+    // heartIcon.id = product.id;
+    // if (currentUser) {
+    //     let favourites = currentUser.favourites
+    //     for (let i = 0; i < favourites.length; i++) {
+    //         if (product.id == favourites[i]) {
+    //             heartIcon.classList.add("active-heart");
+    //             break;
+    //         }
+    //     }
+    // }
+
     this.document.getElementById('product-description').innerText = product.description;
     this.document.getElementById('product-meaning').innerText = product.meaning;
     this.document.getElementById('product-price').innerText = product.price + ' EGP';
@@ -43,7 +56,7 @@ window.addEventListener('load', function () {
 
     this.document.getElementById('items-count').addEventListener('change', function (e) {
         e.target.value = validateAmount(e.target.value);
-        document.getElementById('items-price').innerText = `${Number(Number(e.target.value) * product.price).toFixed(2)} EGP` ;
+        document.getElementById('items-price').innerText = `${Number(Number(e.target.value) * product.price).toFixed(2)} EGP`;
     })
 
     function addReview(curDiv, review_data) {
@@ -51,7 +64,7 @@ window.addEventListener('load', function () {
         curDiv.appendChild(comment_div);
         comment_div.classList.add('col-10', 'mb-3', 'comment');
         let review = document.createElement('q');
-        review.classList.add("text-break","mx-3","text-success");
+        review.classList.add("text-break", "mx-3", "text-success");
         comment_div.appendChild(review);
         let name = document.createElement('i');
         comment_div.appendChild(name);
@@ -99,7 +112,7 @@ window.addEventListener('load', function () {
         localStorage.setItem("flowersData", JSON.stringify(flowers));
     })
 
-    document.getElementById('addCartBTN').addEventListener('click',function() {
+    document.getElementById('addCartBTN').addEventListener('click', function () {
         addchart(product.id);
     })
 })

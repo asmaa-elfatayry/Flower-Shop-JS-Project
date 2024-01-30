@@ -253,3 +253,10 @@
     background-color: white !important;
     color:#d60578 !important;
 }
+.for_wish {
+    font-size: 30px;
+}
+.active-heart {
+    color: #E72463;
+    opacity: 1;
+}

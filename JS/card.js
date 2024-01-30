@@ -16,12 +16,13 @@ export function addProduct(product, rowDiv) {
 
   const heartIcon = document.createElement("i");
   heartIcon.classList.add("fa-solid", "fa-heart", "for_wish");
-
+  
+  let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
   heartIcon.id = product.id;
-  if (JSON.parse(sessionStorage.getItem("loggedInUser"))) {
-    let favourites = JSON.parse(sessionStorage.getItem("loggedInUser"))["favorite"] || [];
+  if (currentUser) {
+    let favourites = currentUser.favourites
     for (let i = 0; i < favourites.length; i++) {
-      if (product.id == favourites[i]["id"]) heartIcon.classList.add("active");
+      if (product.id == favourites[i]) heartIcon.classList.add("active");
     }
   }
   heartIcon.style.fontSize = "2rem";
@@ -55,13 +56,13 @@ export function addProduct(product, rowDiv) {
     if (event.target.classList.contains("cart")) {
       addchart(event.target.id);
     }
-    else if (event.target.parentElement.classList.contains("for_wish")) {
-
-      wish(event);
+    else if (event.target.parentElement.classList.contains("for_wish") || event.target.classList.contains("for_wish")) {
+      console.log('hh');
+      wish(product.id);
     }
-    
-    else if (event.target.classList.contains("for_wish") == false ) {
-   
+
+    else if (event.target.classList.contains("for_wish") == false) {
+
       localStorage.setItem("productToShow", JSON.stringify(product));
       window.open("../HTML pages/product_details.html", "_self");
     }
@@ -69,30 +70,38 @@ export function addProduct(product, rowDiv) {
 }
 
 
-function wish(event) {
-    let currentUser = [];
-    if (sessionStorage.getItem("loggedInUser") !== null) {
-      currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
-      if (!currentUser.favorite) {
-        currentUser.favorite = [];
+function wish(ID) {
+  let currentUser = [];
+  if (sessionStorage.getItem("loggedInUser") !== null) {
+    currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    let userId = currentUser.id;
+    let users = JSON.parse(localStorage.getItem('userData'));
+    let favIcon = document.getElementById(ID);
+    for (let i = 0; i < users.length; i++) {
+      if (userId == users[i].id) {
+        let heartId = parseInt(ID);
+        if (favIcon.classList.contains('active')) {
+          //remove
+          for (let j = 0; j < users[i].favourites.length; j++) {
+            if (users[i].favourites[j] == heartId) {
+              users[i].favourites.splice(j, 1);
+              break;
+            }
+          }
+          favIcon.classList.remove("active");
+        }
+        else {
+          //add
+          users[i].favourites.push(heartId);
+          favIcon.classList.add("active");
+        }
+        localStorage.setItem("userData", JSON.stringify(users));
+        return;
       }
-      sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
-    } else {
-      Swal.fire("Sorry you must login first!");
     }
-    let flowers = JSON.parse(window.localStorage.getItem("flowersData"));
-    let heartId = parseInt(event.target.parentElement.id);
-    let selflower = flowers.find((flower) => flower.id == heartId);
-    let favIcon = document.getElementById(event.target.parentElement.id);
-    if (!currentUser.favorite.some((flower) => flower.id === heartId)) {
-      currentUser.favorite.push(selflower);
-      favIcon.classList.add("active");
-    } else {
-      currentUser.favorite.pop(selflower);
-      console.log(currentUser.favorite);
-      favIcon.classList.remove("active");
-    }
-    sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
+  } else {
+    Swal.fire("Sorry you must login first!");
+  }
 }
 
 
