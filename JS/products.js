@@ -1,8 +1,8 @@
-import * as order from "./order.js";
-import { addProduct } from "../JS/card.js";
+import * as order from './order.js';
+import { addProduct } from "../JS/card.js"
 let numberOfProfProducts = 12;
-window.addEventListener("DOMContentLoaded", function () {
-  order.updateBadge();
+window.addEventListener('DOMContentLoaded', function () {
+    order.updateBadge();
 
   let flowers = JSON.parse(this.window.localStorage.getItem("flowersData"));
   let filteredFlowers;
