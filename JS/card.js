@@ -16,11 +16,11 @@ export function addProduct(product, rowDiv) {
 
   const heartIcon = document.createElement("i");
   heartIcon.classList.add("fa-solid", "fa-heart", "for_wish");
-  
+
   let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
   heartIcon.id = product.id;
   if (currentUser) {
-    let favourites = currentUser.favourites
+    let favourites = currentUser.favourites;
     for (let i = 0; i < favourites.length; i++) {
       if (product.id == favourites[i]) {
         heartIcon.classList.add("active");
@@ -57,14 +57,13 @@ export function addProduct(product, rowDiv) {
     // debugger;
     if (event.target.classList.contains("cart")) {
       addchart(event.target.id);
-    }
-    else if (event.target.parentElement.classList.contains("for_wish") || event.target.classList.contains("for_wish")) {
-      console.log('hh');
+    } else if (
+      event.target.parentElement.classList.contains("for_wish") ||
+      event.target.classList.contains("for_wish")
+    ) {
+      console.log("hh");
       wish(product.id);
-    }
-
-    else if (event.target.classList.contains("for_wish") == false) {
-
+    } else if (event.target.classList.contains("for_wish") == false) {
       localStorage.setItem("productToShow", JSON.stringify(product));
       window.open("../HTML pages/product_details.html", "_self");
     }
@@ -76,12 +75,12 @@ function wish(ID) {
   if (sessionStorage.getItem("loggedInUser") !== null) {
     currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
     let userId = currentUser.id;
-    let users = JSON.parse(localStorage.getItem('userData'));
+    let users = JSON.parse(localStorage.getItem("userData"));
     let favIcon = document.getElementById(ID);
     for (let i = 0; i < users.length; i++) {
       if (userId == users[i].id) {
         let heartId = parseInt(ID);
-        if (favIcon.classList.contains('active')) {
+        if (favIcon.classList.contains("active")) {
           //remove
           for (let j = 0; j < users[i].favourites.length; j++) {
             if (users[i].favourites[j] == heartId) {
@@ -90,14 +89,13 @@ function wish(ID) {
             }
           }
           favIcon.classList.remove("active");
-        }
-        else {
+        } else {
           //add
           users[i].favourites.push(heartId);
           favIcon.classList.add("active");
         }
         currentUser.favourites = users[i].favourites;
-        sessionStorage.setItem("loggedInUser",JSON.stringify(currentUser));
+        sessionStorage.setItem("loggedInUser", JSON.stringify(currentUser));
         localStorage.setItem("userData", JSON.stringify(users));
         return;
       }
@@ -109,12 +107,13 @@ function wish(ID) {
 
 export function addchart(id) {
   //debugger;
-  let CurrentUserData =JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
+  let CurrentUserData =
+    JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
   let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   let TotalOrdersg =
     JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
   let flowers = JSON.parse(localStorage.getItem("flowersData"));
-  if (CurrentUserData.length!=0) {
+  if (CurrentUserData.length != 0) {
     let p_id = parseInt(id);
     if (!order.order_is_exists(p_id)) {
       let found_prod = flowers.find((flower) => flower.id === p_id);
