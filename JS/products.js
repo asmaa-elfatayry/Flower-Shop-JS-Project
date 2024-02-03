@@ -1,8 +1,8 @@
-import * as order from './order.js';
-import { addProduct } from "../JS/card.js"
+import * as order from "./order.js";
+import { addProduct } from "../JS/card.js";
 let numberOfProfProducts = 12;
-window.addEventListener('DOMContentLoaded', function () {
-    order.updateBadge();
+window.addEventListener("DOMContentLoaded", function () {
+  order.updateBadge();
 
   let flowers = JSON.parse(this.window.localStorage.getItem("flowersData"));
   let filteredFlowers;
@@ -16,13 +16,15 @@ window.addEventListener('DOMContentLoaded', function () {
   let pagingBTNs = document.getElementsByClassName("paging-BTN");
   function filterProducts() {
     let txt = document.getElementById("searchTXT").value.trim();
-    filteredFlowers = flowers.filter(function (cur) {
-      return (
-        cur.name.toLowerCase().includes(txt.toLowerCase()) &&
-        Number(cur.price) >= Number(mnP.value) &&
-        Number(cur.price) <= Number(mxP.value)
-      );
-    });
+    if (flowers) {
+      filteredFlowers = flowers.filter(function (cur) {
+        return (
+          cur.name.toLowerCase().includes(txt.toLowerCase()) &&
+          Number(cur.price) >= Number(mnP.value) &&
+          Number(cur.price) <= Number(mxP.value)
+        );
+      });
+    }
     for (let i = 0; i < categories.length; i++) {
       if (categories[i].classList.contains("_active")) {
         if (i == 1) {
@@ -38,24 +40,26 @@ window.addEventListener('DOMContentLoaded', function () {
   function displayProducts(page) {
     newRowDiv.innerHTML = "";
     filterProducts();
-    if (filteredFlowers.length == 0) {
-      document.getElementById("no-products").classList.remove("d-none");
-      removePaging();
-      return;
+    if (filteredFlowers) {
+      if (filteredFlowers.length == 0) {
+        document.getElementById("no-products").classList.remove("d-none");
+        removePaging();
+        return;
+      }
+      document.getElementById("no-products").classList.add("d-none");
+      for (
+        let i = (page - 1) * numberOfProfProducts;
+        i <
+        Math.min(
+          (page - 1) * numberOfProfProducts + numberOfProfProducts,
+          filteredFlowers.length
+        );
+        i++
+      ) {
+        addProduct(filteredFlowers[i], newRowDiv);
+      }
+      displayPaging(page);
     }
-    document.getElementById("no-products").classList.add("d-none");
-    for (
-      let i = (page - 1) * numberOfProfProducts;
-      i <
-      Math.min(
-        (page - 1) * numberOfProfProducts + numberOfProfProducts,
-        filteredFlowers.length
-      );
-      i++
-    ) {
-      addProduct(filteredFlowers[i], newRowDiv);
-    }
-    displayPaging(page);
   }
 
   displayProducts(1);

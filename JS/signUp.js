@@ -1,5 +1,5 @@
 import * as sigAutho from "./Authentication.js";
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   let save_sign = document.getElementById("sig");
   let redirect_signin = document.getElementById("signin");
 

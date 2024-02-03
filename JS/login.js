@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   function loadData() {
     let FlowersDate;
     let SellerData;

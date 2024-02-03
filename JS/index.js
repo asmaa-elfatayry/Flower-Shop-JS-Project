@@ -1,5 +1,5 @@
 import * as order from "./order.js";
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   // // Get the current date
   // const currentDate = new Date();
   // // Calculate the previous month and year
@@ -24,7 +24,7 @@ window.addEventListener("load", function () {
   // console.log(`Visitors for ${lastMonthYear}: ${lastMonthVisitorCount}`);
   let visitors = Number(JSON.parse(localStorage.getItem("visitors")));
   visitors++;
-  localStorage.setItem("visitors", visitors)
+  localStorage.setItem("visitors", visitors);
 
   function loadData() {
     let FlowersDate;
@@ -67,8 +67,8 @@ window.addEventListener("load", function () {
       })
       .catch((error) => console.error("Error fetching products:", error));
   }
-  
-  if (localStorage.length === 0) {
+
+  if (localStorage.length === 0 || localStorage.length === 1) {
     loadData();
   }
 
@@ -76,7 +76,7 @@ window.addEventListener("load", function () {
   let navContainer = this.document.querySelector(".nav-item.dropdown");
 
   if (navContainer) {
-    if (localStorage.length == 0) {
+    if (localStorage.length == 0 || localStorage.length === 1) {
       loadData();
     }
 

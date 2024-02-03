@@ -1,5 +1,5 @@
 import * as order from "./order.js";
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   let currentuser = JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
   let table = document.getElementById("orderTable");
   let tbody = document.getElementById("orderlist");
@@ -102,7 +102,6 @@ window.addEventListener("load", function () {
             ExistChartOrder[i].price,
             ExistChartOrder[i].quantity
           );
-          
         });
         input.addEventListener("change", function (event) {
           validQuantity(
@@ -111,11 +110,7 @@ window.addEventListener("load", function () {
             ExistChartOrder[i].price,
             ExistChartOrder[i].quantity
           );
-          
         });
-
-
-
 
         input.max = `${order.getStockQuantityById(
           ExistChartOrder[i].productId

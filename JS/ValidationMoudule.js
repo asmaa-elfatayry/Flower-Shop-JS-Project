@@ -3,8 +3,11 @@ function ValidEmail(email) {
 }
 
 function ValidPassword(password) {
-  return password.length >= 6;
+  return (
+    /[0-9].*[a-zA-Z]|[a-zA-Z].*[0-9]/.test(password) && password.length >= 6
+  );
 }
+
 function validateCardNumber(cardNumber) {
   return /^\d{16}$/.test(cardNumber);
 }
