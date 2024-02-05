@@ -18,11 +18,17 @@ export function password_valid(password) {
 }
 
 export function valid_name(name) {
-  let reg = new RegExp("^[a-zA-Z][a-zA-Z0-9]{3,20}$");
+  let reg = new RegExp('^[a-zA-Z]+(\\s[a-zA-Z]+)?$');
   if (reg.test(name)) {
     return true;
   }
   return false;
+}
+export function isEmailExistsSeller(email)
+{
+  const SellerData2 = JSON.parse(localStorage.getItem("sellerData")) || [];
+  const check2= SellerData2.some((user) => user.contact === email);
+  return  check2;
 }
 export function isEmailExists(email) {
   const userData = JSON.parse(localStorage.getItem("userData")) || [];
