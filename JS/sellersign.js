@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", function () {
         1,
         "this is invalid name ,please try again"
       );
-    } else if (selAutho.isEmailExists(email)) {
+    } else if (selAutho.isEmailExistsSeller(email)) {
       selAutho.handleTheErrorMessage(
         2,
         "This email is already registered. Please use a different email."
