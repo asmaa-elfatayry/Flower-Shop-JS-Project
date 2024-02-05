@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
 
   let visitors = Number(JSON.parse(localStorage.getItem("visitors"))) || 0;
   visitors++;
   localStorage.setItem("visitors", visitors);
 
-=======
-window.addEventListener("DOMContentLoaded", function () {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
   function loadData() {
     let FlowersDate;
     let SellerData;
