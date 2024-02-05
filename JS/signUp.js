@@ -44,6 +44,8 @@ window.addEventListener("DOMContentLoaded", function () {
         name: name.trim(),
         email: email,
         role: "user",
+        favourites: [],
+
       };
       sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       window.location.href = "index.html";
