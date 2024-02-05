@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 window.addEventListener("load", function () {
 
   // retrive data to cards in main page
@@ -14,17 +13,11 @@ window.addEventListener("load", function () {
   // if not admin deny access to the page
   let curUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
   if(!curUser || curUser.role != 'admin') {
-=======
-window.addEventListener("DOMContentLoaded", function () {
-  let curUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
-  if (!curUser || curUser.role != "admin") {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
     let error = document.createElement("div");
     let head404 = document.createElement("h1");
     let miniHead404 = document.createElement("h3");
     let paragraph404 = document.createElement("p");
-    paragraph404.textContent =
-      "The resource requested could not be found on this server";
+    paragraph404.textContent = "The resource requested could not be found on this server";
     head404.textContent = "404";
     miniHead404.innerText = "Not Found";
     error.classList.add("page-not-found");
@@ -38,14 +31,9 @@ window.addEventListener("DOMContentLoaded", function () {
     sessionStorage.removeItem(loggedInUser);
     return;
   }
-<<<<<<< HEAD
 
   let page  = "";
   var lastsorted = ""
-=======
-  let page = "";
-  var lastsorted = "";
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
   var content = document.getElementById("content");
   var main_page = document.querySelector(".data .content .main-data");
   var links = document.querySelectorAll(".data .side .main-list > a");
@@ -54,12 +42,8 @@ window.addEventListener("DOMContentLoaded", function () {
   let usersData = JSON.parse(localStorage.getItem("userData")) || [];
   let ordersData = JSON.parse(localStorage.getItem("order")) || [];
   let requestseller = JSON.parse(localStorage.getItem("requestseller")) || [];
-<<<<<<< HEAD
   
   // navigation from side bar
-=======
-
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener("click", (e) => {
       page = e.target.classList[0].toLowerCase().trim();
@@ -72,7 +56,6 @@ window.addEventListener("DOMContentLoaded", function () {
         break;
 
         case "sellers":
-<<<<<<< HEAD
         items = sellersData;
         break;
         
@@ -99,42 +82,13 @@ window.addEventListener("DOMContentLoaded", function () {
           sessionStorage.removeItem("loggedInUser");
           return;
         } 
-=======
-          items = sellersData;
-          break;
-
-        case "users":
-          items = usersData;
-          break;
-
-        case "orders":
-          items = ordersData;
-          break;
-
-        case "requestedsellers":
-          items = requestseller;
-          break;
-
-        default:
-          items = [];
-          break;
-      }
-
-      if (page != "main") {
-        if (page == "exit") return;
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
         main_page.classList.add("d-none");
         content.classList.add("scrollable");
         if (document.querySelector(".content .table-responsive")) {
           document.querySelector(".content .table-responsive").outerHTML = "";
           document.querySelector(".content .search-container").outerHTML = "";
         }
-<<<<<<< HEAD
         if(items.length == 0){
-=======
-        console.log(items);
-        if (items.length == 0) {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
           Swal.fire({
             title: `There is no ${
               document.querySelector(".main-list span." + page).textContent
@@ -142,18 +96,13 @@ window.addEventListener("DOMContentLoaded", function () {
             icon: "warning",
             confirmButtonText: "OK",
           });
-<<<<<<< HEAD
         }
         else{
-=======
-        } else {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
           displaySearchInput(items, page);
           createTableStructure();
           displayHead(items, page);
           displayTable(items, page);
           arrangeData(items);
-<<<<<<< HEAD
           document.getElementById("search").addEventListener("keyup", function (e) {
             let searchValue = e.target.value.toUpperCase();
             console.log(searchValue)
@@ -165,205 +114,6 @@ window.addEventListener("DOMContentLoaded", function () {
       
       // if i clicked main page
       else {
-=======
-          document
-            .getElementById("search")
-            .addEventListener("keyup", function (e) {
-              let newItems = items.filter(function (a) {
-                switch (page) {
-                  case "products":
-                    // items = flowersData;
-                    return (
-                      a["id"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["name"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["category"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["price"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["seller"]["id"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["stock"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        )
-                    );
-
-                  case "users":
-                    console.log(a);
-                    return (
-                      a["id"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["name"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["email"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["password"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        )
-                    );
-
-                  case "sellers":
-                    return (
-                      a["id"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["name"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["location"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["contact"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["password"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        )
-                    );
-
-                  case "orders":
-                    return (
-                      a["state"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["productId"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["user"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["orderId"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["price"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["quantity"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["date"]
-                        .toLocaleDateString("EN-EG")
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        )
-                    );
-
-                  case "requestedsellers":
-                    // items = flowersData;
-                    return (
-                      a["name"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["contact"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["password"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["location"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        ) ||
-                      a["no_products"]
-                        .toString()
-                        .toUpperCase()
-                        .includes(
-                          document.getElementById("search").value.toUpperCase()
-                        )
-                    );
-
-                  default:
-                    return;
-                }
-              });
-              displayTable(newItems, page);
-            });
-        }
-      } else {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
         main_page.classList.remove("d-none");
         content.classList.remove("scrollable");
         if (document.querySelector(".content .table-responsive")) {
@@ -378,122 +128,16 @@ window.addEventListener("DOMContentLoaded", function () {
         let Users = document.getElementById("Users");
         let Visitors = document.getElementById("Visitors");
         let Orders = document.getElementById("Orders");
-<<<<<<< HEAD
         Revenue.textContent = ("$ " + (localStorage.getItem("totalPrice") ? Math.floor(Number(JSON.parse(localStorage.getItem("totalPrice")))) : 0));
         Users.textContent = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")).length : 0; 
         Orders.textContent = localStorage.getItem("order") ? JSON.parse(localStorage.getItem("order")).length : 0;
         Visitors.textContent = localStorage.getItem("visitors") ? JSON.parse(localStorage.getItem("visitors")) : 0;
         
-=======
-        // console.log(cards[0].children)
-        Revenue.textContent = localStorage.getItem("totalPrice");
-        Users.textContent = JSON.parse(localStorage.getItem("userData")).length;
-        Orders.textContent = JSON.parse(localStorage.getItem("order")).length;
-        Visitors.textContent = localStorage.getItem("visitors");
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
       }
     });
   }
 
-<<<<<<< HEAD
   function displaySearchInput(items, page){
-=======
-  function createCharts() {
-    let ctx1 = document.querySelector(".ctx1");
-    let ctx2 = document.querySelector(".ctx2");
-    ctx1.width = 400;
-    ctx1.height = 200;
-    ctx2.width = 400;
-    ctx2.height = 200;
-    let FlowersDate = JSON.parse(localStorage.getItem("flowersData")) || [];
-    // let sellerData = JSON.parse(localStorage.getItem("sellerData")) || [];
-    const filteredFlowers = FlowersDate.filter((product) => product.stock > 0);
-    let months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const barChartConfig = {
-      type: "bar",
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: "Monthly Revenue",
-            data: filteredFlowers.map((data) => data.stock),
-            backgroundColor: "#ee5d90cc",
-            borderColor: "lavender",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    };
-    new Chart(ctx1, barChartConfig);
-
-    //chart 2
-
-    const secondBarChartConfig = {
-      type: "bar",
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: "Monthly Visitors",
-            data: localStorage.getItem("visitors"),
-            backgroundColor: "#c7dbef",
-            borderColor: "lavender",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    };
-    new Chart(ctx2, secondBarChartConfig);
-  }
-
-  function createTableStructure() {
-    let content = document.getElementById("content");
-    let table_container = document.createElement("div");
-    table_container.classList.add("table-responsive");
-    let my_table = document.createElement("table");
-    my_table.className = "table text-center table-hover";
-    my_table.setAttribute("id", "itemTable");
-    let my_head = document.createElement("thead");
-    let my_head_Row = document.createElement("tr");
-    my_head.classList.add("table-light");
-    my_head.appendChild(my_head_Row);
-    let my_body = document.createElement("tbody");
-    my_body.setAttribute("id", "tableList");
-    my_table.appendChild(my_head);
-    my_table.appendChild(my_body);
-    table_container.appendChild(my_table);
-    content.appendChild(table_container);
-  }
-
-  function displaySearchInput(items, page) {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
     let content = document.getElementById("content");
     let search_container = document.createElement("div");
     let input_container = document.createElement("div");
@@ -522,7 +166,6 @@ window.addEventListener("DOMContentLoaded", function () {
     content.appendChild(search_container);
   }
 
-<<<<<<< HEAD
   function createTableStructure() {
     let content = document.getElementById("content");
     let table_container = document.createElement("div");
@@ -545,10 +188,6 @@ window.addEventListener("DOMContentLoaded", function () {
   function createCharts(){
     let ctx1= document.querySelector(".ctx1");
     let ctx2=document.querySelector(".ctx2");
-    // ctx1.style.width = '50%';
-    // ctx1.height = 200;
-    // ctx2.width = 400;
-    // ctx2.height = 200;
 
     let FlowersDate = JSON.parse(localStorage.getItem("flowersData")) || [];
     const filteredFlowersBasedOnStock = FlowersDate.filter(
@@ -636,11 +275,6 @@ window.addEventListener("DOMContentLoaded", function () {
   
   function displayHead(items,page) {
     let tableHead = document.querySelector("#content #itemTable thead tr");
-=======
-  function displayHead(items, page) {
-    let tableHead = document.querySelector("#content #itemTable thead tr");
-    console.log(page);
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
     let heads = Object.keys(items[0]);
     tableHead.innerHTML = "";
     for (let i = 0; i < heads.length; i++) {
@@ -714,7 +348,6 @@ window.addEventListener("DOMContentLoaded", function () {
       row.children[row.children.length - 1].appendChild(dapproveButton);
     }
     return row;
-<<<<<<< HEAD
   }
 
   function displayTable(items,page) {
@@ -724,8 +357,6 @@ window.addEventListener("DOMContentLoaded", function () {
       const row = displayRow(item,page);
       tableListContainer.appendChild(row);
     });
-=======
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
   }
 
   function addSeller(e) {
@@ -758,7 +389,6 @@ window.addEventListener("DOMContentLoaded", function () {
       myRow.outerHTML = "";
     }
   }
-<<<<<<< HEAD
   
   function deleteItem(itemId,e) {
     let users = localStorage.getItem("userData");
@@ -770,20 +400,7 @@ window.addEventListener("DOMContentLoaded", function () {
       });
       return;
     }
-    // if(page == "users")
-=======
-
-  function displayTable(items, page) {
-    const tableListContainer = document.getElementById("tableList");
-    tableListContainer.innerHTML = "";
-    items.forEach((item) => {
-      const row = displayRow(item, page);
-      tableListContainer.appendChild(row);
-    });
-  }
-
-  function deleteItem(itemId) {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
+    
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -808,7 +425,6 @@ window.addEventListener("DOMContentLoaded", function () {
             "Deleted!",
             "Your file has been deleted.",
             "success"
-<<<<<<< HEAD
             );
             const itemIndex = flowersData.findIndex(
               (item) => item.id === itemId
@@ -824,14 +440,6 @@ window.addEventListener("DOMContentLoaded", function () {
               if (productIndex !== -1)
                 seller.products.splice(productIndex, 1);
 
-=======
-          );
-          const itemIndex = flowersData.findIndex((item) => item.id === itemId);
-
-          if (itemIndex !== -1) {
-            if (page.toLowerCase() == "products") {
-              flowersData.splice(itemIndex, 1);
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
               localStorage.setItem("flowersData", JSON.stringify(flowersData));
               localStorage.setItem("sellerData", JSON.stringify(sellersData));
               displayTable(flowersData, "products");
@@ -852,15 +460,10 @@ window.addEventListener("DOMContentLoaded", function () {
                 }
               }
               localStorage.setItem("sellerData", JSON.stringify(sellersData));
-<<<<<<< HEAD
               localStorage.setItem("flowersData", JSON.stringify(flowersData));
               displayTable(sellersData,"sellers");
             }
             else if(page.toLowerCase() == "orders"){
-=======
-              displayTable(sellersData, "sellers");
-            } else if (page.toLowerCase() == "orders") {
->>>>>>> a03d0c4490de47cd33207be70c923212c190eb2b
               ordersData.splice(itemIndex, 1);
               ordersData.setItem("sellersData", JSON.stringify(ordersData));
               displayTable(ordersData, "orders");
