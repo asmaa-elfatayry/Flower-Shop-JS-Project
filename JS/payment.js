@@ -55,11 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function validatePaypalForm(event) {
     event.preventDefault();
     let rows = document.querySelectorAll("#orderlist tr");
-    let totalPrice = JSON.parse(localStorage.getItem("totalprice")) || 0;
+    let totalPrice = JSON.parse(localStorage.getItem("totalPrice")) || 0;
     for (let i = 0; i < rows.length; i++) {
-      totalPrice += Number(rows[i].children[4].textContent);
-      localStorage.setItem("totalPrice", totalPrice);
+      totalPrice += Math.floor(Number(rows[i].children[4].textContent));
     }
+    localStorage.setItem("totalPrice", totalPrice);
     let paypalEmail = document.getElementById("paypalEmail");
     let paypalPassword = document.getElementById("paypalPassword");
     resetErrorMessages();
@@ -77,11 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
   function validateVisaForm(event) {
     event.preventDefault();
     let rows = document.querySelectorAll("#orderlist tr");
-    let totalPrice = JSON.parse(localStorage.getItem("totalprice")) || 0;
+    let totalPrice = JSON.parse(localStorage.getItem("totalPrice")) || 0;
     for (let i = 0; i < rows.length; i++) {
-      totalPrice += Number(rows[i].children[4].textContent);
-      localStorage.setItem("totalPrice", totalPrice);
+      totalPrice += Math.floor(Number(rows[i].children[4].textContent));
     }
+    localStorage.setItem("totalPrice", totalPrice);
+
     let visaCardNumber = document.getElementById("visaCardNumber");
     let visaCardHolder = document.getElementById("visaCardHolder");
     let visaExpiresMonth = document.getElementById("visaExpiresMonth");

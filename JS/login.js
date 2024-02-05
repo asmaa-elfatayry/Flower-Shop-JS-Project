@@ -1,4 +1,9 @@
 window.addEventListener("load", function () {
+
+  let visitors = Number(JSON.parse(localStorage.getItem("visitors"))) || 0;
+  visitors++;
+  localStorage.setItem("visitors", visitors);
+
   function loadData() {
     let FlowersDate;
     let SellerData;

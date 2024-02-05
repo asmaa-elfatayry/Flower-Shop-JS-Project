@@ -1,4 +1,16 @@
 window.addEventListener("load", function () {
+
+  // retrive data to cards in main page
+  let Revenue = document.getElementById("Revenue");
+  let Users = document.getElementById("Users");
+  let Visitors = document.getElementById("Visitors");
+  let Orders = document.getElementById("Orders");
+  Revenue.textContent = ("$ " + (localStorage.getItem("totalPrice") ? Math.floor(Number(JSON.parse(localStorage.getItem("totalPrice")))) : 0));
+  Users.textContent = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")).length : 0; 
+  Orders.textContent = localStorage.getItem("order") ? JSON.parse(localStorage.getItem("order")).length : 0;
+  Visitors.textContent = localStorage.getItem("visitors") ? JSON.parse(localStorage.getItem("visitors")) : 0;
+
+  // if not admin deny access to the page
   let curUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
   if(!curUser || curUser.role != 'admin') {
     let error = document.createElement("div");
@@ -16,8 +28,10 @@ window.addEventListener("load", function () {
     document.body.style.backgroundColor = "#FFF";
     document.body.appendChild(error);
     error.appendChild();
+    sessionStorage.removeItem(loggedInUser);
     return;
   }
+
   let page  = "";
   var lastsorted = ""
   var content = document.getElementById("content");
@@ -29,45 +43,51 @@ window.addEventListener("load", function () {
   let ordersData = JSON.parse(localStorage.getItem("order")) || [];
   let requestseller = JSON.parse(localStorage.getItem("requestseller")) || [];
   
+  // navigation from side bar
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener('click', (e)=>{
       page = e.target.classList[0].toLowerCase().trim();
+      links.forEach((link)=>link.classList.remove("active"));
+      e.target.closest("a").classList.add("active");
       var items;
       switch (page){
         case "products":
-          items = flowersData;
-          break;
+        items = flowersData;
+        break;
 
         case "sellers":
-          items = sellersData;
-          break;
-          
+        items = sellersData;
+        break;
+        
         case "users":
-          items = usersData;
-          break;
-          
+        items = usersData;
+        break;
+        
         case "orders":
-          items = ordersData;
-          break;
+        items = ordersData;
+        break;
         
         case "requestedsellers":
-          items = requestseller;
-          break;
-
+        items = requestseller;
+        break;
+        
         default: 
-          items = [];
-          break;
+        items = [];
+        break;
       }
-
+       
+      //if i clicked any page other than Main page
       if(page != "main"){
-        if(page == "exit") return;
+        if(page == "exit"){
+          sessionStorage.removeItem("loggedInUser");
+          return;
+        } 
         main_page.classList.add("d-none");
         content.classList.add("scrollable");
         if(document.querySelector(".content .table-responsive")){
           document.querySelector(".content .table-responsive").outerHTML = "";
           document.querySelector(".content .search-container").outerHTML = "";
         }
-        console.log(items)
         if(items.length == 0){
           Swal.fire({
             title: `There is no ${document.querySelector(".main-list span."+page).textContent}`,
@@ -76,68 +96,21 @@ window.addEventListener("load", function () {
           });
         }
         else{
-
           displaySearchInput(items, page);
           createTableStructure();
           displayHead(items,page);
           displayTable(items,page);
           arrangeData(items);
           document.getElementById("search").addEventListener("keyup", function (e) {
-            let newItems = items.filter(function (a) { 
-              switch (page){
-                case "products":
-                  // items = flowersData;
-                  return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                    a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['category'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['price'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['seller']['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['stock'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
-                  );
-        
-                case "users":
-                  console.log(a)
-                  return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                    a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['email'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
-                  );
-                  
-                case "sellers":
-                  return (a['id'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                    a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['location'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['contact'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
-                  );
-                  
-                case "orders":
-                  return (a['state'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) || 
-                    a['productId'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['user'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['orderId'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['price'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['quantity'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                    a['date'].toLocaleDateString("EN-EG").includes(document.getElementById("search").value.toUpperCase())
-                  );
-  
-                  case "requestedsellers":
-                    // items = flowersData;
-                    return (a['name'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                      a['contact'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                      a['password'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                      a['location'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase()) ||
-                      a['no_products'].toString().toUpperCase().includes(document.getElementById("search").value.toUpperCase())
-                    );
-        
-                default: 
-                  return;
-              }
-            });
+            let searchValue = e.target.value.toUpperCase();
+            console.log(searchValue)
+            let newItems = filterItems(items,searchValue);
             displayTable(newItems,page);
           });
         }
       }
+      
+      // if i clicked main page
       else {
         main_page.classList.remove("d-none");
         content.classList.remove("scrollable");
@@ -149,98 +122,15 @@ window.addEventListener("load", function () {
         let Users = document.getElementById("Users");
         let Visitors = document.getElementById("Visitors");
         let Orders = document.getElementById("Orders");
-        // console.log(cards[0].children)
-        Revenue.textContent = localStorage.getItem("totalPrice");
-        Users.textContent = JSON.parse(localStorage.getItem("userData")).length
-        Orders.textContent = JSON.parse(localStorage.getItem("order")).length;
-        Visitors.textContent = localStorage.getItem("visitors");
+        Revenue.textContent = ("$ " + (localStorage.getItem("totalPrice") ? Math.floor(Number(JSON.parse(localStorage.getItem("totalPrice")))) : 0));
+        Users.textContent = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")).length : 0; 
+        Orders.textContent = localStorage.getItem("order") ? JSON.parse(localStorage.getItem("order")).length : 0;
+        Visitors.textContent = localStorage.getItem("visitors") ? JSON.parse(localStorage.getItem("visitors")) : 0;
+        
       }
     }) 
   }
 
-  function createCharts(){
-    let ctx1= document.querySelector(".ctx1");
-    let ctx2=document.querySelector(".ctx2");
-    ctx1.width = 400;
-    ctx1.height = 200;
-    ctx2.width = 400;
-    ctx2.height = 200;
-    let FlowersDate = JSON.parse(localStorage.getItem("flowersData")) || [];
-  // let sellerData = JSON.parse(localStorage.getItem("sellerData")) || [];
-    const filteredFlowers = FlowersDate.filter(
-      (product) =>  product.stock > 0
-    );
-    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const barChartConfig = {
-      type: "bar",
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: "Monthly Revenue",
-            data: filteredFlowers.map((data) => data.stock),
-            backgroundColor: "#ee5d90cc",
-            borderColor: "lavender",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    };
-    new Chart(ctx1, barChartConfig);
-
-    //chart 2
-
-    const secondBarChartConfig = {
-      type: "bar",
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: "Monthly Visitors",
-            data: localStorage.getItem("visitors"),
-            backgroundColor: "#c7dbef",
-            borderColor: "lavender",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    };
-    new Chart(ctx2, secondBarChartConfig);
-  }
-
-  function createTableStructure() {
-    let content = document.getElementById("content");
-    let table_container = document.createElement("div");
-    table_container.classList.add("table-responsive");
-    let my_table = document.createElement("table");
-    my_table.className = "table text-center table-hover";
-    my_table.setAttribute("id","itemTable");
-    let my_head = document.createElement("thead");
-    let my_head_Row = document.createElement("tr");
-    my_head.classList.add("table-light");
-    my_head.appendChild(my_head_Row);
-    let my_body = document.createElement("tbody");
-    my_body.setAttribute("id","tableList");
-    my_table.appendChild(my_head);
-    my_table.appendChild(my_body);
-    table_container.appendChild(my_table);
-    content.appendChild(table_container);
-  }
-  
   function displaySearchInput(items, page){
     let content = document.getElementById("content");
     let search_container = document.createElement("div");
@@ -268,10 +158,120 @@ window.addEventListener("load", function () {
     search_container.appendChild(input_container);
     content.appendChild(search_container);
   }
+
+  function createTableStructure() {
+    let content = document.getElementById("content");
+    let table_container = document.createElement("div");
+    table_container.classList.add("table-responsive");
+    let my_table = document.createElement("table");
+    my_table.className = "table text-center table-hover";
+    my_table.setAttribute("id","itemTable");
+    let my_head = document.createElement("thead");
+    let my_head_Row = document.createElement("tr");
+    my_head.classList.add("table-light");
+    my_head.appendChild(my_head_Row);
+    let my_body = document.createElement("tbody");
+    my_body.setAttribute("id","tableList");
+    my_table.appendChild(my_head);
+    my_table.appendChild(my_body);
+    table_container.appendChild(my_table);
+    content.appendChild(table_container);
+  }
+
+  function createCharts(){
+    let ctx1= document.querySelector(".ctx1");
+    let ctx2=document.querySelector(".ctx2");
+    // ctx1.style.width = '50%';
+    // ctx1.height = 200;
+    // ctx2.width = 400;
+    // ctx2.height = 200;
+
+    let FlowersDate = JSON.parse(localStorage.getItem("flowersData")) || [];
+    const filteredFlowersBasedOnStock = FlowersDate.filter(
+      (product) =>  product.stock > 0
+    );
+    
+    const groupedData = filteredFlowersBasedOnStock.reduce((acc, flower) => {
+      if (!acc[flower.category]) {
+        acc[flower.category] = 0;
+      }
+      acc[flower.category] += flower.stock;
+      return acc;
+    }, {});
+
+    const categories = Object.keys(groupedData);
+
+    const barChartConfig = {
+      type: "bar",
+      data: {
+        labels: categories,
+        datasets: [
+          {
+            label: "Categories",
+            data: groupedData,
+            backgroundColor: "#EE5D90cc",
+            borderColor: "lavender",
+            borderWidth: 1,
+            barThickness: 30,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    };
+    new Chart(ctx1, barChartConfig);
+
+    //chart 2
+    let sellersData = JSON.parse(localStorage.getItem("sellerData")) || [];
+    const totalPaidNoBySeller = {};
+    const filteredFlowersBasedOnPaidNo = FlowersDate.filter(
+      (product) =>  product.paidNo > 0
+    );
+
+    for (const seller of sellersData) {
+      let sellerTotalPaidNo = 0;
+      for (const productId of seller.products) {
+        const product = filteredFlowersBasedOnPaidNo.find((flower) => flower.id === productId);
+        if (product) {
+          sellerTotalPaidNo += product.paidNo;
+        }
+      }
+      totalPaidNoBySeller[seller.id] = sellerTotalPaidNo;
+    }
+
+    const secondBarChartConfig = {
+      type: "bar",
+      data: {
+        labels: Object.keys(totalPaidNoBySeller),
+        datasets: [
+          {
+            label: "Total paid products",
+            data: totalPaidNoBySeller,
+            backgroundColor: "#3b7dddcc",
+            borderColor: "lavender",
+            borderWidth: 1,
+            barThickness: 30,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    };
+    new Chart(ctx2, secondBarChartConfig);
+  }
   
   function displayHead(items,page) {
     let tableHead = document.querySelector("#content #itemTable thead tr");
-    console.log(page)
     let heads = Object.keys(items[0]);
     tableHead.innerHTML = "";
     for(let i=0; i<heads.length; i++){
@@ -317,6 +317,13 @@ window.addEventListener("load", function () {
     
     if(page != "orders" && page != "requestedsellers" ){
       const deleteButton = document.createElement("button");
+      if(page == "products"){
+        deleteButton.setAttribute("data-id", item.id);
+        deleteButton.setAttribute("data-sellerId", item.seller.id);
+      }
+      else if(page == "sellers"){
+        deleteButton.setAttribute("data-id",item.id)
+      }
       deleteButton.className = "btn btn-danger";
       deleteButton.style.width = "90px";
       deleteButton.textContent = "Delete";
@@ -331,7 +338,16 @@ window.addEventListener("load", function () {
       dapproveButton.addEventListener("click", (e) => addSeller(e));
       row.children[row.children.length - 1].appendChild(dapproveButton);
     }
-      return row;
+    return row;
+  }
+
+  function displayTable(items,page) {
+    const tableListContainer = document.getElementById("tableList");
+    tableListContainer.innerHTML = "";
+    items.forEach((item) => {
+      const row = displayRow(item,page);
+      tableListContainer.appendChild(row);
+    });
   }
 
   function addSeller(e){
@@ -364,16 +380,17 @@ window.addEventListener("load", function () {
     }
   }
   
-  function displayTable(items,page) {
-    const tableListContainer = document.getElementById("tableList");
-    tableListContainer.innerHTML = "";
-    items.forEach((item) => {
-      const row = displayRow(item,page);
-      tableListContainer.appendChild(row);
-    });
-  }
-  
-  function deleteItem(itemId) {
+  function deleteItem(itemId,e) {
+    let users = localStorage.getItem("userData");
+    if(e.target.closest("tr").children[2].textContent == "admin@example.com"){
+      Swal.fire({
+        title: `You can't delete the admin (yourself)`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+    // if(page == "users")
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -403,10 +420,18 @@ window.addEventListener("load", function () {
               (item) => item.id === itemId
               );
               
-              if (itemIndex !== -1) {
-                if(page.toLowerCase() == "products"){
-                  flowersData.splice(itemIndex, 1);
+          if (itemIndex !== -1) {
+            if(page.toLowerCase() == "products"){
+              flowersData.splice(itemIndex, 1);
+              let productId = e.target.getAttribute("data-id");
+              let sellerId = e.target.getAttribute("data-sellerId");
+              const seller = sellersData.find((seller) => seller.id == sellerId);
+              const productIndex = seller.products.indexOf(Number(productId));
+              if (productIndex !== -1)
+                seller.products.splice(productIndex, 1);
+
               localStorage.setItem("flowersData", JSON.stringify(flowersData));
+              localStorage.setItem("sellerData", JSON.stringify(sellersData));
               displayTable(flowersData, "products");
             }
             else if(page.toLowerCase() == "users"){
@@ -416,7 +441,18 @@ window.addEventListener("load", function () {
             }
             else if(page.toLowerCase() == "sellers"){
               sellersData.splice(itemIndex, 1);
+              let sellerId = e.target.getAttribute("data-id");
+              const seller = sellersData.find((seller) => seller.id == sellerId);
+              const deletedProducts = flowersData.filter((product) => product.seller.id == Number(sellerId));
+              console.log(deletedProducts);
+              for (let i = 0; i < flowersData.length; i++) {
+                for (let j = 0; j < deletedProducts.length; j++) {
+                  if(flowersData[i].id == deletedProducts[j].id)
+                  flowersData.splice(i, 1);
+                }
+              }
               localStorage.setItem("sellerData", JSON.stringify(sellersData));
+              localStorage.setItem("flowersData", JSON.stringify(flowersData));
               displayTable(sellersData,"sellers");
             }
             else if(page.toLowerCase() == "orders"){
@@ -464,7 +500,7 @@ window.addEventListener("load", function () {
       }
 
       if (lastsorted == e.target.textContent) {
-        displayTable(items.reverse());
+        displayTable(items.reverse(), page);
         return;
       }
       else if (e.target.textContent == "delete"){
@@ -485,9 +521,38 @@ window.addEventListener("load", function () {
           return firstKey - secondKey;
       })
       lastsorted = e.target.textContent;
-      displayTable(items,page);
+      displayTable(items, page);
     });
   }
+
+  function filterItems(items, searchValue) {
+    let propNames = getSearchProps(items);
+    return items.filter(item => {
+      return propNames.some(prop => {
+        let propValue = prop.includes(' ') ? item[prop.split(' ')[0]][prop.split(' ')[1]] : item[prop];
+        return propValue.toString().toUpperCase().includes(searchValue);
+      })
+    }) 
+  }
+
+  function getSearchProps(items) {
+    let heads = document.querySelectorAll("#content #itemTable thead tr th");
+    let propNames = [];
+    for(let i=0; i<heads.length - 1; i++){     
+      if( typeof items[0][heads[i].textContent] == "object"){
+        let innerHeads = Object.keys(items[0][heads[i].textContent]);
+        for (let j = 0; j < innerHeads.length; j++) {
+          propNames.push(`${heads[i].textContent} ${Object.keys(items[0][heads[i].textContent])[j]}`)
+        }
+      }
+      else{
+        propNames.push(`${heads[i].textContent}`);
+      }
+    }
+    return propNames;
+  }
+
   createCharts();
+  
 });
 

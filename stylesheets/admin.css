@@ -96,9 +96,11 @@ body {
   color: #EE5D90;
   border: 0 !important;
 }
+.main-list a.active i,
 .main-list a:hover i{
   color: #33334f;
 }
+.main-list a.active li,
 .main-list a:hover li{
   background-color: #EE5D90;
 }
@@ -177,10 +179,10 @@ body {
 /* large */
 @media (min-width: 992px) {
   ul.main-list a:nth-child(1) li{
-    border-radius: 0rem !important;
+    border-radius: 0rem;
   }
   ul.main-list a:last-child li{
-    border-radius: 0rem !important;
+    border-radius: 0rem;
   } 
   .header{
     height: 70px;
@@ -189,6 +191,9 @@ body {
     background-color: #3b7ddd;
     padding-right: 0rem !important;
     padding-left: 0rem !important;
+  }
+  .main-list{
+    padding-left: 10px !important;
   }
   .main-list li{
     background-color: #3b7ddd;
@@ -201,12 +206,16 @@ body {
     color: white;
     border: 0 !important;
   }
-  .main-list a:hover i{
+  .main-list a:hover i,
+  .main-list a.active i{
     color: #EE5D90;
   }
+  .main-list a.active li,
   .main-list a:hover li{
     background-color: #f5f7fb;
     color: #EE5D90;
+    border-top-left-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
   }
   .data{
     height: calc(100vh - 70px);
