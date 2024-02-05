@@ -58,7 +58,7 @@ window.addEventListener("DOMContentLoaded", function () {
       email: email,
       password: password,
       role: "user",
-      favorite: [],
+      favourites: [],
     };
 
     UserData.push(newUser);
