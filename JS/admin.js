@@ -28,9 +28,9 @@ window.addEventListener("load", function () {
     document.body.style.backgroundColor = "#FFF";
     document.body.appendChild(error);
     error.appendChild();
-    sessionStorage.removeItem(loggedInUser);
     return;
   }
+  sessionStorage.removeItem("loggedInUser");
 
   let page  = "";
   var lastsorted = ""
@@ -469,15 +469,10 @@ window.addEventListener("load", function () {
               ordersData.setItem("sellersData", JSON.stringify(ordersData));
               displayTable(ordersData, "orders");
             }
-            // const sellerProducts = items.filter(
-            //   (item) => item.id === itemId
-            // );
-            // displayTable(sellerProducts);
           } else {
             console.error(`Product with ID ${itemId} not found`);
           }
         } else if (
-          /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
         ) {
           swalWithBootstrapButtons.fire(
