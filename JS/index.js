@@ -1,5 +1,5 @@
 import * as order from "./order.js";
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   function loadData() {
     let FlowersDate;
     let SellerData;
@@ -41,8 +41,8 @@ window.addEventListener("load", function () {
       })
       .catch((error) => console.error("Error fetching products:", error));
   }
-  
-  if (localStorage.length === 0) {
+
+  if (localStorage.length === 0 || localStorage.length === 1) {
     loadData();
   }
 
@@ -50,7 +50,7 @@ window.addEventListener("load", function () {
   let navContainer = this.document.querySelector(".nav-item.dropdown");
 
   if (navContainer) {
-    if (localStorage.length == 0) {
+    if (localStorage.length == 0 || localStorage.length === 1) {
       loadData();
     }
 
