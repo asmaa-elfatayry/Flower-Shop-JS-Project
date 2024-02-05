@@ -24,7 +24,7 @@ h1 {
 
 /* line 25, ../sass/signUp.scss */
 .right-box {
-  background-image: linear-gradient(rgba(245, 242, 242, 0.5), rgba(218, 161, 245, 0.5)), url("../images/flowers/flower14.jpg");
+  background-image: linear-gradient(rgba(245, 242, 242, 0.5), rgba(218, 161, 245, 0.5)), url("../images/flowers/flower14.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
