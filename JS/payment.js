@@ -179,6 +179,8 @@ document.addEventListener("DOMContentLoaded", function () {
         removeCartOrdersAfterChecked();
         updateTapleNoOrder();
         updateBadge();
+        window.location.href="../HTML Pages/index.html";
+
 
         // createTable();
       } else if (product.stock < 1) {
