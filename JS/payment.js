@@ -171,14 +171,14 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       if (product && product.stock > 0) {
-        product.paidno = (product.paidno || 0) + soldProduct.quantity;
+        product.paidNo = (product.paidNo || 0) + soldProduct.quantity;
         product.stock -= soldProduct.quantity;
         ClearInputs();
         showSweetAlert();
-
         removeCartOrdersAfterChecked();
         updateTapleNoOrder();
         updateBadge();
+       window.location.href="../HTML Pages/index.html";
 
         // createTable();
       } else if (product.stock < 1) {

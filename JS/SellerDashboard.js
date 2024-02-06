@@ -377,6 +377,7 @@ addProductForm.addEventListener("submit", function (event) {
   }
 });
 //update
+
 function updateProduct(productId) {
   const updateForm = document.getElementById("updateProductForm");
   let nameValue = document.getElementById("updateProductName");
@@ -386,7 +387,7 @@ function updateProduct(productId) {
   let categoryValue = document.getElementById("updateProductCategory");
 
   // get specific product
-  const productToUpdate = FlowersDate.find(
+  let productToUpdate = FlowersDate.find(
     (product) => product.id === productId
   );
 
@@ -394,20 +395,18 @@ function updateProduct(productId) {
     // retrieve data from table to inputs :)
     nameValue.value = productToUpdate.name;
     priceValue.value = productToUpdate.price;
-    //imageValue.files[0].name = productToUpdate.image;
     categoryValue.value = productToUpdate.category;
     stockValue.value = productToUpdate.stock;
 
+    // Update the product => new values
     updateForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      // Update the product => new values
       const validName = validateTextInput(
         nameValue,
         "nameErr",
         "Plz Enter Valid Name"
       );
-
       const validPrice = validateNumberInput(
         priceValue,
         "priceErr",
@@ -415,19 +414,16 @@ function updateProduct(productId) {
         0,
         1000
       );
-
       const validImage = validateFileInput(
         imageValue,
         "aimgErr",
         "Please choose an image."
       );
-
       const validCategory = validateTextInput(
         categoryValue,
         "categoryErr",
         "Plz Enter a Valid category flower name!"
       );
-
       const validStock = validateNumberInput(
         stockValue,
         "stockErr",
@@ -451,10 +447,9 @@ function updateProduct(productId) {
         // Update the product properties
         productToUpdate.name = nameValue.value;
         productToUpdate.price = parseFloat(priceValue.value);
-        productToUpdate.image = imageValue.files[0].name;
         productToUpdate.category = categoryValue.value;
         productToUpdate.stock = parseInt(stockValue.value);
-        console.log(imageValue.files[0].name);
+
         localStorage.setItem("flowersData", JSON.stringify(FlowersDate));
 
         displayProducts(sellerProducts);
@@ -474,6 +469,7 @@ function updateProduct(productId) {
     console.error(`Product with ID ${productId} not found`);
   }
 }
+
 // end update
 // toggle theme
 export function toggleTheme() {

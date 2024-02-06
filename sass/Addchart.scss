@@ -54,14 +54,14 @@ div>img{
     animation-delay: 1s;
 }
 @keyframes truck {
-    40%, 70% {
-        left: 60%;
+    40%,70%{
+      left: 60%;
     }
     100% {
-        left: 100%;
+      left: 100%;
+  
     }
-}
-
+  }
 @keyframes box {
     0%, 40% {
         opacity: 0;
@@ -74,6 +74,7 @@ div>img{
     60% {
         opacity: 0;
         left: 61%;
+
     }
 }
 

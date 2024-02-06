@@ -43,7 +43,8 @@ window.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".charts").addEventListener("click", ShowCharts);
   // document.querySelector(".darkMood").addEventListener("click", toggleTheme);
 
-  document.querySelector(".logout").addEventListener("click", function () {
+  document.querySelector(".logoutI").addEventListener("click", function () {
+    debugger;
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",

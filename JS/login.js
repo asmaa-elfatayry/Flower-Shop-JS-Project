@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         SellerData = data.sellers;
         UserData = data.users;
-        favourites = data.favourites;
+       // favourites = data.favourites;
         RequestSeller = data.request_seller;
         ChartOrder = data.CartOrders;
 

@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", function () {
     let UserData;
     let RequestSeller;
     let ChartOrder;
-    let favourites;
+    //let favourites;
     sessionStorage.setItem("guestRequestorder", JSON.stringify([]));
 
     fetch("../Data.json")
@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         SellerData = data.sellers;
         UserData = data.users;
-        favourites = data.favourites;
+      //  favourites = data.favourites;
         RequestSeller = data.request_seller;
         ChartOrder = data.CartOrders;
 
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("userData", JSON.stringify(UserData));
         localStorage.setItem("requestseller", JSON.stringify(RequestSeller));
 
-        localStorage.setItem("favourites", JSON.stringify(favourites));
+      //  localStorage.setItem("favourites", JSON.stringify(favourites));
 
         localStorage.setItem("ChartOrder", JSON.stringify(ChartOrder));
 

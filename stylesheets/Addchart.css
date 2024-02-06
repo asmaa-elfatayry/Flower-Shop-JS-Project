@@ -60,17 +60,19 @@ div > img {
 }
 
 @keyframes truck {
-  40%, 70% {
+  40%,70%{
     left: 60%;
   }
   100% {
     left: 100%;
+
   }
 }
 @keyframes box {
   0%, 40% {
     opacity: 0;
     left: 55%;
+
   }
   50% {
     opacity: 1;
@@ -79,6 +81,7 @@ div > img {
   60% {
     opacity: 0;
     left: 61%;
+
   }
 }
 /* line 80, ../sass/Addchart.scss */
