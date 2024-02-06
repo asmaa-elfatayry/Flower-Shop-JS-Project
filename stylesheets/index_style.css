@@ -314,12 +314,15 @@ margin: 20px auto;
   background-color:#E72463;
   color:white;
   margin-bottom: 40px;
-  transition:2s;
+  border-radius:10px;
+  transition:1.3s;
+  border:none;
 }
 .input-item input[type ="submit"]:hover
 {
-  background-color:white;
-  color:#E72463;
+  border:solid 1px #E72463;
+  background-color: white;
+  color: #E72463;
 }
 /*end of contact ===========================================*/
 /* about us =========================================================*/
