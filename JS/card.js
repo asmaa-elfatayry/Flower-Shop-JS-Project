@@ -122,7 +122,7 @@ export function addchart(id) {
       let price = found_prod.price;
       let sellerid = found_prod.seller.id;
       let date = new Date();
-      let state = 0;
+      let state = "Pending";
       let prodId = found_prod.id;
       let user;
       if (CurrentUserData.length == 0) {

@@ -1,29 +1,45 @@
+:root{
+  --main-bg-color:#f8f9fa;
+  --text-color:#4F4F4F;
+  --light-color:#eee;
+  --main-pink-dark-color:#bb7ca8;
+  --main-pink-light-color:#F05990;
+  --error-msg:brown;
+  --green-color:green;
+  --info-img-border:#9880e4;
+  --lavender-color:lavender;
+  --state-pending-bg:#c78dd1db;
+  --state-approved-bg:#088a31bf;
+  --span-info-bg:#1b1a1ab7;
+  --icons-color:#657079;
+  --whitesmoke-color:whitesmoke;
+}
 /* line 1, ../sass/seller.scss */
 body {
-  color: #4F4F4F;
-  background-color: #ffffff;
+  color: var(--text-color);
+  background-color: var(--main-bg-color);
 }
 
 /* line 31, ../sass/_variables.scss */
 /* line 7, ../sass/seller.scss */
-body.dark-theme {
+/* body.dark-theme {
   color: #e1e0e0;
   background-color: #121212;
-}
+} */
 
 /* line 11, ../sass/seller.scss */
-body.dark-theme .sellerInfo {
+/* body.dark-theme .sellerInfo {
   background-color: #2c2b2d;
-}
+} */
 
 /* line 15, ../sass/seller.scss */
-body.dark-theme tr, th, td, input {
+/* body.dark-theme tr, th, td, input {
   background-color: #b8aad4;
-}
+} */
 
 /* line 21, ../sass/seller.scss */
 .btn.btn-danger {
-  background-color: #F05990;
+  background-color: var(--main-pink-light-color);
 }
 
 /* line 25, ../sass/seller.scss */
@@ -35,10 +51,10 @@ body.dark-theme tr, th, td, input {
 .info {
   position: absolute;
   left: 40px;
-  background-color: #1b1a1ab7;
-  color: #f6f2f2;
+  background-color: var(--span-info-bg);
+  color: var(--main-bg-color);
   border-radius: 4px;
-  border: 1px solid #F05990;
+  border: 1px solid var(--main-pink-light-color);
   padding: 3px;
   transition: .4s;
   font-size: 14px;
@@ -72,7 +88,7 @@ body.dark-theme tr, th, td, input {
 
 /* line 55, ../sass/seller.scss */
 .info.logout {
-  top: 380px;
+  top: 320px;
 }
 
 /* line 58, ../sass/seller.scss */
@@ -82,18 +98,19 @@ body.dark-theme tr, th, td, input {
 
 /* line 62, ../sass/seller.scss */
 .error-msg {
-  color: brown;
+  color: var(--error-msg);
   margin-left: 10px;
 }
 
 /* line 66, ../sass/seller.scss */
 .is-invalid {
-  border-color: brown;
+  border-color: var(--error-msg);
 }
 
 /* line 69, ../sass/seller.scss */
 .is-valid {
-  border-color: green;
+  border-color: var(--green-color);
+  
 }
 
 /* line 73, ../sass/seller.scss */
@@ -109,7 +126,7 @@ body.dark-theme tr, th, td, input {
 
 /* line 86, ../sass/seller.scss */
 .sellerInfo {
-  background-color: lavender;
+  background-color: var(--lavender-color);
   width: 50px;
   display: flex;
   flex-direction: column;
@@ -140,7 +157,7 @@ i:hover {
 #sellerInfoContainer.showInfo {
   display: block;
   width: 193px;
-  background-color: whitesmoke;
+  background-color: var(--whitesmoke-color);
   height: 100vh;
   position: absolute;
   left: 52px;
@@ -153,12 +170,12 @@ i:hover {
 #sellerInfoContainer .sellerImg {
   width: 115px;
   margin: 40px 0;
-  border: 6px solid #9880e4;
+  border: 6px solid var(--info-img-border);
 }
 
 /* line 125, ../sass/seller.scss */
 #sellerInfoContainer i {
-  color: #657079;
+  color: var(--icons-color);
 }
 
 /* line 128, ../sass/seller.scss */
@@ -175,6 +192,9 @@ input[type=file] {
 .button-wrap {
   position: relative;
 }
+.btn.btn-info{
+  color: var(--main-bg-color);
+}
 
 /* line 139, ../sass/seller.scss */
 .uploadButton {
@@ -182,10 +202,10 @@ input[type=file] {
   padding: 12px 18px;
   cursor: pointer;
   border-radius: 5px;
-  background-color: #bf4289;
+  background-color: var(--main-pink-light-color);
   font-size: 16px;
   font-weight: bold;
-  color: #fff;
+  color: var(--main-bg-color);
 }
 
 /* line 149, ../sass/seller.scss */
@@ -232,7 +252,7 @@ input[type=file] {
 
 /* line 179, ../sass/seller.scss */
 .typeOf {
-  color: #bf4289;
+  color: var(--main-pink-dark-color);
 }
 
 /* line 184, ../sass/seller.scss */
@@ -247,15 +267,15 @@ input[type=file] {
 
 /* line 193, ../sass/seller.scss */
 .state span:hover {
-  background-color: #c78dd1db;
-  color: whitesmoke;
+  background-color: var(--state-pending-bg);
+  color: var(--whitesmoke-color);
 }
 
 /* line 198, ../sass/seller.scss */
-.state span.approved {
-  background-color: #088a31bf;
+.state span.Delivered {
+  background-color: var(--state-approved-bg);
   border: 2px solid #95e98cdb;
-  color: whitesmoke;
+  color: var(--whitesmoke-color);
 }
 
 @media (max-width: 576px) {
