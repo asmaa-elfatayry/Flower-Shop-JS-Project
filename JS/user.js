@@ -25,6 +25,9 @@ window.addEventListener("DOMContentLoaded", function () {
       let name_in = document.getElementsByTagName("input")[0].value;
       let email_in = document.getElementsByTagName("input")[1].value;
       let password_in = document.getElementsByTagName("input")[2].value;
+      let password_in_new = document.getElementsByTagName("input")[3].value;
+    
+
       if (!editform.valid_name(name_in.trim())) {
         editform.handleTheErrorMessage(
           0,
@@ -50,14 +53,24 @@ window.addEventListener("DOMContentLoaded", function () {
           2,
           "This is not a complex password. Please choose a password with at least 8 characters, including letters, digits, and special characters."
         );
-      } else {
-        const loggedInUser = {
-          id: user.id,
-          name: name_in.trim(),
-          email: email_in,
-          role: "user",
-        };
-        sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+      } 
+      else if(!updateprofile.correctOldUserpassword(user.id,password_in))
+      {
+        editform.handleTheErrorMessage(
+          2,
+          "this not match the old password"
+        );
+
+      }
+      else if(updateprofile.isnewPassworMatchOld(user.id,password_in_new))
+      {
+        editform.handleTheErrorMessage(
+          3,
+          "please choose new password"
+        );
+
+      }
+      else {
         updateprofile.editprofile(
           user.id,
           name_in.trim(),
