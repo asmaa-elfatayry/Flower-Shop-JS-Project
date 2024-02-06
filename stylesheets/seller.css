@@ -114,7 +114,7 @@ body.dark-theme tr, th, td, input {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  position: absolute;
+  position: fixed;
   left: 0px;
   top: 0px;
   height: 100vh;

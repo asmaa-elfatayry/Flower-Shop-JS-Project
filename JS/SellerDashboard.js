@@ -166,7 +166,7 @@ export function displayProductRow(product, type) {
   const actionsCell = document.createElement("td");
   actionsCell.className = " justify-content-center actionsBtn ";
   const updateButton = document.createElement("button");
-  updateButton.className = "btn btn-info mx-2";
+  updateButton.className = "btn btn-info mx-2 my-1";
   updateButton.setAttribute("data-toggle", "modal");
   updateButton.style.width = "90px";
   updateButton.setAttribute("data-target", "#updateProductModal");
@@ -475,11 +475,11 @@ function updateProduct(productId) {
   }
 }
 // end update
-// toggle theme
-export function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle("dark-theme");
-}
+// // toggle theme
+// export function toggleTheme() {
+//   const body = document.body;
+//   body.classList.toggle("dark-theme");
+// }
 
 // start handle orders section
 export function ShowOrders() {
