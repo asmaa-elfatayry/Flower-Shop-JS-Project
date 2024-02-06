@@ -6,6 +6,7 @@ import {
   ValidPassword,
 } from "./ValidationMoudule.js";
 import { updateBadge } from "./order.js";
+let chartOrderData ;
 
 document.addEventListener("DOMContentLoaded", function () {
   let visaCard = document.querySelector(".visa ");
@@ -57,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     let paypalEmail = document.getElementById("paypalEmail");
     let paypalPassword = document.getElementById("paypalPassword");
+    chartOrderData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
     resetErrorMessages();
     if (!ValidEmail(paypalEmail.value)) {
       showError("paypalEmailError", "Invalid Email");
@@ -77,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let visaExpiresMonth = document.getElementById("visaExpiresMonth");
     let visaExpiresYear = document.getElementById("visaExpiresYear");
     let visaCVV = document.getElementById("visaCVV");
+    chartOrderData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
 
     resetErrorMessages();
 
@@ -117,11 +120,9 @@ document.addEventListener("DOMContentLoaded", function () {
       inp.value = "";
     });
   }
-  let chartOrderData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   let totalorders = JSON.parse(localStorage.getItem("order")) || [];
 
   let order = [];
-
   function removeCartOrdersAfterChecked() {
     let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
     let userId;
@@ -130,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < chartOrderData.length; i++) {
         if (chartOrderData[i].user == userId) {
           order = chartOrderData.splice(i, 1);
+          console.log(order,chartOrderData);
           order.forEach((ord) => {
             totalorders.push(ord);
           });
@@ -164,17 +166,28 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       if (product && product.stock > 0) {
-        product.paidNo = (product.paidNo || 0) + soldProduct.quantity;
-        product.stock -= soldProduct.quantity;
+        product.paidno = (product.paidno || 0) + soldProduct.quantity;
+        let result= product.stock - soldProduct.quantity;
+        if(result<0)
+        {
+          product.stock =0;
+
+
+        }
+        else{
+          product.stock -= soldProduct.quantity;
+
+        }
         ClearInputs();
         showSweetAlert();
         removeCartOrdersAfterChecked();
         updateTapleNoOrder();
         updateBadge();
-       window.location.href="../HTML Pages/index.html";
+         window.location.href="../HTML Pages/index.html";
 
         // createTable();
-      } else if (product.stock < 1) {
+      } 
+      else if (product.stock < 1) {
         Swal.fire("Sorry, The Product Not Avalible Now!");
         ClearInputs();
       }
