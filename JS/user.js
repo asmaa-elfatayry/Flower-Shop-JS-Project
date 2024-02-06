@@ -3,7 +3,7 @@ import * as updateprofile from "./EditUserProfile.js";
 import {
   getdeliveredorder,
   getpendingorder,
-  getProductImgById,
+  getProductImgByIdUser,
   getwhishlist,
   updateBadge,
 } from "./order.js";
@@ -95,6 +95,7 @@ window.addEventListener("DOMContentLoaded", function () {
       document.getElementsByTagName("input")[1].value = currentUser.email;
     });
   function getorders() {
+
     let pendingOrders = getpendingorder();
     let deliveredOrders = getdeliveredorder();
 
@@ -210,7 +211,7 @@ window.addEventListener("DOMContentLoaded", function () {
       div.appendChild(textContainer);
 
       let p_image = document.createElement("img");
-      let source = getProductImgById(orders[i].productId);
+      let source = getProductImgByIdUser(orders[i].productId);
       p_image.src = `../images/flowers/${source}`;
       p_image.classList.add("rounded-circle");
       p_image.width = "70";
