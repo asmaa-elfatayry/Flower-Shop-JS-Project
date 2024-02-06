@@ -52,52 +52,57 @@ export function ShowCharts() {
   document.querySelector(".chart-parent").style.display = "flex";
   document.querySelector(".dynamic-section").style.display = "none";
   myspan.textContent = "Charts Page";
-  let ctx1 = document.createElement("canvas");
+
+  // orders
+  const ctx1 = document.createElement("canvas");
   ctx1.width = 400;
-  ctx1.height = 200;
+  ctx1.height = 300;
   ctx1.classList.add("myChart");
-  document.querySelector(".chart-parent").appendChild(ctx1);
+  chartParent.appendChild(ctx1);
 
-  // console.log(FlowersDate[0]["seller"]);
-  const filteredFlowers = FlowersDate.filter(
-    (product) => product["seller"].id === sellerId && product.stock > 0
+  const sellerOrders = JSON.parse(localStorage.getItem("order") || []).filter(
+    (order) => order.sellerId === sellerId
   );
-  console.log(filteredFlowers);
 
-  const barChartConfig = {
+ 
+  const orderLabels = sellerOrders.map((order) => {
+    const product = FlowersDate.find((item) => item.id === order.productId);
+    return product ? product.name : ""; 
+  });
+
+  const orderData = sellerOrders.map((order) => order.quantity);
+
+  new Chart(ctx1, {
     type: "bar",
     data: {
-      labels: filteredFlowers.map((data) => data.name),
+      labels: orderLabels,
       datasets: [
         {
-          label: "Stock Numbers",
-          data: filteredFlowers.map((data) => data.stock),
+          label: "Order Quantities",
+          data: orderData,
           backgroundColor: "#ca9cbc",
           borderColor: "lavender",
           borderWidth: 1,
+          barThickness: 80,
         },
       ],
     },
     options: {
       scales: {
-        y: {
-          beginAtZero: true,
-        },
+        y: { beginAtZero: true },
       },
     },
-  };
-
-  new Chart(ctx1, barChartConfig);
+  });
   //second char
+  const filteredPaidFlowers = FlowersDate.filter(
+    (product) => product["seller"].id === sellerId && product.stock > 0
+  );
   let ctx2 = document.createElement("canvas");
   ctx2.width = 400;
-  ctx2.height = 200;
+  ctx2.height = 300;
   ctx2.classList.add("myChart");
   document.querySelector(".chart-parent").appendChild(ctx2);
 
-  const filteredPaidFlowers = FlowersDate.filter(
-    (product) => product["seller"].id === sellerId
-  );
   console.log(filteredPaidFlowers);
 
   const barChartConfig2 = {
@@ -106,8 +111,8 @@ export function ShowCharts() {
       labels: filteredPaidFlowers.map((data) => data.name),
       datasets: [
         {
-          label: "Product Paid Numbers",
-          data: filteredPaidFlowers.map((data) => data.paidNo),
+          label: "Product Stock Numbers",
+          data: filteredPaidFlowers.map((data) => data.stock),
           backgroundColor: "#c7dbef",
           borderColor: "lavender",
           borderWidth: 1,
@@ -126,10 +131,10 @@ export function ShowCharts() {
 
   new Chart(ctx2, barChartConfig2);
 }
-// end charts page
+//  charts end
 
 // display products
-export function displayProductRow(product, type) {
+export function displayProductRow(product) {
   const row = document.createElement("tr");
 
   const idCell = document.createElement("td");
@@ -166,13 +171,13 @@ export function displayProductRow(product, type) {
   const actionsCell = document.createElement("td");
   actionsCell.className = " justify-content-center actionsBtn ";
   const updateButton = document.createElement("button");
-  updateButton.className = "btn btn-info mx-2";
+  updateButton.className = "btn btn-info mx-2 my-1";
   updateButton.setAttribute("data-toggle", "modal");
   updateButton.style.width = "90px";
   updateButton.setAttribute("data-target", "#updateProductModal");
-  updateButton.setAttribute("data-id", product.id);
   updateButton.textContent = "Update";
   updateButton.addEventListener("click", () => updateProduct(product.id));
+  console.log(product.id);
   actionsCell.appendChild(updateButton);
 
   const deleteButton = document.createElement("button");
@@ -230,7 +235,7 @@ inpSearch.addEventListener("keyup", function () {
   });
 });
 //delete
-function deleteProduct(productId, e) {
+function deleteProduct(productId) {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton: "btn btn-success",
@@ -283,8 +288,13 @@ function deleteProduct(productId, e) {
 //add product
 
 const addProductForm = document.getElementById("addProductForm");
+document.querySelector(".addBtn").addEventListener("click", () => {
+  addProductForm.reset();
+});
+
 addProductForm.addEventListener("submit", function (event) {
   event.preventDefault();
+
   document.querySelector(".error-msg").innerHTML = "";
   flag = 1;
 
@@ -315,7 +325,7 @@ addProductForm.addEventListener("submit", function (event) {
   const validImage = validateFileInput(
     productImageInput,
     "aimgErr",
-    "Please choose an image."
+    "Please choose an image. Be care image must be in flowers folder!"
   );
 
   const productCategoryInput = document.getElementById("productCategory");
@@ -379,66 +389,59 @@ addProductForm.addEventListener("submit", function (event) {
 //update
 function updateProduct(productId) {
   const updateForm = document.getElementById("updateProductForm");
-  let nameValue = document.getElementById("updateProductName");
-  let priceValue = document.getElementById("updateProductPrice");
-  let imageValue = document.getElementById("updateProductImage");
-  let stockValue = document.getElementById("updateProductStock");
-  let categoryValue = document.getElementById("updateProductCategory");
+  const nameValue = document.getElementById("updateProductName");
+  const priceValue = document.getElementById("updateProductPrice");
+  const imageValue = document.getElementById("updateProductImage");
+  const stockValue = document.getElementById("updateProductStock");
+  const categoryValue = document.getElementById("updateProductCategory");
 
-  // get specific product
+  // Get specific product -> clicked
   const productToUpdate = FlowersDate.find(
     (product) => product.id === productId
   );
 
   if (productToUpdate) {
-    // retrieve data from table to inputs :)
+    // Retrieve my data :)
     nameValue.value = productToUpdate.name;
     priceValue.value = productToUpdate.price;
-    //imageValue.files[0].name = productToUpdate.image;
     categoryValue.value = productToUpdate.category;
     stockValue.value = productToUpdate.stock;
 
-    updateForm.addEventListener("submit", function (event) {
+    function handleUpdate(event) {
       event.preventDefault();
 
-      // Update the product => new values
       const validName = validateTextInput(
         nameValue,
         "nameErr",
-        "Plz Enter Valid Name"
+        "Please enter a valid name"
       );
 
       const validPrice = validateNumberInput(
         priceValue,
         "priceErr",
-        "Plz Enter Valid Price in range 0:1000",
-        0,
+        "Please enter a valid price in the range 5 to 1000",
+        5,
         1000
       );
 
       const validImage = validateFileInput(
         imageValue,
         "aimgErr",
-        "Please choose an image."
+        "Please choose an image from the flowers folder."
       );
 
       const validCategory = validateTextInput(
         categoryValue,
         "categoryErr",
-        "Plz Enter a Valid category flower name!"
+        "Please enter a valid category flower name."
       );
 
       const validStock = validateNumberInput(
         stockValue,
         "stockErr",
-        "Plz Enter a Stock No!",
+        "Please enter a stock number in the range 0 to 100",
         0,
         100
-      );
-
-      // get products for -> the current seller
-      const sellerProducts = FlowersDate.filter(
-        (product) => product.seller.id === sellerId
       );
 
       if (
@@ -448,17 +451,25 @@ function updateProduct(productId) {
         validCategory &&
         validStock
       ) {
-        // Update the product properties
+        // Update ->
         productToUpdate.name = nameValue.value;
         productToUpdate.price = parseFloat(priceValue.value);
-        productToUpdate.image = imageValue.files[0].name;
+
+        if (imageValue.files.length > 0) {
+          productToUpdate.image = imageValue.files[0].name;
+        }
         productToUpdate.category = categoryValue.value;
         productToUpdate.stock = parseInt(stockValue.value);
-        console.log(imageValue.files[0].name);
+
         localStorage.setItem("flowersData", JSON.stringify(FlowersDate));
 
+        const sellerProducts = FlowersDate.filter(
+          (product) => product.seller.id === sellerId
+        );
         displayProducts(sellerProducts);
+
         $("#updateProductModal").modal("hide");
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -467,6 +478,12 @@ function updateProduct(productId) {
           timer: 1500,
         });
       }
+    }
+
+    updateForm.addEventListener("submit", handleUpdate);
+
+    $("#updateProductModal").on("hidden.bs.modal", function () {
+      updateForm.removeEventListener("submit", handleUpdate);
     });
 
     $("#updateProductModal").modal("show");
@@ -474,15 +491,11 @@ function updateProduct(productId) {
     console.error(`Product with ID ${productId} not found`);
   }
 }
-// end update
-// toggle theme
-export function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle("dark-theme");
-}
+
 
 // start handle orders section
 export function ShowOrders() {
+
   myspan.textContent = ": Orders Details";
   document.querySelector(".chart-parent").style.display = "none";
   document.querySelector(".dynamic-section").style.display = "block";
@@ -490,28 +503,26 @@ export function ShowOrders() {
   document.getElementById("OrdersTable").style.display = "block";
   document.querySelector(".addBtn").style.display = "none";
 
+
   function getOrdersForSeller(sellerID) {
-    const allOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    const allOrders = JSON.parse(localStorage.getItem("order")) || [];
     return allOrders.filter((order) => order.sellerId === sellerID);
   }
 
+
   function updateOrderState(orderID, newState) {
-    const allOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    const allOrders = JSON.parse(localStorage.getItem("order")) || [];
     const updatedOrders = allOrders.map((order) => {
       if (order.orderID === orderID) {
         order.state = newState;
       }
       return order;
     });
-    localStorage.setItem("ChartOrder", JSON.stringify(updatedOrders));
+    localStorage.setItem("order", JSON.stringify(updatedOrders));
   }
 
-  const OrdersListContainer = document.getElementById("OrderList");
-  OrdersListContainer.innerHTML = "";
 
-  const sellerOrders = getOrdersForSeller(sellerId);
-
-  sellerOrders.forEach((order) => {
+  function createOrderRow(order) {
     const row = document.createElement("tr");
 
     const idUserCell = document.createElement("td");
@@ -541,29 +552,32 @@ export function ShowOrders() {
     const stateCell = document.createElement("td");
     stateCell.classList.add("state");
     const state = document.createElement("span");
-
-    if (order.state === 0) {
-      state.textContent = "Pending";
-    } else {
-      state.textContent = "Approved";
-      state.classList.add("approved");
-    }
-
+    state.textContent = order.state;
+    state.classList.add(order.state.toLowerCase());
     stateCell.appendChild(state);
     row.appendChild(stateCell);
-    OrdersListContainer.appendChild(row);
 
     state.addEventListener("click", function () {
-      state.classList.toggle("approved");
-      if (order.state === 0) {
-        state.textContent = "Approved";
-        order.state = 1;
-        updateOrderState(order.orderID, 1);
-      } else {
-        state.textContent = "Pending";
-        order.state = 0;
-        updateOrderState(order.orderID, 0);
+      if (order.state === "Pending") {
+        state.textContent = "Delivered";
+        state.classList.remove("pending");
+        state.classList.add("delivered");
+        order.state = "Delivered";
+        updateOrderState(order.orderID, "Delivered");
+        state.disabled = true;
       }
     });
+
+    return row;
+  }
+
+  const OrdersListContainer = document.getElementById("OrderList");
+  OrdersListContainer.innerHTML = "";
+
+  const sellerOrders = getOrdersForSeller(sellerId);
+
+  sellerOrders.forEach((order) => {
+    const row = createOrderRow(order);
+    OrdersListContainer.appendChild(row);
   });
 }

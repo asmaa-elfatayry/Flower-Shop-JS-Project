@@ -1,3 +1,17 @@
+:root{
+    --main-bg-color:#f5f7fb;
+    --main-pink-dark-color:#E72463;
+    --main-pink-light-color:#F05990;
+    --black-color:#000000;
+    --white-color:#ffffff;
+    --anchor-text:#dddddd;
+    --border-color:#dee2e6;
+    --border-dark-color:#ccc;
+    --box-shadow-color:rgba(0, 0, 0, 0.1);
+    --search-blue-color:#007bff;
+   
+  }
+
 #procuct-card {
     margin-right: 20px;
     margin-bottom: 20px;
@@ -17,9 +31,9 @@
 }
 
 #product-image{
-    background-color: white;
+    background-color: var(--white-color);
     padding: 0.5rem;
-    border: 2px solid #dee2e6;
+    border: 2px solid var(--border-color);
     text-align: center;
     border-radius: 0.5rem;
     box-shadow: 3px 3px 9px rgba(164,164,164,0.2);
@@ -51,29 +65,29 @@
 }
 
 .category-btn {
-    background-color: #fff !important;
-    border: 1px solid #ccc !important;
+    background-color: var(--white-color) !important;
+    border: 1px solid var(--border-dark-color) !important;
     padding: 8px 12px;
     margin: 5px;
     cursor: pointer !important;
 }
 
 ._active {
-    background-color: #e1397f !important;
-    color: white !important;
+    background-color: var(--main-pink-light-color) !important;
+    color: var(--white-color) !important;
 }
 
 .category-btn:hover {
-    background-color: #e1397f !important;
-    color: white !important;
+    background-color: var(--main-pink-light-color) !important;
+    color: var(--white-color) !important;
 }
 
 #filter-Div,
 #productContainer {
-    background-color: #fff;
+    background-color:var(--white-color);
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px var(--box-shadow-color);
 }
 
 .pagination {
@@ -86,31 +100,31 @@
 }
 
 #searchTXT {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-dark-color);
     border-radius: 4px;
     padding: 8px;
     height: 40px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--box-shadow-color);
 }
 
 #searchBTN {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-dark-color);
     border-radius: 4px;
     height: 40px;
-    background-color: #007bff;
-    color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--search-blue-color);
+    color: var(--white-color);
+    box-shadow: 0 2px 4px var(--box-shadow-color);
 }
 
 #searchBTN:hover {
-    background-color: #e1397f !important;
+    background-color: var(--main-pink-light-color) !important;
 }
 
 .pagination li.active a,
 .pagination li a:hover {
-    background-color: #007bff;
-    color: #fff;
-    border: 1px solid #007bff;
+    background-color: var(--search-blue-color);
+    color: var(--white-color);
+    border: 1px solid var(--search-blue-color);
     padding: 8px 12px;
     border-radius: 4px;
 }
@@ -127,7 +141,7 @@
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-dark-color);
     border-radius: 4px;
 }
 
@@ -142,9 +156,9 @@
 }
 
 #product-data {
-    background-color: #ffffff;
+    background-color: var(--white-color);
     padding: 20px;
-    border: 2px solid #dee2e6;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
     box-shadow: 3px 3px 9px rgba(164,164,164,0.2);
 }
@@ -177,7 +191,7 @@
 
 .btn-outline-secondary:hover {
     background-color: #6c757d;
-    color: #ffffff;
+    color: var(--white-color);
 }
 
 
@@ -192,11 +206,11 @@
 }
 
 #comment-section h2 {
-    color: #d60578;
+    color: var(--main-pink-dark-color);
 }
 
 #comment-section hr {
-    border-top: 2px solid #d60578;
+    border-top: 2px solid var(--main-pink-dark-color);
     margin-bottom: 20px;
 }
 
@@ -209,20 +223,20 @@
 }
 
 #comment-section .btn , #addCartBTN {
-    background-color: #ffffff;
-    color: #d60578;
-    border: 1px solid #d60578;
+    background-color: var(--white-color);
+    color: var(--main-pink-dark-color);
+    border: 1px solid var(--main-pink-dark-color);
 }
 
 #comment-section .btn:hover , #addCartBTN:hover {
-    background-color: #ef5ab1;
-    color: white;
+    background-color: var(--main-pink-light-color);
+    color: var(--white-color);
 }
 
 .comment {
     padding: 20px;
     border-radius: 40px;
-    background-color: #e7d0dd;
+    background-color: var(--border-color);
 }
 .review {
     margin-left: 20px;
@@ -238,20 +252,20 @@
     transition: all 0.5s;
 }
 .page-link{
-    background-color: #d60578;
-    color: white;
+    background-color: var(--main-pink-dark-color);
+    color: var(--white-color);
 }
 .page-link:hover{
-    color: #d60578 !important;
-    background-color: white !important;
+    color: var(--main-pink-dark-color) !important;
+    background-color: var(--white-color) !important;
 }
 .pagination .active .page-link{
-    background-color: #ef5ab1 !important;
-    color: white !important;
+    background-color: var(--main-pink-light-color) !important;
+    color: var(--white-color) !important;
 }
 .pagination .active .page-link:hover{
-    background-color: white !important;
-    color:#d60578 !important;
+    background-color: var(--white-color) !important;
+    color:var(--main-pink-dark-color) !important;
 }
 .for_wish {
     font-size: 30px;

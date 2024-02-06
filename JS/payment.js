@@ -11,13 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
   let visaCard = document.querySelector(".visa ");
   let paypalCard = document.querySelector(".paypal");
   let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+  //  clicked visa ->
   visaCard.addEventListener("click", function () {
     document.getElementById("visa").style.display = "block";
     document.getElementById("paypal").style.display = "none";
     visaCard.style.transform = "scale(1.3)";
     paypalCard.style.transform = "scale(.9)";
   });
-
+  // paypal clicked ->
   paypalCard.addEventListener("click", function () {
     document.getElementById("paypal").style.display = "block";
     document.getElementById("visa").style.display = "none";
@@ -54,12 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function validatePaypalForm(event) {
     event.preventDefault();
-    let rows = document.querySelectorAll("#orderlist tr");
-    let totalPrice = JSON.parse(localStorage.getItem("totalPrice")) || 0;
-    for (let i = 0; i < rows.length; i++) {
-      totalPrice += Math.floor(Number(rows[i].children[4].textContent));
-    }
-    localStorage.setItem("totalPrice", totalPrice);
     let paypalEmail = document.getElementById("paypalEmail");
     let paypalPassword = document.getElementById("paypalPassword");
     resetErrorMessages();
@@ -76,12 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function validateVisaForm(event) {
     event.preventDefault();
-    let rows = document.querySelectorAll("#orderlist tr");
-    let totalPrice = JSON.parse(localStorage.getItem("totalPrice")) || 0;
-    for (let i = 0; i < rows.length; i++) {
-      totalPrice += Math.floor(Number(rows[i].children[4].textContent));
-    }
-    localStorage.setItem("totalPrice", totalPrice);
 
     let visaCardNumber = document.getElementById("visaCardNumber");
     let visaCardHolder = document.getElementById("visaCardHolder");
@@ -145,7 +134,11 @@ document.addEventListener("DOMContentLoaded", function () {
             totalorders.push(ord);
           });
 
-          localStorage.setItem("order", JSON.stringify(totalorders));
+          localStorage.setItem("order", JSON.stringify(totalorders)); // will be a history for all
+          // localStorage.setItem(
+          //   "sellerOrdersControl",
+          //   JSON.stringify(totalorders)
+          // ); //to handle in seller
           localStorage.setItem("ChartOrder", JSON.stringify(chartOrderData));
         }
       }
@@ -179,8 +172,6 @@ document.addEventListener("DOMContentLoaded", function () {
         removeCartOrdersAfterChecked();
         updateTapleNoOrder();
         updateBadge();
-        window.location.href="../HTML Pages/index.html";
-
 
         // createTable();
       } else if (product.stock < 1) {

@@ -45,6 +45,9 @@ export function iscomplexPassword(password) {
   const s_char = /[!@#$%^&*(),.?":{}|<>]/.test(password);
   return char && digit && s_char;
 }
+export function matchpassword(password1,password2) {
+  return password1==password2;
+}
 
 export function check_positive(number_prod) {
   var number = Number(number_prod);

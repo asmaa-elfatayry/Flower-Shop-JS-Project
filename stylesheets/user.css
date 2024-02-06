@@ -1,6 +1,16 @@
+:root{
+  --main-bg-color:#f8f9fa;
+  --main-pink-lighter-color:#fb83d7;
+  --black-color:#000000;
+  --white-color:#ffffff;
+  --light-color:#eee;
+  --browon-color:#58073e;
+
+}
+
 /* line 1, ../sass/user.scss */
 body {
-  background-color: #f8f9fa;
+  background-color: var(--main-bg-color);
   overflow-y: hidden;
 }
 
@@ -26,8 +36,8 @@ body {
   height: 151px;
   padding: 10px;
   border-radius: 50%;
-  border: 2px solid #58073e;
-  background-color: #eee;
+  border: 2px solid var(--browon-color);
+  background-color: var(--light-color);
 }
 
 /* line 30, ../sass/user.scss */
@@ -43,7 +53,7 @@ body {
   background: linear-gradient(to right, #fb83d7, #ab8daf);
   padding: 30px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  color: #eee;
+  color: var(--light-color);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -60,7 +70,7 @@ hr {
 
 /* line 58, ../sass/user.scss */
 .profile-right {
-  background-color: #fff;
+  background-color: var(--white-color);
   padding-top: 30px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -102,15 +112,15 @@ hr {
 .nav li {
   margin-bottom: 3px;
   color: #555;
-  border-left: 5px solid #fb83d7;
-  background-color: #ffffff;
+  border-left: 5px solid var(--main-pink-lighter-color);
+  background-color: var(--white-color);
   margin-right: inherit;
 }
 
 /* line 99, ../sass/user.scss */
 .nav li a {
   text-decoration: none;
-  color: black;
+  color: var(--black-color);
   font-size: 1.5rem;
 }
 

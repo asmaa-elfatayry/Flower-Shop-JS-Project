@@ -21,16 +21,16 @@ $border-radius: 4px;
 
 // Override theme based on body class
 
-body {
-  // Default styles
-  @each $property, $value in $light-theme-colors {
-    #{$property}: $value;
-  }
-}
+// body {
 
-body.dark-theme {
-  // Apply dark theme styles
-  @each $property, $value in $dark-theme-colors {
-    #{$property}: $value;
-  }
-}
+//   @each $property, $value in $light-theme-colors {
+//     #{$property}: $value;
+//   }
+// }
+
+// body.dark-theme {
+
+//   @each $property, $value in $dark-theme-colors {
+//     #{$property}: $value;
+//   }
+// }

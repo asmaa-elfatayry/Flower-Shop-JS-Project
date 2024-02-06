@@ -12,6 +12,8 @@ window.addEventListener("DOMContentLoaded", function () {
     let name = document.getElementsByTagName("input")[0].value;
     let email = document.getElementsByTagName("input")[1].value;
     let password = document.getElementsByTagName("input")[2].value;
+    let password_new = document.getElementsByTagName("input")[3].value;
+
     if (!sigAutho.valid_name(name.trim())) {
       sigAutho.handleTheErrorMessage(
         0,
@@ -37,7 +39,15 @@ window.addEventListener("DOMContentLoaded", function () {
         2,
         "This is not a complex password. Please choose a password with at least 8 characters, including letters, digits, and special characters."
       );
-    } else {
+    } 
+    else if(!sigAutho.matchpassword(password,password_new))
+    {
+      sigAutho.handleTheErrorMessage(
+        3,
+        "your passwords dosent match"
+      );
+    }
+    else {
       const user_n_id = signUp(name.trim(), email, password);
       const loggedInUser = {
         id: user_n_id,
