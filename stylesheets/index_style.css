@@ -1,3 +1,16 @@
+:root{
+  --main-bg-color:#f5f7fb;
+  --main-pink-dark-color:#E72463;
+  --main-pink-light-color:#F05990;
+  --black-color:#000000;
+  --white-color:#ffffff;
+  --category-text:chocolate;
+  --category-bg:#f0f8ffad;
+  --category-border-hover:#d3d3d3;
+  --category-img-hover:#f0f8ffc7;
+  --light-gray-color:#dddddd;
+  --pargraph-text-color:#484848;
+}
 *{
   margin: 0;
   padding: 0;
@@ -13,7 +26,7 @@ a:hover{
 }
   body {
   font-family: "Arial", sans-serif, "Poppins";
-   background-color:#f5f5f5;
+   background-color:var(--main-bg-color);
    box-sizing: border-box;
   }
 
@@ -31,7 +44,7 @@ a:hover{
   left: 17%;
   top: 34%;
   text-align:left;
-  color: black;
+  color: var(--black-color);
 }
 .carousel-caption h2
 {
@@ -86,9 +99,9 @@ a:hover{
 .carousel-caption button{
   padding: 10px 25px;
   border-radius:5x;
-  background-color:#F05990;
-  border:#ffffff;
-  color :#ffffff;
+  background-color:var(--main-pink-light-color);
+  border:var(--white-color);
+  color :var(--white-color);
   border-radius:5px;
   animation-name:btnanimate;
   animation-duration:2s;
@@ -101,7 +114,7 @@ a:hover{
 }
 .carousel-control-prev-span
 {
-fill:#F05990 !important;
+fill:var(--main-pink-light-color) !important;
 }
 
 
@@ -126,23 +139,23 @@ fill:#F05990 !important;
   width: 150px;
   text-align: center;
   padding: 13px;
-  background-color: #f0f8ffad;
-  color: chocolate;
+  background-color: var(--category-bg);
+  color: var(--category-text);
   transition: all 1s;
 }
 .categories-img_content:hover{
-  background-color: #f0f8ffc7;
+  background-color: var(--category-img-hover);
 }
 .categories-img:hover 
 {
-  box-shadow: 5px 10px 30px 0px #d3d3d3;
+  box-shadow: 5px 10px 30px 0px var(--category-border-hover);
 }
 .soon{
   position: absolute;
   bottom:  30px;
   left: 30px;
-  background-color: whitesmoke;
-  color: #F05990;
+  background-color: var(--category-border-hover);
+  color: var(--main-pink-light-color);
   padding: 4px 10px;
   font-size: 17px;
  animation: swing 1s infinite ease-in-out;
@@ -170,7 +183,7 @@ fill:#F05990 !important;
 }
 .productContainer .title-1
 {
-  color: #F05990;
+  color: var(--main-pink-light-color);
   font-size: 22px;
   font-weight: 600;
   line-height: 34px;
@@ -184,7 +197,7 @@ fill:#F05990 !important;
 }
 
 .icons.clicked-fav{
-  color: #F05990;
+  color: var(--main-pink-light-color);
   opacity:1;
 }
 
@@ -192,7 +205,7 @@ h3.section-title-2.text-uppercase {
   text-align: center;
   padding-bottom: 10px;
   width: fit-content;
-border-bottom: 2px solid #E72463;
+border-bottom: 2px solid var(--main-pink-color);
 margin: 20px auto;
 }
 
@@ -242,7 +255,7 @@ margin: 20px auto;
 }
 #home_li a:hover
 {
-  color:#F05990;
+  color:var(--main-pink-light-color);
 }
 #contact_li
 {
@@ -256,7 +269,7 @@ margin: 20px auto;
 }
 .info-txt
 {
-  border: 1px solid #dddddd;
+  border: 1px solid var(--light-gray-color);
   text-align: center;
   padding: 60px 20px;
   margin-bottom: 30px;
@@ -264,7 +277,7 @@ margin: 20px auto;
 }
 .icon
 {
-  color:#F05990;
+  color:var(--main-pink-light-color);
   width:60px;
   height:60px;
   text-align:center;
@@ -274,7 +287,7 @@ margin: 20px auto;
 }
 .info-txt p
 {
-  color: #484848;
+  color: var(--pargraph-text-color);
   font-size: 14px;
 
 }
@@ -282,13 +295,13 @@ margin: 20px auto;
 .icon2
 {
   border-radius:50%;
-  border:1px solid #F05990;
+  border:1px solid var(--main-pink-light-color);
   transition: 1s;
 }
 .icon2:hover
 {
-  background-color: #F05990 !important;
-  color:white;
+  background-color: var(--main-pink-light-color) !important;
+  color:var(--white-color);
 }
 .formdetails h5
 {
@@ -311,8 +324,8 @@ margin: 20px auto;
 .input-item input[type ="submit"]
 {
   padding: 10px 30px;
-  background-color:#E72463;
-  color:white;
+  background-color:var(--main-pink-dark-color);
+  color:var(--white-color);
   margin-bottom: 40px;
   border-radius:10px;
   transition:1.3s;
@@ -320,9 +333,8 @@ margin: 20px auto;
 }
 .input-item input[type ="submit"]:hover
 {
-  border:solid 1px #E72463;
-  background-color: white;
-  color: #E72463;
+  background-color:var(--white-color);
+  color:var(--main-pink-dark-color);
 }
 /*end of contact ===========================================*/
 /* about us =========================================================*/
@@ -350,7 +362,7 @@ margin: 20px auto;
 }
 .about-content h2 span
 {
-  color:#F05990;
+  color:var(--main-pink-light-color);
   font-weight: 500;
   line-height: 1.2;
   font-size: calc(1.325rem + .9vw);
@@ -392,7 +404,7 @@ margin: 20px auto;
 {
   text-align: center;
   margin:30px 0px;
-  background-color: #F05990;
+  background-color: var(--main-pink-light-color);
 }
 .review-content
 {
@@ -414,7 +426,7 @@ margin: 20px auto;
 /* text-style */
 .carousel-bg  h1
 {
-  color:#F05990;
+  color:var(--main-pink-light-color);
   font-size:40px;
   font-weight:600px;
   margin-bottom: 30px;
@@ -423,7 +435,7 @@ margin: 20px auto;
   font-family: "Roboto";
   font-weight: 400;
   font-size: 24px;
-  color: #354052;
+  color: var(--pargraph-text-color);
   line-height: 30px;
   bottom: 40%;
   text-shadow: none;
@@ -433,7 +445,7 @@ margin: 20px auto;
   font-family: "Roboto";
   font-weight: 700;
   font-size: 20px;
-  color: #354052;
+  color: var(--pargraph-text-color);
   line-height: 30px;
   margin-top: 40px;
 }
@@ -455,10 +467,10 @@ margin: 20px auto;
   text-shadow: none;
 }
 .testimonial-style .carousel-control {
-  color: #354052;
+  color: var(--pargraph-text-color);
 }
 .testimonial-style .carousel-control:hover {
-  color: #354052;
+  color: var(--pargraph-text-color);
   text-decoration: none;
   transition: background-color 1s ease;
 }
@@ -467,16 +479,16 @@ margin: 20px auto;
   width: 14px;
   height: 14px;
   transition: all 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-  background-color:#F05990;
-  border:#F05990;
+  background-color:var(--main-pink-light-color);
+  border:var(--main-pink-light-color);
 }
 .testimonial-style .carousel-indicators 
 {
   left: 50% !important;
 }
 .testimonial-style .carousel-indicators li {
-  border: 2px solid #354052;
-  background-color: #354052;
+  border: 2px solid var(--pargraph-text-color);
+  background-color: var(--pargraph-text-color);
 }
 @media screen  and (max-width:992px){
   .testimonial-style .carousel-indicators 
@@ -524,7 +536,7 @@ margin: 20px auto;
 } 
 .section-title-1 .title-1 
 {
-  color: #F05990;
+  color: var(--main-pink-light-color);
   font-size: 22px;
   font-weight: 600;
   line-height: 34px;

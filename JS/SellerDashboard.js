@@ -7,7 +7,7 @@ let myspan = document.querySelector(".typeOf");
 let flag;
 let sellerId;
 const loggedInUserData = sessionStorage.getItem("loggedInUser");
-
+let updateForm = document.getElementById("updateProductForm");
 if (loggedInUserData) {
   const loggedInUser = JSON.parse(loggedInUserData);
 
@@ -129,7 +129,7 @@ export function ShowCharts() {
 // end charts page
 
 // display products
-export function displayProductRow(product, type) {
+export function displayProductRow(product) {
   const row = document.createElement("tr");
 
   const idCell = document.createElement("td");
@@ -170,9 +170,10 @@ export function displayProductRow(product, type) {
   updateButton.setAttribute("data-toggle", "modal");
   updateButton.style.width = "90px";
   updateButton.setAttribute("data-target", "#updateProductModal");
-  updateButton.setAttribute("data-id", product.id);
+  // updateButton.setAttribute("data-id", product.id);
   updateButton.textContent = "Update";
   updateButton.addEventListener("click", () => updateProduct(product.id));
+  console.log(product.id);
   actionsCell.appendChild(updateButton);
 
   const deleteButton = document.createElement("button");
@@ -230,7 +231,7 @@ inpSearch.addEventListener("keyup", function () {
   });
 });
 //delete
-function deleteProduct(productId, e) {
+function deleteProduct(productId) {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton: "btn btn-success",
@@ -315,7 +316,7 @@ addProductForm.addEventListener("submit", function (event) {
   const validImage = validateFileInput(
     productImageInput,
     "aimgErr",
-    "Please choose an image."
+    "Please choose an image. Be care image must be in flowers folder!"
   );
 
   const productCategoryInput = document.getElementById("productCategory");
@@ -379,66 +380,59 @@ addProductForm.addEventListener("submit", function (event) {
 //update
 function updateProduct(productId) {
   const updateForm = document.getElementById("updateProductForm");
-  let nameValue = document.getElementById("updateProductName");
-  let priceValue = document.getElementById("updateProductPrice");
-  let imageValue = document.getElementById("updateProductImage");
-  let stockValue = document.getElementById("updateProductStock");
-  let categoryValue = document.getElementById("updateProductCategory");
+  const nameValue = document.getElementById("updateProductName");
+  const priceValue = document.getElementById("updateProductPrice");
+  const imageValue = document.getElementById("updateProductImage");
+  const stockValue = document.getElementById("updateProductStock");
+  const categoryValue = document.getElementById("updateProductCategory");
 
-  // get specific product
+  // Get specific product -> clicked
   const productToUpdate = FlowersDate.find(
     (product) => product.id === productId
   );
 
   if (productToUpdate) {
-    // retrieve data from table to inputs :)
+    // Retrieve my data :)
     nameValue.value = productToUpdate.name;
     priceValue.value = productToUpdate.price;
-    //imageValue.files[0].name = productToUpdate.image;
     categoryValue.value = productToUpdate.category;
     stockValue.value = productToUpdate.stock;
 
-    updateForm.addEventListener("submit", function (event) {
+    function handleUpdate(event) {
       event.preventDefault();
 
-      // Update the product => new values
       const validName = validateTextInput(
         nameValue,
         "nameErr",
-        "Plz Enter Valid Name"
+        "Please enter a valid name"
       );
 
       const validPrice = validateNumberInput(
         priceValue,
         "priceErr",
-        "Plz Enter Valid Price in range 0:1000",
-        0,
+        "Please enter a valid price in the range 5 to 1000",
+        5,
         1000
       );
 
       const validImage = validateFileInput(
         imageValue,
         "aimgErr",
-        "Please choose an image."
+        "Please choose an image from the flowers folder."
       );
 
       const validCategory = validateTextInput(
         categoryValue,
         "categoryErr",
-        "Plz Enter a Valid category flower name!"
+        "Please enter a valid category flower name."
       );
 
       const validStock = validateNumberInput(
         stockValue,
         "stockErr",
-        "Plz Enter a Stock No!",
+        "Please enter a stock number in the range 0 to 100",
         0,
         100
-      );
-
-      // get products for -> the current seller
-      const sellerProducts = FlowersDate.filter(
-        (product) => product.seller.id === sellerId
       );
 
       if (
@@ -448,17 +442,25 @@ function updateProduct(productId) {
         validCategory &&
         validStock
       ) {
-        // Update the product properties
+        // Update ->
         productToUpdate.name = nameValue.value;
         productToUpdate.price = parseFloat(priceValue.value);
-        productToUpdate.image = imageValue.files[0].name;
+
+        if (imageValue.files.length > 0) {
+          productToUpdate.image = imageValue.files[0].name;
+        }
         productToUpdate.category = categoryValue.value;
         productToUpdate.stock = parseInt(stockValue.value);
-        console.log(imageValue.files[0].name);
+
         localStorage.setItem("flowersData", JSON.stringify(FlowersDate));
 
+        const sellerProducts = FlowersDate.filter(
+          (product) => product.seller.id === sellerId
+        );
         displayProducts(sellerProducts);
+
         $("#updateProductModal").modal("hide");
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -467,6 +469,12 @@ function updateProduct(productId) {
           timer: 1500,
         });
       }
+    }
+
+    updateForm.addEventListener("submit", handleUpdate);
+
+    $("#updateProductModal").on("hidden.bs.modal", function () {
+      updateForm.removeEventListener("submit", handleUpdate);
     });
 
     $("#updateProductModal").modal("show");
@@ -474,6 +482,7 @@ function updateProduct(productId) {
     console.error(`Product with ID ${productId} not found`);
   }
 }
+
 // end update
 // // toggle theme
 // export function toggleTheme() {
@@ -491,19 +500,23 @@ export function ShowOrders() {
   document.querySelector(".addBtn").style.display = "none";
 
   function getOrdersForSeller(sellerID) {
-    const allOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    const allOrders = JSON.parse(localStorage.getItem("order")) || [];
     return allOrders.filter((order) => order.sellerId === sellerID);
   }
 
   function updateOrderState(orderID, newState) {
-    const allOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    const allOrders = JSON.parse(localStorage.getItem("order")) || [];
     const updatedOrders = allOrders.map((order) => {
       if (order.orderID === orderID) {
-        order.state = newState;
+        if (newState === "Delivered") {
+          console.log(order.orderId);
+        } else {
+          order.state = newState;
+        }
       }
       return order;
     });
-    localStorage.setItem("ChartOrder", JSON.stringify(updatedOrders));
+    localStorage.setItem("order", JSON.stringify(updatedOrders));
   }
 
   const OrdersListContainer = document.getElementById("OrderList");
@@ -542,11 +555,11 @@ export function ShowOrders() {
     stateCell.classList.add("state");
     const state = document.createElement("span");
 
-    if (order.state === 0) {
+    if (order.state === "Pending") {
       state.textContent = "Pending";
     } else {
-      state.textContent = "Approved";
-      state.classList.add("approved");
+      state.textContent = "Delivered";
+      state.classList.add("Delivered");
     }
 
     stateCell.appendChild(state);
@@ -554,15 +567,15 @@ export function ShowOrders() {
     OrdersListContainer.appendChild(row);
 
     state.addEventListener("click", function () {
-      state.classList.toggle("approved");
-      if (order.state === 0) {
-        state.textContent = "Approved";
-        order.state = 1;
-        updateOrderState(order.orderID, 1);
+      state.classList.toggle("Delivered");
+      if (order.state === "Pending") {
+        state.textContent = "Delivered";
+        order.state = "Delivered";
+        updateOrderState(order.orderID, "Delivered");
       } else {
         state.textContent = "Pending";
-        order.state = 0;
-        updateOrderState(order.orderID, 0);
+        order.state = "Pending";
+        updateOrderState(order.orderID, "Pending");
       }
     });
   });
