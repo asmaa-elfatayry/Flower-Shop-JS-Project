@@ -20,6 +20,22 @@ export function updatesessionstorage(id)
      const updateuser=newusers.find(user=>user.id==id);
      sessionStorage.setItem("loggedInUser",JSON.stringify(updateuser));
 }
+
+export function isnewPassworMatchOld(id,password)
+{
+     const users=JSON.parse(localStorage.getItem("userData"))||[];
+     const currentuser=users.find(user=>user.id==id);
+     let pass=currentuser.password;
+     return pass==password;
+}
+export function correctOldUserpassword(id,password)
+{    
+     const users=JSON.parse(localStorage.getItem("userData"))||[];
+     const currentuser=users.find(user=>user.id==id);
+     let pass=currentuser.password;
+     return pass==password;
+}
+
 export function isEmailExists(email,id)
 {
  const users=JSON.parse(localStorage.getItem("userData"))||[];
