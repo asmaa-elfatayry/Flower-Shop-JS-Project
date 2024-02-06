@@ -28,9 +28,9 @@ window.addEventListener("load", function () {
     document.body.style.backgroundColor = "#FFF";
     document.body.appendChild(error);
     error.appendChild();
+    sessionStorage.removeItem("loggedInUser");
     return;
   }
-  sessionStorage.removeItem("loggedInUser");
 
   let page  = "";
   var lastsorted = ""
@@ -41,6 +41,7 @@ window.addEventListener("load", function () {
   let sellersData = JSON.parse(localStorage.getItem("sellerData")) || [];
   let usersData = JSON.parse(localStorage.getItem("userData")) || [];
   let ordersData = JSON.parse(localStorage.getItem("order")) || [];
+  let messagesData = JSON.parse(localStorage.getItem("messages")) || [];
   let requestseller = JSON.parse(localStorage.getItem("requestseller")) || [];
   
   // navigation from side bar
@@ -65,6 +66,10 @@ window.addEventListener("load", function () {
         
         case "orders":
         items = ordersData;
+        break;
+        
+        case "messages":
+        items = messagesData;
         break;
         
         case "requestedsellers":
@@ -300,10 +305,18 @@ window.addEventListener("load", function () {
       }
     }
     if (page != "orders" && page != "requestedsellers") {
-      let delHead = document.createElement("th");
-      delHead.setAttribute("scope", "col");
-      delHead.textContent = "delete";
-      tableHead.appendChild(delHead);
+      if(page == "messages"){
+        let actionHead = document.createElement("th");
+        actionHead.setAttribute("scope", "col");
+        actionHead.textContent = "Actions";
+        tableHead.appendChild(actionHead);
+      }
+      else{
+        let delHead = document.createElement("th");
+        delHead.setAttribute("scope", "col");
+        delHead.textContent = "delete";
+        tableHead.appendChild(delHead);
+      }
     } else if (page == "requestedsellers") {
       let approveHead = document.createElement("th");
       approveHead.setAttribute("scope", "col");
@@ -324,6 +337,10 @@ window.addEventListener("load", function () {
         Cell.textContent = item[tableHead.children[i].textContent];
       }
       row.appendChild(Cell);
+      if(tableHead.children[i].textContent == "Message"){
+        console.log("kokoko")
+        Cell.classList.add("elipses");
+      }
     }
 
     if (page != "orders" && page != "requestedsellers") {
@@ -333,7 +350,16 @@ window.addEventListener("load", function () {
         deleteButton.setAttribute("data-sellerId", item.seller.id);
       }
       else if(page == "sellers"){
-        deleteButton.setAttribute("data-id",item.id)
+        deleteButton.setAttribute("data-id",item.id);
+      }
+      if(page == "messages"){
+        const detailsButton = document.createElement("button");
+        detailsButton.className = "btn btn-primary";
+        detailsButton.style.width = "90px";
+        detailsButton.classList.add("mx-2");
+        detailsButton.textContent = "Details";
+        detailsButton.addEventListener("click", (e) => deleteItem(items,item.id, e));
+        row.children[row.children.length - 1].appendChild(detailsButton);
       }
       deleteButton.className = "btn btn-danger";
       deleteButton.style.width = "90px";
