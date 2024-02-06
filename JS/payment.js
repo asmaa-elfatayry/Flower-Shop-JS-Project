@@ -134,7 +134,11 @@ document.addEventListener("DOMContentLoaded", function () {
             totalorders.push(ord);
           });
 
-          localStorage.setItem("order", JSON.stringify(totalorders)); // will be ahistory for all
+          localStorage.setItem("order", JSON.stringify(totalorders)); // will be a history for all
+          // localStorage.setItem(
+          //   "sellerOrdersControl",
+          //   JSON.stringify(totalorders)
+          // ); //to handle in seller
           localStorage.setItem("ChartOrder", JSON.stringify(chartOrderData));
         }
       }

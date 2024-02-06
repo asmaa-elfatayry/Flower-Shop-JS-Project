@@ -72,6 +72,7 @@ function validateNumberInput(
 }
 function validateFileInput(inputElement, errorElementId, errorMessage) {
   const file = inputElement.files[0];
+  console.log(inputElement.files.length);
   const errorElement = document.getElementById(errorElementId);
 
   if (!file) {

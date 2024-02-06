@@ -9,11 +9,12 @@
   --info-img-border:#9880e4;
   --lavender-color:lavender;
   --state-pending-bg:#c78dd1db;
-  --state-approved-bg:#088a31bf;
+  --state-delivered-bg:#1e7f14;
   --span-info-bg:#1b1a1ab7;
   --icons-color:#657079;
   --whitesmoke-color:whitesmoke;
 }
+
 /* line 1, ../sass/seller.scss */
 body {
   color: var(--text-color);
@@ -194,6 +195,7 @@ input[type=file] {
 }
 .btn.btn-info{
   color: var(--main-bg-color);
+  background-color: #2b7292;
 }
 
 /* line 139, ../sass/seller.scss */
@@ -272,9 +274,9 @@ input[type=file] {
 }
 
 /* line 198, ../sass/seller.scss */
-.state span.Delivered {
-  background-color: var(--state-approved-bg);
-  border: 2px solid #95e98cdb;
+.state span.delivered {
+  background-color: var(--state-delivered-bg);
+  border: 2px solid #c78dd1db;
   color: var(--whitesmoke-color);
 }
 
