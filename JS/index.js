@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", function () {
     sessionStorage.setItem("guestRequestorder", JSON.stringify([]));
 
     fetch("../Data.json")
-      .then((response) => response.json())
+      .then((response) => response.json())  
       .then((data) => {
         FlowersDate = data.flowers;
         for (let i = 0; i < FlowersDate.length; i++) {

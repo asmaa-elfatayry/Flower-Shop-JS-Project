@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
     document.body.style.backgroundColor = "#FFF";
     document.body.appendChild(error);
     error.appendChild();
-    sessionStorage.removeItem(loggedInUser);
+    sessionStorage.removeItem("loggedInUser");
     return;
   }
 
@@ -41,6 +41,7 @@ window.addEventListener("load", function () {
   let sellersData = JSON.parse(localStorage.getItem("sellerData")) || [];
   let usersData = JSON.parse(localStorage.getItem("userData")) || [];
   let ordersData = JSON.parse(localStorage.getItem("order")) || [];
+  let messagesData = JSON.parse(localStorage.getItem("messages")) || [];
   let requestseller = JSON.parse(localStorage.getItem("requestseller")) || [];
   
   // navigation from side bar
@@ -65,6 +66,10 @@ window.addEventListener("load", function () {
         
         case "orders":
         items = ordersData;
+        break;
+        
+        case "messages":
+        items = messagesData;
         break;
         
         case "requestedsellers":
@@ -105,7 +110,6 @@ window.addEventListener("load", function () {
           arrangeData(items);
           document.getElementById("search").addEventListener("keyup", function (e) {
             let searchValue = e.target.value.toUpperCase();
-            console.log(searchValue)
             let newItems = filterItems(items,searchValue);
             displayTable(newItems,page);
           });
@@ -210,7 +214,7 @@ window.addEventListener("load", function () {
         labels: categories,
         datasets: [
           {
-            label: "Categories",
+            label: "Total Products",
             data: groupedData,
             backgroundColor: "#EE5D90cc",
             borderColor: "lavender",
@@ -253,7 +257,7 @@ window.addEventListener("load", function () {
         labels: Object.keys(totalPaidNoBySeller),
         datasets: [
           {
-            label: "Total paid products",
+            label: "Total sold products",
             data: totalPaidNoBySeller,
             backgroundColor: "#3b7dddcc",
             borderColor: "lavender",
@@ -284,13 +288,15 @@ window.addEventListener("load", function () {
         heads[i] != "products" &&
         heads[i] != "description" &&
         heads[i] != "meaning" &&
+        heads[i] != "favourites" &&
+        heads[i] != "password" &&
         heads[i] != "image"
       ) {
         let head = document.createElement("th");
         head.setAttribute("scope", "col");
         head.textContent = heads[i];
         head.textContent = heads[i];
-        if (typeof items[0][heads[i]] == "object") {
+        if ((items[0][heads[i]]).constructor.name == "Object") {
           head.textContent = `${heads[i]} ${
             Object.keys(items[0][heads[i]])[0]
           }`;
@@ -299,10 +305,18 @@ window.addEventListener("load", function () {
       }
     }
     if (page != "orders" && page != "requestedsellers") {
-      let delHead = document.createElement("th");
-      delHead.setAttribute("scope", "col");
-      delHead.textContent = "delete";
-      tableHead.appendChild(delHead);
+      if(page == "messages"){
+        let actionHead = document.createElement("th");
+        actionHead.setAttribute("scope", "col");
+        actionHead.textContent = "Actions";
+        tableHead.appendChild(actionHead);
+      }
+      else{
+        let delHead = document.createElement("th");
+        delHead.setAttribute("scope", "col");
+        delHead.textContent = "delete";
+        tableHead.appendChild(delHead);
+      }
     } else if (page == "requestedsellers") {
       let approveHead = document.createElement("th");
       approveHead.setAttribute("scope", "col");
@@ -311,7 +325,7 @@ window.addEventListener("load", function () {
     }
   }
 
-  function displayRow(item, page) {
+  function displayRow(items,item, page) {
     let tableHead = document.querySelector("#content #itemTable thead tr");
     const row = document.createElement("tr");
     for (let i = 0; i < tableHead.children.length; i++) {
@@ -323,6 +337,10 @@ window.addEventListener("load", function () {
         Cell.textContent = item[tableHead.children[i].textContent];
       }
       row.appendChild(Cell);
+      if(tableHead.children[i].textContent == "Message"){
+        console.log("kokoko")
+        Cell.classList.add("elipses");
+      }
     }
 
     if (page != "orders" && page != "requestedsellers") {
@@ -332,12 +350,21 @@ window.addEventListener("load", function () {
         deleteButton.setAttribute("data-sellerId", item.seller.id);
       }
       else if(page == "sellers"){
-        deleteButton.setAttribute("data-id",item.id)
+        deleteButton.setAttribute("data-id",item.id);
+      }
+      if(page == "messages"){
+        const detailsButton = document.createElement("button");
+        detailsButton.className = "btn btn-primary";
+        detailsButton.style.width = "90px";
+        detailsButton.classList.add("mx-2");
+        detailsButton.textContent = "Details";
+        detailsButton.addEventListener("click", (e) => deleteItem(items,item.id, e));
+        row.children[row.children.length - 1].appendChild(detailsButton);
       }
       deleteButton.className = "btn btn-danger";
       deleteButton.style.width = "90px";
       deleteButton.textContent = "Delete";
-      deleteButton.addEventListener("click", (e) => deleteItem(item.id, e));
+      deleteButton.addEventListener("click", (e) => deleteItem(items,item.id, e));
       row.children[row.children.length - 1].appendChild(deleteButton);
     } else if (page == "requestedsellers") {
       const dapproveButton = document.createElement("button");
@@ -354,7 +381,7 @@ window.addEventListener("load", function () {
     const tableListContainer = document.getElementById("tableList");
     tableListContainer.innerHTML = "";
     items.forEach((item) => {
-      const row = displayRow(item,page);
+      const row = displayRow(items,item,page);
       tableListContainer.appendChild(row);
     });
   }
@@ -390,7 +417,7 @@ window.addEventListener("load", function () {
     }
   }
   
-  function deleteItem(itemId,e) {
+  function deleteItem(items,itemId,e) {
     let users = localStorage.getItem("userData");
     if(e.target.closest("tr").children[2].textContent == "admin@example.com"){
       Swal.fire({
@@ -426,9 +453,9 @@ window.addEventListener("load", function () {
             "Your file has been deleted.",
             "success"
             );
-            const itemIndex = flowersData.findIndex(
+            const itemIndex = items.findIndex(
               (item) => item.id === itemId
-              );
+            );
               
           if (itemIndex !== -1) {
             if(page.toLowerCase() == "products"){
@@ -468,15 +495,10 @@ window.addEventListener("load", function () {
               ordersData.setItem("sellersData", JSON.stringify(ordersData));
               displayTable(ordersData, "orders");
             }
-            // const sellerProducts = items.filter(
-            //   (item) => item.id === itemId
-            // );
-            // displayTable(sellerProducts);
           } else {
             console.error(`Product with ID ${itemId} not found`);
           }
         } else if (
-          /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
         ) {
           swalWithBootstrapButtons.fire(

@@ -1,4 +1,7 @@
 /* line 1, ../sass/Addchart.scss */
+:root{
+  --brown-color:#8c1858;
+}
 * {
   padding: 0;
   margin: 0;
@@ -8,7 +11,7 @@
 /* line 7, ../sass/Addchart.scss */
 h1 {
   font-family: 'Dancing Script', cursive;
-  color: #8c1858;
+  color: var(--brown-color);
   font-size: 4rem;
   font-weight: bold;
 }
@@ -106,7 +109,7 @@ hr {
 /* line 95, ../sass/Addchart.scss */
 .checkout {
   width: 100%;
-  background-color: #8c1858;
+  background-color: var(--brown-color);
 }
 
 /* line 100, ../sass/Addchart.scss */

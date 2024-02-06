@@ -1,7 +1,6 @@
 import {
   displayProducts,
   ShowCharts,
-  toggleTheme,
   ShowOrders,
   sellerProducts,
 } from "./SellerDashboard.js";
@@ -41,10 +40,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
   document.querySelector(".orders").addEventListener("click", ShowOrders);
   document.querySelector(".charts").addEventListener("click", ShowCharts);
-  // document.querySelector(".darkMood").addEventListener("click", toggleTheme);
 
   document.querySelector(".logoutI").addEventListener("click", function () {
-    debugger;
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -63,6 +60,7 @@ window.addEventListener("DOMContentLoaded", function () {
       .then((result) => {
         if (result.isConfirmed) {
           location.assign("login.html");
+          sessionStorage.removeItem("loggedInUser");
         }
       });
   });

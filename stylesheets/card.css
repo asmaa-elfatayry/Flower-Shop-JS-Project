@@ -1,3 +1,12 @@
+:root{
+    --main-bg-color:#f5f7fb;
+    --main-pink-dark-color:#E72463;
+    --main-pink-light-color:#F05990;
+    --black-color:#000000;
+    --white-color:#ffffff;
+   
+  }
+
 .card {
     padding: 0px 20px;
     box-sizing: border-box;
@@ -48,8 +57,8 @@
 
 .card-details button {
     padding: 8px 10px;
-    background-color: #E72463;
-    color: white;
+    background-color: var(--main-pink-dark-color);
+    color: var(--white-color);
     border-radius: 20px;
     border: none;
     margin-bottom: 40px;
@@ -59,16 +68,16 @@
 }
 
 .card-details button:hover {
-    background-color: white;
-    color: #E72463;
-    border: 1px solid #F05990;
+    background-color: var(--white-color);
+    color: var(--main-pink-dark-color);
+    border: 1px solid var(--main-pink-light-color);
 }
 
 #productContainer>.row>div {
-    background-color: #f5f7fb;
+    background-color: var(--main-bg-color);
 }
 
 .card-details .active {
-    color: #E72463;
+    color: var(--main-pink-dark-color);
     opacity: 1;
 }

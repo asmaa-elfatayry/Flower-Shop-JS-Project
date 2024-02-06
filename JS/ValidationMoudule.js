@@ -28,7 +28,7 @@ function validateExpiryDate(month, year) {
 }
 
 function validateCVV(cvv) {
-  return /^\d{3,4}$/.test(cvv);
+  return /^\d{3}$/.test(cvv);
 }
 
 function validateTextInput(inputElement, errorElementId, errorMessage) {
@@ -63,25 +63,32 @@ function validateNumberInput(
   if (!isNaN(inputValue) && inputValue >= min && inputValue <= max) {
     inputElement.classList.remove("is-invalid");
     errorElement.innerHTML = "";
-    return true; // Valid input
+    return true; // Valid
   } else {
     errorElement.innerHTML = errorMessage;
     inputElement.classList.add("is-invalid");
-    return false; // Invalid input
+    return false; // Invalid
   }
 }
 function validateFileInput(inputElement, errorElementId, errorMessage) {
   const file = inputElement.files[0];
+  console.log(inputElement.files.length);
   const errorElement = document.getElementById(errorElementId);
 
-  if (file && file.type.startsWith("image/")) {
-    inputElement.classList.remove("is-invalid");
+  if (!file) {
     errorElement.innerHTML = "";
-    return true; // Valid input
+    inputElement.classList.remove("is-invalid");
+    return true; // Valid
+  }
+
+  if (file.type.startsWith("image/")) {
+    errorElement.innerHTML = "";
+    inputElement.classList.remove("is-invalid");
+    return true; // Valid
   } else {
     errorElement.innerHTML = errorMessage;
     inputElement.classList.add("is-invalid");
-    return false; // Invalid input
+    return false;
   }
 }
 

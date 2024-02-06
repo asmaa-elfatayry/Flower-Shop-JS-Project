@@ -1,3 +1,10 @@
+:root{
+  --main-bg-color:#f5f7fb;
+  --main-pink-dark-color:#E72463;
+  --overlay-bg:rgba(0, 0, 0, 0.333);
+  --modal-border:#a19f9f;
+ 
+}
 /* line 1, ../sass/payment.scss */
 .overlay {
   display: none;
@@ -7,12 +14,12 @@
   left: 0;
   top: 0;
   z-index: 99999;
-  background-color: rgba(0, 0, 0, 0.333);
+  background-color: var(--overlay-bg);
 }
 
 /* line 10, ../sass/payment.scss */
 .modal-title {
-  border-bottom: 1px solid #a19f9f;
+  border-bottom: 1px solid var(--modal-border);
   width: 100%;
   padding-bottom: 10px;
 }
@@ -118,14 +125,14 @@ form input {
 
 /* line 99, ../sass/payment.scss */
 .error {
-  color: #e74646;
+  color: var(--main-pink-dark-color);
   text-align: left;
   display: block;
 }
 
 /* line 104, ../sass/payment.scss */
 input::placeholder {
-  color: #a0a0a0;
+  color: var(--modal-border);
 }
 
 /* line 107, ../sass/payment.scss */
