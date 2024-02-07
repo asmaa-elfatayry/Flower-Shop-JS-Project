@@ -11,7 +11,7 @@ let chartOrderData ;
 document.addEventListener("DOMContentLoaded", function () {
   let visaCard = document.querySelector(".visa ");
   let paypalCard = document.querySelector(".paypal");
-  let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+  // let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   //  clicked visa ->
   visaCard.addEventListener("click", function () {
     document.getElementById("visa").style.display = "block";
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showError("paypalPasswordError", "Invalid Password");
       return;
     }
-    updatePaidNoForProducts(ExistChartOrder);
+    updatePaidNoForProducts(chartOrderData);
   }
   function validateVisaForm(event) {
     event.preventDefault();
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showError("visaCVVError", "Invalid CVV");
       return;
     }
-    updatePaidNoForProducts(ExistChartOrder);
+    updatePaidNoForProducts(chartOrderData);
   }
 
   document
@@ -167,17 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (product && product.stock > 0) {
         product.paidno = (product.paidno || 0) + soldProduct.quantity;
-        let result= product.stock - soldProduct.quantity;
-        if(result<0)
-        {
-          product.stock =0;
+        product.stock -= soldProduct.quantity;
 
-
-        }
-        else{
-          product.stock -= soldProduct.quantity;
-
-        }
+        
         ClearInputs();
         showSweetAlert();
         removeCartOrdersAfterChecked();
