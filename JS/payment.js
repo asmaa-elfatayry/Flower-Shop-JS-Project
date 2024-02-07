@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showError("visaCVVError", "Invalid CVV");
       return;
     }
-    updatePaidNoForProducts(ExistChartOrder);
+    updatePaidNoForProducts(chartOrderData);
   }
 
   document
@@ -166,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       if (product && product.stock > 0) {
-        debugger;
         product.paidno = (product.paidno || 0) + soldProduct.quantity;
         product.stock -= soldProduct.quantity;
 
