@@ -191,6 +191,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
       }
       localStorage.setItem("flowersData", JSON.stringify(flowers));
+      document.getElementById("commentTextarea").value='';
     });
   for (let i = 0; i < stars.length; i++) {
     stars[i].addEventListener('click', function () {
