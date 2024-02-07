@@ -60,14 +60,13 @@ export function ShowCharts() {
   ctx1.classList.add("myChart");
   chartParent.appendChild(ctx1);
 
-  const sellerOrders = JSON.parse(localStorage.getItem("order") || []).filter(
+  const sellerOrders = (JSON.parse(localStorage.getItem("order")) || []).filter(
     (order) => order.sellerId === sellerId
   );
 
- 
   const orderLabels = sellerOrders.map((order) => {
     const product = FlowersDate.find((item) => item.id === order.productId);
-    return product ? product.name : ""; 
+    return product ? product.name : "";
   });
 
   const orderData = sellerOrders.map((order) => order.quantity);
@@ -489,10 +488,8 @@ function updateProduct(productId) {
   }
 }
 
-
 // start handle orders section
 export function ShowOrders() {
-
   myspan.textContent = ": Orders Details";
   document.querySelector(".chart-parent").style.display = "none";
   document.querySelector(".dynamic-section").style.display = "block";
@@ -500,12 +497,10 @@ export function ShowOrders() {
   document.getElementById("OrdersTable").style.display = "block";
   document.querySelector(".addBtn").style.display = "none";
 
-
   function getOrdersForSeller(sellerID) {
     const allOrders = JSON.parse(localStorage.getItem("order")) || [];
     return allOrders.filter((order) => order.sellerId === sellerID);
   }
-
 
   function updateOrderState(orderID, newState) {
     const allOrders = JSON.parse(localStorage.getItem("order")) || [];
@@ -517,7 +512,6 @@ export function ShowOrders() {
     });
     localStorage.setItem("order", JSON.stringify(updatedOrders));
   }
-
 
   function createOrderRow(order) {
     const row = document.createElement("tr");

@@ -195,7 +195,11 @@ window.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       if (sessionStorage.getItem("loggedInUser") == null) {
         Swal.fire("please login first!");
-        window.location.href = "login.html";
+        document
+          .querySelector("button.swal2-confirm.swal2-styled")
+          .addEventListener("click", function () {
+            window.location.href = "login.html";
+          });
       } else {
         if (ExistChartOrder.length > 0) {
           document.querySelector("#paymentModal").style.display = "block";
