@@ -21,7 +21,8 @@ window.addEventListener("DOMContentLoaded", function () {
         return (
           cur.name.toLowerCase().includes(txt.toLowerCase()) &&
           Number(cur.price) >= Number(mnP.value) &&
-          Number(cur.price) <= Number(mxP.value)
+          Number(cur.price) <= Number(mxP.value) &&
+          cur.stock > 0
         );
       });
     }
