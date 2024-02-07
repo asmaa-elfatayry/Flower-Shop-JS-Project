@@ -274,3 +274,9 @@
     color: #E72463;
     opacity: 1;
 }
+.fa-star {
+    color: red;
+}
+#paging-prev,#paging-next,.paging-BTN {
+    cursor: pointer
+}

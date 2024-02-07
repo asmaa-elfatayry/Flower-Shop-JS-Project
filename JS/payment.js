@@ -11,9 +11,10 @@ let chartOrderData ;
 document.addEventListener("DOMContentLoaded", function () {
   let visaCard = document.querySelector(".visa ");
   let paypalCard = document.querySelector(".paypal");
-  let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+  // let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   //  clicked visa ->
   visaCard.addEventListener("click", function () {
+ 
     document.getElementById("visa").style.display = "block";
     document.getElementById("paypal").style.display = "none";
     visaCard.style.transform = "scale(1.3)";
@@ -21,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   // paypal clicked ->
   paypalCard.addEventListener("click", function () {
+    let allInputs=document.querySelectorAll("form input")
+     allInputs.forEach((inp) => {
+      inp.value = "";
+    });
     document.getElementById("paypal").style.display = "block";
     document.getElementById("visa").style.display = "none";
     paypalCard.style.transform = "scale(1.3)";
@@ -77,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showError("paypalPasswordError", "Invalid Password");
       return;
     }
-    updatePaidNoForProducts(ExistChartOrder);
+    updatePaidNoForProducts(chartOrderData);
   }
   function validateVisaForm(event) {
     event.preventDefault();
@@ -117,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showError("visaCVVError", "Invalid CVV");
       return;
     }
-    updatePaidNoForProducts(ExistChartOrder);
+    updatePaidNoForProducts(chartOrderData);
   }
 
   document
@@ -131,14 +136,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("#paymentModal").style.display = "none";
     document.querySelector(".overlay").style.display = "none";
     const allInputs = document.querySelectorAll("form input");
+    // let inputs=document.querySelector(".form-control")
     allInputs.forEach((inp) => {
       inp.value = "";
     });
+
   }
   let totalorders = JSON.parse(localStorage.getItem("order")) || [];
 
   let order = [];
   function removeCartOrdersAfterChecked() {
+    debugger;
     let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
     let userId;
     if (currentUser) {
@@ -146,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < chartOrderData.length; i++) {
         if (chartOrderData[i].user == userId) {
           order = chartOrderData.splice(i, 1);
-          console.log(order,chartOrderData);
+          i--;
           order.forEach((ord) => {
             totalorders.push(ord);
           });
@@ -174,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updatePaidNoForProducts(soldProducts) {
     let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
-
     soldProducts.forEach((soldProduct) => {
       let product = flowers.find(
         (flower) => flower.id === soldProduct.productId
@@ -182,17 +189,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (product && product.stock > 0) {
         product.paidno = (product.paidno || 0) + soldProduct.quantity;
-        let result= product.stock - soldProduct.quantity;
-        if(result<0)
-        {
-          product.stock =0;
+        product.stock -= soldProduct.quantity;
 
-
-        }
-        else{
-          product.stock -= soldProduct.quantity;
-
-        }
+        
         ClearInputs();
         showSweetAlert();
         removeCartOrdersAfterChecked();

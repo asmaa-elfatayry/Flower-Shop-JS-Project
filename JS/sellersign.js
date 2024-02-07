@@ -54,6 +54,16 @@ window.addEventListener("DOMContentLoaded", function () {
       document.getElementsByTagName("input")[2].classList.remove("is-invalid");
       document.getElementsByTagName("input")[3].classList.remove("is-invalid");
       document.getElementsByTagName("input")[4].classList.remove("is-invalid");
+
+      document.getElementsByTagName("input")[0].value="";
+      document.getElementsByTagName("input")[1].value="";
+      document.getElementsByTagName("input")[2].value="";
+      document.getElementsByTagName("input")[3].value="";
+      document.getElementsByTagName("input")[4].value="";
+      let message = document.getElementById("validation");
+      message.style.display="none";
+
+
       seller_req(
         shop_name.trim(),
         email,

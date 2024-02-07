@@ -163,16 +163,33 @@ export function getProductImgById(id) {
 }
 
 export function getpendingorder() {
-  let userorders = getuserorder();
-  let userpendingorders = userorders.filter((userorder) => { return userorder.state == 0 });
+  let userorders =JSON.parse(localStorage.getItem("order"))||[];
+  let userpendingorders=userorders.filter((userorder) => {return userorder.state==="Pending" && userorder.user==currentuser.id});
   return userpendingorders;
 }
 
 
 export function getdeliveredorder() {
-  let userorders = getuserorder();
-  let userpendingorders = userorders.filter((userorder) => { return userorder.state == 1 });
+  let userorders =JSON.parse(localStorage.getItem("order"))||[];
+  let userpendingorders = userorders.filter((userorder) => { return userorder.state === "Delivered" && userorder.user==currentuser.id});
   return userpendingorders;
+}
+
+export function getProductImgByIdUser(id) {
+  let TotalOrders = JSON.parse(localStorage.getItem("order"))||[];
+  let searchedProduct = flowers;
+  let resultOrdeId;
+  let resultproduct;
+  if (currentuser.length == 0) {
+    resultOrdeId = TotalOrders.find((order) => order.productId === parseInt(id));
+
+  }
+  else {
+    resultOrdeId = TotalOrders.find((order) => order.productId === parseInt(id) && order.user == currentuser.id);
+   
+  }
+  resultproduct = searchedProduct.find((flower) => flower.id === resultOrdeId.productId);
+  return resultproduct.image;
 }
 
 

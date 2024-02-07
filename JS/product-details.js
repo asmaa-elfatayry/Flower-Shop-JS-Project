@@ -5,6 +5,7 @@ window.addEventListener("DOMContentLoaded", function () {
   let product = JSON.parse(window.localStorage.getItem("productToShow"));
   let img_container = this.document.getElementById("product-image");
   let data_container = this.document.getElementById("product-data");
+  let stars = document.getElementsByClassName('review-star');
 
   this.document.getElementById(
     "product-image"
@@ -123,9 +124,19 @@ window.addEventListener("DOMContentLoaded", function () {
     let name = document.createElement("i");
     comment_div.appendChild(name);
     name.classList.add("text-muted");
-    // console.log();
     review.innerText = review_data.review;
     name.innerText = review_data.name;
+    let rate = Number(review_data.rating);
+    for (let i = 0; i < 5; i++) {
+      let star = document.createElement('i');
+      if (i >= rate) {
+        star.classList.add('fa-regular', 'fa-star');
+      }
+      else {
+        star.classList.add('fa-solid', 'fa-star');
+      }
+      comment_div.appendChild(star);
+    }
   }
   function loadReviews() {
     let reviews = product.reviews;
@@ -141,6 +152,14 @@ window.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       let text = document.getElementById("commentTextarea").value.trim();
       let username = JSON.parse(sessionStorage.getItem("loggedInUser"));
+      let rate = 0;
+      for (let i = 0; i < stars.length; i++) {
+        console.log(stars[i]);
+        if (stars[i].classList.contains('selected'))
+          rate++;
+        else
+          break;
+      }
       if (!username) {
         Swal.fire("please login first");
         return;
@@ -149,11 +168,17 @@ window.addEventListener("DOMContentLoaded", function () {
         Swal.fire("please write something first");
         return;
       }
+      if (!rate) {
+        console.log(rate);
+        Swal.fire("please enter a rate first");
+        return;
+      }
       let curDiv = document.getElementById("comments");
       //adding new review
       const rev = {
         name: username.name,
         review: text,
+        rating: rate,
       };
       addReview(curDiv, rev);
       //adding the review to the local storage
@@ -161,13 +186,28 @@ window.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < flowers.length; i++) {
         if (flowers[i].id == product.id) {
           flowers[i].reviews.push(rev);
-          console.log(flowers[i]);
+          localStorage.setItem('productToShow', JSON.stringify(flowers[i]));
           break;
         }
       }
       localStorage.setItem("flowersData", JSON.stringify(flowers));
     });
-
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].addEventListener('click', function () {
+      for (let j = 0; j < stars.length; j++) {
+        if (j <= i) {
+          stars[j].classList.add('selected');
+          stars[j].children[0].classList.remove('fa-regular');
+          stars[j].children[0].classList.add('fa-solid');
+        }
+        else {
+          stars[j].classList.remove('selected');
+          stars[j].children[0].classList.remove('fa-solid');
+          stars[j].children[0].classList.add('fa-regular');
+        }
+      }
+    })
+  }
   document.getElementById("addCartBTN").addEventListener("click", function () {
     addchart(product.id);
   });
