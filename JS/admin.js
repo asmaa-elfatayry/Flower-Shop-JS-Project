@@ -248,7 +248,7 @@ window.addEventListener("load", function () {
           sellerTotalPaidNo += product.paidno;
         }
       }
-      totalPaidNoBySeller[seller.id] = sellerTotalPaidNo;
+      totalPaidNoBySeller[seller.name] = sellerTotalPaidNo;
     }
 
     const secondBarChartConfig = {

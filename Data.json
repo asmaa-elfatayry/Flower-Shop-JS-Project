@@ -510,7 +510,7 @@
     "sellers": [
       {
         "id": 1,
-        "name": "FlowerShop1",
+        "name": "Florish",
         "role": "seller",
         "location": "Cityville",
         "contact": "flowershop1@example.com",
@@ -519,7 +519,7 @@
       },
       {
         "id": 2,
-        "name": "FloralBoutique",
+        "name": "FloShop",
         "role": "seller",
         "location": "Townsville",
         "contact": "floralboutique@example.com",
@@ -528,7 +528,7 @@
       },
       {
         "id": 3,
-        "name": "FloralEmporium",
+        "name": "FloSun",
         "role": "seller",
         "location": "Meadowville",
         "contact": "floralemporium@example.com",
@@ -548,10 +548,10 @@
     "users": [
       {
         "id": 1,
-        "name": "Mohamed",
+        "name": "Eslam",
         "role": "admin",
         "email": "admin@example.com",
-        "password":"123",
+        "password":"PopolInolI11*?",
         "favourites":[]
       },
       {
