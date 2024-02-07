@@ -61,7 +61,8 @@ window.addEventListener("DOMContentLoaded", function () {
       document.getElementsByTagName("input")[3].value="";
       document.getElementsByTagName("input")[4].value="";
       let message = document.getElementById("validation");
-      message.display="none";
+      message.style.display="none";
+
 
       seller_req(
         shop_name.trim(),

@@ -89,6 +89,7 @@ align-items:baseline;
 {
 color:var(--black-color);
 font-size:18px;
+margin-right: 7px;
 }
 @media screen and (max-width:992px){
   .navbar-collapse{

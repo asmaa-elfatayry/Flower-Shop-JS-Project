@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   //  clicked visa ->
   visaCard.addEventListener("click", function () {
+ 
     document.getElementById("visa").style.display = "block";
     document.getElementById("paypal").style.display = "none";
     visaCard.style.transform = "scale(1.3)";
@@ -21,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   // paypal clicked ->
   paypalCard.addEventListener("click", function () {
+    let allInputs=document.querySelectorAll("form input")
+     allInputs.forEach((inp) => {
+      inp.value = "";
+    });
     document.getElementById("paypal").style.display = "block";
     document.getElementById("visa").style.display = "none";
     paypalCard.style.transform = "scale(1.3)";
@@ -56,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function validatePaypalForm(event) {
     event.preventDefault();
+
     let paypalEmail = document.getElementById("paypalEmail");
     let paypalPassword = document.getElementById("paypalPassword");
     chartOrderData = JSON.parse(localStorage.getItem("ChartOrder")) || [];
@@ -116,14 +122,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("#paymentModal").style.display = "none";
     document.querySelector(".overlay").style.display = "none";
     const allInputs = document.querySelectorAll("form input");
+    // let inputs=document.querySelector(".form-control")
     allInputs.forEach((inp) => {
       inp.value = "";
     });
+
   }
   let totalorders = JSON.parse(localStorage.getItem("order")) || [];
 
   let order = [];
   function removeCartOrdersAfterChecked() {
+    debugger;
     let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
     let userId;
     if (currentUser) {
@@ -131,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (let i = 0; i < chartOrderData.length; i++) {
         if (chartOrderData[i].user == userId) {
           order = chartOrderData.splice(i, 1);
-          console.log(order,chartOrderData);
+          i--;
           order.forEach((ord) => {
             totalorders.push(ord);
           });
@@ -159,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updatePaidNoForProducts(soldProducts) {
     let flowers = JSON.parse(localStorage.getItem("flowersData")) || [];
-
     soldProducts.forEach((soldProduct) => {
       let product = flowers.find(
         (flower) => flower.id === soldProduct.productId

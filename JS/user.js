@@ -93,6 +93,8 @@ window.addEventListener("DOMContentLoaded", function () {
       const currentUser = updateprofile.getcurrentuser();
       document.getElementsByTagName("input")[0].value = currentUser.name;
       document.getElementsByTagName("input")[1].value = currentUser.email;
+      document.getElementsByTagName("input")[2].value = "";
+
     });
   function getorders() {
 
