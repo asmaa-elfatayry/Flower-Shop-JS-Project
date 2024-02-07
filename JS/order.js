@@ -146,7 +146,6 @@ export function loggeduser() {
 
 }
 export function getProductImgById(id) {
-  debugger;
   let TotalOrders = getTotalorders();
   let searchedProduct = flowers;
   let resultOrdeId;
