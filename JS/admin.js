@@ -289,7 +289,6 @@ window.addEventListener("load", function () {
         heads[i] != "description" &&
         heads[i] != "meaning" &&
         heads[i] != "favourites" &&
-        heads[i] != "password" &&
         heads[i] != "Id" &&
         heads[i] != "image"
       ) {
@@ -411,7 +410,7 @@ window.addEventListener("load", function () {
         id: sellers.length > 0 ? sellers[sellers.length - 1].id + 1 : 1,
         name: myRow.children[0].textContent,
         role: "seller",
-        location: myRow.children[3].textContent,
+        location: myRow.children[4].textContent,
         contact: myRow.children[1].textContent,
         products: [],
         password: myRow.children[2].textContent,
