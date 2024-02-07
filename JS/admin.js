@@ -399,7 +399,7 @@ window.addEventListener("load", function () {
       JSON.parse(localStorage.getItem("requestseller")) || [];
     let indexToRemove = -1;
     for (let j = 0; j < requestedSellers.length; j++) {
-      if (requestedSellers[j].name === myRow.children[0].textContent) {
+      if (requestedSellers[j].contact === myRow.children[1].textContent) {
         indexToRemove = j;
         break;
       }
@@ -411,7 +411,7 @@ window.addEventListener("load", function () {
         id: sellers.length > 0 ? sellers[sellers.length - 1].id + 1 : 1,
         name: myRow.children[0].textContent,
         role: "seller",
-        location: myRow.children[4].textContent,
+        location: myRow.children[3].textContent,
         contact: myRow.children[1].textContent,
         products: [],
         password: myRow.children[2].textContent,
@@ -490,7 +490,6 @@ window.addEventListener("load", function () {
               let sellerId = e.target.getAttribute("data-id");
               const seller = sellersData.find((seller) => seller.id == sellerId);
               const deletedProducts = flowersData.filter((product) => product.seller.id == Number(sellerId));
-              console.log(deletedProducts);
               for (let i = 0; i < flowersData.length; i++) {
                 for (let j = 0; j < deletedProducts.length; j++) {
                   if(flowersData[i].id == deletedProducts[j].id)
