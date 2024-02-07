@@ -209,6 +209,8 @@ window.addEventListener("DOMContentLoaded", function () {
     })
   }
   document.getElementById("addCartBTN").addEventListener("click", function () {
-    addchart(product.id);
+    let product_num = document.getElementById("items-count").value;
+    for (let i = 0; i < Number(product_num); i++)
+      addchart(product.id);
   });
 });
