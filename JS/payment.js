@@ -6,7 +6,7 @@ import {
   ValidPassword,
 } from "./ValidationMoudule.js";
 import { updateBadge } from "./order.js";
-let chartOrderData ;
+let chartOrderData;
 
 document.addEventListener("DOMContentLoaded", function () {
   let visaCard = document.querySelector(".visa ");
@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // let ExistChartOrder = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   //  clicked visa ->
   visaCard.addEventListener("click", function () {
- 
     document.getElementById("visa").style.display = "block";
     document.getElementById("paypal").style.display = "none";
     visaCard.style.transform = "scale(1.3)";
@@ -22,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   // paypal clicked ->
   paypalCard.addEventListener("click", function () {
-    let allInputs=document.querySelectorAll("form input")
-     allInputs.forEach((inp) => {
+    let allInputs = document.querySelectorAll("form input");
+    allInputs.forEach((inp) => {
       inp.value = "";
     });
     document.getElementById("paypal").style.display = "block";
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function validatePaypalForm(event) {
     event.preventDefault();
-    
+
     let rows = document.querySelectorAll("#orderlist tr");
     let totalPrice = JSON.parse(localStorage.getItem("totalPrice")) || 0;
     for (let i = 0; i < rows.length; i++) {
@@ -140,7 +139,6 @@ document.addEventListener("DOMContentLoaded", function () {
     allInputs.forEach((inp) => {
       inp.value = "";
     });
-
   }
   let totalorders = JSON.parse(localStorage.getItem("order")) || [];
 
@@ -191,21 +189,20 @@ document.addEventListener("DOMContentLoaded", function () {
         product.paidno = (product.paidno || 0) + soldProduct.quantity;
         product.stock -= soldProduct.quantity;
 
-        
         ClearInputs();
         showSweetAlert();
         removeCartOrdersAfterChecked();
         updateTapleNoOrder();
         updateBadge();
-        document.querySelector("button.swal2-confirm.btn.btn-success").addEventListener("click",function(){
-          console.log("done");
-          window.location.href="../HTML Pages/index.html";
-        })
-        
+        document
+          .querySelector("button.swal2-confirm.btn.btn-success")
+          .addEventListener("click", function () {
+            // console.log("done");
+            window.location.href = "../HTML Pages/index.html";
+          });
 
         // createTable();
-      } 
-      else if (product.stock < 1) {
+      } else if (product.stock < 1) {
         Swal.fire("Sorry, The Product Not Avalible Now!");
         ClearInputs();
       }

@@ -102,6 +102,11 @@ function wish(ID) {
     }
   } else {
     Swal.fire("Sorry you must login first!");
+    document
+      .querySelector("button.swal2-confirm.swal2-styled")
+      .addEventListener("click", function () {
+        window.location.href = "login.html";
+      });
   }
 }
 
@@ -156,6 +161,10 @@ export function addchart(id) {
     }
   } else {
     Swal.fire("please login first!");
-    window.location.href = "login.html";
+    document
+      .querySelector("button.swal2-confirm.swal2-styled")
+      .addEventListener("click", function () {
+        window.location.href = "login.html";
+      });
   }
 }
