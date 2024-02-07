@@ -46,8 +46,8 @@
 
 		<!-- main -->
 		<div class="data row flex-lg-row flex-column">
+			<!-- side -->
 			<div class="side col-12 col-lg-2 d-flex pt-4">
-				<!--  -->
 				<ul
 					class="main-list list-group flex-lg-column justify-content-center flex-row flex-md-nowrap flex-wrap w-100">
 					<a class="col-auto col-lg-12 active">
@@ -100,9 +100,9 @@
 					</a>
 				</ul>
 			</div>
+			<!-- data -->
 			<div class="col-12 col-lg-10">
 				<div class="content pt-2 pb-2" id="content">
-					<!-- l;l;l;l;l; -->
 					<div class="main-data container-fluid p-0">
 						<div class="row">
 							<h4>Analytics Dashboard</h4>
@@ -242,7 +242,38 @@
 
 					</div>
 
-					<!-- l;l;l;l;l; -->
+				</div>
+			</div>
+		</div>
+
+		<!-- details modal -->
+		<div class="modal fade" id="showDetailsModal" tabindex="-1" role="dialog" aria-labelledby="showDetailsModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="showDetailsModalLabel"> Message details </h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="bg-red" aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<div class="details-item uName my-2">
+							<div class="rounded-top-1 p-2">name:</div>
+							<div class="rounded-bottom-1 p-2"></div>
+						</div>
+						<div class="details-item uName my-2">
+							<div class="rounded-top-1 p-2">email:</div>
+							<div class="rounded-bottom-1 p-2"></div>
+						</div>
+						<div class="details-item uName my-2">
+							<div class="rounded-top-1 p-2">subject:</div>
+							<div class="rounded-bottom-1 p-2"></div>
+						</div>
+						<div class="details-item uName my-2">
+							<div class="rounded-top-1 p-2">message:</div>
+							<div class="rounded-bottom-1 p-2"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

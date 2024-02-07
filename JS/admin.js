@@ -237,7 +237,7 @@ window.addEventListener("load", function () {
     let sellersData = JSON.parse(localStorage.getItem("sellerData")) || [];
     const totalPaidNoBySeller = {};
     const filteredFlowersBasedOnPaidNo = FlowersDate.filter(
-      (product) =>  product.paidNo > 0
+      (product) =>  product.paidno > 0
     );
 
     for (const seller of sellersData) {
@@ -245,7 +245,7 @@ window.addEventListener("load", function () {
       for (const productId of seller.products) {
         const product = filteredFlowersBasedOnPaidNo.find((flower) => flower.id === productId);
         if (product) {
-          sellerTotalPaidNo += product.paidNo;
+          sellerTotalPaidNo += product.paidno;
         }
       }
       totalPaidNoBySeller[seller.id] = sellerTotalPaidNo;
@@ -290,6 +290,7 @@ window.addEventListener("load", function () {
         heads[i] != "meaning" &&
         heads[i] != "favourites" &&
         heads[i] != "password" &&
+        heads[i] != "Id" &&
         heads[i] != "image"
       ) {
         let head = document.createElement("th");
@@ -337,8 +338,7 @@ window.addEventListener("load", function () {
         Cell.textContent = item[tableHead.children[i].textContent];
       }
       row.appendChild(Cell);
-      if(tableHead.children[i].textContent == "Message"){
-        console.log("kokoko")
+      if(tableHead.children[i].textContent == "Message" || tableHead.children[i].textContent == "Subject"){
         Cell.classList.add("elipses");
       }
     }
@@ -352,19 +352,25 @@ window.addEventListener("load", function () {
       else if(page == "sellers"){
         deleteButton.setAttribute("data-id",item.id);
       }
-      if(page == "messages"){
+      else if(page == "messages"){
         const detailsButton = document.createElement("button");
-        detailsButton.className = "btn btn-primary";
+        detailsButton.className = "btn btn-primary text-center detailsBtn";
+        detailsButton.setAttribute("data-toggle", "modal");
+        detailsButton.setAttribute("data-target", "#showDetailsModal");
         detailsButton.style.width = "90px";
         detailsButton.classList.add("mx-2");
         detailsButton.textContent = "Details";
-        detailsButton.addEventListener("click", (e) => deleteItem(items,item.id, e));
+        detailsButton.addEventListener("click", (e) => showDetails(e));
         row.children[row.children.length - 1].appendChild(detailsButton);
       }
+
       deleteButton.className = "btn btn-danger";
       deleteButton.style.width = "90px";
       deleteButton.textContent = "Delete";
-      deleteButton.addEventListener("click", (e) => deleteItem(items,item.id, e));
+      if(page == "messages")
+        deleteButton.addEventListener("click", (e) => deleteItem(items,item.Id, e));
+      else
+        deleteButton.addEventListener("click", (e) => deleteItem(items,item.id, e));
       row.children[row.children.length - 1].appendChild(deleteButton);
     } else if (page == "requestedsellers") {
       const dapproveButton = document.createElement("button");
@@ -418,7 +424,7 @@ window.addEventListener("load", function () {
   }
   
   function deleteItem(items,itemId,e) {
-    let users = localStorage.getItem("userData");
+    // let users = localStorage.getItem("userData");
     if(e.target.closest("tr").children[2].textContent == "admin@example.com"){
       Swal.fire({
         title: `You can't delete the admin (yourself)`,
@@ -454,7 +460,12 @@ window.addEventListener("load", function () {
             "success"
             );
             const itemIndex = items.findIndex(
-              (item) => item.id === itemId
+              (item) => {
+                if(page != "messages")
+                  return item.id == itemId;
+                else
+                  return item.Id == itemId;
+              }
             );
               
           if (itemIndex !== -1) {
@@ -472,7 +483,7 @@ window.addEventListener("load", function () {
               displayTable(flowersData, "products");
             } else if (page.toLowerCase() == "users") {
               usersData.splice(itemIndex, 1);
-              localStorage.setItem("userData", JSON.stringify(data["users"]));
+              localStorage.setItem("userData", JSON.stringify(usersData));
               displayTable(usersData, "users");
             } else if (page.toLowerCase() == "sellers") {
               sellersData.splice(itemIndex, 1);
@@ -492,8 +503,13 @@ window.addEventListener("load", function () {
             }
             else if(page.toLowerCase() == "orders"){
               ordersData.splice(itemIndex, 1);
-              ordersData.setItem("sellersData", JSON.stringify(ordersData));
+              localStorage.setItem("sellersData", JSON.stringify(ordersData));
               displayTable(ordersData, "orders");
+            }
+            else if(page.toLowerCase() == "messages"){
+              messagesData.splice(itemIndex, 1);
+              localStorage.setItem("messages", JSON.stringify(messagesData));
+              displayTable(messagesData, "messages");
             }
           } else {
             console.error(`Product with ID ${itemId} not found`);
@@ -584,6 +600,14 @@ window.addEventListener("load", function () {
     return propNames;
   }
 
+  function showDetails(e) {
+    let heads = e.target.closest("table").children[0].children[0];
+    let currentRow = e.target.closest("tr");
+    let displayareas = document.querySelectorAll("#showDetailsModal .details-item > div:nth-child(2)");
+    for (let i = 0; i < currentRow.children.length - 1; i++) {
+      displayareas[i].innerHTML = currentRow.children[i].innerHTML;
+    }
+  }
   createCharts();
   
 });

@@ -158,6 +158,27 @@ body {
   text-overflow: ellipsis;
   max-width: 200px;
 }
+#showDetailsModal .details-item{
+  border-radius: 0.5rem;
+  border: 2px solid black;
+  background-color: #3b7ddd;
+  color: white;
+  font-size: 1.1rem;
+}
+#showDetailsModal .details-item {
+  display: flex;
+  flex-direction: column;
+}
+#showDetailsModal .details-item > div:first-child{
+  text-align: center;
+}
+#showDetailsModal .details-item > div:nth-child(2){
+  font-size: 1.2rem;
+  background-color: white;
+  color: #33334f;
+  height: 100%;
+  width: 100%;
+}
 
 /*============================== screens =========================*/
 /* medium */
