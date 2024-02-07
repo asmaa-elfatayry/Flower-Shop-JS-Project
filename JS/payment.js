@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let order = [];
   function removeCartOrdersAfterChecked() {
-    debugger;
+    // debugger;
     let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
     let userId;
     if (currentUser) {
@@ -183,7 +183,11 @@ document.addEventListener("DOMContentLoaded", function () {
         removeCartOrdersAfterChecked();
         updateTapleNoOrder();
         updateBadge();
-         window.location.href="../HTML Pages/index.html";
+        document.querySelector("button.swal2-confirm.btn.btn-success").addEventListener("click",function(){
+          console.log("done");
+          window.location.href="../HTML Pages/index.html";
+        })
+        
 
         // createTable();
       } 
