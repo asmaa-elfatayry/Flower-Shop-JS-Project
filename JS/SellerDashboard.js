@@ -54,22 +54,37 @@ export function ShowCharts() {
   myspan.textContent = "Charts Page";
 
   // orders
-  const ctx1 = document.createElement("canvas");
-  ctx1.width = 400;
-  ctx1.height = 300;
-  ctx1.classList.add("myChart");
-  chartParent.appendChild(ctx1);
 
   const sellerOrders = (JSON.parse(localStorage.getItem("order")) || []).filter(
     (order) => order.sellerId === sellerId
   );
 
-  const orderLabels = sellerOrders.map((order) => {
-    const product = FlowersDate.find((item) => item.id === order.productId);
-    return product ? product.name : "";
+  const productOrdersMap = {};
+  sellerOrders.forEach((order) => {
+    const productId = order.productId;
+    if (productOrdersMap[productId]) {
+      productOrdersMap[productId] += order.quantity;
+    } else {
+      productOrdersMap[productId] = order.quantity;
+    }
   });
 
-  const orderData = sellerOrders.map((order) => order.quantity);
+  const orderLabels = [];
+  const orderData = [];
+  console.log(productOrdersMap);
+  Object.keys(productOrdersMap).forEach((productId) => {
+    const product = FlowersDate.find((item) => item.id === parseInt(productId));
+    if (product) {
+      orderLabels.push(product.name);
+      orderData.push(productOrdersMap[productId]);
+    }
+  });
+
+  const ctx1 = document.createElement("canvas");
+  ctx1.width = 400;
+  ctx1.height = 300;
+  ctx1.classList.add("myChart");
+  chartParent.appendChild(ctx1);
 
   new Chart(ctx1, {
     type: "bar",
@@ -176,7 +191,7 @@ export function displayProductRow(product) {
   updateButton.setAttribute("data-target", "#updateProductModal");
   updateButton.textContent = "Update";
   updateButton.addEventListener("click", () => updateProduct(product.id));
-  console.log(product.id);
+  // console.log(product.id);
   actionsCell.appendChild(updateButton);
 
   const deleteButton = document.createElement("button");
@@ -493,9 +508,8 @@ export function ShowOrders() {
   myspan.textContent = ": Orders Details";
   document.querySelector(".chart-parent").style.display = "none";
   document.querySelector(".dynamic-section").style.display = "block";
-  document.getElementById("productTable").style.display = "none";
-  document.getElementById("OrdersTable").style.display = "block";
   document.querySelector(".addBtn").style.display = "none";
+  document.getElementById("productTable").style.display = "none";
 
   function getOrdersForSeller(sellerID) {
     const allOrders = JSON.parse(localStorage.getItem("order")) || [];
@@ -505,12 +519,13 @@ export function ShowOrders() {
   function updateOrderState(orderID, newState) {
     const allOrders = JSON.parse(localStorage.getItem("order")) || [];
     const updatedOrders = allOrders.map((order) => {
-      if (order.orderID === orderID) {
+      if (order.orderId === orderID) {
         order.state = newState;
       }
       return order;
     });
     localStorage.setItem("order", JSON.stringify(updatedOrders));
+    return updatedOrders.find((order) => order.orderId === orderID); // Return the updated order
   }
 
   function createOrderRow(order) {
@@ -548,18 +563,45 @@ export function ShowOrders() {
     stateCell.appendChild(state);
     row.appendChild(stateCell);
 
-    state.addEventListener("click", function () {
+    state.addEventListener("click", function (e) {
       if (order.state === "Pending") {
         state.textContent = "Delivered";
         state.classList.remove("pending");
         state.classList.add("delivered");
         order.state = "Delivered";
-        updateOrderState(order.orderID, "Delivered");
+        updateOrderState(order.orderId, "Delivered");
         state.disabled = true;
+      } else if (order.state === "Delivered") {
+        console.log(e.target);
+        Swal.fire({
+          title: "Are You Want Delete this row!",
+          icon: "warning",
+          showCancelButton: true,
+          cancelButtonText: "Cancel ",
+          confirmButtonText: "Delete",
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              "Deleted!",
+              "Your file has been deleted.",
+              "success",
+              3000
+            );
+            row.remove();
+            if (document.querySelector("#OrderList").childNodes.length === 0) {
+              document.getElementById("OrdersTable").style.display = "none";
+              Swal.fire("Empty Orders!");
+            }
+          } else {
+          }
+        });
       }
+
+      return row;
     });
 
-    return row;
+    return row; // Return the created row
   }
 
   const OrdersListContainer = document.getElementById("OrderList");
@@ -567,8 +609,14 @@ export function ShowOrders() {
 
   const sellerOrders = getOrdersForSeller(sellerId);
 
-  sellerOrders.forEach((order) => {
-    const row = createOrderRow(order);
-    OrdersListContainer.appendChild(row);
-  });
+  if (sellerOrders.length < 1) {
+    Swal.fire("No orders yet!");
+  } else {
+    sellerOrders.forEach((order) => {
+      const row = createOrderRow(order);
+      OrdersListContainer.appendChild(row); // Append the row to the container
+    });
+
+    document.getElementById("OrdersTable").style.display = "block";
+  }
 }
