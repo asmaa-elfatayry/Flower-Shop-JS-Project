@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", function () {
   let mnP = document.getElementById("minPrice");
   let mxP = document.getElementById("maxPrice");
   let pagingBTNs = document.getElementsByClassName("paging-BTN");
-  document.getElementById('products_per_page').addEventListener('change',function(e) {
+  document.getElementById('products_per_page').addEventListener('change', function (e) {
     numberOfProfProducts = Number(e.target.value);
     displayProducts(1);
   })
@@ -36,12 +36,27 @@ window.addEventListener("DOMContentLoaded", function () {
           filteredFlowers.sort(function (a, b) {
             return b.price - a.price;
           });
-        } else if (i == 2) {
+        }
+        else if (i == 2) {
+          filteredFlowers.sort(function (a, b) {
+            let rate1 = 0, rate2 = 0;
+            for (let i = 0; i < a.reviews.length; i++)
+              rate1 += Number(a.reviews[i].rating);
+            if (rate1)
+              rate1 = Math.ceil(rate1 / a.reviews.length)
+            for (let i = 0; i < b.reviews.length; i++)
+              rate2 += Number(b.reviews[i].rating);
+            if (rate2)
+              rate2 = Math.ceil(rate2 / b.reviews.length)
+            return rate2 - rate1;
+          });
+        }
+        else if (i == 3) {
           filteredFlowers = filteredFlowers.reverse();
         }
-        else if(i>=3) {
+        else if (i >= 3) {
           let _category = categories[i].innerText;
-          filteredFlowers = filteredFlowers.filter(function(cur) {
+          filteredFlowers = filteredFlowers.filter(function (cur) {
             return cur.category === _category
           });
         }

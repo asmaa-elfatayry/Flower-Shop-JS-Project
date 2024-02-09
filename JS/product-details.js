@@ -154,7 +154,6 @@ window.addEventListener("DOMContentLoaded", function () {
       let username = JSON.parse(sessionStorage.getItem("loggedInUser"));
       let rate = 0;
       for (let i = 0; i < stars.length; i++) {
-        console.log(stars[i]);
         if (stars[i].classList.contains('selected'))
           rate++;
         else
@@ -169,7 +168,6 @@ window.addEventListener("DOMContentLoaded", function () {
         return;
       }
       if (!rate) {
-        console.log(rate);
         Swal.fire("please enter a rate first");
         return;
       }

@@ -48,6 +48,25 @@ export function addProduct(product, rowDiv) {
   price.textContent = `${product.price} EGP`;
   cardBody.appendChild(price);
 
+  const stars = document.createElement('div');
+  cardBody.appendChild(stars);
+  let rate = 0;
+  for (let i = 0; i < product.reviews.length; i++)
+    rate += Number(product.reviews[i].rating);
+  if (rate)
+    rate = Math.ceil(rate / product.reviews.length)
+  for (let i = 0; i < 5; i++) {
+    const reviewStarElement = document.createElement('span');
+    reviewStarElement.classList.add('review-star');
+    const starIconElement = document.createElement('i');
+    if (rate > i)
+      starIconElement.classList.add('fa-solid', 'fa-star');
+    else
+      starIconElement.classList.add('fa-regular', 'fa-star');
+    reviewStarElement.appendChild(starIconElement);
+    stars.appendChild(reviewStarElement);
+  }
+
   const addToCartButton = document.createElement("button");
   addToCartButton.classList.add("cart");
   addToCartButton.setAttribute("id", `${product.id}`);
@@ -61,7 +80,6 @@ export function addProduct(product, rowDiv) {
       event.target.parentElement.classList.contains("for_wish") ||
       event.target.classList.contains("for_wish")
     ) {
-      console.log("hh");
       wish(product.id);
     } else if (event.target.classList.contains("for_wish") == false) {
       localStorage.setItem("productToShow", JSON.stringify(product));
