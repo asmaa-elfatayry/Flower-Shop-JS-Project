@@ -14,6 +14,10 @@ window.addEventListener("DOMContentLoaded", function () {
   let mnP = document.getElementById("minPrice");
   let mxP = document.getElementById("maxPrice");
   let pagingBTNs = document.getElementsByClassName("paging-BTN");
+  document.getElementById('products_per_page').addEventListener('change',function(e) {
+    numberOfProfProducts = Number(e.target.value);
+    displayProducts(1);
+  })
   function filterProducts() {
     let txt = document.getElementById("searchTXT").value.trim();
     if (flowers) {

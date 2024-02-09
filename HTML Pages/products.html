@@ -133,6 +133,16 @@
     </div>
     <div class="col-12">
       <div class="container text-center" id="productContainer">
+        <label for="products_per_page">products per page</label>
+        <select name="products_per_page" id="products_per_page">
+          <option value="4">4</option>
+          <option value="8">8</option>
+          <option value="12" selected>12</option>
+          <option value="16">16</option>
+          <option value="32">32</option>
+          <option value="64">64</option>
+        </select>
+        
         <h1 class="mt-5" id="no-products">Sorry no products to show :(</h1>
       </div>
     </div>
@@ -140,17 +150,17 @@
       <nav>
         <ul class="pagination">
           <li class="page-item d-none" id="paging-prev">
-            <span class="page-link">Previous</span>
+            <a href="#" class="page-link">Previous</a>
           </li>
-          <li class="page-item active paging-BTN"><a class="page-link">1</a></li>
+          <li class="page-item active paging-BTN"><a href="#" class="page-link">1</a></li>
           <li class="page-item d-none dots-1"><a class="page-link">...</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">2</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">3</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">4</a></li>
+          <li class="page-item paging-BTN"><a href="#" class="page-link">2</a></li>
+          <li class="page-item paging-BTN"><a href="#" class="page-link">3</a></li>
+          <li class="page-item paging-BTN"><a href="#" class="page-link">4</a></li>
           <li class="page-item d-none dots-2"><a class="page-link">...</a></li>
-          <li class="page-item paging-BTN"><a class="page-link">3</a></li>
+          <li class="page-item paging-BTN"><a href="#" class="page-link">3</a></li>
           <li class="page-item" id="paging-next">
-            <span class="page-link">Next</span>
+            <a href="#" class="page-link">Next</a>
           </li>
         </ul>
       </nav>
