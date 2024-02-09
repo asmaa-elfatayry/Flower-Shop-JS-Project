@@ -1,5 +1,4 @@
 window.addEventListener("DOMContentLoaded", function () {
-  
   let visitors = Number(JSON.parse(localStorage.getItem("visitors"))) || 0;
   visitors++;
   localStorage.setItem("visitors", visitors);
@@ -13,10 +12,9 @@ window.addEventListener("DOMContentLoaded", function () {
     fetch("../Data.json")
       .then((response) => response.json())
       .then((data) => {
-      
         FlowersDate = data.flowers;
-        for (let i = 0; i<FlowersDate.length; i++) {
-          FlowersDate[i]['reviews'] = new Array;
+        for (let i = 0; i < FlowersDate.length; i++) {
+          FlowersDate[i]["reviews"] = new Array();
         }
         SellerData = data.sellers;
         UserData = data.users;
@@ -93,13 +91,14 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   function getOldOrdersInCart(id) {
-    debugger;
-    let usercartorders = JSON.parse(localStorage.getItem("guestRequestorder")) || [];
+    // debugger;
+    let usercartorders =
+      JSON.parse(localStorage.getItem("guestRequestorder")) || [];
     let allcartorders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
     let CartOrdersForLoggedUser = getuserloggedorder(id);
-  
+
     if (CartOrdersForLoggedUser.length == 0) {
-      usercartorders.forEach(order => {
+      usercartorders.forEach((order) => {
         order.user = id;
         order.orderId = allcartorders.length + 1;
         allcartorders.push(order);
@@ -107,13 +106,13 @@ window.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("ChartOrder", JSON.stringify(allcartorders));
       localStorage.setItem("guestRequestorder", JSON.stringify([]));
     } else {
-      usercartorders.forEach(order => {
+      usercartorders.forEach((order) => {
         if (orderexists(order.productId, id)) {
           order.user = id;
           let oldQuantity = getExistingQuantityOrder(id, order.productId);
           order.quantity += oldQuantity;
           let index = getExistingindexOrder(order.productId);
-          allcartorders[index] = order; 
+          allcartorders[index] = order;
         } else {
           order.user = id;
           order.orderId = allcartorders.length + 1;
@@ -124,29 +123,32 @@ window.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("guestRequestorder", JSON.stringify([]));
     }
   }
-  
 
- function orderexists(id,userid) {
+  function orderexists(id, userid) {
     let get_all_order = getuserloggedorder(userid);
-      return get_all_order.some((order) => order.productId === id);
-  
+    return get_all_order.some((order) => order.productId === id);
   }
   function getExistingQuantityOrder(id, prod_id) {
     let userOrders = getuserloggedorder(id);
-    let resultsearch = userOrders.find((product) => product.productId === prod_id);
+    let resultsearch = userOrders.find(
+      (product) => product.productId === prod_id
+    );
     return resultsearch.quantity;
   }
-  
+
   function getExistingindexOrder(prod_id) {
     let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
-    let index = TotalOrders.findIndex((product) => product.productId === prod_id);
+    let index = TotalOrders.findIndex(
+      (product) => product.productId === prod_id
+    );
     return index;
   }
-  
-  function getuserloggedorder(id)
-  {
+
+  function getuserloggedorder(id) {
     let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
-    let ExistChartOrder = TotalOrders.filter((order) => { return order.user === id });
+    let ExistChartOrder = TotalOrders.filter((order) => {
+      return order.user === id;
+    });
     return ExistChartOrder;
   }
 
@@ -161,10 +163,10 @@ window.addEventListener("DOMContentLoaded", function () {
     sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
   }
 
-  function clear()
- {
+  function clear() {
     const allInputs = document.querySelectorAll("input");
     allInputs.forEach((inp) => {
-      inp.value = "";});
- }
+      inp.value = "";
+    });
+  }
 });

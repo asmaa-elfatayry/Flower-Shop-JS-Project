@@ -527,6 +527,17 @@ export function ShowOrders() {
     localStorage.setItem("order", JSON.stringify(updatedOrders));
     return updatedOrders.find((order) => order.orderId === orderID); // Return the updated order
   }
+  function updateOrderRemoved(orderID, newState) {
+    const allOrders = JSON.parse(localStorage.getItem("order")) || [];
+    const updatedOrders = allOrders.map((order) => {
+      if (order.orderId === orderID) {
+        order.isRemoved = newState;
+      }
+      return order;
+    });
+    localStorage.setItem("order", JSON.stringify(updatedOrders));
+    return updatedOrders.find((order) => order.orderId === orderID); // Return the updated order
+  }
 
   function createOrderRow(order) {
     const row = document.createElement("tr");
@@ -588,6 +599,9 @@ export function ShowOrders() {
               "success",
               3000
             );
+            order.isRemoved = true;
+            // localStorage.setItem("order", JSON.stringify(order));
+            updateOrderRemoved(order.orderId, true);
             row.remove();
             if (document.querySelector("#OrderList").childNodes.length === 0) {
               document.getElementById("OrdersTable").style.display = "none";
@@ -613,8 +627,10 @@ export function ShowOrders() {
     Swal.fire("No orders yet!");
   } else {
     sellerOrders.forEach((order) => {
-      const row = createOrderRow(order);
-      OrdersListContainer.appendChild(row); // Append the row to the container
+      if (!order.isRemoved) {
+        const row = createOrderRow(order);
+        OrdersListContainer.appendChild(row); // Append the row to the container
+      }
     });
 
     document.getElementById("OrdersTable").style.display = "block";

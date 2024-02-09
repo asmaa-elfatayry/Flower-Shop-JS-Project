@@ -118,45 +118,47 @@ export function addchart(id) {
   let TotalOrdersg =
     JSON.parse(localStorage.getItem("guestRequestorder")) || [];
   let flowers = JSON.parse(localStorage.getItem("flowersData"));
- 
-    let p_id = parseInt(id);
-    if (!order.order_is_exists(p_id)) {
-      let found_prod = flowers.find((flower) => flower.id === p_id);
-      let quantity = 1;
-      let orderid;
-      let price = found_prod.price;
-      let sellerid = found_prod.seller.id;
-      let date = new Date();
-      let state = "Pending";
-      let prodId = found_prod.id;
-      let user;
-      if (CurrentUserData.length == 0) {
-        user = -1;
-        orderid = TotalOrdersg.length + 1;
-      } else {
-        user = CurrentUserData.id;
-        orderid = TotalOrders.length + 1;
-      }
-      let new_order = new order.Order(
-        date,
-        prodId,
-        sellerid,
-        quantity,
-        price,
-        orderid,
-        state,
-        user
-      );
-      if (CurrentUserData.length == 0) {
-        TotalOrdersg.push(new_order.getOrderData());
-        order.updateChartData(TotalOrdersg);
-      } else {
-        TotalOrders.push(new_order.getOrderData());
-        order.updateChartData(TotalOrders);
-      }
-      order.updateBadge();
+
+  let p_id = parseInt(id);
+  if (!order.order_is_exists(p_id)) {
+    let found_prod = flowers.find((flower) => flower.id === p_id);
+    let quantity = 1;
+    let orderid;
+    let price = found_prod.price;
+    let sellerid = found_prod.seller.id;
+    let date = new Date();
+    let state = "Pending";
+    let isRemoved = false;
+    let prodId = found_prod.id;
+    let user;
+    if (CurrentUserData.length == 0) {
+      user = -1;
+      orderid = TotalOrdersg.length + 1;
     } else {
-      order.updateproductById(p_id);
-      order.updateBadge();
+      user = CurrentUserData.id;
+      orderid = TotalOrders.length + 1;
     }
+    let new_order = new order.Order(
+      date,
+      prodId,
+      sellerid,
+      quantity,
+      price,
+      orderid,
+      state,
+      isRemoved,
+      user
+    );
+    if (CurrentUserData.length == 0) {
+      TotalOrdersg.push(new_order.getOrderData());
+      order.updateChartData(TotalOrdersg);
+    } else {
+      TotalOrders.push(new_order.getOrderData());
+      order.updateChartData(TotalOrders);
+    }
+    order.updateBadge();
+  } else {
+    order.updateproductById(p_id);
+    order.updateBadge();
+  }
 }
