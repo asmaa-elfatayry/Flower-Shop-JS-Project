@@ -1,6 +1,8 @@
 import * as selAutho from "./Authentication.js";
 
 window.addEventListener("DOMContentLoaded", function () {
+  clear();
+
   let save_sign = document.getElementById("sig_sel");
   save_sign.addEventListener("click", function (event) {
     let shop_name = document.getElementsByTagName("input")[0].value;
@@ -54,12 +56,8 @@ window.addEventListener("DOMContentLoaded", function () {
       document.getElementsByTagName("input")[2].classList.remove("is-invalid");
       document.getElementsByTagName("input")[3].classList.remove("is-invalid");
       document.getElementsByTagName("input")[4].classList.remove("is-invalid");
+      clear();
 
-      document.getElementsByTagName("input")[0].value="";
-      document.getElementsByTagName("input")[1].value="";
-      document.getElementsByTagName("input")[2].value="";
-      document.getElementsByTagName("input")[3].value="";
-      document.getElementsByTagName("input")[4].value="";
       let message = document.getElementById("validation");
       message.style.display="none";
 
@@ -73,9 +71,18 @@ window.addEventListener("DOMContentLoaded", function () {
       );
       document.getElementsByClassName("message")[0].innerHTML =
         '<div class="alert alert-success" role="alert">the request has been send successfuly.</div>';
+
+        setTimeout(function() {
+          document.getElementsByClassName("message")[0].innerHTML = "";
+        }, 5000);    
     }
   });
-
+ function clear()
+ {
+    const allInputs = document.querySelectorAll("input");
+    allInputs.forEach((inp) => {
+      inp.value = "";});
+ }
   function seller_req(shop_name, email, password, number_prod, location_shop) {
     const requestdata = JSON.parse(localStorage.getItem("requestseller")) || [];
     const newrequest = {

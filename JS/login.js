@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", function () {
-
+  
   let visitors = Number(JSON.parse(localStorage.getItem("visitors"))) || 0;
   visitors++;
   localStorage.setItem("visitors", visitors);
@@ -10,9 +10,6 @@ window.addEventListener("DOMContentLoaded", function () {
     let UserData;
     let RequestSeller;
     let ChartOrder;
-    // let favourites;
-    sessionStorage.setItem("guestRequestorder", JSON.stringify([]));
-
     fetch("../Data.json")
       .then((response) => response.json())
       .then((data) => {
@@ -23,7 +20,6 @@ window.addEventListener("DOMContentLoaded", function () {
         }
         SellerData = data.sellers;
         UserData = data.users;
-       // favourites = data.favourites;
         RequestSeller = data.request_seller;
         ChartOrder = data.CartOrders;
 
@@ -31,9 +27,6 @@ window.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("sellerData", JSON.stringify(SellerData));
         localStorage.setItem("userData", JSON.stringify(UserData));
         localStorage.setItem("requestseller", JSON.stringify(RequestSeller));
-
-        // localStorage.setItem("favourites", JSON.stringify(favourites));
-
         localStorage.setItem("ChartOrder", JSON.stringify(ChartOrder));
 
         let search_icon = this.document.querySelector(".search");
@@ -49,7 +42,7 @@ window.addEventListener("DOMContentLoaded", function () {
   if (localStorage.length <= 1) {
     loadData();
   }
-
+  clear();
   let check_login = document.getElementById("log");
   let redirect_signUP = document.getElementById("signUp");
 
@@ -79,6 +72,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     if (user && user.role === "user") {
       logged_user(user, "user");
+      getOldOrdersInCart(user.id);
       window.location.href = "index.html";
     } else if (seller) {
       logged_user(seller, "seller");
@@ -98,6 +92,64 @@ window.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function getOldOrdersInCart(id) {
+    debugger;
+    let usercartorders = JSON.parse(localStorage.getItem("guestRequestorder")) || [];
+    let allcartorders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    let CartOrdersForLoggedUser = getuserloggedorder(id);
+  
+    if (CartOrdersForLoggedUser.length == 0) {
+      usercartorders.forEach(order => {
+        order.user = id;
+        order.orderId = allcartorders.length + 1;
+        allcartorders.push(order);
+      });
+      localStorage.setItem("ChartOrder", JSON.stringify(allcartorders));
+      localStorage.setItem("guestRequestorder", JSON.stringify([]));
+    } else {
+      usercartorders.forEach(order => {
+        if (orderexists(order.productId, id)) {
+          order.user = id;
+          let oldQuantity = getExistingQuantityOrder(id, order.productId);
+          order.quantity += oldQuantity;
+          let index = getExistingindexOrder(order.productId);
+          allcartorders[index] = order; 
+        } else {
+          order.user = id;
+          order.orderId = allcartorders.length + 1;
+          allcartorders.push(order);
+        }
+      });
+      localStorage.setItem("ChartOrder", JSON.stringify(allcartorders));
+      localStorage.setItem("guestRequestorder", JSON.stringify([]));
+    }
+  }
+  
+
+ function orderexists(id,userid) {
+    let get_all_order = getuserloggedorder(userid);
+      return get_all_order.some((order) => order.productId === id);
+  
+  }
+  function getExistingQuantityOrder(id, prod_id) {
+    let userOrders = getuserloggedorder(id);
+    let resultsearch = userOrders.find((product) => product.productId === prod_id);
+    return resultsearch.quantity;
+  }
+  
+  function getExistingindexOrder(prod_id) {
+    let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    let index = TotalOrders.findIndex((product) => product.productId === prod_id);
+    return index;
+  }
+  
+  function getuserloggedorder(id)
+  {
+    let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+    let ExistChartOrder = TotalOrders.filter((order) => { return order.user === id });
+    return ExistChartOrder;
+  }
+
   function logged_user(user, role) {
     const loggedInUser = {
       id: user.id,
@@ -108,4 +160,11 @@ window.addEventListener("DOMContentLoaded", function () {
     };
     sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
   }
+
+  function clear()
+ {
+    const allInputs = document.querySelectorAll("input");
+    allInputs.forEach((inp) => {
+      inp.value = "";});
+ }
 });

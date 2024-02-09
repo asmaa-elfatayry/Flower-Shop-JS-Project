@@ -116,9 +116,9 @@ export function addchart(id) {
     JSON.parse(sessionStorage.getItem("loggedInUser")) || [];
   let TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
   let TotalOrdersg =
-    JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+    JSON.parse(localStorage.getItem("guestRequestorder")) || [];
   let flowers = JSON.parse(localStorage.getItem("flowersData"));
-  if (CurrentUserData.length != 0) {
+ 
     let p_id = parseInt(id);
     if (!order.order_is_exists(p_id)) {
       let found_prod = flowers.find((flower) => flower.id === p_id);
@@ -159,12 +159,4 @@ export function addchart(id) {
       order.updateproductById(p_id);
       order.updateBadge();
     }
-  } else {
-    Swal.fire("please login first!");
-    document
-      .querySelector("button.swal2-confirm.swal2-styled")
-      .addEventListener("click", function () {
-        window.location.href = "login.html";
-      });
-  }
 }

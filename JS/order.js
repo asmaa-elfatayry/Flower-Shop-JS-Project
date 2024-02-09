@@ -52,7 +52,7 @@ export function getuserorder() {
 export function getTotalorders() {
   let TotalOrders;
   if (currentuser.length == 0) {
-    TotalOrders = JSON.parse(sessionStorage.getItem("guestRequestorder")) || [];
+    TotalOrders = JSON.parse(localStorage.getItem("guestRequestorder")) || [];
   }
   else {
     TotalOrders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
@@ -97,7 +97,7 @@ export function getStockQuantityById(productId) {
 }
 export function updateChartData(TotalOrders) {
   if (currentuser.length == 0) {
-    sessionStorage.setItem("guestRequestorder", JSON.stringify(TotalOrders));
+    localStorage.setItem("guestRequestorder", JSON.stringify(TotalOrders));
 
   }
   else {

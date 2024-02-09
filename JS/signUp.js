@@ -1,7 +1,9 @@
 import * as sigAutho from "./Authentication.js";
+
 window.addEventListener("DOMContentLoaded", function () {
   let save_sign = document.getElementById("sig");
   let redirect_signin = document.getElementById("signin");
+  let user_n_id;
 
   redirect_signin.addEventListener("click", function () {
     window.location.href = "login.html";
@@ -48,7 +50,7 @@ window.addEventListener("DOMContentLoaded", function () {
       );
     }
     else {
-      const user_n_id = signUp(name.trim(), email, password);
+      user_n_id = signUp(name.trim(), email, password);
       const loggedInUser = {
         id: user_n_id,
         name: name.trim(),
@@ -58,10 +60,27 @@ window.addEventListener("DOMContentLoaded", function () {
 
       };
       sessionStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+      getOldOrdersInCart();
       window.location.href = "index.html";
     }
   });
 
+
+  function getOldOrdersInCart() {
+    let usercartorders = JSON.parse(localStorage.getItem("guestRequestorder")) || [];
+    let allcartorders = JSON.parse(localStorage.getItem("ChartOrder")) || [];
+  
+    if (usercartorders.length != 0) {
+        usercartorders.forEach(order => {
+        order.user = user_n_id;
+        order.orderId=allcartorders.length+1;
+        allcartorders.push(order);
+      });
+        localStorage.setItem("ChartOrder", JSON.stringify(allcartorders));
+        localStorage.setItem("guestRequestorder", JSON.stringify([]));
+    }
+  }
+  
   function signUp(name, email, password) {
     const UserData = JSON.parse(localStorage.getItem("userData")) || [];
     const newUser = {
