@@ -39,6 +39,12 @@ window.addEventListener("DOMContentLoaded", function () {
         } else if (i == 2) {
           filteredFlowers = filteredFlowers.reverse();
         }
+        else if(i>=3) {
+          let _category = categories[i].innerText;
+          filteredFlowers = filteredFlowers.filter(function(cur) {
+            return cur.category === _category
+          });
+        }
       }
     }
   }

@@ -7,7 +7,7 @@
         "image": "flower1.png",
         "price": 10.99,
         "description": "Beautiful red rose symbolizing immortality and perseverance.",
-        "category": "ُEngagement",
+        "category": "Engagement",
         "paidno":4,
         "seller": {
           "id": 1
@@ -63,7 +63,7 @@
         "image": "flower5.png",
         "price": 16.99,
         "description": "Elegant white lily symbolizing purity and endurance.",
-        "category": "ُEngagement",
+        "category": "Engagement",
         "paidno":0,
         "seller": {
           "id": 1
@@ -105,7 +105,7 @@
         "image": "flower8.png",
         "price": 16.99,
         "description": "Elegant Azalea symbolizing femininity and softness.",
-        "category": "ُEngagement",
+        "category": "Engagement",
         "paidno":0,
         "seller": {
           "id": 3
@@ -134,7 +134,7 @@
         "image": "flower10.png",
         "price": 16.99,
         "description": "Elegant Peach Blossom symbolizing longevity and happiness.",
-        "category": "ُEngagement",
+        "category": "Engagement",
         "paidno":2,
         "seller": {
           "id": 4
@@ -162,7 +162,7 @@
         "image": "flower12.png",
         "price": 16.99,
         "description": "Elegant Rose symbolizing love, passion, and beauty.",
-        "category": "ُEngagement",
+        "category": "Engagement",
         "paidno":0,
         "seller": {
           "id": 2
@@ -319,7 +319,7 @@
         "image": "flower23.png",
         "price": 21.99,
         "description": "Captivating Rose symbolizing enchantment and mystery.",
-        "category": "ُEngagement",
+        "category": "Engagement",
         "paidno":0,
         "seller": {
           "id": 4
@@ -407,7 +407,7 @@
       "image": "flower23.png",
       "price": 21.99,
       "description": "Captivating Rose symbolizing enchantment and mystery.",
-      "category": "ُEngagement",
+      "category": "Engagement",
       "paidno":4,
       "seller": {
         "id": 4
