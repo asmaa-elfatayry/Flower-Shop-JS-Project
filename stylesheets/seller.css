@@ -7,11 +7,11 @@
   --error-msg:brown;
   --green-color:green;
   --info-img-border:#9880e4;
-  --lavender-color:lavender;
+  --lavender-color:#3B7DDD;
   --state-pending-bg:#c78dd1db;
   --state-delivered-bg:#1e7f14;
   --span-info-bg:#1b1a1ab7;
-  --icons-color:#657079;
+  --icons-color:rgb(248, 239, 249);
   --whitesmoke-color:whitesmoke;
 }
 
@@ -47,7 +47,9 @@ body {
 .addBtn {
   margin-top: 30px;
 }
-
+.fa{
+  color: var(--icons-color);
+}
 /* line 28, ../sass/seller.scss */
 .info {
   position: absolute;
