@@ -15,4 +15,12 @@ window.addEventListener("DOMContentLoaded", function () {
   } else {
     console.log("loading");
   }
+  let categories = document.getElementsByClassName('cat');
+  for (let i = 0; i < categories.length; i++) {
+    categories[i].addEventListener('click', function () {
+      const cat = this.children[0].children[1].innerText;
+      const url = `../HTML pages/products.html?category=${cat}`;
+      window.location.href = url;
+    })
+  }
 });

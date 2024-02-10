@@ -14,6 +14,23 @@ window.addEventListener("DOMContentLoaded", function () {
   let mnP = document.getElementById("minPrice");
   let mxP = document.getElementById("maxPrice");
   let pagingBTNs = document.getElementsByClassName("paging-BTN");
+  function getCategoryURL() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const cat = urlParams.get('category');
+    if (!cat)
+      return;
+    for (let i = 0; i < categories.length; i++) {
+      if (categories[i].innerText === cat)
+        categories[i].classList.add("_active");
+      else
+        categories[i].classList.remove("_active");
+    }
+    urlParams.delete('category');
+    const updatedURL = `${window.location.origin}${window.location.pathname}?${urlParams.toString()}`;
+    window.history.replaceState({}, document.title, updatedURL);
+  }
+  getCategoryURL();
   document.getElementById('products_per_page').addEventListener('change', function (e) {
     numberOfProfProducts = Number(e.target.value);
     displayProducts(1);
