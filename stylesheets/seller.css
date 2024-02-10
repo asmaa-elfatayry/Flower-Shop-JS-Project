@@ -12,7 +12,7 @@
   --state-delivered-bg:#1e7f14;
   --span-info-bg:#1b1a1ab7;
   --icons-color:rgb(248, 239, 249);
-  --whitesmoke-color:whitesmoke;
+  --whitesmoke-color:rgb(255, 251, 251);
 }
 
 /* line 1, ../sass/seller.scss */
@@ -178,7 +178,7 @@ i:hover {
 
 /* line 125, ../sass/seller.scss */
 #sellerInfoContainer i {
-  color: var(--icons-color);
+  color: #333;
 }
 
 /* line 128, ../sass/seller.scss */
