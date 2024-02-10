@@ -374,10 +374,12 @@ addProductForm.addEventListener("submit", function (event) {
       name: productNameInput.value,
       meaning: nameMeaningInput.value,
       price: parseFloat(productPriceInput.value),
+      reviews: [],
       image: productImageInput.files[0].name,
       category: productCategoryInput.value,
       description: document.getElementById("description").value || "",
       stock: parseInt(productStockInput.value),
+
       seller: {
         id: sellerId,
       },

@@ -48,21 +48,18 @@ export function addProduct(product, rowDiv) {
   price.textContent = `${product.price} EGP`;
   cardBody.appendChild(price);
 
-  const stars = document.createElement('div');
+  const stars = document.createElement("div");
   cardBody.appendChild(stars);
   let rate = 0;
   for (let i = 0; i < product.reviews.length; i++)
     rate += Number(product.reviews[i].rating);
-  if (rate)
-    rate = Math.ceil(rate / product.reviews.length)
+  if (rate) rate = Math.ceil(rate / product.reviews.length);
   for (let i = 0; i < 5; i++) {
-    const reviewStarElement = document.createElement('span');
-    reviewStarElement.classList.add('review-star');
-    const starIconElement = document.createElement('i');
-    if (rate > i)
-      starIconElement.classList.add('fa-solid', 'fa-star');
-    else
-      starIconElement.classList.add('fa-regular', 'fa-star');
+    const reviewStarElement = document.createElement("span");
+    reviewStarElement.classList.add("review-star");
+    const starIconElement = document.createElement("i");
+    if (rate > i) starIconElement.classList.add("fa-solid", "fa-star");
+    else starIconElement.classList.add("fa-regular", "fa-star");
     reviewStarElement.appendChild(starIconElement);
     stars.appendChild(reviewStarElement);
   }
