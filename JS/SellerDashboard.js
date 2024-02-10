@@ -372,12 +372,15 @@ addProductForm.addEventListener("submit", function (event) {
     const newProduct = {
       id: maxId + 1,
       name: productNameInput.value,
+      paidno: 0,
       meaning: nameMeaningInput.value,
       price: parseFloat(productPriceInput.value),
       reviews: [],
       image: productImageInput.files[0].name,
       category: productCategoryInput.value,
-      description: document.getElementById("description").value || "",
+      description:
+        document.getElementById("description").value ||
+        "perfect for expressing imagination and creativity.",
       stock: parseInt(productStockInput.value),
 
       seller: {
