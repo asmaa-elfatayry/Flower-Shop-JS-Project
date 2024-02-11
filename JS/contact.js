@@ -1,11 +1,12 @@
-window.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("submit").addEventListener("click", (e) => {
-        e.preventDefault();
+window.addEventListener("DOMContentLoaded", function () {  
+document.getElementById("submit").addEventListener("click", (e) => {
+    e.preventDefault();
+    if(sessionStorage.getItem("loggedInUser")) {
         let uName = document.getElementById("uname").value.trim();
         let uMail = document.getElementById("uemail").value.trim();
         let uSubject = document.getElementById("usubject").value.trim();
         let uMessage = document.getElementById("con_message").value.trim();
-
+        
         // Regular expression for email validation
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
@@ -28,6 +29,12 @@ window.addEventListener("DOMContentLoaded", function () {
         } else {
             Swal.fire("Please enter valid data");
         }
-
-    })
+    } 
+    else {
+        Swal.fire("please login first!");
+        document.querySelector("button.swal2-confirm.swal2-styled").addEventListener("click", function () {
+            window.location.href = "login.html";
+        });
+    }
+})
 });
