@@ -7,7 +7,7 @@ let myspan = document.querySelector(".typeOf");
 let flag;
 let sellerId;
 const loggedInUserData = sessionStorage.getItem("loggedInUser");
-
+const chartParent = document.querySelector(".chart-parent");
 if (loggedInUserData) {
   const loggedInUser = JSON.parse(loggedInUserData);
 
@@ -29,6 +29,7 @@ function displaySellerInfo(sellerData) {
   document.querySelector(
     ".location"
   ).innerHTML = `<i class="fa fa-map-marker pr-2"></i> ${sellerData.location}`;
+  document.querySelector(".sellerID").innerHTML = `Seller ID: ${sellerData.id}`;
 }
 
 // Initialize the page
@@ -43,21 +44,31 @@ if (seller) {
 export let sellerProducts = FlowersDate.filter(
   (product) => product.seller.id === sellerId
 );
-
+// orders
+let sellerOrders = (JSON.parse(localStorage.getItem("order")) || []).filter(
+  (order) => order.sellerId === sellerId
+);
+//create data for no orders and no of products
+function SellerDataVisual() {
+  let dataContainer = document.createElement("div");
+  dataContainer.classList.add("data-seller");
+  let ProductNo = document.createElement("div");
+  let OrdertNo = document.createElement("div");
+  ProductNo.innerHTML = `<h4>Products No</h4> <h3> ${sellerProducts.length}</h3> <h4>Since launched</h4>`;
+  OrdertNo.innerHTML = `<h4>Orders No</h4> <h3> ${sellerOrders.length} </h3> <h4>Since launched</h4>`;
+  dataContainer.appendChild(ProductNo);
+  dataContainer.appendChild(OrdertNo);
+  chartParent.prepend(dataContainer);
+}
 //
 export function ShowCharts() {
   //   document.querySelector(".controls").innerHTML = "";
-  const chartParent = document.querySelector(".chart-parent");
-  chartParent.innerHTML = "";
-  document.querySelector(".chart-parent").style.display = "flex";
+  let chartsContainer = document.querySelector(".chartsCon");
+  chartsContainer.innerHTML = "";
+  document.querySelector(".chart-parent").style.display = "block";
   document.querySelector(".dynamic-section").style.display = "none";
   myspan.textContent = "Charts Page";
-
-  // orders
-
-  const sellerOrders = (JSON.parse(localStorage.getItem("order")) || []).filter(
-    (order) => order.sellerId === sellerId
-  );
+  SellerDataVisual();
 
   const productOrdersMap = {};
   sellerOrders.forEach((order) => {
@@ -84,7 +95,7 @@ export function ShowCharts() {
   ctx1.width = 400;
   ctx1.height = 300;
   ctx1.classList.add("myChart");
-  chartParent.appendChild(ctx1);
+  chartsContainer.appendChild(ctx1);
 
   new Chart(ctx1, {
     type: "bar",
@@ -115,9 +126,9 @@ export function ShowCharts() {
   ctx2.width = 400;
   ctx2.height = 300;
   ctx2.classList.add("myChart");
-  document.querySelector(".chart-parent").appendChild(ctx2);
+  chartsContainer.appendChild(ctx2);
 
-  console.log(filteredPaidFlowers);
+  // console.log(filteredPaidFlowers);
 
   const barChartConfig2 = {
     type: "bar",
@@ -521,10 +532,10 @@ export function ShowOrders() {
     return allOrders.filter((order) => order.sellerId === sellerID);
   }
 
-  function updateOrderState(orderID, newState) {
+  function updateOrderState(orderID, newState, userID) {
     const allOrders = JSON.parse(localStorage.getItem("order")) || [];
     const updatedOrders = allOrders.map((order) => {
-      if (order.orderId === orderID) {
+      if (order.orderId === orderID && order.user === userID) {
         order.state = newState;
       }
       return order;
@@ -547,17 +558,17 @@ export function ShowOrders() {
   function createOrderRow(order) {
     const row = document.createElement("tr");
 
-    const idUserCell = document.createElement("td");
-    idUserCell.textContent = order.orderId;
-    row.appendChild(idUserCell);
+    const idOrderCell = document.createElement("td");
+    idOrderCell.textContent = order.orderId;
+    row.appendChild(idOrderCell);
 
     const idProductCell = document.createElement("td");
     idProductCell.textContent = order.productId;
     row.appendChild(idProductCell);
 
-    const idSellerCell = document.createElement("td");
-    idSellerCell.textContent = order.sellerId;
-    row.appendChild(idSellerCell);
+    const idUserCell = document.createElement("td");
+    idUserCell.textContent = order.user;
+    row.appendChild(idUserCell);
 
     const dateCell = document.createElement("td");
     dateCell.textContent = new Date(order.date).toISOString().split("T")[0];
@@ -585,7 +596,7 @@ export function ShowOrders() {
         state.classList.remove("pending");
         state.classList.add("delivered");
         order.state = "Delivered";
-        updateOrderState(order.orderId, "Delivered");
+        updateOrderState(order.orderId, "Delivered", order.user);
         state.disabled = true;
       } else if (order.state === "Delivered") {
         console.log(e.target);

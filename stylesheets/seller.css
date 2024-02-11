@@ -234,7 +234,7 @@ input[type=file] {
 }
 
 /* line 163, ../sass/seller.scss */
-.chart-parent {
+.chartsCon {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -242,7 +242,29 @@ input[type=file] {
   margin: 50px auto;
   gap: 1%;
 }
-
+.data-seller{
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.data-seller div{
+  background-color: var(--whitesmoke-color);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+}
+.data-seller div h4{
+  color: rgba(33, 37, 41, 0.879);
+  font-weight: normal;
+  font-size: 20px;
+}
+.data-seller div h3{
+margin: 15px 0px;
+  font-size: 28px;
+}
 /* line 171, ../sass/seller.scss */
 .myChart {
   width: 48% !important;
@@ -290,7 +312,7 @@ input[type=file] {
   }
 
   /* line 209, ../sass/seller.scss */
-  .chart-parent {
+  .chartsCon{
     gap: 40px;
   }
 
