@@ -91,6 +91,7 @@ window.addEventListener("DOMContentLoaded", function () {
       password: password,
       no_products: number_prod,
       location: location_shop,
+      Id: requestdata.length,
     };
 
     requestdata.push(newrequest);
