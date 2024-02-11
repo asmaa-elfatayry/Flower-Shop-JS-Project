@@ -247,7 +247,7 @@ input[type=file] {
   justify-content: center;
   margin-top: 40px;
   gap: 40px;
-  flex-wrap: wrap;
+
 }
 .data-seller div{
   background-color: var(--whitesmoke-color);
@@ -325,6 +325,11 @@ margin: 15px 0px;
   /* line 216, ../sass/seller.scss */
   .canvas {
     width: 90%;
+  }
+  .data-seller{
+    display: flex;
+  flex-direction: column;
+  
   }
 }
 
