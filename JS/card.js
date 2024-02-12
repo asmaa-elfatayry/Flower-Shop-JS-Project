@@ -19,11 +19,13 @@ export function addProduct(product, rowDiv) {
 
   let currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
   heartIcon.id = product.id;
+  // ده علشان لما اليوزر اللي مسجل من قبل يجي يعمل لوجن تاني تتحمل الاراي اللي كان فيها العناصر المنضافة للمفضلة وهيضيف 
+  // class active : اللي بتلون الايقونة بلون معين
   if (currentUser) {
-    let favourites = currentUser.favourites;
+    let favourites = currentUser.favourites;// currentUser.favourites: contains the id s of favourite products
     for (let i = 0; i < favourites.length; i++) {
-      if (product.id == favourites[i]) {
-        heartIcon.classList.add("active");
+      if (product.id == favourites[i]) {// favourites[i]: is id of product
+        heartIcon.classList.add("active");//  active: is a class in index_style.css
       }
     }
   }
@@ -47,21 +49,24 @@ export function addProduct(product, rowDiv) {
   const price = document.createElement("p");
   price.textContent = `${product.price} EGP`;
   cardBody.appendChild(price);
-
+// add review 
   const stars = document.createElement("div");
   cardBody.appendChild(stars);
-  let rate = 0;
-  for (let i = 0; i < product.reviews.length; i++)
-    rate += Number(product.reviews[i].rating);
-  if (rate) rate = Math.ceil(rate / product.reviews.length);
+  let rate = 0;// the same product
+  for (let i = 0; i < product.reviews.length; i++)// number of reviews objects for the same user
+    rate += Number(product.reviews[i].rating);// total rate for the same product
+  if (rate) rate = Math.ceil(rate / product.reviews.length);// average rate = total rating/#of objects(reviews)
+  //rateبيجيب متوسط ال ratings الي اليوزرز كلهم ادوه
+// rate: is the average of total rating of product for one user or more,الrating بيجيب متوسط ال ratings الي اليوزرز كلهم ادوه
+  //Math.ceil() function is then used to round up the average rating to the nearest integer.
   for (let i = 0; i < 5; i++) {
     const reviewStarElement = document.createElement("span");
-    reviewStarElement.classList.add("review-star");
+    reviewStarElement.classList.add("review-star");// for span
     const starIconElement = document.createElement("i");
-    if (rate > i) starIconElement.classList.add("fa-solid", "fa-star");
+    if (rate > i) starIconElement.classList.add("fa-solid", "fa-star");//The number of filled stars corresponds to the average rating, while the rest remain empty.
     else starIconElement.classList.add("fa-regular", "fa-star");
     reviewStarElement.appendChild(starIconElement);
-    stars.appendChild(reviewStarElement);
+    stars.appendChild(reviewStarElement);//     <span class="review-star"><i class="fa-regular fa-star"></i></span>
   }
 
   const addToCartButton = document.createElement("button");
@@ -85,19 +90,20 @@ export function addProduct(product, rowDiv) {
   });
 }
 
-function wish(ID) {
+export function wish(ID) {// product id == heartIcon id
   let currentUser = [];
   if (sessionStorage.getItem("loggedInUser") !== null) {
-    currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    currentUser = JSON.parse(sessionStorage.getItem("loggedInUser"));// returns object
     let userId = currentUser.id;
     let users = JSON.parse(localStorage.getItem("userData"));
+    // userData: local storage contains the all users of website; user or admin roles
     let favIcon = document.getElementById(ID);
     for (let i = 0; i < users.length; i++) {
-      if (userId == users[i].id) {
-        let heartId = parseInt(ID);
+      if (userId == users[i].id) {// check if current user in localstorage called userdata,
+        let heartId = parseInt(ID);// id of product
         if (favIcon.classList.contains("active")) {
           //remove
-          for (let j = 0; j < users[i].favourites.length; j++) {
+          for (let j = 0; j < users[i].favourites.length; j++) {//users[i].favourites.length: id of 
             if (users[i].favourites[j] == heartId) {
               users[i].favourites.splice(j, 1);
               break;
@@ -115,9 +121,9 @@ function wish(ID) {
         return;
       }
     }
-  } else {
-    Swal.fire("Sorry you must login first!");
-    document
+  } else {// if no user in session storage ,
+    Swal.fire("Sorry you must login first!");//1
+    document// 2 go to login.html
       .querySelector("button.swal2-confirm.swal2-styled")
       .addEventListener("click", function () {
         window.location.href = "login.html";

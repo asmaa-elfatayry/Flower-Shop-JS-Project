@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", function () {
   let product = JSON.parse(window.localStorage.getItem("productToShow"));
   let img_container = this.document.getElementById("product-image");
   let data_container = this.document.getElementById("product-data");
-  let stars = document.getElementsByClassName('review-star');
+  let stars = document.getElementsByClassName('review-star');// in product_details.html
 
   this.document.getElementById(
     "product-image"
@@ -114,7 +114,7 @@ window.addEventListener("DOMContentLoaded", function () {
       ).toFixed(2)} EGP`;
     });
 
-  function addReview(curDiv, review_data) {
+  function addReview(curDiv, review_data) {// review_data: object
     let comment_div = document.createElement("div");
     curDiv.appendChild(comment_div);
     comment_div.classList.add("col-10", "mb-3", "comment");
@@ -124,7 +124,7 @@ window.addEventListener("DOMContentLoaded", function () {
     let name = document.createElement("i");
     comment_div.appendChild(name);
     name.classList.add("text-muted");
-    review.innerText = review_data.review;
+    review.innerText = review_data.review;// review:message
     name.innerText = review_data.name;
     let rate = Number(review_data.rating);
     for (let i = 0; i < 5; i++) {
@@ -142,7 +142,7 @@ window.addEventListener("DOMContentLoaded", function () {
     let reviews = product.reviews;
     for (let i = 0; i < reviews.length; i++) {
       let curDiv = document.getElementById("comments");
-      addReview(curDiv, reviews[i]);
+      addReview(curDiv, reviews[i]);// send object of reviews
     }
   }
   loadReviews();
@@ -153,7 +153,7 @@ window.addEventListener("DOMContentLoaded", function () {
       let text = document.getElementById("commentTextarea").value.trim();
       let username = JSON.parse(sessionStorage.getItem("loggedInUser"));
       let rate = 0;
-      for (let i = 0; i < stars.length; i++) {
+      for (let i = 0; i < stars.length; i++) {// stars.length:5
         if (stars[i].classList.contains('selected'))
           rate++;
         else

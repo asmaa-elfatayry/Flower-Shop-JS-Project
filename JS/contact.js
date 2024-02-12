@@ -10,10 +10,11 @@ window.addEventListener("DOMContentLoaded", function () {
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
         if (uName !== '' && uMail !== '' && uSubject !== '' && uMessage !== '') {
-            if (emailRegex.test(uMail)) {
-                
+            if (emailRegex.test(uMail)) {// bool; true of umail matches emailRegex
+                // messages localsorage will declared  when user enter the first message
                 let messages = localStorage.getItem("messages") ? JSON.parse(localStorage.getItem("messages")) : [];
-                let Lastid = messages.length;
+               // if there is array of messages , then make parse and returns it , else returns empty array
+                let Lastid = messages.length;// first=0
                 messages.push({Id: Lastid, Name: uName, Email: uMail, Subject: uSubject, Message: uMessage});
                 localStorage.setItem("messages", JSON.stringify(messages));
                 

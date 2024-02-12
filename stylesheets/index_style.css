@@ -335,6 +335,7 @@ margin: 20px auto;
 {
   background-color:var(--white-color);
   color:var(--main-pink-dark-color);
+  border:solid 1px var(--main-pink-dark-color);
 }
 /*end of contact ===========================================*/
 /* about us =========================================================*/

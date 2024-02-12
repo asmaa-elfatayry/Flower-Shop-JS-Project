@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         FlowersDate = data.flowers;
         for (let i = 0; i < FlowersDate.length; i++) {
-          FlowersDate[i]["reviews"] = new Array();
+          FlowersDate[i]["reviews"] = new Array();// make new array of products for each product(flower)
         }
         SellerData = data.sellers;
         UserData = data.users;
