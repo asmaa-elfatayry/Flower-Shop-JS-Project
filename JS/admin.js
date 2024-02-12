@@ -32,6 +32,12 @@ window.addEventListener("load", function () {
     return;
   }
 
+  // if admin logged in then he leaved the page, deny access
+  window.addEventListener('beforeunload', function(event) {
+    if (window.location.href === "http://127.0.0.1:5501/Flower-Shop-JS-Project/HTML%20pages/admin.html") 
+      sessionStorage.removeItem('loggedInUser');
+  });
+  
   let page  = "";
   var lastsorted = ""
   var content = document.getElementById("content");
@@ -290,6 +296,8 @@ window.addEventListener("load", function () {
         heads[i] != "meaning" &&
         heads[i] != "favourites" &&
         heads[i] != "Id" &&
+        heads[i] != "password" &&
+        heads[i] != "isRemoved" &&
         heads[i] != "image"
       ) {
         let head = document.createElement("th");
@@ -353,7 +361,7 @@ window.addEventListener("load", function () {
       }
       else if(page == "messages"){
         const detailsButton = document.createElement("button");
-        detailsButton.className = "btn btn-primary text-center detailsBtn";
+        detailsButton.className = "btn btn-primary text-center detailsBtn m-1";
         detailsButton.setAttribute("data-toggle", "modal");
         detailsButton.setAttribute("data-target", "#showDetailsModal");
         detailsButton.style.width = "90px";
@@ -376,7 +384,7 @@ window.addEventListener("load", function () {
       dapproveButton.className = "btn btn-primary";
       dapproveButton.style.width = "90px";
       dapproveButton.textContent = "Approve";
-      dapproveButton.addEventListener("click", (e) => addSeller(e));
+      dapproveButton.addEventListener("click", (e) => addSeller(items,item.Id,e));
       row.children[row.children.length - 1].appendChild(dapproveButton);
     }
     return row;
@@ -391,34 +399,32 @@ window.addEventListener("load", function () {
     });
   }
 
-  function addSeller(e) {
+  function addSeller(items,itemId,e) {
+    let requestedSellers =
+    JSON.parse(localStorage.getItem("requestseller")) || [];
+    const itemIndex = requestedSellers.findIndex(
+      (item) => item.Id == itemId
+    );
     let myRow = e.target.closest("tr");
     let sellers = JSON.parse(localStorage.getItem("sellerData")) || [];
-    let requestedSellers =
-      JSON.parse(localStorage.getItem("requestseller")) || [];
-    let indexToRemove = -1;
-    for (let j = 0; j < requestedSellers.length; j++) {
-      if (requestedSellers[j].contact === myRow.children[1].textContent) {
-        indexToRemove = j;
-        break;
-      }
-    }
-    if (indexToRemove !== -1) {
-      requestedSellers.splice(indexToRemove, 1);
+    if (itemIndex !== -1) {
       localStorage.setItem("requestseller", JSON.stringify(requestedSellers));
       let newseller = {
         id: sellers.length > 0 ? sellers[sellers.length - 1].id + 1 : 1,
-        name: myRow.children[0].textContent,
+        name: requestedSellers[itemIndex]['name'],
         role: "seller",
-        location: myRow.children[4].textContent,
-        contact: myRow.children[1].textContent,
+        location: requestedSellers[itemIndex]['location'],
+        contact: requestedSellers[itemIndex]['contact'],
         products: [],
-        password: myRow.children[2].textContent,
+        password: requestedSellers[itemIndex]['password'],
       };
-
+      
       sellers.push(newseller);
       localStorage.setItem("sellerData", JSON.stringify(sellers));
       myRow.outerHTML = "";
+      requestedSellers.splice(itemIndex, 1);
+      items.splice(itemIndex, 1);
+      localStorage.setItem("requestseller", JSON.stringify(requestedSellers));
     }
   }
   
@@ -435,8 +441,8 @@ window.addEventListener("load", function () {
     
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger",
+        confirmButton: "btn btn-success mx-2",
+        cancelButton: "btn btn-danger mx-2",
       },
       buttonsStyling: false,
     });

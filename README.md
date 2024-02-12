@@ -2,7 +2,10 @@
 
 Welcome to Floura, your go-to destination for all things floral! This e-commerce platform is designed to provide a delightful shopping experience for flower enthusiasts. The project features three main user roles: Users, Admin, and Sellers. Each role has specific functionalities and access levels to ensure smooth operation.
 
-<img src="images/pink-flowers-4wepipx4mtfx5v9m.jpg"/>
+<!--<img src="images/pink-flowers-4wepipx4mtfx5v9m.jpg"/>-->
+
+## Our Logic
+<img src="FloraWebsite.jpg"/>
 
 ## Features
 
